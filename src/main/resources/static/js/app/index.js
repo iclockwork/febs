@@ -55,12 +55,10 @@
 	        for (var i = 0; i < o.length; i++) {
 	            var urlstr = "";
 	            try {
-	                if (!o[i]["url"] && !!o[i]["icon"]) {
+	                if (!o[i]["url"]) {
 	                    urlstr = "<div><span><i class='" + o[i]["icon"] + "'></i>&nbsp;&nbsp;" + o[i]["text"] + "</span><ul>";
-	                } else if (!o[i]["url"]) {
-	                    urlstr = "<div><span>" + o[i]["text"] + "</span><ul>";
 	                } else {
-	                    urlstr = "<div><span name=" + o[i]["url"] + " onclick='loadMain(this);'>" + o[i]["text"] + "</span><ul>";
+	                    urlstr = "<div><span name=" + o[i]["url"] + " onclick='loadMain(this);'><i class='" + o[i]["icon"] + "'></i>&nbsp;&nbsp;" + o[i]["text"] + "</span><ul>";
 	                }
 	                str += urlstr;
 	                if (o[i]["children"].length != 0) {
