@@ -55,6 +55,7 @@
 	    $rolesSelect.multipleSelect("refresh");
 	    $MB.resetJsTree("deptTree");
 	    $MB.closeAndRestModal("user-add");
+	    $userAddForm.find("input[name='username']").removeAttr("readonly");
 	}
 
 	function validateRule() {
