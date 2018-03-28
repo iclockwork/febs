@@ -76,6 +76,7 @@ public class LogAspect {
 		log.setTime(time);
 		log.setCreateTime(new Date());
 		log.setLocation(AddressUtils.getRealAddressByIP(log.getIp()));
+		log.setId(this.logService.getSequence(SysLog.SEQ));
 		this.logService.save(log);
 	}
 }
