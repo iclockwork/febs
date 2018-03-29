@@ -1,11 +1,16 @@
 package cc.mrbird.system.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Table;
 
 @Table(name = "T_USER_ROLE")
-public class UserRole {
-    @Column(name = "USER_ID")
+public class UserRole implements Serializable{
+    
+	private static final long serialVersionUID = -3166012934498268403L;
+
+	@Column(name = "USER_ID")
     private Long userId;
 
     @Column(name = "ROLE_ID")
