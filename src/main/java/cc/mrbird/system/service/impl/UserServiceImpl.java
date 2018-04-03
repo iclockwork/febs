@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	}
 
 	public List<User> findUserWithDept(User user) {
+		if(StringUtils.isNotBlank(user.getUsername())){
+			user.setUsername(user.getUsername().toLowerCase());
+		}
 		return this.userMapper.findUserWithDept(user);
 	}
 

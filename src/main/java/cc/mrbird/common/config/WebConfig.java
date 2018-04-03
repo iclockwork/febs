@@ -1,11 +1,14 @@
 package cc.mrbird.common.config;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import cc.mrbird.common.xss.XssFilter;
 
@@ -29,4 +32,10 @@ public class WebConfig {
 		return filterRegistrationBean;
 	}
 	
+	@Bean
+	public ObjectMapper getObjectMapper() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		return mapper;
+	}
 }
