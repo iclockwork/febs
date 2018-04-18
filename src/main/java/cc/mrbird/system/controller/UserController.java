@@ -29,6 +29,7 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
+	@Log("获取用户信息")
 	@RequestMapping("user")
 	public String index(Model model) {
 		User user = super.getCurrentUser();
