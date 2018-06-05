@@ -29,6 +29,8 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
+	private static final String ON = "on";
+
 	@Log("获取用户信息")
 	@RequestMapping("user")
 	@RequiresPermissions("user:list")
@@ -128,7 +130,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseBo addUser(User user, Long[] roles) {
 		try {
-			if ("on".equalsIgnoreCase(user.getStatus()))
+			if (ON.equalsIgnoreCase(user.getStatus()))
 				user.setStatus("1");
 			else
 				user.setStatus("0");
@@ -146,7 +148,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public ResponseBo updateUser(User user, Long[] rolesSelect) {
 		try {
-			if ("on".equalsIgnoreCase(user.getStatus()))
+			if (ON.equalsIgnoreCase(user.getStatus()))
 				user.setStatus("1");
 			else
 				user.setStatus("0");
@@ -197,9 +199,9 @@ public class UserController extends BaseController {
 		User user = super.getCurrentUser();
 		user = this.userService.findUserProfile(user);
 		String ssex = user.getSsex();
-		if ("0".equals(ssex)) {
+		if (User.SEX_MALE.equals(ssex)) {
 			user.setSsex("性别：男");
-		} else if ("1".equals(ssex)) {
+		} else if (User.SEX_FEMALE.equals(ssex)) {
 			user.setSsex("性别：女");
 		} else {
 			user.setSsex("性别：保密");
