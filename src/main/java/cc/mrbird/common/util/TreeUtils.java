@@ -8,12 +8,12 @@ import java.util.Map;
 import cc.mrbird.common.domain.Tree;
 
 public class TreeUtils {
-	
+
 	public static <T> Tree<T> build(List<Tree<T>> nodes) {
 		if (nodes == null) {
 			return null;
 		}
-		List<Tree<T>> topNodes = new ArrayList<Tree<T>>();
+		List<Tree<T>> topNodes = new ArrayList<>();
 		for (Tree<T> children : nodes) {
 			String pid = children.getParentId();
 			if (pid == null || "0".equals(pid)) {
@@ -32,7 +32,7 @@ public class TreeUtils {
 
 		}
 
-		Tree<T> root = new Tree<T>();
+		Tree<T> root = new Tree<>();
 		root.setId("0");
 		root.setParentId("");
 		root.setHasParent(false);
@@ -50,7 +50,7 @@ public class TreeUtils {
 		if (nodes == null) {
 			return null;
 		}
-		List<Tree<T>> topNodes = new ArrayList<Tree<T>>();
+		List<Tree<T>> topNodes = new ArrayList<>();
 		for (Tree<T> children : nodes) {
 			String pid = children.getParentId();
 			if (pid == null || idParam.equals(pid)) {

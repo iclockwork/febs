@@ -14,7 +14,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前Date型日期
-	 * 
+	 *
 	 * @return Date() 当前日期
 	 */
 	public static Date getNowDate() {
@@ -23,7 +23,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前日期
-	 * 
+	 *
 	 * @return 返回当前日期(yyyyMMdd)
 	 */
 	public static String getDate() {
@@ -35,7 +35,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前日期
-	 * 
+	 *
 	 * @return 返回当前日期(yyyyMMdd HH:mm:ss)
 	 */
 	public static String getDateTime() {
@@ -47,7 +47,7 @@ public class DateUtil {
 
 	/**
 	 * 按特定的日期格式获取当前字符串型日期
-	 * 
+	 *
 	 * @param dateFormatType
 	 *            String，日期格式<br>
 	 *            几种日期格式和测试的结果<br>
@@ -64,7 +64,7 @@ public class DateUtil {
 
 	/**
 	 * 按特定的日期格式获取当前字符串型日期
-	 * 
+	 *
 	 * @param date
 	 *            指定的时间
 	 * @param dateFormatType
@@ -83,7 +83,7 @@ public class DateUtil {
 
 	/**
 	 * 判断今天是不是周末
-	 * 
+	 *
 	 * @return true/false
 	 */
 	public static boolean isTodayWeekend() {
@@ -98,7 +98,7 @@ public class DateUtil {
 
 	/**
 	 * 获得间隔日期（主要是间隔N周、间隔N天）
-	 * 
+	 *
 	 * @param specifiedStrDate
 	 *            指定日期
 	 * @param dateForamtType
@@ -111,7 +111,7 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getIntervalStrDate(String specifiedStrDate, String dateForamtType, int intervalNum,
-			int calenderParam) {
+											int calenderParam) {
 		if (specifiedStrDate == null) {
 			return null;
 		}
@@ -129,10 +129,10 @@ public class DateUtil {
 
 	/**
 	 * 按照指定格式将字符串日期转换为SQL需要的日期对象
-	 * 
+	 *
 	 * @param strDate
 	 *            String，欲转换的字符串型日期
-	 * 
+	 *
 	 * @param dateFormateType
 	 *            String，指定的字符串日期格式
 	 * @return java.sql.Date 转换后的java.sql.Date型日期
@@ -150,12 +150,12 @@ public class DateUtil {
 
 	/**
 	 * 判断两个字符串型日期是否指同一天
-	 * 
+	 *
 	 * @param strDate
 	 *            字符串日期
 	 * @param anotherStrDate
 	 *            另一个字符日期
-	 * 
+	 *
 	 * @return boolean true/false
 	 */
 	public static boolean isTheSameDay(String strDate, String anotherStrDate) {
@@ -186,7 +186,7 @@ public class DateUtil {
 
 	/**
 	 * 按指定的字符串格式将字符串型日期转化为Date型日期
-	 * 
+	 *
 	 * @Param dateStr 字符型日期
 	 * @param dateFormatType
 	 *            "yyyy-MM-dd" 或者 "yyyy-MM-dd hh:mm:ss"
@@ -211,7 +211,7 @@ public class DateUtil {
 
 	/**
 	 * 将Date型日期转化指定格式的字符串型日期
-	 * 
+	 *
 	 * @param javaUtilDate
 	 *            Date,传入的Date型日期
 	 * @param dateFormatType
@@ -234,7 +234,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当年指定月份第一天的字符串日期
-	 * 
+	 *
 	 * @param specifiedMonth
 	 *            指定月份
 	 * @param dateFormatType
@@ -258,14 +258,14 @@ public class DateUtil {
 
 	/**
 	 * 获取当年指定月份的最后一天字符串日期
-	 * 
+	 *
 	 * @param specifiedMonth
 	 *            指定月份
 	 * @param dateFormatType
 	 *            日期格式
 	 * @return String 时间字符串
-	 * @throws CSException
-	 *             CSExceptionCode.EC_2000,CSExceptionCode.MSG_2000
+	 * @throws Exception
+	 *
 	 */
 	public static String getTheLastDayOfSpecifiedMonth(int specifiedMonth, String dateFormatType) throws Exception {
 
@@ -276,13 +276,12 @@ public class DateUtil {
 		calendar.setTime(date);
 		calendar.add(Calendar.MONTH, 1);
 		calendar.add(Calendar.DAY_OF_YEAR, -1);
-		String result = turnJavaUtilDateToStrDate(calendar.getTime(), "yyyy-MM-dd");
-		return result;
+		return turnJavaUtilDateToStrDate(calendar.getTime(), "yyyy-MM-dd");
 	}
 
 	/**
 	 * 获取当前月第一天的字符串日期
-	 * 
+	 *
 	 * @return String 当前月第一天的字符串日期。例如：当前日期是2012-08-2，则返回值为2012-08-1
 	 */
 	public static String getTheFirstDayOfCurrentMonth() {
@@ -295,7 +294,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前月最后一天的字符串日期
-	 * 
+	 *
 	 * @return String 当前月最后一天的日期。 例如：当前日期是2012-08-2，则返回值为2012-08-31
 	 */
 	public static String getTheLastDayOfCurrentMonth() {
@@ -310,7 +309,7 @@ public class DateUtil {
 
 	/**
 	 * 验证传入日期是否为当前月最后一天
-	 * 
+	 *
 	 * @param targetObj
 	 *            传入日期可为字符串、Date
 	 * @param formtStr
@@ -345,7 +344,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前时间16位字符串 小富修改为时间16位+4位随机数2012091811320043154
-	 * 
+	 *
 	 * @return String e.g."2012082110290016"
 	 */
 	public static String getCurrentDateTime16Str() {
@@ -372,7 +371,7 @@ public class DateUtil {
 	/**
 	 * 指定日期、相加月数值、格式，得到相加日期 例如：2011-06-19 2 yyyy-MM-dd 结果：2011-08-19 2011-06-19
 	 * 12 yyyy-MM-dd 结果：2012-06-19
-	 * 
+	 *
 	 * @param date
 	 *            指定日期
 	 * @param formtStr
@@ -403,7 +402,7 @@ public class DateUtil {
 
 	/**
 	 * 按照"yyyy-MM-dd"格式将字符串date转换为日期对象
-	 * 
+	 *
 	 * @param date
 	 * @return
 	 */
@@ -425,7 +424,7 @@ public class DateUtil {
 
 	/**
 	 * 按照"yyyy-MM-dd"格式将字符串date转换为日期对象
-	 * 
+	 *
 	 * @param date
 	 * @return
 	 */
@@ -444,7 +443,7 @@ public class DateUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 格式化CST（ Thu Aug 27 18:05:49 CST 2015 ）格式字符串
 	 * @param date
@@ -460,7 +459,7 @@ public class DateUtil {
 
 	/**
 	 * 取得两个时间段的时间间隔
-	 * 
+	 *
 	 * @author color
 	 * @param t1
 	 *            时间1
@@ -490,7 +489,7 @@ public class DateUtil {
 
 	/**
 	 * 取得两个时间段的时间间隔
-	 * 
+	 *
 	 * @author color
 	 * @param t1
 	 *            时间1
@@ -555,7 +554,7 @@ public class DateUtil {
 
 	/**
 	 * 判断是否是日期
-	 * 
+	 *
 	 * @param String
 	 *            dateStr 日期字符串
 	 * @return
@@ -567,7 +566,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前时间戳
-	 * 
+	 *
 	 * @return String 时间戳字符串
 	 */
 	public static String getCurrentStringTimestamp() {
@@ -576,7 +575,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前日期戳
-	 * 
+	 *
 	 * @return String 日期戳字符串
 	 */
 	public static String getCurrentStringDate() {
@@ -585,7 +584,7 @@ public class DateUtil {
 
 	/**
 	 * 获取当前月份的最后一天
-	 * 
+	 *
 	 * @return String 日期戳字符串
 	 */
 	public static Integer getDaycountInMonth() {
@@ -598,7 +597,7 @@ public class DateUtil {
 
 	/**
 	 * 获取指定日期的前几天或者后几天
-	 * 
+	 *
 	 * @return String 日期戳字符串
 	 */
 	public static String getCoupleDate(Date date, int day, String formtStr) {
@@ -614,27 +613,27 @@ public class DateUtil {
 		calendar.setTime(date);
 		String week = "";
 		switch (calendar.get(Calendar.DAY_OF_WEEK)) {
-		case 1:
-			week = "星期日";
-			break;
-		case 2:
-			week = "星期一";
-			break;
-		case 3:
-			week = "星期二";
-			break;
-		case 4:
-			week = "星期三";
-			break;
-		case 5:
-			week = "星期四";
-			break;
-		case 6:
-			week = "星期五";
-			break;
-		case 7:
-			week = "星期六";
-			break;
+			case 1:
+				week = "星期日";
+				break;
+			case 2:
+				week = "星期一";
+				break;
+			case 3:
+				week = "星期二";
+				break;
+			case 4:
+				week = "星期三";
+				break;
+			case 5:
+				week = "星期四";
+				break;
+			case 6:
+				week = "星期五";
+				break;
+			case 7:
+				week = "星期六";
+				break;
 		}
 		return week;
 	}
