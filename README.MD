@@ -5,7 +5,7 @@
 ![https://img.shields.io/badge/spring%20boot-1.5.13-yellow.svg?longCache=true&style=flat-square](https://img.shields.io/badge/spring%20boot-1.5.13-yellow.svg?longCache=true&style=flat-square)
 ![https://img.shields.io/badge/apache%20shiro-1.4.0-green.svg?longCache=true&style=flat-square](https://img.shields.io/badge/apache%20shiro-1.4.0-green.svg?longCache=true&style=flat-square)
 
-FEBS是一个简单高效的后台权限管理系统。项目基础框架采用全新的Java Web开发框架 —— Spring Boot，消除了繁杂的XML配置，使得二次开发更为简单；数据访问层采用Mybatis，同时引入了通用Mapper和PageHelper插件，可快速高效的对单表进行增删改查操作，消除了大量传统XML配置SQL的代码；安全框架采用时下流行的Apache Shiro，可实现对按钮级别的权限控制；前端页面使用Bootstrap构建，主题风格为时下Google最新设计语言Material Design，并提供多套配色以供选择。FEBS意指：Fast，Easy use，Beautiful和Safe🙄。
+FEBS是一个简单高效的后台权限管理系统。项目基础框架采用全新的Java Web开发框架 —— Spring Boot，消除了繁杂的XML配置，使得二次开发更为简单；数据访问层采用Mybatis，同时引入了通用Mapper和PageHelper插件，可快速高效的对单表进行增删改查操作，消除了大量传统XML配置SQL的代码；安全框架采用时下流行的Apache Shiro，可实现对按钮级别的权限控制；前端页面使用Bootstrap构建，主题风格为时下Google最新设计语言Material Design，并提供多套配色以供选择。FEBS意指：Fast，Easy use，Beautiful和Safe。
 <!--more-->
 ### 功能模块
 系统功能模块组成如下所示：
@@ -115,15 +115,17 @@ FEBS是一个简单高效的后台权限管理系统。项目基础框架采用�
 
 ![5e6d35e4390cf7f0752d7864ad701e2b.png](screenshots/22217970.jpg)
 
-### 部署方式
+### 开发与部署
 
 码云地址： https://gitee.com/github-16661027/project 
 
 GitHub 地址： https://github.com/wuyouzhuguli/FEBS
 
-下载后以maven项目导入。
+下载后以Maven项目的方式导入Eclipse或者IDEA。
 
-开发时直接使用Spring Boot的入口类启动即可，Oralce版本访问地址[localhost](localhost)；MySQL版本访问地址[localhost:8080](localhost:8080)。部署时建议打包成war包，访问地址[localhost:(端口号)/febs](localhost:(端口号)/febs)。账号mrbird，密码123456。
+开发时直接使用Spring Boot的入口类`cc.mrbird.Application`启动即可，访问地址[localhost:8080](localhost:8080)，账号mrbird，密码123456。
+
+部署时，使用Maven将项目打包成febs.jar，然后使用命令`java -jar febs.jar`启动即可。在Linux下部署Spring Boot jar，并编写启停脚本可参考链接[https://mrbird.cc/Linux%20Spring-Boot-jar.html](https://mrbird.cc/Linux%20Spring-Boot-jar.html)。
 
 ### 常见问题
 [https://mrbird.cc/基于Spring Boot和Shiro的后台管理系统FEBS.html#常见问题](https://mrbird.cc/Spring-Boot%20Shiro%20FEBS.html)
