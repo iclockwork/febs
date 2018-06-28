@@ -297,6 +297,8 @@ INSERT INTO "MRBIRD"."T_MENU" VALUES ('107', '102', '恢复任务', null, 'job:r
 INSERT INTO "MRBIRD"."T_MENU" VALUES ('108', '102', '立即执行任务', null, 'job:run', null, '1 ', null, TO_DATE('2018-02-24 15:59:45', 'YYYY-MM-DD HH24:MI:SS'), null);
 INSERT INTO "MRBIRD"."T_MENU" VALUES ('109', '101', '调度日志', 'jobLog', 'jobLog:list', null, '0 ', null, TO_DATE('2018-02-24 16:00:45', 'YYYY-MM-DD HH24:MI:SS'), TO_DATE('2018-04-25 09:40:16', 'YYYY-MM-DD HH24:MI:SS'));
 INSERT INTO "MRBIRD"."T_MENU" VALUES ('110', '109', '删除日志', null, 'jobLog:delete', null, '1 ', null, TO_DATE('2018-02-24 16:01:21', 'YYYY-MM-DD HH24:MI:SS'), null);
+INSERT INTO "MRBIRD"."T_MENU" VALUES ('141', '2', 'Redis监控', 'redis/info', 'redis:list', null, '0 ', null, TO_DATE('2018-06-28 18:58:53', 'YYYY-MM-DD HH24:MI:SS'), null);
+INSERT INTO "MRBIRD"."T_MENU" VALUES ('142', '2', 'Redis终端', 'redis/terminal', 'redis:terminal', null, '0 ', null, TO_DATE('2018-06-28 18:59:18', 'YYYY-MM-DD HH24:MI:SS'), null);
 
 -- ----------------------------
 -- Table structure for T_ROLE
@@ -451,6 +453,8 @@ INSERT INTO "MRBIRD"."T_ROLE_MENU" VALUES ('1', '109');
 INSERT INTO "MRBIRD"."T_ROLE_MENU" VALUES ('1', '110');
 INSERT INTO "MRBIRD"."T_ROLE_MENU" VALUES ('64', '59');
 INSERT INTO "MRBIRD"."T_ROLE_MENU" VALUES ('64', '58');
+INSERT INTO "MRBIRD"."T_ROLE_MENU" VALUES ('1', '141');
+INSERT INTO "MRBIRD"."T_ROLE_MENU" VALUES ('1', '142');
 
 -- ----------------------------
 -- Table structure for T_USER
