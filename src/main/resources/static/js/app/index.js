@@ -2,6 +2,9 @@ var $breadcrumb = $(".breadcrumb");
 var $main_content = $(".main-content");
 var $navigation = $("#navigation");
 
+var redisMemoryInfoInterval;
+var rediskeysSizeInterval;
+
 $(window).on("load", function () {
     // 加载loading
     setTimeout(function () {
@@ -150,6 +153,8 @@ function loadMain(obj) {
             location = location;
             return;
         }
+        clearInterval(rediskeysSizeInterval);
+        clearInterval(redisMemoryInfoInterval);
         $main_content.html("").append(r);
     });
 }
