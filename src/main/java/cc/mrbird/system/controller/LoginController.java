@@ -1,15 +1,16 @@
 package cc.mrbird.system.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import cc.mrbird.common.annotation.Log;
+import cc.mrbird.common.config.FebsProperies;
+import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.MD5Utils;
+import cc.mrbird.common.util.vcode.Captcha;
+import cc.mrbird.common.util.vcode.GifCaptcha;
+import cc.mrbird.system.domain.User;
+import cc.mrbird.system.service.UserService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,17 +20,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cc.mrbird.common.annotation.Log;
-import cc.mrbird.common.controller.BaseController;
-import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.MD5Utils;
-import cc.mrbird.common.util.vcode.Captcha;
-import cc.mrbird.common.util.vcode.GifCaptcha;
-import cc.mrbird.system.domain.User;
-import cc.mrbird.system.service.UserService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController extends BaseController {
+
+    @Autowired
+    private FebsProperies febsProperies;
 
     @Autowired
     private UserService userService;
@@ -73,7 +72,10 @@ public class LoginController extends BaseController {
             response.setDateHeader("Expires", 0);
             response.setContentType("image/gif");
 
-            Captcha captcha = new GifCaptcha(146, 33, 4);
+            Captcha captcha = new GifCaptcha(
+                    febsProperies.getValidateCode().getWidth(),
+                    febsProperies.getValidateCode().getHeight(),
+                    febsProperies.getValidateCode().getLength());
             captcha.out(response.getOutputStream());
             HttpSession session = request.getSession(true);
             session.removeAttribute("_code");

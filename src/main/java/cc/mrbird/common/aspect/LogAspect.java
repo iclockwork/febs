@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cc.mrbird.common.config.FebsProperies;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -36,6 +37,9 @@ import cc.mrbird.system.service.LogService;
 public class LogAspect {
 
 	@Autowired
+	private FebsProperies febsProperies;
+
+	@Autowired
 	private LogService logService;
 
 	@Autowired
@@ -57,8 +61,9 @@ public class LogAspect {
 		}
 		// 执行时长(毫秒)
 		long time = System.currentTimeMillis() - beginTime;
-		// 保持日志
-		saveLog(point, time);
+		if (febsProperies.isOpenAopLog())
+			// 保持日志
+			saveLog(point, time);
 		return result;
 	}
 
@@ -83,7 +88,7 @@ public class LogAspect {
 		// 请求的方法参数名称
 		LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
 		String[] paramNames = u.getParameterNames(method);
-		if (args != null && paramNames != null) {
+		if (args != null) {
 			StringBuilder params = new StringBuilder();
 			for (int i = 0; i < args.length; i++) {
 				params.append("  ").append(paramNames[i]).append(": ").append(this.mapper.writeValueAsString(args[i]));
