@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,11 +64,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 		Example example = new Example(Role.class);
 		example.createCriteria().andCondition("lower(role_name)=", roleName.toLowerCase());
 		List<Role> list = this.selectByExample(example);
-		if (list.size() == 0) {
-			return null;
-		} else {
-			return list.get(0);
-		}
+		return list.size() == 0 ? null : list.get(0);
 	}
 
 	@Override
@@ -80,12 +77,12 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	}
 
 	private void setRoleMenus(Role role, Long[] menuIds) {
-		for (Long menuId : menuIds) {
+		Arrays.stream(menuIds).forEach(menuId -> {
 			RoleMenu rm = new RoleMenu();
 			rm.setMenuId(menuId);
 			rm.setRoleId(role.getRoleId());
 			this.roleMenuMapper.insert(rm);
-		}
+		});
 	}
 
 	@Override
@@ -102,10 +99,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
 	@Override
 	public RoleWithMenu findRoleWithMenus(Long roleId) {
 		List<RoleWithMenu> list = this.roleMapper.findById(roleId);
-		List<Long> menuList = new ArrayList<>();
-		for (RoleWithMenu rwm : list) {
-			menuList.add(rwm.getMenuId());
-		}
+		List<Long> menuList = list.stream().map(RoleWithMenu::getMenuId).collect(Collectors.toList());
 		if (list.size() == 0) {
 			return null;
 		}

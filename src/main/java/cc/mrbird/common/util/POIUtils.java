@@ -40,7 +40,7 @@ public class POIUtils {
 
 	/**
 	 * 设定单元格宽度 (手动/自动)
-	 * 
+	 *
 	 * @param sheet
 	 *            工作薄对象
 	 * @param index
@@ -60,8 +60,8 @@ public class POIUtils {
 	}
 
 	public static void writeByLocalOrBrowser(HttpServletResponse response, String fileName, SXSSFWorkbook wb,
-			OutputStream out) throws Exception {
-		ZipSecureFile.setMinInflateRatio(0l);
+											 OutputStream out) throws Exception {
+		ZipSecureFile.setMinInflateRatio(0L);
 		if (response != null) {
 			// response对象不为空,响应到浏览器下载
 			response.setContentType(Constant.XLSX_CONTENT_TYPE);

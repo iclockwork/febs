@@ -80,20 +80,20 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 	}
 
 	private void buildTrees(List<Tree<Menu>> trees, List<Menu> menus) {
-		for (Menu menu : menus) {
+		menus.forEach(menu -> {
 			Tree<Menu> tree = new Tree<>();
 			tree.setId(menu.getMenuId().toString());
 			tree.setParentId(menu.getParentId().toString());
 			tree.setText(menu.getMenuName());
 			trees.add(tree);
-		}
+		});
 	}
 
 	@Override
 	public Tree<Menu> getUserMenu(String userName) {
 		List<Tree<Menu>> trees = new ArrayList<>();
 		List<Menu> menus = this.findUserMenus(userName);
-		for (Menu menu : menus) {
+		menus.forEach(menu -> {
 			Tree<Menu> tree = new Tree<>();
 			tree.setId(menu.getMenuId().toString());
 			tree.setParentId(menu.getParentId().toString());
@@ -101,7 +101,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 			tree.setIcon(menu.getIcon());
 			tree.setUrl(menu.getUrl());
 			trees.add(tree);
-		}
+		});
 		return TreeUtils.build(trees);
 	}
 
@@ -111,11 +111,7 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		example.createCriteria().andCondition("lower(menu_name)=", menuName.toLowerCase()).andEqualTo("type",
 				Long.valueOf(type));
 		List<Menu> list = this.selectByExample(example);
-		if (list.size() == 0) {
-			return null;
-		} else {
-			return list.get(0);
-		}
+		return list.size() == 0 ? null : list.get(0);
 	}
 
 	@Override

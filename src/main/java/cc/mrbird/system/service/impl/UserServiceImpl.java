@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("userService")
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
@@ -40,11 +41,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		Example example = new Example(User.class);
 		example.createCriteria().andCondition("lower(username)=", userName.toLowerCase());
 		List<User> list = this.selectByExample(example);
-		if (list.size() == 0) {
-			return null;
-		} else {
-			return list.get(0);
-		}
+		return list.size() == 0 ? null : list.get(0);
 	}
 
 	@Override
@@ -99,12 +96,12 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	}
 
 	private void setUserRoles(User user, Long[] roles) {
-		for (Long roleId : roles) {
+		Arrays.stream(roles).forEach(roleId -> {
 			UserRole ur = new UserRole();
 			ur.setUserId(user.getUserId());
 			ur.setRoleId(roleId);
 			this.userRoleMapper.insert(ur);
-		}
+		});
 	}
 
 	@Override
@@ -153,10 +150,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	@Override
 	public UserWithRole findById(Long userId) {
 		List<UserWithRole> list = this.userMapper.findUserWithRole(userId);
-		List<Long> roleList = new ArrayList<>();
-		for (UserWithRole uwr : list) {
-			roleList.add(uwr.getRoleId());
-		}
+		List<Long> roleList = list.stream().map(UserWithRole::getRoleId).collect(Collectors.toList());
 		if (list.size() == 0) {
 			return null;
 		}

@@ -3,11 +3,7 @@ package cc.mrbird.common.util;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class DateUtil {
@@ -36,7 +32,7 @@ public class DateUtil {
 	/**
 	 * 获取当前日期
 	 *
-	 * @return 返回当前日期(yyyyMMdd HH:mm:ss)
+	 * @return 返回当前日期(yyyyMMdd HH : mm : ss)
 	 */
 	public static String getDateTime() {
 		Calendar calendar = Calendar.getInstance();
@@ -48,13 +44,12 @@ public class DateUtil {
 	/**
 	 * 按特定的日期格式获取当前字符串型日期
 	 *
-	 * @param dateFormatType
-	 *            String，日期格式<br>
-	 *            几种日期格式和测试的结果<br>
-	 *            "yyyy-MM-dd": 2012-08-02<br>
-	 *            "yyyy-MM-dd hh:mm:ss": 2012-08-02 11:27:41<br>
-	 *            "yyyy-MM-dd hh:mm:ss EE": 2012-08-02 11:27:41 星期四<br>
-	 *            "yyyy年MM月dd日 hh:mm:ss EE": 2012年08月02日 11:27:41 星期四<br>
+	 * @param dateFormatType String，日期格式<br>
+	 *                       几种日期格式和测试的结果<br>
+	 *                       "yyyy-MM-dd": 2012-08-02<br>
+	 *                       "yyyy-MM-dd hh:mm:ss": 2012-08-02 11:27:41<br>
+	 *                       "yyyy-MM-dd hh:mm:ss EE": 2012-08-02 11:27:41 星期四<br>
+	 *                       "yyyy年MM月dd日 hh:mm:ss EE": 2012年08月02日 11:27:41 星期四<br>
 	 * @return String 当前字符串型日期
 	 */
 	public static String getNowDateFormat(String dateFormatType) {
@@ -65,15 +60,13 @@ public class DateUtil {
 	/**
 	 * 按特定的日期格式获取当前字符串型日期
 	 *
-	 * @param date
-	 *            指定的时间
-	 * @param dateFormatType
-	 *            String，日期格式<br>
-	 *            几种日期格式和测试的结果<br>
-	 *            "yyyy-MM-dd": 2012-08-02<br>
-	 *            "yyyy-MM-dd hh:mm:ss": 2012-08-02 11:27:41<br>
-	 *            "yyyy-MM-dd hh:mm:ss EE": 2012-08-02 11:27:41 星期四<br>
-	 *            "yyyy年MM月dd日 hh:mm:ss EE": 2012年08月02日 11:27:41 星期四<br>
+	 * @param date           指定的时间
+	 * @param dateFormatType String，日期格式<br>
+	 *                       几种日期格式和测试的结果<br>
+	 *                       "yyyy-MM-dd": 2012-08-02<br>
+	 *                       "yyyy-MM-dd hh:mm:ss": 2012-08-02 11:27:41<br>
+	 *                       "yyyy-MM-dd hh:mm:ss EE": 2012-08-02 11:27:41 星期四<br>
+	 *                       "yyyy年MM月dd日 hh:mm:ss EE": 2012年08月02日 11:27:41 星期四<br>
 	 * @return String 当前字符串型日期
 	 */
 	public static String getDateFormat(Date date, String dateFormatType) {
@@ -90,32 +83,25 @@ public class DateUtil {
 
 		Calendar c = Calendar.getInstance(); // 获取当前日期
 		int day = c.get(Calendar.DAY_OF_WEEK); // 获取当前日期星期，英国算法(周日为一周第一天)
-		if (day == 7 || day == 1) { // 如果是周六或周日就返回true
-			return true;
-		}
-		return false;
+		return day == 7 || day == 1;
 	}
 
 	/**
 	 * 获得间隔日期（主要是间隔N周、间隔N天）
 	 *
-	 * @param specifiedStrDate
-	 *            指定日期
-	 * @param dateForamtType
-	 *            指定日期格式
-	 * @param intervalNum
-	 *            间隔数（周或者天）
-	 * @param calenderParam
-	 *            指定修改日期格式的属性
-	 *            Calendar.WEEK_OF_MONTH（周）或者Calendar.DAY_OF_MONTH（天）
-	 * @return
+	 * @param specifiedStrDate 指定日期
+	 * @param dateForamtType   指定日期格式
+	 * @param intervalNum      间隔数（周或者天）
+	 * @param calenderParam    指定修改日期格式的属性
+	 *                         Calendar.WEEK_OF_MONTH（周）或者Calendar.DAY_OF_MONTH（天）
+	 * @return String
 	 */
 	public static String getIntervalStrDate(String specifiedStrDate, String dateForamtType, int intervalNum,
 											int calenderParam) {
 		if (specifiedStrDate == null) {
 			return null;
 		}
-		if (specifiedStrDate.trim().equals("")) {
+		if ("".equals(specifiedStrDate.trim())) {
 			return null;
 		}
 
@@ -130,11 +116,8 @@ public class DateUtil {
 	/**
 	 * 按照指定格式将字符串日期转换为SQL需要的日期对象
 	 *
-	 * @param strDate
-	 *            String，欲转换的字符串型日期
-	 *
-	 * @param dateFormateType
-	 *            String，指定的字符串日期格式
+	 * @param strDate         String，欲转换的字符串型日期
+	 * @param dateFormateType String，指定的字符串日期格式
 	 * @return java.sql.Date 转换后的java.sql.Date型日期
 	 */
 	public static java.sql.Date turnDateToSqlDate(String strDate, String dateFormateType) {
@@ -151,11 +134,8 @@ public class DateUtil {
 	/**
 	 * 判断两个字符串型日期是否指同一天
 	 *
-	 * @param strDate
-	 *            字符串日期
-	 * @param anotherStrDate
-	 *            另一个字符日期
-	 *
+	 * @param strDate        字符串日期
+	 * @param anotherStrDate 另一个字符日期
 	 * @return boolean true/false
 	 */
 	public static boolean isTheSameDay(String strDate, String anotherStrDate) {
@@ -166,43 +146,31 @@ public class DateUtil {
 		try {
 			firstStrDate = df.parse(strDate);
 			secondStrDate = df.parse(anotherStrDate);
-		} catch (ParseException e) {
+		} catch (ParseException ignored) {
 
 		}
 		if (firstStrDate.getTime() > secondStrDate.getTime()) {
-
 			return false;
 		} else if (firstStrDate.getTime() < secondStrDate.getTime()) {
-
 			return false;
-		} else if (firstStrDate.getTime() == secondStrDate.getTime()) {
-
-			return true;
-		} else {
-
-			return false;
-		}
+		} else return firstStrDate.getTime() == secondStrDate.getTime();
 	}
 
 	/**
 	 * 按指定的字符串格式将字符串型日期转化为Date型日期
 	 *
-	 * @Param dateStr 字符型日期
-	 * @param dateFormatType
-	 *            "yyyy-MM-dd" 或者 "yyyy-MM-dd hh:mm:ss"
+	 * @param dateFormatType "yyyy-MM-dd" 或者 "yyyy-MM-dd hh:mm:ss"
 	 * @return Date型日期
-	 * @throws Exception
+	 * @param strDate 字符型日期
 	 */
 	public static Date turnStrDateToJavaUtilDate(String strDate, String dateFormatType) {
 
 		Date javaUtilDate = null;
 		DateFormat df = new SimpleDateFormat(dateFormatType);
-		if (strDate != null && (!"".equals(strDate)) && dateFormatType != null && (!"".equals(dateFormatType))) {
-
+		if (strDate != null && !"".equals(strDate) && !"".equals(dateFormatType)) {
 			try {
-
 				javaUtilDate = df.parse(strDate);
-			} catch (ParseException e) {
+			} catch (ParseException ignored) {
 
 			}
 		}
@@ -212,13 +180,11 @@ public class DateUtil {
 	/**
 	 * 将Date型日期转化指定格式的字符串型日期
 	 *
-	 * @param javaUtilDate
-	 *            Date,传入的Date型日期
-	 * @param dateFormatType
-	 *            "yyyy-MM-dd"或者<br>
-	 *            "yyyy-MM-dd hh:mm:ss EE"或者<br>
-	 *            "yyyy年MM月dd日 hh:mm:ss EE" <br>
-	 *            (年月日 时:分:秒 星期 ，注意MM/mm大小写)
+	 * @param javaUtilDate   Date,传入的Date型日期
+	 * @param dateFormatType "yyyy-MM-dd"或者<br>
+	 *                       "yyyy-MM-dd hh:mm:ss EE"或者<br>
+	 *                       "yyyy年MM月dd日 hh:mm:ss EE" <br>
+	 *                       (年月日 时:分:秒 星期 ，注意MM/mm大小写)
 	 * @return String 指定格式的字符串型日期
 	 */
 	public static String turnJavaUtilDateToStrDate(Date javaUtilDate, String dateFormatType) {
@@ -235,15 +201,11 @@ public class DateUtil {
 	/**
 	 * 获取当年指定月份第一天的字符串日期
 	 *
-	 * @param specifiedMonth
-	 *            指定月份
-	 * @param dateFormatType
-	 *            日期格式
+	 * @param specifiedMonth 指定月份
+	 * @param dateFormatType 日期格式
 	 * @return String 指定月份第一天的字符串日期
-	 * @throws CSException
-	 *             CSExceptionCode.EC_2000,CSExceptionCode.MSG_2000
 	 */
-	public static String getTheFirstDayOfSpecifiedMonth(int specifiedMonth, String dateFormatType) throws Exception {
+	public static String getTheFirstDayOfSpecifiedMonth(int specifiedMonth, String dateFormatType) {
 
 		Date currentJavaUtilDate = getNowDate();
 		Calendar cal = Calendar.getInstance();
@@ -252,22 +214,17 @@ public class DateUtil {
 		cal.set(Calendar.DAY_OF_MONTH, 1);
 
 		Date resultDate = cal.getTime();
-		String result = turnJavaUtilDateToStrDate(resultDate, dateFormatType);
-		return result;
+		return turnJavaUtilDateToStrDate(resultDate, dateFormatType);
 	}
 
 	/**
 	 * 获取当年指定月份的最后一天字符串日期
 	 *
-	 * @param specifiedMonth
-	 *            指定月份
-	 * @param dateFormatType
-	 *            日期格式
+	 * @param specifiedMonth 指定月份
+	 * @param dateFormatType 日期格式
 	 * @return String 时间字符串
-	 * @throws Exception
-	 *
 	 */
-	public static String getTheLastDayOfSpecifiedMonth(int specifiedMonth, String dateFormatType) throws Exception {
+	public static String getTheLastDayOfSpecifiedMonth(int specifiedMonth, String dateFormatType) {
 
 		Date date = null;
 		date = turnStrDateToJavaUtilDate(getTheFirstDayOfSpecifiedMonth(specifiedMonth, dateFormatType),
@@ -310,19 +267,16 @@ public class DateUtil {
 	/**
 	 * 验证传入日期是否为当前月最后一天
 	 *
-	 * @param targetObj
-	 *            传入日期可为字符串、Date
-	 * @param formtStr
-	 *            yyyy-MM-dd hh:mm:ss
+	 * @param targetObj 传入日期可为字符串、Date
+	 * @param formtStr  yyyy-MM-dd hh:mm:ss
 	 * @return true/false
 	 */
 	public static boolean isTheLastDayOfCurrentMonth(Object targetObj, String formtStr) {
 
-		boolean flag = false;
 		if (targetObj == null) {// 如果传入日期参数为null，则返回false
-			return flag;
+			return false;
 		} else if ("".equals(targetObj.toString())) {// 如果传入日期参数为空字符串，则返回false
-			return flag;
+			return false;
 		}
 
 		String srcDate = "";
@@ -334,12 +288,8 @@ public class DateUtil {
 		} else {
 			srcDate = DateUtil.turnJavaUtilDateToStrDate(getNowDate(), "yyyy-MM-dd");
 		}
-		if (srcDate.compareTo(DateUtil.getTheLastDayOfCurrentMonth()) == 0) {// 和当前月最后一天比较的结果为0，则是当前月最后一天
-			flag = true;
-			return flag;
-		} else {
-			return flag;
-		}
+		// 和当前月最后一天比较的结果为0，则是当前月最后一天
+		return srcDate.compareTo(DateUtil.getTheLastDayOfCurrentMonth()) == 0;
 	}
 
 	/**
@@ -352,7 +302,7 @@ public class DateUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSS");
 
 		/* 生成随机数 */
-		int[] array = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		int[] array = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 		Random rand = new Random();
 		for (int i = 10; i > 1; i--) {
 			int index = rand.nextInt(i);
@@ -372,16 +322,11 @@ public class DateUtil {
 	 * 指定日期、相加月数值、格式，得到相加日期 例如：2011-06-19 2 yyyy-MM-dd 结果：2011-08-19 2011-06-19
 	 * 12 yyyy-MM-dd 结果：2012-06-19
 	 *
-	 * @param date
-	 *            指定日期
-	 * @param formtStr
-	 *            格式
-	 * @param number
-	 *            数组
-	 * @param calender
-	 *            指定修改日期格式数组
-	 * @author leiyunshi
-	 * @return
+	 * @param date     指定日期
+	 * @param formtStr 格式
+	 * @param number   数组
+	 * @param calender 指定修改日期格式数组
+	 * @return String
 	 */
 	public static String tragetDate(String date, String formtStr, int number, int calender) {
 		if (date == null) {
@@ -403,8 +348,8 @@ public class DateUtil {
 	/**
 	 * 按照"yyyy-MM-dd"格式将字符串date转换为日期对象
 	 *
-	 * @param date
-	 * @return
+	 * @param date date
+	 * @return Date
 	 */
 	public static Date toDate(String date) {
 		if (date == null) {
@@ -425,8 +370,9 @@ public class DateUtil {
 	/**
 	 * 按照"yyyy-MM-dd"格式将字符串date转换为日期对象
 	 *
-	 * @param date
-	 * @return
+	 * @param date   date
+	 * @param format format
+	 * @return Date
 	 */
 	public static Date toDate(String date, String format) {
 		if (date == null) {
@@ -446,12 +392,13 @@ public class DateUtil {
 
 	/**
 	 * 格式化CST（ Thu Aug 27 18:05:49 CST 2015 ）格式字符串
-	 * @param date
-	 * @param format
-	 * @return
-	 * @throws ParseException
+	 *
+	 * @param date   date
+	 * @param format format
+	 * @return String
+	 * @throws ParseException ParseException
 	 */
-	public static String formatCSTTime(String date, String format) throws ParseException{
+	public static String formatCSTTime(String date, String format) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
 		Date d = sdf.parse(date);
 		return DateUtil.getDateFormat(d, format);
@@ -460,14 +407,11 @@ public class DateUtil {
 	/**
 	 * 取得两个时间段的时间间隔
 	 *
-	 * @author color
-	 * @param t1
-	 *            时间1
-	 * @param t2
-	 *            时间2
+	 * @param t1 时间1
+	 * @param t2 时间2
 	 * @return t2 与t1的间隔年数
-	 * @throws ParseException
-	 *             如果输入的日期格式不是0000-00-00 格式抛出异常
+	 * @throws ParseException 如果输入的日期格式不是0000-00-00 格式抛出异常
+	 * @author color
 	 */
 	public static int getBetweenYears(String t1, String t2) throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -482,22 +426,18 @@ public class DateUtil {
 			c1 = c2;
 			c2.setTime(d1);
 		}
-		int betweenYears = c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR);
 
-		return betweenYears;
+		return c2.get(Calendar.YEAR) - c1.get(Calendar.YEAR);
 	}
 
 	/**
 	 * 取得两个时间段的时间间隔
 	 *
-	 * @author color
-	 * @param t1
-	 *            时间1
-	 * @param t2
-	 *            时间2
+	 * @param t1 时间1
+	 * @param t2 时间2
 	 * @return t2 与t1的间隔天数
-	 * @throws ParseException
-	 *             如果输入的日期格式不是0000-00-00 格式抛出异常
+	 * @throws ParseException 如果输入的日期格式不是0000-00-00 格式抛出异常
+	 * @author color
 	 */
 	public static int getBetweenDays(String t1, String t2) throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -546,7 +486,6 @@ public class DateUtil {
 				betweenDays += c1.getMaximum(Calendar.DAY_OF_YEAR);
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return betweenDays;
@@ -555,12 +494,11 @@ public class DateUtil {
 	/**
 	 * 判断是否是日期
 	 *
-	 * @param String
-	 *            dateStr 日期字符串
-	 * @return
+	 * @param dateStr dateStr
+	 * @return boolean
 	 */
 	public static boolean checkDate(String dateStr) {
-		String regex = "[1-2]{1}\\d{3}[0-1]{1}\\d{1}[0-3]{1}\\d{1}";
+		String regex = "[1-2]\\d{3}[0-1]\\d[0-3]\\d";
 		return Pattern.matches(regex, dateStr);
 	}
 

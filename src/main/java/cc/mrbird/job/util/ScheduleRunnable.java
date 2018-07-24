@@ -10,7 +10,7 @@ import cc.mrbird.common.util.SpringContextUtils;
 /**
  * 执行定时任务
  * 
- * @author Administrator
+ * @author MrBird
  *
  */
 public class ScheduleRunnable implements Runnable {
