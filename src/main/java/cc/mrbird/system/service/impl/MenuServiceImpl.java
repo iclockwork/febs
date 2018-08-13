@@ -121,6 +121,10 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		menu.setCreateTime(new Date());
 		if (menu.getParentId() == null)
 			menu.setParentId(0L);
+		if (Menu.TYPE_BUTTON.equals(menu.getType())) {
+			menu.setUrl(null);
+			menu.setIcon(null);
+		}
 		this.save(menu);
 	}
 
@@ -144,7 +148,10 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 		menu.setModifyTime(new Date());
 		if (menu.getParentId() == null)
 			menu.setParentId(0L);
+		if (Menu.TYPE_BUTTON.equals(menu.getType())) {
+			menu.setUrl(null);
+			menu.setIcon(null);
+		}
 		this.updateNotNull(menu);
 	}
-
 }

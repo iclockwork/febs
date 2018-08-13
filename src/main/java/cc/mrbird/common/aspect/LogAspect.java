@@ -108,7 +108,7 @@ public class LogAspect {
 		log.setUsername(user.getUsername());
 		log.setTime(time);
 		log.setCreateTime(new Date());
-		log.setLocation(AddressUtils.getRealAddressByIP(log.getIp(), mapper));
+		log.setLocation("");
 		log.setId(this.logService.getSequence(SysLog.SEQ));
 		// 保存系统日志
 		this.logService.save(log);

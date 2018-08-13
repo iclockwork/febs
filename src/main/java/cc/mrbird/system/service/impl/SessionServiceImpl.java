@@ -71,6 +71,8 @@ public class SessionServiceImpl implements SessionService {
 	public boolean forceLogout(String sessionId) {
 		Session session = sessionDAO.readSession(sessionId);
 		session.setTimeout(0);
+		session.stop();
+		sessionDAO.delete(session);
 		return true;
 	}
 

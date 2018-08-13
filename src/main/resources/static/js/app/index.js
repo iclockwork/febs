@@ -31,6 +31,7 @@ $(window).on("load", function () {
     function a(a) {
         a.requestFullscreen ? a.requestFullscreen() : a.mozRequestFullScreen ? a.mozRequestFullScreen() : a.webkitRequestFullscreen ? a.webkitRequestFullscreen() : a.msRequestFullscreen && a.msRequestFullscreen()
     }
+
     $("body").on("click", "[data-ma-action]", function (b) {
         b.preventDefault();
         var c = $(this),
