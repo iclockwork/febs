@@ -1,15 +1,18 @@
 package cc.mrbird.job.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import cc.mrbird.common.annotation.CronTag;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.WordUtils;
 import org.quartz.CronTrigger;
 import org.quartz.Scheduler;
+import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -135,5 +138,30 @@ public class JobServiceImpl extends BaseService<Job> implements JobService {
 		Arrays.stream(list).forEach(jobId -> ScheduleUtils.resumeJob(scheduler, Long.valueOf(jobId)));
 		this.updateBatch(jobIds, Job.ScheduleStatus.NORMAL.getValue());
 	}
+
+	@Override
+	public List<Job> getSysCronClazz(Job job) {
+		Reflections reflections = new Reflections("cc.mrbird.job.task");
+		List<Job> jobList = new ArrayList<>();
+		Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(CronTag.class);
+
+		for (Class cls : annotated) {
+			String clsSimpleName = cls.getSimpleName();
+			Method[] methods = cls.getDeclaredMethods();
+			for (Method method : methods) {
+				Job job1 = new Job();
+				String methodName = method.getName();
+				Parameter[] methodParameters = method.getParameters();
+				String params = String.format("%s(%s)", methodName, Arrays.stream(methodParameters).map(item -> item.getType().getSimpleName() + " " + item.getName()).collect(Collectors.joining(", ")));
+
+				job1.setBeanName(WordUtils.uncapitalize(clsSimpleName));
+				job1.setMethodName(methodName);
+				job1.setParams(params);
+				jobList.add(job1);
+			}
+		}
+		return jobList;
+	}
+
 
 }

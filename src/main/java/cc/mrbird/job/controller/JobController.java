@@ -172,4 +172,15 @@ public class JobController extends BaseController {
 			return ResponseBo.error("导出Csv失败，请联系网站管理员！");
 		}
 	}
+
+	/**
+	 * @param job 定时任务
+	 * @return ResponseBo
+	 */
+	@RequestMapping("job/getSysCronClazz")
+	@ResponseBody
+	public ResponseBo getSysCronClazz(Job job) {
+		List<Job> sysCronClazz = this.jobService.getSysCronClazz(job);
+		return ResponseBo.ok(sysCronClazz);
+	}
 }

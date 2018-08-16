@@ -1,11 +1,15 @@
 package cc.mrbird.system.service;
 
 import java.util.List;
+import java.util.Map;
 
 import cc.mrbird.common.domain.Tree;
 import cc.mrbird.common.service.IService;
 import cc.mrbird.system.domain.Menu;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
+@CacheConfig(cacheNames = "MenuService")
 public interface MenuService extends IService<Menu> {
 
 	List<Menu> findUserPermissions(String userName);
@@ -29,4 +33,7 @@ public interface MenuService extends IService<Menu> {
 	void updateMenu(Menu menu);
 	
 	void deleteMeuns(String menuIds);
+
+	@Cacheable(key = "'url_'+ #p0")
+	List<Map<String, String>> getAllUrl(String p1);
 }

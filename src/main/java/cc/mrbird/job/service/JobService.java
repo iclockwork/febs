@@ -4,7 +4,9 @@ import java.util.List;
 
 import cc.mrbird.common.service.IService;
 import cc.mrbird.job.domain.Job;
+import org.springframework.cache.annotation.CacheConfig;
 
+@CacheConfig(cacheNames = "JobService")
 public interface JobService extends IService<Job>{
 	
 	Job findJob(Long jobId);
@@ -24,4 +26,6 @@ public interface JobService extends IService<Job>{
 	void pause(String jobIds);
 
 	void resume(String jobIds);
+
+	List<Job> getSysCronClazz(Job job);
 }
