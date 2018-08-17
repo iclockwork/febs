@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisPassword;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -22,6 +25,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.nio.charset.Charset;
+import java.time.Duration;
 
 @Configuration
 
@@ -60,13 +64,15 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
-        JedisConnectionFactory factory = new JedisConnectionFactory();
-        factory.setHostName(host);
-        factory.setPort(port);
-        factory.setPassword(password);
-        factory.setUsePool(true);
-        factory.setTimeout(timeout);
-        return factory;
+        RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
+        redisStandaloneConfiguration.setHostName(host);
+        redisStandaloneConfiguration.setPort(port);
+        redisStandaloneConfiguration.setPassword(RedisPassword.of(password));
+
+        JedisClientConfiguration.JedisClientConfigurationBuilder jedisClientConfiguration = JedisClientConfiguration.builder();
+        jedisClientConfiguration.connectTimeout(Duration.ofMillis(timeout));
+        jedisClientConfiguration.usePooling();
+        return new JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration.build());
     }
 
     @Bean(name = "redisTemplate")
@@ -96,7 +102,6 @@ public class RedisConfig extends CachingConfigurerSupport {
                 .fromConnectionFactory(redisConnectionFactory);
         return builder.build();
     }
-
 
     @Bean
     @ConditionalOnMissingBean(StringRedisTemplate.class)
