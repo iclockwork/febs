@@ -9,7 +9,7 @@ import cc.mrbird.system.domain.UserRole;
 import cc.mrbird.system.domain.UserWithRole;
 import cc.mrbird.system.service.UserRoleService;
 import cc.mrbird.system.service.UserService;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

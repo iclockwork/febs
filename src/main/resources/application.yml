@@ -41,7 +41,7 @@ spring:
         # 添加过滤规则
         url-pattern: /*
         # 忽略过滤的格式
-        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,/actuator/**'
       
       # StatViewServlet配置 
       stat-view-servlet:
@@ -159,7 +159,7 @@ febs:
     # rememberMe cookie有效时长，默认86400秒，即一天
     cookieTimeout: 86400
     # 免认证的路径配置，如静态资源，druid监控页面，注册页面，验证码请求等
-    anonUrl: /css/**,/js/**,/fonts/**,/img/**,/druid/**,/user/regist,/gifCode,/
+    anonUrl: /css/**,/js/**,/fonts/**,/img/**,/druid/**,/user/regist,/gifCode,/,/actuator/**,/test/**
     # 登录 url
     loginUrl: /login
     # 登录成功后跳转的 url

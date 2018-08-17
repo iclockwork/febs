@@ -1,7 +1,7 @@
 package cc.mrbird.common.xss;
 
-import org.apache.commons.lang.BooleanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class XssFilter implements Filter {
 	// 是否过滤富文本内容
 	private static boolean IS_INCLUDE_RICH_TEXT = false;
 
-	public List<String> excludes = new ArrayList<String>();
+	private List<String> excludes = new ArrayList<>();
 
 	@Override
 	public void init(FilterConfig filterConfig) {
