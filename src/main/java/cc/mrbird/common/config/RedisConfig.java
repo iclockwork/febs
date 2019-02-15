@@ -2,7 +2,6 @@ package cc.mrbird.common.config;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
@@ -32,7 +31,6 @@ import java.time.Duration;
 @Configuration
 
 public class RedisConfig extends CachingConfigurerSupport {
-
     @Value("${spring.redis.host}")
     private String host;
 
@@ -41,6 +39,9 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Value("${spring.redis.password}")
     private String password = "";
+
+    @Value("${spring.redis.database}")
+    private int database;
 
     @Value("${spring.redis.timeout}")
     private int timeout;
@@ -56,12 +57,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
-        if (StringUtils.isNotBlank(password)) {
-
-            return new JedisPool(jedisPoolConfig, host, port, timeout, password);
-        } else {
-            return new JedisPool(jedisPoolConfig, host, port, timeout);
-        }
+        return new JedisPool(jedisPoolConfig, host, port, timeout, password, database);
     }
 
     @Bean
@@ -70,6 +66,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         redisStandaloneConfiguration.setHostName(host);
         redisStandaloneConfiguration.setPort(port);
         redisStandaloneConfiguration.setPassword(RedisPassword.of(password));
+        redisStandaloneConfiguration.setDatabase(database);
 
         JedisClientConfiguration.JedisClientConfigurationBuilder jedisClientConfiguration = JedisClientConfiguration.builder();
         jedisClientConfiguration.connectTimeout(Duration.ofMillis(timeout));

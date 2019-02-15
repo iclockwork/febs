@@ -19,9 +19,9 @@
         <!-- 数据库链接地址账号密码 -->
         <jdbcConnection 
             driverClass="oracle.jdbc.driver.OracleDriver"
-            connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL"
-            userId="mrbird"
-            password="123456">
+            connectionURL="jdbc:oracle:thin:@132.225.150.61:9999:resdb1"
+            userId="res_check"
+            password="res_check">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>

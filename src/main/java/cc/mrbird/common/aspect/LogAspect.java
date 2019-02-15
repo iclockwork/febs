@@ -1,116 +1,73 @@
 package cc.mrbird.common.aspect;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
-
-import cc.mrbird.common.config.FebsProperies;
+import cc.mrbird.common.config.FebsProperties;
+import cc.mrbird.common.util.HttpContextUtils;
+import cc.mrbird.common.util.IPUtils;
+import cc.mrbird.system.domain.SysLog;
+import cc.mrbird.system.domain.User;
+import cc.mrbird.system.service.LogService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import cc.mrbird.common.annotation.Log;
-import cc.mrbird.common.util.AddressUtils;
-import cc.mrbird.common.util.HttpContextUtils;
-import cc.mrbird.common.util.IPUtils;
-import cc.mrbird.system.domain.SysLog;
-import cc.mrbird.system.domain.User;
-import cc.mrbird.system.service.LogService;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * AOP 记录用户操作日志
- * @link https://mrbird.cc/Spring-Boot-AOP%20log.html
+ *
  * @author MrBird
+ * @link https://mrbird.cc/Spring-Boot-AOP%20log.html
  */
 @Aspect
 @Component
 public class LogAspect {
 
-	@Autowired
-	private FebsProperies febsProperies;
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private LogService logService;
+    @Autowired
+    private FebsProperties febsProperties;
 
-	@Autowired
-	ObjectMapper mapper;
+    @Autowired
+    private LogService logService;
 
-	@Pointcut("@annotation(cc.mrbird.common.annotation.Log)")
-	public void pointcut() {
-	}
 
-	@Around("pointcut()")
-	public Object around(ProceedingJoinPoint point) throws JsonProcessingException {
-		Object result = null;
-		long beginTime = System.currentTimeMillis();
-		try {
-			// 执行方法
-			result = point.proceed();
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		// 执行时长(毫秒)
-		long time = System.currentTimeMillis() - beginTime;
-		if (febsProperies.isOpenAopLog())
-			// 保存日志
-			saveLog(point, time);
-		return result;
-	}
+    @Pointcut("@annotation(cc.mrbird.common.annotation.Log)")
+    public void pointcut() {
+        // do nothing
+    }
 
-	private void saveLog(ProceedingJoinPoint joinPoint, long time) throws JsonProcessingException {
-		User user = (User) SecurityUtils.getSubject().getPrincipal();
-		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-		Method method = signature.getMethod();
-		SysLog log = new SysLog();
-		Log logAnnotation = method.getAnnotation(Log.class);
-		if (logAnnotation != null) {
-			// 注解上的描述
-			log.setOperation(logAnnotation.value());
-		}
-
-		// 请求的类名
-		String className = joinPoint.getTarget().getClass().getName();
-		// 请求的方法名
-		String methodName = signature.getName();
-		log.setMethod(className + "." + methodName + "()");
-		// 请求的方法参数值
-		Object[] args = joinPoint.getArgs();
-		// 请求的方法参数名称
-		LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
-		String[] paramNames = u.getParameterNames(method);
-		if (args != null) {
-			StringBuilder params = new StringBuilder();
-			int i = 0;
-			while (i < args.length) {
-				if(args[i] instanceof Serializable)
-					params.append("  ").append(paramNames[i]).append(": ").append(this.mapper.writeValueAsString(args[i]));
-				else
-					params.append("  ").append(paramNames[i]).append(": ").append(args[i]);
-				i++;
-			}
-			log.setParams(params.toString());
-		}
-		// 获取request
-		HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
-		// 设置IP地址
-		log.setIp(IPUtils.getIpAddr(request));
-		log.setUsername(user.getUsername());
-		log.setTime(time);
-		log.setCreateTime(new Date());
-		log.setLocation(AddressUtils.getRealAddressByIP(log.getIp(), mapper));
-		log.setId(this.logService.getSequence(SysLog.SEQ));
-		// 保存系统日志
-		this.logService.save(log);
-	}
+    @Around("pointcut()")
+    public Object around(ProceedingJoinPoint point) throws JsonProcessingException {
+        Object result = null;
+        long beginTime = System.currentTimeMillis();
+        try {
+            // 执行方法
+            result = point.proceed();
+        } catch (Throwable e) {
+            log.error(e.getMessage());
+        }
+        // 获取request
+        HttpServletRequest request = HttpContextUtils.getHttpServletRequest();
+        // 设置IP地址
+        String ip = IPUtils.getIpAddr(request);
+        // 执行时长(毫秒)
+        long time = System.currentTimeMillis() - beginTime;
+        if (febsProperties.isOpenAopLog()) {
+            // 保存日志
+            User user = (User) SecurityUtils.getSubject().getPrincipal();
+            SysLog log = new SysLog();
+            log.setUsername(user.getUsername());
+            log.setIp(ip);
+            log.setTime(time);
+            logService.saveLog(point, log);
+        }
+        return result;
+    }
 }

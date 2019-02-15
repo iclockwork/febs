@@ -9,9 +9,9 @@ spring:
       # 数据库访问配置, 使用druid数据源 
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: oracle.jdbc.driver.OracleDriver
-      url: jdbc:oracle:thin:@localhost:1521:ORCL
-      username: mrbird
-      password: 123456   
+      url: jdbc:oracle:thin:@132.225.150.61:9999:resdb1
+      username: res_check
+      password: res_check
       # 连接池配置
       initial-size: 5
       min-idle: 5
@@ -65,13 +65,13 @@ spring:
 
   redis:
     # Redis数据库索引（默认为0）
-    database: 0
+    database: 11
     # Redis服务器地址
-    host: 127.0.0.1
+    host: 47.97.4.204
     # Redis服务器连接端口
     port: 6379
     # Redis 密码
-    password:
+    password: MyNewPass4!
     jedis:
       pool:
         # 连接池中的最小空闲连接

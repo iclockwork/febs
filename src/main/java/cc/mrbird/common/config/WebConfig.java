@@ -15,31 +15,31 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class WebConfig {
 
-	@Autowired
-	private FebsProperies febsProperies;
+    @Autowired
+    private FebsProperties febsProperties;
 
-	/**
-	 * XssFilter Bean
-	 */
-	@Bean
-	public FilterRegistrationBean xssFilterRegistrationBean() {
-		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-		filterRegistrationBean.setFilter(new XssFilter());
-		filterRegistrationBean.setOrder(1);
-		filterRegistrationBean.setEnabled(true);
-		filterRegistrationBean.addUrlPatterns("/*");
-		Map<String, String> initParameters = new HashMap<>();
-		initParameters.put("excludes", "/favicon.ico,/img/*,/js/*,/css/*");
-		initParameters.put("isIncludeRichText", "true");
-		filterRegistrationBean.setInitParameters(initParameters);
-		return filterRegistrationBean;
-	}
+    /**
+     * XssFilter Bean
+     */
+    @Bean
+    public FilterRegistrationBean xssFilterRegistrationBean() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        filterRegistrationBean.setFilter(new XssFilter());
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.setEnabled(true);
+        filterRegistrationBean.addUrlPatterns("/*");
+        Map<String, String> initParameters = new HashMap<>();
+        initParameters.put("excludes", "/favicon.ico,/img/*,/js/*,/css/*");
+        initParameters.put("isIncludeRichText", "true");
+        filterRegistrationBean.setInitParameters(initParameters);
+        return filterRegistrationBean;
+    }
 
-	@Bean
-	public ObjectMapper getObjectMapper() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setDateFormat(new SimpleDateFormat(febsProperies.getTimeFormat()));
-		return mapper;
-	}
+    @Bean
+    public ObjectMapper getObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.setDateFormat(new SimpleDateFormat(febsProperties.getTimeFormat()));
+        return mapper;
+    }
 
 }
