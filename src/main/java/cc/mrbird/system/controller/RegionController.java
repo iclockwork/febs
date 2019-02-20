@@ -38,13 +38,13 @@ public class RegionController extends BaseController {
 
     @RequestMapping("region/list")
     @ResponseBody
-    public Map<String, Object> regionList(QueryRequest request, Region region) {
+    public Map<String, Object> list(QueryRequest request, Region region) {
         return super.selectByPageNumSize(request, () -> this.regionService.findAll(region));
     }
 
     @RequestMapping("region/excel")
     @ResponseBody
-    public ResponseBo regionExcel(Region region) {
+    public ResponseBo excel(Region region) {
         try {
             List<Region> list = this.regionService.findAll(region);
             return FileUtils.createExcelByPOIKit("区域表", list, Region.class);
@@ -56,7 +56,7 @@ public class RegionController extends BaseController {
 
     @RequestMapping("region/csv")
     @ResponseBody
-    public ResponseBo roleCsv(Region region) {
+    public ResponseBo csv(Region region) {
         try {
             List<Region> list = this.regionService.findAll(region);
             return FileUtils.createCsv("区域表", list, Region.class);
