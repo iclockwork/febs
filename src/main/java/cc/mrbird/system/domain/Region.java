@@ -91,6 +91,7 @@ public class Region implements Serializable {
     private Integer ppdomId;
 
     @Column(name = "CREATE_DATE")
+    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
     private Date createDate;
 
     @Column(name = "CREATE_OP")

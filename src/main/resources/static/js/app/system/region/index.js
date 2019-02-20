@@ -27,6 +27,9 @@ $(function () {
         }, {
             field: 'address',
             title: '区域中心地址'
+        }, {
+            field: 'createDate',
+            title: '创建时间'
         }]
     };
 

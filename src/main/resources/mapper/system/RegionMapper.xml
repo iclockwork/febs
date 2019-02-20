@@ -37,7 +37,7 @@
     </resultMap>
 
     <select id="findAll" resultType="cc.mrbird.system.domain.Region">
-        <bind name="bindRegionName" value="'%'+regionName+'%'"/>
+        <bind name="bindRegionName" value="'%' + regionName + '%'"/>
         SELECT A.REGION_ID as regionId,
         A.REGION_NAME as regionName,
         A.REGION_NO as regionNo,
@@ -45,7 +45,8 @@
         A.SUPER_REGION_ID as superRegionId,
         B.REGION_NAME as superRegionName,
         SF_GET_DESC_CHINA(A.GRADE_ID) as gradeName,
-        A.ADDRESS as address
+        A.ADDRESS as address,
+        A.CREATE_DATE as createDate
         FROM (select * from SPC_REGION where nvl(delete_state, '0') = '0') A,
         (select * from SPC_REGION where nvl(delete_state, '0') = '0') B
         WHERE 1 = 1
@@ -54,5 +55,6 @@
         <if test="regionName != null and regionName != ''">
             AND A.REGION_NAME like #{bindRegionName}
         </if>
+        order by A.REGION_ID asc
     </select>
 </mapper>
