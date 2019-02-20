@@ -1,9 +1,13 @@
 package cc.mrbird.building.domain;
 
+import cc.mrbird.common.annotation.ExportConfig;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
 @Table(name = "BD_BUILDING")
 public class Building implements Serializable {
@@ -12,9 +16,11 @@ public class Building implements Serializable {
     private Integer buildingId;
 
     @Column(name = "BUILDING_NO")
+    @ExportConfig(value = "楼宇编码")
     private String buildingNo;
 
     @Column(name = "BUILDING_NAME")
+    @ExportConfig(value = "楼宇名称")
     private String buildingName;
 
     @Column(name = "BUILDING_LEVEL")
@@ -126,6 +132,7 @@ public class Building implements Serializable {
     private Integer createStaffId;
 
     @Column(name = "CREATE_DATE")
+    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")
