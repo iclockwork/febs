@@ -194,9 +194,9 @@
 
         <!-- spring-boot-admin-client -->
         <!--<dependency>-->
-            <!--<groupId>de.codecentric</groupId>-->
-            <!--<artifactId>spring-boot-admin-starter-client</artifactId>-->
-            <!--<version>2.0.2</version>-->
+        <!--<groupId>de.codecentric</groupId>-->
+        <!--<artifactId>spring-boot-admin-starter-client</artifactId>-->
+        <!--<version>2.0.2</version>-->
         <!--</dependency>-->
 
         <!-- google.guava/guava -->
@@ -224,21 +224,19 @@
             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
         </repository>
     </repositories>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.5</version>
                 <dependencies>
                     <dependency>
-                         <groupId>com.github.noraui</groupId>
+                        <groupId>com.github.noraui</groupId>
                         <artifactId>ojdbc7</artifactId>
                         <version>12.1.0.2</version>
                     </dependency>
@@ -263,7 +261,6 @@
                     <configurationFile>src/main/resources/config/mybatis-generator.xml</configurationFile>
                 </configuration>
             </plugin>
-            -->
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
