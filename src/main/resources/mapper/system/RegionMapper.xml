@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.RegionMapper">
+    <resultMap id="region" type="cc.mrbird.system.domain.Region">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="REGION_ID" jdbcType="VARCHAR" property="regionId"/>
+        <result column="REGION_NO" jdbcType="VARCHAR" property="regionNo"/>
+        <result column="REGION_NAME" jdbcType="VARCHAR" property="regionName"/>
+        <result column="ALIAS" jdbcType="VARCHAR" property="alias"/>
+        <result column="GRADE_ID" jdbcType="DECIMAL" property="gradeId"/>
+        <result column="TYPE_ID" jdbcType="DECIMAL" property="typeId"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="SUPER_REGION_ID" jdbcType="CHAR" property="superRegionId"/>
+        <result column="PARENT_ID" jdbcType="CHAR" property="parentId"/>
+        <result column="DELETE_STATE" jdbcType="CHAR" property="deleteState"/>
+        <result column="DELETE_TIME" jdbcType="TIMESTAMP" property="deleteTime"/>
+        <result column="NOTES" jdbcType="VARCHAR" property="notes"/>
+        <result column="NAME_AB" jdbcType="VARCHAR" property="nameAb"/>
+        <result column="RES_TYPE_ID" jdbcType="DECIMAL" property="resTypeId"/>
+        <result column="CHINA_NAME_AB" jdbcType="VARCHAR" property="chinaNameAb"/>
+        <result column="MODIFY_OP" jdbcType="DECIMAL" property="modifyOp"/>
+        <result column="MODIRY_DATE" jdbcType="TIMESTAMP" property="modiryDate"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="SYNC_DATE" jdbcType="TIMESTAMP" property="syncDate"/>
+        <result column="OLD_ID_EQP" jdbcType="VARCHAR" property="oldIdEqp"/>
+        <result column="OLD_SP" jdbcType="VARCHAR" property="oldSp"/>
+        <result column="LAN_ID" jdbcType="DECIMAL" property="lanId"/>
+        <result column="PPDOM_ID" jdbcType="DECIMAL" property="ppdomId"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="CREATE_OP" jdbcType="DECIMAL" property="createOp"/>
+        <result column="CRM_REGION" jdbcType="DECIMAL" property="crmRegion"/>
+        <result column="CRM_LAN" jdbcType="DECIMAL" property="crmLan"/>
+        <result column="SP_REGION_ID" jdbcType="VARCHAR" property="spRegionId"/>
+        <result column="COUNTRY_TYPE" jdbcType="DECIMAL" property="countryType"/>
+    </resultMap>
+
+    <select id="findAll" resultType="cc.mrbird.system.domain.Region">
+        <bind name="bindRegionName" value="'%'+regionName+'%'"/>
+        SELECT A.REGION_ID as regionId,
+        A.REGION_NAME as regionName,
+        A.REGION_NO as regionNo,
+        A.CHINA_NAME_AB as chinaNameAb,
+        A.SUPER_REGION_ID as superRegionId,
+        B.REGION_NAME as superRegionName,
+        SF_GET_DESC_CHINA(A.GRADE_ID) as gradeName,
+        A.ADDRESS as address
+        FROM (select * from SPC_REGION where nvl(delete_state, '0') = '0') A,
+        (select * from SPC_REGION where nvl(delete_state, '0') = '0') B
+        WHERE 1 = 1
+        AND A.GRADE_ID not in (2000024)
+        AND A.SUPER_REGION_ID = B.REGION_ID(+)
+        <if test="regionName != null and regionName != ''">
+            AND A.REGION_NAME like #{bindRegionName}
+        </if>
+    </select>
+</mapper>
