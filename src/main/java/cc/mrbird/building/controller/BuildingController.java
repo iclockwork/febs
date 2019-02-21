@@ -29,7 +29,7 @@ public class BuildingController extends BaseController {
     @Autowired
     private BuildingService buildingService;
 
-    @Log("获取区域信息")
+    @Log("获取楼宇信息")
     @RequestMapping("building")
     @RequiresPermissions("building:list")
     public String index() {
@@ -47,7 +47,7 @@ public class BuildingController extends BaseController {
     public ResponseBo excel(Building building) {
         try {
             List<Building> list = this.buildingService.findAll(building);
-            return FileUtils.createExcelByPOIKit("区域表", list, Building.class);
+            return FileUtils.createExcelByPOIKit("楼宇表", list, Building.class);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -59,7 +59,7 @@ public class BuildingController extends BaseController {
     public ResponseBo csv(Building building) {
         try {
             List<Building> list = this.buildingService.findAll(building);
-            return FileUtils.createCsv("区域表", list, Building.class);
+            return FileUtils.createCsv("楼宇表", list, Building.class);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
