@@ -1,6 +1,6 @@
 $(function () {
     var theme_color = $MB.getThemeColor(theme);
-    
+
     Highcharts.setOptions({
         global: {
             useUTC: false
@@ -8,7 +8,7 @@ $(function () {
     });
     $("#container").highcharts({
         chart: {
-            type: "spline",
+            type: "area",
             animation: Highcharts.svg,
             marginRight: 0,
             events: {
