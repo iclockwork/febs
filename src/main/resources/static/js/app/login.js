@@ -5,33 +5,6 @@ $(document).ready(function () {
         radioClass: 'iradio_minimal-green',
         increaseArea: '20%'
     });
-
-    var $formPanelTwo = $('.form-panel.two');
-
-    var panelOne = $formPanelTwo.height();
-    var panelTwo = $formPanelTwo[0].scrollHeight;
-
-    $formPanelTwo.not('.form-panel.two.active').on('click', function (e) {
-        e.preventDefault();
-
-        $('.form-toggle').addClass('visible');
-        $('.form-panel.one').addClass('hidden');
-        $('.form-panel.two').addClass('active');
-        $('.form').animate({
-            'height': panelTwo
-        }, 200);
-    });
-
-    $('.form-toggle').on('click', function (e) {
-        e.preventDefault();
-        $(this).removeClass('visible');
-        $('.form-panel.one').removeClass('hidden');
-        $('.form-panel.two').removeClass('active');
-        $('.form').animate({
-            'height': panelOne + 92
-        }, 200);
-    });
-
 });
 
 
