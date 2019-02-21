@@ -15,6 +15,17 @@ public class Building implements Serializable {
     @Column(name = "BUILDING_ID")
     private Integer buildingId;
 
+    private String dsRegionId;
+
+    @ExportConfig(value = "地市")
+    private String dsRegionName;
+
+    @Column(name = "REGION_ID")
+    private String regionId;
+
+    @ExportConfig(value = "区县")
+    private String regionName;
+
     @Column(name = "BUILDING_NO")
     @ExportConfig(value = "楼宇编码")
     private String buildingNo;
@@ -26,104 +37,166 @@ public class Building implements Serializable {
     @Column(name = "BUILDING_LEVEL")
     private String buildingLevel;
 
+    @ExportConfig(value = "楼宇等级")
+    private String buildingLevelName;
+
     @Column(name = "BUILDING_TYPE")
     private String buildingType;
 
+    @ExportConfig(value = "楼宇所属区域类型")
+    private String buildingTypeDesc;
+
     @Column(name = "BUILDING_TYPE_NAME")
+    @ExportConfig(value = "楼宇所属区域名称")
     private String buildingTypeName;
 
     @Column(name = "BUILDING_ADDRESS")
+    @ExportConfig(value = "楼宇地址")
     private String buildingAddress;
 
-    @Column(name = "REGION_ID")
-    private String regionId;
-
     @Column(name = "LONGITUDE")
+    @ExportConfig(value = "经度")
     private BigDecimal longitude;
 
     @Column(name = "LATITUDE")
+    @ExportConfig(value = "纬度")
     private BigDecimal latitude;
 
     @Column(name = "FLOOR_NUMBER")
+    @ExportConfig(value = "楼层数")
     private Short floorNumber;
 
     @Column(name = "AREA")
+    @ExportConfig(value = "建筑面积（万m2）")
     private BigDecimal area;
 
     @Column(name = "HOUSEHOLDER_NUMBER")
+    @ExportConfig(value = "商户数（户）")
     private Short householderNumber;
 
     @Column(name = "PROPERTY_COMPANY")
+    @ExportConfig(value = "物业单位")
     private String propertyCompany;
 
     @Column(name = "PROPERTY_MANAGER")
+    @ExportConfig(value = "物业联系人")
     private String propertyManager;
 
     @Column(name = "PROPERTY_MANAGER_CONTACT")
+    @ExportConfig(value = "物业联系人电话")
     private String propertyManagerContact;
 
     @Column(name = "BUILDING_MANAGER_ID")
     private Integer buildingManagerId;
 
+    @ExportConfig(value = "楼长")
+    private String buildingManager;
+
     @Column(name = "STATE")
     private Short state;
 
+    @ExportConfig(value = "楼宇状态")
+    private String stateName;
+
     @Column(name = "REMARK")
+    @ExportConfig(value = "备注")
     private String remark;
 
     @Column(name = "SEGM_ID")
     private String segmId;
 
+    @ExportConfig(value = "标准地址")
+    private String standName;
+
     @Column(name = "ACCESS_AREA_ID")
     private String accessAreaId;
+
+    @ExportConfig(value = "综合业务接入区")
+    private String accessAreaName;
 
     @Column(name = "ROOM_ID")
     private String roomId;
 
+    @ExportConfig(value = "综合业务接入机房")
+    private String roomName;
+
     @Column(name = "LIGHT_NAME")
+    @ExportConfig(value = "光交名称")
     private String lightName;
 
     @Column(name = "LIGHT_ADDRESS")
+    @ExportConfig(value = "光交地址")
     private String lightAddress;
 
     @Column(name = "LIGHT_LONGITUDE")
+    @ExportConfig(value = "光交经度")
     private BigDecimal lightLongitude;
 
     @Column(name = "LIGHT_LATITUDE")
+    @ExportConfig(value = "光交纬度")
     private BigDecimal lightLatitude;
 
     @Column(name = "ROOM_CABINET_FLAG")
     private Short roomCabinetFlag;
 
+    @ExportConfig(value = "是否有机房/机柜")
+    private String roomCabinetFlagName;
+
     @Column(name = "CABLE_ACCESS_FLAG")
     private Short cableAccessFlag;
 
+    @ExportConfig(value = "光缆资源是否接入")
+    private String cableAccessFlagName;
+
     @Column(name = "CABLE_NUMBER")
+    @ExportConfig(value = "进楼光缆条数")
     private Short cableNumber;
 
     @Column(name = "CABLE_REMAIN_NUMBER")
+    @ExportConfig(value = "空余芯数")
     private Short cableRemainNumber;
 
     @Column(name = "VERTICAL_COVERAGE_FLAG")
     private Short verticalCoverageFlag;
 
+    @ExportConfig(value = "是否具备垂直覆盖")
+    private String verticalCoverageFlagName;
+
     @Column(name = "HORIZONTAL_COVERAGE_FLAG")
     private Short horizontalCoverageFlag;
+
+    @ExportConfig(value = "是否具备水平覆盖")
+    private String horizontalCoverageFlagName;
 
     @Column(name = "COVERAGE_METHOD")
     private Short coverageMethod;
 
+    @ExportConfig(value = "楼宇覆盖方式")
+    private String coverageMethodName;
+
     @Column(name = "COOPERATION_METHOD")
     private Short cooperationMethod;
+
+    @ExportConfig(value = "合作方式")
+    private String cooperationMethodName;
 
     @Column(name = "INDOOR_DISTRIBUTION_FLAG")
     private Short indoorDistributionFlag;
 
+    @ExportConfig(value = "是否具备室分")
+    private String indoorDistributionFlagName;
+
     @Column(name = "COVERAGE_NETWORK_STANDARD")
     private Short coverageNetworkStandard;
 
+    @ExportConfig(value = "已覆盖网络制式")
+    private String coverageNetworkStandardName;
+
     @Column(name = "WLAN_FLAG")
     private Short wlanFlag;
+
+    @ExportConfig(value = "WLAN是否已覆盖")
+    private String wlanFlagName;
 
     @Column(name = "DELETE_FLAG")
     private Short deleteFlag;
@@ -131,8 +204,11 @@ public class Building implements Serializable {
     @Column(name = "CREATE_STAFF_ID")
     private Integer createStaffId;
 
+    @ExportConfig(value = "录入人")
+    private String createStaffName;
+
     @Column(name = "CREATE_DATE")
-    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
+    @ExportConfig(value = "录入时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")
@@ -744,5 +820,165 @@ public class Building implements Serializable {
      */
     public void setModifyOp(String modifyOp) {
         this.modifyOp = modifyOp == null ? null : modifyOp.trim();
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getDsRegionName() {
+        return dsRegionName;
+    }
+
+    public void setDsRegionName(String dsRegionName) {
+        this.dsRegionName = dsRegionName;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
+
+    public String getBuildingLevelName() {
+        return buildingLevelName;
+    }
+
+    public void setBuildingLevelName(String buildingLevelName) {
+        this.buildingLevelName = buildingLevelName;
+    }
+
+    public String getBuildingTypeDesc() {
+        return buildingTypeDesc;
+    }
+
+    public void setBuildingTypeDesc(String buildingTypeDesc) {
+        this.buildingTypeDesc = buildingTypeDesc;
+    }
+
+    public String getBuildingManager() {
+        return buildingManager;
+    }
+
+    public void setBuildingManager(String buildingManager) {
+        this.buildingManager = buildingManager;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getStandName() {
+        return standName;
+    }
+
+    public void setStandName(String standName) {
+        this.standName = standName;
+    }
+
+    public String getAccessAreaName() {
+        return accessAreaName;
+    }
+
+    public void setAccessAreaName(String accessAreaName) {
+        this.accessAreaName = accessAreaName;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getRoomCabinetFlagName() {
+        return roomCabinetFlagName;
+    }
+
+    public void setRoomCabinetFlagName(String roomCabinetFlagName) {
+        this.roomCabinetFlagName = roomCabinetFlagName;
+    }
+
+    public String getCableAccessFlagName() {
+        return cableAccessFlagName;
+    }
+
+    public void setCableAccessFlagName(String cableAccessFlagName) {
+        this.cableAccessFlagName = cableAccessFlagName;
+    }
+
+    public String getVerticalCoverageFlagName() {
+        return verticalCoverageFlagName;
+    }
+
+    public void setVerticalCoverageFlagName(String verticalCoverageFlagName) {
+        this.verticalCoverageFlagName = verticalCoverageFlagName;
+    }
+
+    public String getHorizontalCoverageFlagName() {
+        return horizontalCoverageFlagName;
+    }
+
+    public void setHorizontalCoverageFlagName(String horizontalCoverageFlagName) {
+        this.horizontalCoverageFlagName = horizontalCoverageFlagName;
+    }
+
+    public String getCoverageMethodName() {
+        return coverageMethodName;
+    }
+
+    public void setCoverageMethodName(String coverageMethodName) {
+        this.coverageMethodName = coverageMethodName;
+    }
+
+    public String getCooperationMethodName() {
+        return cooperationMethodName;
+    }
+
+    public void setCooperationMethodName(String cooperationMethodName) {
+        this.cooperationMethodName = cooperationMethodName;
+    }
+
+    public String getIndoorDistributionFlagName() {
+        return indoorDistributionFlagName;
+    }
+
+    public void setIndoorDistributionFlagName(String indoorDistributionFlagName) {
+        this.indoorDistributionFlagName = indoorDistributionFlagName;
+    }
+
+    public String getCoverageNetworkStandardName() {
+        return coverageNetworkStandardName;
+    }
+
+    public void setCoverageNetworkStandardName(String coverageNetworkStandardName) {
+        this.coverageNetworkStandardName = coverageNetworkStandardName;
+    }
+
+    public String getWlanFlagName() {
+        return wlanFlagName;
+    }
+
+    public void setWlanFlagName(String wlanFlagName) {
+        this.wlanFlagName = wlanFlagName;
+    }
+
+    public String getCreateStaffName() {
+        return createStaffName;
+    }
+
+    public void setCreateStaffName(String createStaffName) {
+        this.createStaffName = createStaffName;
     }
 }
