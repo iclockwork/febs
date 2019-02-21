@@ -64,7 +64,7 @@ public class Building implements Serializable {
 
     @Column(name = "FLOOR_NUMBER")
     @ExportConfig(value = "楼层数")
-    private Short floorNumber;
+    private Integer floorNumber;
 
     @Column(name = "AREA")
     @ExportConfig(value = "建筑面积（万m2）")
@@ -72,7 +72,7 @@ public class Building implements Serializable {
 
     @Column(name = "HOUSEHOLDER_NUMBER")
     @ExportConfig(value = "商户数（户）")
-    private Short householderNumber;
+    private Integer householderNumber;
 
     @Column(name = "PROPERTY_COMPANY")
     @ExportConfig(value = "物业单位")
@@ -93,7 +93,7 @@ public class Building implements Serializable {
     private String buildingManager;
 
     @Column(name = "STATE")
-    private Short state;
+    private Integer state;
 
     @ExportConfig(value = "楼宇状态")
     private String stateName;
@@ -137,69 +137,69 @@ public class Building implements Serializable {
     private BigDecimal lightLatitude;
 
     @Column(name = "ROOM_CABINET_FLAG")
-    private Short roomCabinetFlag;
+    private Integer roomCabinetFlag;
 
     @ExportConfig(value = "是否有机房/机柜")
     private String roomCabinetFlagName;
 
     @Column(name = "CABLE_ACCESS_FLAG")
-    private Short cableAccessFlag;
+    private Integer cableAccessFlag;
 
     @ExportConfig(value = "光缆资源是否接入")
     private String cableAccessFlagName;
 
     @Column(name = "CABLE_NUMBER")
     @ExportConfig(value = "进楼光缆条数")
-    private Short cableNumber;
+    private Integer cableNumber;
 
     @Column(name = "CABLE_REMAIN_NUMBER")
     @ExportConfig(value = "空余芯数")
-    private Short cableRemainNumber;
+    private Integer cableRemainNumber;
 
     @Column(name = "VERTICAL_COVERAGE_FLAG")
-    private Short verticalCoverageFlag;
+    private Integer verticalCoverageFlag;
 
     @ExportConfig(value = "是否具备垂直覆盖")
     private String verticalCoverageFlagName;
 
     @Column(name = "HORIZONTAL_COVERAGE_FLAG")
-    private Short horizontalCoverageFlag;
+    private Integer horizontalCoverageFlag;
 
     @ExportConfig(value = "是否具备水平覆盖")
     private String horizontalCoverageFlagName;
 
     @Column(name = "COVERAGE_METHOD")
-    private Short coverageMethod;
+    private Integer coverageMethod;
 
     @ExportConfig(value = "楼宇覆盖方式")
     private String coverageMethodName;
 
     @Column(name = "COOPERATION_METHOD")
-    private Short cooperationMethod;
+    private Integer cooperationMethod;
 
     @ExportConfig(value = "合作方式")
     private String cooperationMethodName;
 
     @Column(name = "INDOOR_DISTRIBUTION_FLAG")
-    private Short indoorDistributionFlag;
+    private Integer indoorDistributionFlag;
 
     @ExportConfig(value = "是否具备室分")
     private String indoorDistributionFlagName;
 
     @Column(name = "COVERAGE_NETWORK_STANDARD")
-    private Short coverageNetworkStandard;
+    private Integer coverageNetworkStandard;
 
     @ExportConfig(value = "已覆盖网络制式")
     private String coverageNetworkStandardName;
 
     @Column(name = "WLAN_FLAG")
-    private Short wlanFlag;
+    private Integer wlanFlag;
 
     @ExportConfig(value = "WLAN是否已覆盖")
     private String wlanFlagName;
 
     @Column(name = "DELETE_FLAG")
-    private Short deleteFlag;
+    private Integer deleteFlag;
 
     @Column(name = "CREATE_STAFF_ID")
     private Integer createStaffId;
@@ -363,14 +363,14 @@ public class Building implements Serializable {
     /**
      * @return FLOOR_NUMBER
      */
-    public Short getFloorNumber() {
+    public Integer getFloorNumber() {
         return floorNumber;
     }
 
     /**
      * @param floorNumber
      */
-    public void setFloorNumber(Short floorNumber) {
+    public void setFloorNumber(Integer floorNumber) {
         this.floorNumber = floorNumber;
     }
 
@@ -391,14 +391,14 @@ public class Building implements Serializable {
     /**
      * @return HOUSEHOLDER_NUMBER
      */
-    public Short getHouseholderNumber() {
+    public Integer getHouseholderNumber() {
         return householderNumber;
     }
 
     /**
      * @param householderNumber
      */
-    public void setHouseholderNumber(Short householderNumber) {
+    public void setHouseholderNumber(Integer householderNumber) {
         this.householderNumber = householderNumber;
     }
 
@@ -461,14 +461,14 @@ public class Building implements Serializable {
     /**
      * @return STATE
      */
-    public Short getState() {
+    public Integer getState() {
         return state;
     }
 
     /**
      * @param state
      */
-    public void setState(Short state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -587,168 +587,168 @@ public class Building implements Serializable {
     /**
      * @return ROOM_CABINET_FLAG
      */
-    public Short getRoomCabinetFlag() {
+    public Integer getRoomCabinetFlag() {
         return roomCabinetFlag;
     }
 
     /**
      * @param roomCabinetFlag
      */
-    public void setRoomCabinetFlag(Short roomCabinetFlag) {
+    public void setRoomCabinetFlag(Integer roomCabinetFlag) {
         this.roomCabinetFlag = roomCabinetFlag;
     }
 
     /**
      * @return CABLE_ACCESS_FLAG
      */
-    public Short getCableAccessFlag() {
+    public Integer getCableAccessFlag() {
         return cableAccessFlag;
     }
 
     /**
      * @param cableAccessFlag
      */
-    public void setCableAccessFlag(Short cableAccessFlag) {
+    public void setCableAccessFlag(Integer cableAccessFlag) {
         this.cableAccessFlag = cableAccessFlag;
     }
 
     /**
      * @return CABLE_NUMBER
      */
-    public Short getCableNumber() {
+    public Integer getCableNumber() {
         return cableNumber;
     }
 
     /**
      * @param cableNumber
      */
-    public void setCableNumber(Short cableNumber) {
+    public void setCableNumber(Integer cableNumber) {
         this.cableNumber = cableNumber;
     }
 
     /**
      * @return CABLE_REMAIN_NUMBER
      */
-    public Short getCableRemainNumber() {
+    public Integer getCableRemainNumber() {
         return cableRemainNumber;
     }
 
     /**
      * @param cableRemainNumber
      */
-    public void setCableRemainNumber(Short cableRemainNumber) {
+    public void setCableRemainNumber(Integer cableRemainNumber) {
         this.cableRemainNumber = cableRemainNumber;
     }
 
     /**
      * @return VERTICAL_COVERAGE_FLAG
      */
-    public Short getVerticalCoverageFlag() {
+    public Integer getVerticalCoverageFlag() {
         return verticalCoverageFlag;
     }
 
     /**
      * @param verticalCoverageFlag
      */
-    public void setVerticalCoverageFlag(Short verticalCoverageFlag) {
+    public void setVerticalCoverageFlag(Integer verticalCoverageFlag) {
         this.verticalCoverageFlag = verticalCoverageFlag;
     }
 
     /**
      * @return HORIZONTAL_COVERAGE_FLAG
      */
-    public Short getHorizontalCoverageFlag() {
+    public Integer getHorizontalCoverageFlag() {
         return horizontalCoverageFlag;
     }
 
     /**
      * @param horizontalCoverageFlag
      */
-    public void setHorizontalCoverageFlag(Short horizontalCoverageFlag) {
+    public void setHorizontalCoverageFlag(Integer horizontalCoverageFlag) {
         this.horizontalCoverageFlag = horizontalCoverageFlag;
     }
 
     /**
      * @return COVERAGE_METHOD
      */
-    public Short getCoverageMethod() {
+    public Integer getCoverageMethod() {
         return coverageMethod;
     }
 
     /**
      * @param coverageMethod
      */
-    public void setCoverageMethod(Short coverageMethod) {
+    public void setCoverageMethod(Integer coverageMethod) {
         this.coverageMethod = coverageMethod;
     }
 
     /**
      * @return COOPERATION_METHOD
      */
-    public Short getCooperationMethod() {
+    public Integer getCooperationMethod() {
         return cooperationMethod;
     }
 
     /**
      * @param cooperationMethod
      */
-    public void setCooperationMethod(Short cooperationMethod) {
+    public void setCooperationMethod(Integer cooperationMethod) {
         this.cooperationMethod = cooperationMethod;
     }
 
     /**
      * @return INDOOR_DISTRIBUTION_FLAG
      */
-    public Short getIndoorDistributionFlag() {
+    public Integer getIndoorDistributionFlag() {
         return indoorDistributionFlag;
     }
 
     /**
      * @param indoorDistributionFlag
      */
-    public void setIndoorDistributionFlag(Short indoorDistributionFlag) {
+    public void setIndoorDistributionFlag(Integer indoorDistributionFlag) {
         this.indoorDistributionFlag = indoorDistributionFlag;
     }
 
     /**
      * @return COVERAGE_NETWORK_STANDARD
      */
-    public Short getCoverageNetworkStandard() {
+    public Integer getCoverageNetworkStandard() {
         return coverageNetworkStandard;
     }
 
     /**
      * @param coverageNetworkStandard
      */
-    public void setCoverageNetworkStandard(Short coverageNetworkStandard) {
+    public void setCoverageNetworkStandard(Integer coverageNetworkStandard) {
         this.coverageNetworkStandard = coverageNetworkStandard;
     }
 
     /**
      * @return WLAN_FLAG
      */
-    public Short getWlanFlag() {
+    public Integer getWlanFlag() {
         return wlanFlag;
     }
 
     /**
      * @param wlanFlag
      */
-    public void setWlanFlag(Short wlanFlag) {
+    public void setWlanFlag(Integer wlanFlag) {
         this.wlanFlag = wlanFlag;
     }
 
     /**
      * @return DELETE_FLAG
      */
-    public Short getDeleteFlag() {
+    public Integer getDeleteFlag() {
         return deleteFlag;
     }
 
     /**
      * @param deleteFlag
      */
-    public void setDeleteFlag(Short deleteFlag) {
+    public void setDeleteFlag(Integer deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
 
