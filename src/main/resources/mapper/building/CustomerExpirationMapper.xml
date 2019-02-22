@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.building.dao.CustomerExpirationMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.building.domain.CustomerExpiration">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="CUSTOMER_EXPIRATION_ID" jdbcType="DECIMAL" property="customerExpirationId" />
+    <result column="BUILDING_ID" jdbcType="DECIMAL" property="buildingId" />
+    <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
+    <result column="REMIND_DATE" jdbcType="TIMESTAMP" property="remindDate" />
+    <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="REMIND_FLAG" jdbcType="DECIMAL" property="remindFlag" />
+  </resultMap>
+
+    <sql id="selectColumn">
+        a.building_no as buildingNo,a.building_name as buildingName, t.CUSTOMER_EXPIRATION_ID as
+        customerExpirationId,t.BUILDING_ID as buildingId,t.CUSTOMER_NAME as customerName, t.REMIND_DATE as remindDate,
+        t.DELETE_FLAG as deleteFlag, t.CREATE_DATE as createDate, t.REMIND_FLAG as remindFlag
+
+    </sql>
+
+    <select id="queryCustomerExpiration" resultType="cc.mrbird.building.domain.CustomerExpiration">
+        select
+        <include refid="selectColumn"/>
+        from bd_customer_expiration t
+        join bd_building a on t.building_id = a.building_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_no like
+            '%'||#{buildingNo}||'%')
+        </if>
+        <if test="buildingName != null and buildingName != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_name like
+            '%'||#{buildingName}||'%')
+        </if>
+        <if test="customerName != null and customerName != ''">
+            AND t.customer_name like '%'||#{customerName}||'%'
+        </if>
+        <if test="remindDate != null and remindDate != ''">
+            AND to_char(t.remind_date, 'yyyy-mm-dd hh24:mi') like '%'||#{remindDate}||'%'
+        </if>
+        order by t.customer_expiration_id desc
+
+    </select>
+
+
+</mapper>

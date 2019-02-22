@@ -1,0 +1,106 @@
+<div class="card" xmlns:shiro="http://www.w3.org/1999/xhtml">
+    <div data-th-include="building/businessOpportunity/businessOpportunityAdd"></div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <div class="dataTables_buttons hidden-sm-down actions">
+                    <span class="actions__item zmdi zmdi-search" id="search" title="搜索" />
+                    <span class="actions__item zmdi zmdi-refresh-alt" id="refresh" title="重置查询条件" />
+                    <div class="dropdown actions__item">
+                        <i data-toggle="dropdown" class="zmdi zmdi-download"> </i>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" id="exportExcel">
+							Excel (.xlsx) </a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" id="exportCsv">
+                                CSV (.csv) </a>
+                        </ul>
+                    </div>
+                    <div class="dropdown actions__item" shiro:hasAnyPermissions="businessOpportunity:add,businessOpportunity:delete,businessOpportunity:update">
+                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#businessOpportunity-add" shiro:hasPermission="businessOpportunity:add">新增商机</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="updateBusinessOpportunity()" shiro:hasPermission="businessOpportunity:update">修改商机</a>
+                            <a href="javascript:void(0)" class="dropdown-item" onclick="deleteBusinessOpportunity()" shiro:hasPermission="businessOpportunity:delete">删除商机</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="data-table_filter" class="dataTables_filter">
+                    <form class="businessOpportunity-table-form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 楼宇编码： </span>
+                                    <div class="form-group">
+                                        <input type="text" name="buildingNo" class="form-control"> <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 楼宇名称： </span>
+                                    <div class="form-group">
+                                        <input type="text" name="buildingName" class="form-control"> <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 客户名称： </span>
+                                    <div class="form-group">
+                                        <input type="text" name="customerName" class="form-control"> <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 商机来源： </span>
+                                    <div class="form-group">
+                                        <select class="form-control" name="businessSource">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="1">竞争对手</option>
+                                            <option value="2">市场活动</option>
+                                            <option value="3">客户</option>
+                                            <option value="4">互联网</option>
+                                            <option value="0">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 商机类型： </span>
+                                    <div class="form-group">
+                                        <select class="form-control" name="businessType">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="1">移动业务</option>
+                                            <option value="2">固网业务</option>
+                                            <option value="3">融合业务</option>
+                                            <option value="4">创新业务</option>
+                                            <option value="0">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 商机状态： </span>
+                                    <div class="form-group">
+                                        <select class="form-control" name="state">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="1">待转化</option>
+                                            <option value="2">待签约</option>
+                                            <option value="3">已签约</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table id="businessOpportunityTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/building/businessOpportunity/businessOpportunity.js}"></script>
+<script data-th-src="@{js/app/building/businessOpportunity/businessOpportunityEdit.js}"></script>
