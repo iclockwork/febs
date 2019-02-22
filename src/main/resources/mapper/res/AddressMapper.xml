@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.res.dao.AddressMapper">
+    <resultMap id="address" type="cc.mrbird.res.domain.Address">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="SEGM_ID" jdbcType="CHAR" property="segmId"/>
+        <result column="SEGM_TYPE" jdbcType="DECIMAL" property="segmType"/>
+        <result column="SEGM_NAME" jdbcType="VARCHAR" property="segmName"/>
+        <result column="SEGM_NO" jdbcType="VARCHAR" property="segmNo"/>
+        <result column="PARENT_SEGM_ID" jdbcType="CHAR" property="parentSegmId"/>
+        <result column="OUTSIDE" jdbcType="DECIMAL" property="outside"/>
+        <result column="STATUS" jdbcType="DECIMAL" property="status"/>
+        <result column="TIME" jdbcType="TIMESTAMP" property="time"/>
+        <result column="OUTREGION" jdbcType="DECIMAL" property="outregion"/>
+        <result column="POST_CODE" jdbcType="VARCHAR" property="postCode"/>
+        <result column="IS_CITY" jdbcType="CHAR" property="isCity"/>
+        <result column="IS_BAND" jdbcType="CHAR" property="isBand"/>
+        <result column="IS_USER" jdbcType="CHAR" property="isUser"/>
+        <result column="STAND_NAME" jdbcType="VARCHAR" property="standName"/>
+        <result column="STAND_NO" jdbcType="VARCHAR" property="standNo"/>
+        <result column="REGION_ID" jdbcType="CHAR" property="regionId"/>
+        <result column="TEMPLATE_ID" jdbcType="DECIMAL" property="templateId"/>
+        <result column="NOTES" jdbcType="VARCHAR" property="notes"/>
+        <result column="DELETE_STATE" jdbcType="CHAR" property="deleteState"/>
+        <result column="DELETE_TIME" jdbcType="TIMESTAMP" property="deleteTime"/>
+        <result column="OLD_DATA" jdbcType="DECIMAL" property="oldData"/>
+        <result column="MODIFY_OP" jdbcType="DECIMAL" property="modifyOp"/>
+        <result column="MODIRY_DATE" jdbcType="TIMESTAMP" property="modiryDate"/>
+        <result column="ALIAS" jdbcType="VARCHAR" property="alias"/>
+        <result column="SYNC_DATE" jdbcType="TIMESTAMP" property="syncDate"/>
+        <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="IS4GIS" jdbcType="CHAR" property="is4gis"/>
+        <result column="SERVICE_REGION_ID" jdbcType="CHAR" property="serviceRegionId"/>
+        <result column="LAN_ID" jdbcType="DECIMAL" property="lanId"/>
+        <result column="PPDOM_ID" jdbcType="DECIMAL" property="ppdomId"/>
+        <result column="OLD_ID_EQP" jdbcType="VARCHAR" property="oldIdEqp"/>
+        <result column="OLD_SP" jdbcType="VARCHAR" property="oldSp"/>
+        <result column="ADDR_FROM" jdbcType="VARCHAR" property="addrFrom"/>
+        <result column="IS_HIGHCLASS_AREA" jdbcType="CHAR" property="isHighclassArea"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="CREATE_OP" jdbcType="DECIMAL" property="createOp"/>
+        <result column="BORDER_ADDRESS" jdbcType="VARCHAR" property="borderAddress"/>
+        <result column="X" jdbcType="DECIMAL" property="x"/>
+        <result column="Y" jdbcType="DECIMAL" property="y"/>
+        <result column="EXP_DATE" jdbcType="TIMESTAMP" property="expDate"/>
+        <result column="ADDR_TYPE" jdbcType="DECIMAL" property="addrType"/>
+        <result column="IS_COMPETE_REGION" jdbcType="CHAR" property="isCompeteRegion"/>
+        <result column="IS_COMPETE_MODIFY_OP" jdbcType="DECIMAL" property="isCompeteModifyOp"/>
+        <result column="IS_COMPETE_MODIFY_DATE" jdbcType="TIMESTAMP" property="isCompeteModifyDate"/>
+        <result column="BUILD_UNITS" jdbcType="DECIMAL" property="buildUnits"/>
+        <result column="BUILD_FLOORS" jdbcType="DECIMAL" property="buildFloors"/>
+        <result column="FLOOR_HEIGHT" jdbcType="DECIMAL" property="floorHeight"/>
+        <result column="ISBUILDING" jdbcType="CHAR" property="isbuilding"/>
+        <result column="IS_NORMAL_ADDR" jdbcType="CHAR" property="isNormalAddr"/>
+        <result column="IS_INSTAL_ADDR" jdbcType="CHAR" property="isInstalAddr"/>
+        <result column="MNT_TYPE_ID" jdbcType="DECIMAL" property="mntTypeId"/>
+        <result column="OPTIC_NODE" jdbcType="VARCHAR" property="opticNode"/>
+        <result column="DISTRICT_ID" jdbcType="CHAR" property="districtId"/>
+        <result column="IS_SUPPORT_IPQQM" jdbcType="CHAR" property="isSupportIpqqm"/>
+        <result column="NET_STRUCT_ID" jdbcType="DECIMAL" property="netStructId"/>
+        <result column="LINE_EXTENSION_FEE" jdbcType="DECIMAL" property="lineExtensionFee"/>
+        <result column="IS_SUPPORT_EOC" jdbcType="CHAR" property="isSupportEoc"/>
+        <result column="IS_INSTEAD_INDOOR_DEVICES" jdbcType="CHAR" property="isInsteadIndoorDevices"/>
+        <result column="IS_SUPPORT_CM" jdbcType="CHAR" property="isSupportCm"/>
+        <result column="IS_LINE_INSTALL" jdbcType="CHAR" property="isLineInstall"/>
+        <result column="IS_STOP_IP_PLUG_FLOW" jdbcType="CHAR" property="isStopIpPlugFlow"/>
+        <result column="BUILD_TYPE_ID" jdbcType="DECIMAL" property="buildTypeId"/>
+        <result column="NET_AREA_TYPE_ID" jdbcType="DECIMAL" property="netAreaTypeId"/>
+        <result column="BUILD_GRADE_ID" jdbcType="DECIMAL" property="buildGradeId"/>
+        <result column="SERVICES_INFO" jdbcType="VARCHAR" property="servicesInfo"/>
+        <result column="NET_TYPE" jdbcType="DECIMAL" property="netType"/>
+        <result column="COM_ID" jdbcType="VARCHAR" property="comId"/>
+        <result column="LAST_ADDR" jdbcType="DECIMAL" property="lastAddr"/>
+        <result column="CHECK_OP" jdbcType="VARCHAR" property="checkOp"/>
+        <result column="AUDITOR" jdbcType="VARCHAR" property="auditor"/>
+    </resultMap>
+
+    <select id="findAll" resultType="cc.mrbird.res.domain.Address">
+        select a.segm_id as segmId,
+        a.stand_name as standName,
+        a.segm_name as segmName,
+        a.alias as alias,
+        b.stand_name as parentStandName,
+        a.parent_segm_id as parentSegmId,
+        a.segm_type as segmType,
+        sf_get_desc_china(a.segm_type) as segmTypeName,
+        c.region_name as regionName,
+        a.region_id as regionId,
+        a.x as x,
+        a.y as y,
+        sf_get_desc_china(a.is_user) as isUserName,
+        sf_rme_getdireforeqp(a.segm_id) as isBindDire,
+        sf_isaddrbindeqp(a.segm_id) as isBindDevice,
+        d.region_name as comRegionName,
+        e.service_region_name as serviceRegionName,
+        sf_get_desc_china(e.cust_group) as custGroupName,
+        a.create_time as createTime,
+        a.modiry_date as modiryDate
+        from (select * from addr_segm where delete_state = '0') a,
+        (select * from addr_segm where delete_state = '0') b,
+        (select *
+        from spc_region
+        where delete_state = '0'
+        and res_type_id = '200') c,
+        (select *
+        from spc_region
+        where delete_state = '0'
+        and res_type_id = '209') d,
+        (select *
+        from spc_service_region
+        where delete_state = '0'
+        and res_type_id = '222') e
+        where 1 = 1
+        and a.region_id = c.region_id
+        and a.parent_segm_id = b.segm_id(+)
+        and a.com_id = d.region_id(+)
+        and a.service_region_id = e.service_region_id(+)
+        AND a.stand_name = #{standName}
+        order by a.stand_no asc
+    </select>
+</mapper>
