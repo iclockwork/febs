@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.res.dao.RoomMapper">
+    <resultMap id="room" type="cc.mrbird.res.domain.Room">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="ROOM_ID" jdbcType="CHAR" property="roomId"/>
+        <result column="ROOM_NO" jdbcType="VARCHAR" property="roomNo"/>
+        <result column="CHINA_NAME" jdbcType="VARCHAR" property="chinaName"/>
+        <result column="CHINA_NAME_AB" jdbcType="VARCHAR" property="chinaNameAb"/>
+        <result column="ALIAS" jdbcType="VARCHAR" property="alias"/>
+        <result column="NAME_AB" jdbcType="VARCHAR" property="nameAb"/>
+        <result column="CODE" jdbcType="VARCHAR" property="code"/>
+        <result column="STATION_ID" jdbcType="CHAR" property="stationId"/>
+        <result column="BLDG_ID" jdbcType="CHAR" property="bldgId"/>
+        <result column="TYPE_ID" jdbcType="DECIMAL" property="typeId"/>
+        <result column="CLASS_ID" jdbcType="DECIMAL" property="classId"/>
+        <result column="SPECIALITY_ID" jdbcType="DECIMAL" property="specialityId"/>
+        <result column="AREA" jdbcType="DECIMAL" property="area"/>
+        <result column="HEIGHT" jdbcType="DECIMAL" property="height"/>
+        <result column="ONDUTY_TELE" jdbcType="VARCHAR" property="ondutyTele"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="HISTORY_NAME" jdbcType="VARCHAR" property="historyName"/>
+        <result column="HISTORY_CODE" jdbcType="VARCHAR" property="historyCode"/>
+        <result column="DISTRICT_ID" jdbcType="CHAR" property="districtId"/>
+        <result column="REGION_ID" jdbcType="CHAR" property="regionId"/>
+        <result column="ENVIR_GRADE" jdbcType="VARCHAR" property="envirGrade"/>
+        <result column="EFIELD_STRENGTH" jdbcType="VARCHAR" property="efieldStrength"/>
+        <result column="MFIELD_STRENGTH" jdbcType="VARCHAR" property="mfieldStrength"/>
+        <result column="BACK_NOISE" jdbcType="VARCHAR" property="backNoise"/>
+        <result column="STATIC_PROTECT" jdbcType="VARCHAR" property="staticProtect"/>
+        <result column="EARTHING_R" jdbcType="VARCHAR" property="earthingR"/>
+        <result column="FLOOR_BEARING" jdbcType="DECIMAL" property="floorBearing"/>
+        <result column="LIFTOFF_HEIGHT" jdbcType="DECIMAL" property="liftoffHeight"/>
+        <result column="WNG_STYLE" jdbcType="CHAR" property="wngStyle"/>
+        <result column="AIRBLAST_STYLE" jdbcType="CHAR" property="airblastStyle"/>
+        <result column="OPR_STATE_ID" jdbcType="DECIMAL" property="oprStateId"/>
+        <result column="MNT_STATE_ID" jdbcType="DECIMAL" property="mntStateId"/>
+        <result column="PARENT_ID" jdbcType="CHAR" property="parentId"/>
+        <result column="DELETE_STATE" jdbcType="CHAR" property="deleteState"/>
+        <result column="DELETE_TIME" jdbcType="TIMESTAMP" property="deleteTime"/>
+        <result column="NOTES" jdbcType="VARCHAR" property="notes"/>
+        <result column="POS_X" jdbcType="DECIMAL" property="posX"/>
+        <result column="POS_Y" jdbcType="DECIMAL" property="posY"/>
+        <result column="GRAPH_WIDTH" jdbcType="DECIMAL" property="graphWidth"/>
+        <result column="GRAPH_HEIGHT" jdbcType="DECIMAL" property="graphHeight"/>
+        <result column="ISOFFSET" jdbcType="CHAR" property="isoffset"/>
+        <result column="GRAPH_ID" jdbcType="DECIMAL" property="graphId"/>
+        <result column="CELL_NO" jdbcType="VARCHAR" property="cellNo"/>
+        <result column="FLOOR_NO" jdbcType="VARCHAR" property="floorNo"/>
+        <result column="ROOM_CODE" jdbcType="VARCHAR" property="roomCode"/>
+        <result column="DRAWINGNO" jdbcType="VARCHAR" property="drawingno"/>
+        <result column="COM_ID" jdbcType="CHAR" property="comId"/>
+        <result column="DRAINAGE_MODE" jdbcType="VARCHAR" property="drainageMode"/>
+        <result column="MODIFY_OP" jdbcType="DECIMAL" property="modifyOp"/>
+        <result column="MODIRY_DATE" jdbcType="TIMESTAMP" property="modiryDate"/>
+        <result column="REINFORCE" jdbcType="CHAR" property="reinforce"/>
+        <result column="ROOM_PROPERTY" jdbcType="DECIMAL" property="roomProperty"/>
+        <result column="PROP_CHAR_ID" jdbcType="DECIMAL" property="propCharId"/>
+        <result column="RENT_UNIT_ID" jdbcType="DECIMAL" property="rentUnitId"/>
+        <result column="MNT_TYPE_ID" jdbcType="DECIMAL" property="mntTypeId"/>
+        <result column="FIREPROTECTION" jdbcType="CHAR" property="fireprotection"/>
+        <result column="LINK_MAN" jdbcType="VARCHAR" property="linkMan"/>
+        <result column="START_USE_DATE" jdbcType="TIMESTAMP" property="startUseDate"/>
+        <result column="LINK_TEL" jdbcType="VARCHAR" property="linkTel"/>
+        <result column="MAPX" jdbcType="DECIMAL" property="mapx"/>
+        <result column="MAPY" jdbcType="DECIMAL" property="mapy"/>
+        <result column="OLD_ID_EQP" jdbcType="VARCHAR" property="oldIdEqp"/>
+        <result column="OLD_SP" jdbcType="VARCHAR" property="oldSp"/>
+        <result column="FLAG" jdbcType="VARCHAR" property="flag"/>
+        <result column="LENGTH" jdbcType="DECIMAL" property="length"/>
+        <result column="WIDTH" jdbcType="DECIMAL" property="width"/>
+        <result column="DATACOLLECT_UNIT" jdbcType="VARCHAR" property="datacollectUnit"/>
+        <result column="DATA_COLLECTOR" jdbcType="VARCHAR" property="dataCollector"/>
+        <result column="DATADATACOLLECT_TIME" jdbcType="TIMESTAMP" property="datadatacollectTime"/>
+        <result column="OLD_PROJECT_NO" jdbcType="VARCHAR" property="oldProjectNo"/>
+        <result column="OLD_PROJECT_NAME" jdbcType="VARCHAR" property="oldProjectName"/>
+        <result column="RESOURCE_FROM" jdbcType="DECIMAL" property="resourceFrom"/>
+        <result column="PROPERTY_BELONG" jdbcType="DECIMAL" property="propertyBelong"/>
+        <result column="PROPERTY" jdbcType="DECIMAL" property="property"/>
+        <result column="IS_SHARE" jdbcType="DECIMAL" property="isShare"/>
+        <result column="SHARE_TYPE" jdbcType="DECIMAL" property="shareType"/>
+        <result column="POS_Z" jdbcType="DECIMAL" property="posZ"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="IS_OUTDOOR" jdbcType="CHAR" property="isOutdoor"/>
+        <result column="LAN_ID" jdbcType="VARCHAR" property="lanId"/>
+        <result column="CREATE_OP" jdbcType="DECIMAL" property="createOp"/>
+        <result column="ADDR_SEGM_ID" jdbcType="CHAR" property="addrSegmId"/>
+        <result column="MAINTENANCE_UNIT" jdbcType="VARCHAR" property="maintenanceUnit"/>
+        <result column="LONG_LOCAL_ID" jdbcType="DECIMAL" property="longLocalId"/>
+        <result column="TERRITORIAL_NATURE_ID" jdbcType="DECIMAL" property="territorialNatureId"/>
+        <result column="CONSTRUCTION_SHARE_ID" jdbcType="DECIMAL" property="constructionShareId"/>
+        <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="CONTRACT_EXPIRES_TIME" jdbcType="TIMESTAMP" property="contractExpiresTime"/>
+        <result column="LONGORLOCAL" jdbcType="DECIMAL" property="longorlocal"/>
+        <result column="ROW_NUM" jdbcType="DECIMAL" property="rowNum"/>
+        <result column="COL_NUM" jdbcType="DECIMAL" property="colNum"/>
+        <result column="WO_ID" jdbcType="DECIMAL" property="woId"/>
+    </resultMap>
+
+    <select id="findAll" resultType="cc.mrbird.res.domain.Room">
+        <bind name="bindChinaName" value="'%' + chinaName + '%'"/>
+        SELECT A.ROOM_ID as roomId,
+        A.CHINA_NAME as chinaName,
+        A.ROOM_NO as roomNo,
+        A.REGION_ID as regionId,
+        A.STATION_ID as stationId,
+        A.ALIAS as alias,
+        SF_GET_DESC_CHINA(A.TYPE_ID) as typeName,
+        SF_GET_DESC_CHINA(A.CLASS_ID) as className,
+        A.ADDR_SEGM_ID as addrSegmId,
+        SF_GET_DESC_CHINA(A.PROPERTY) as propertyName,
+        A.LENGTH as length,
+        A.WIDTH as width,
+        SF_GET_DESC_CHINA(A.REINFORCE) as reinforceName,
+        A.MAINTENANCE_UNIT as maintenanceUnit,
+        A.LINK_MAN as linkMan,
+        SF_GET_DESC_CHINA(A.LONG_LOCAL_ID) as longLocalName,
+        SF_GET_DESC_CHINA(A.TERRITORIAL_NATURE_ID) as territorialNatureName,
+        A.CREATE_DATE as createDate,
+        A.MODIFY_OP as modifyOp,
+        A.NOTES as notes,
+        SF_GET_DESC_CHINA(A.CONSTRUCTION_SHARE_ID) as constructionShareName,
+        A.START_TIME as startTime,
+        A.CONTRACT_EXPIRES_TIME as contractExpiresTime,
+        A.AREA as area,
+        SF_GET_DESC_CHINA(A.PROPERTY_BELONG) as propertyBelongName,
+        B.CHINA_NAME as stationName,
+        C.REGION_NAME as regionName
+        FROM (select * from ADDR_SEGM where nvl(delete_state, '0') = '0') D,
+        (select * from SPC_ROOM where nvl(delete_state, '0') = '0') A,
+        (select * from SPC_STATION where nvl(delete_state, '0') = '0') B,
+        (select * from SPC_REGION where nvl(delete_state, '0') = '0') C,
+        (select * from STAFF where nvl(delete_state, '0') = '0') E
+        WHERE 1 = 1
+        AND A.CLASS_ID not in (12050001)
+        AND A.STATION_ID = B.STATION_ID(+)
+        AND A.ADDR_SEGM_ID = D.SEGM_ID(+)
+        AND A.ADDR_SEGM_ID = D.SEGM_ID(+)
+        AND A.ADDR_SEGM_ID = D.SEGM_ID(+)
+        AND A.MODIFY_OP = E.STAFF_ID(+)
+        AND A.REGION_ID = C.REGION_ID(+)
+        AND A.ADDR_SEGM_ID = D.SEGM_ID(+)
+        <if test="chinaName != null and chinaName != ''">
+            AND A.CHINA_NAME like #{bindChinaName}
+        </if>
+    </select>
+</mapper>
