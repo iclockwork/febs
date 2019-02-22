@@ -247,13 +247,6 @@
                     </dependency>
                 </dependencies>
                 <executions>
-                    <execution>
-                        <id>Generate MyBatis Artifacts</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
                 </executions>
                 <configuration>
                     <verbose>true</verbose>
