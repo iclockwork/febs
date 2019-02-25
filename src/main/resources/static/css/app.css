@@ -545,7 +545,7 @@ h1, h2, h3, h4, h5, h6,
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
-  color: #333;
+  /*color: #333;*/
 }
 
 h1, .h1 {
@@ -9057,6 +9057,11 @@ select::-ms-expand {
 .input-group-addon {
   padding: 0 0 0 1rem !important;
 }
+
+.input-group .input-group-addon {
+  border-color: #f1f1f1;
+}
+
 .input-group-addon + .form-group .form-control {
   padding-right: 1rem;
   padding-left: 1rem;
