@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.building.dao.BusinessOpportunityMapper">
+
+    <sql id="selectColumn">
+        a.building_no as buildingNo,a.building_name as buildingName,t.BUSINESS_OPPORTUNITY_ID as
+        businessOpportunityId,t.BUILDING_ID as buildingId,t.CUSTOMER_NAME as customerName, t.BUSINESS_SOURCE as
+        businessSource,
+        t.BUSINESS_TYPE as businessType, t.KEY_PERSON as keyPerson, t.KEY_PERSON_CONTACT as keyPersonContact,
+        t.introduction, t.state,
+        t.SIGN_STAFF_NAME as signStaffName, t.SIGN_DATE as signDate, t.DELETE_FLAG as deleteFlag, t.CREATE_STAFF_ID as
+        createStaffId,
+        t.CREATE_DATE as createDate, t.MODIFY_STAFF_ID as modifyStaffId, t.MODIFY_DATE as modifyDate, t.MODIFY_OP as
+        modifyOp, t.CUSTOMER_GROWTH as customerGrowth
+    </sql>
+
+    <select id="queryBusinessOpportunity" resultType="cc.mrbird.building.domain.BusinessOpportunityEntity">
+        select
+        <include refid="selectColumn"/>
+        from BD_BUSINESS_OPPORTUNITY t
+        join bd_building a on t.building_id = a.building_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_no like
+            '%'||#{buildingNo}||'%')
+        </if>
+        <if test="buildingName != null and buildingName != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_name like
+            '%'||#{buildingName}||'%')
+        </if>
+        <if test="customerName != null and customerName != ''">
+            AND t.customer_name like '%'||#{customerName}||'%'
+        </if>
+        <if test="businessSource != null and businessSource != ''">
+            AND t.BUSINESS_SOURCE = #{businessSource}
+        </if>
+        <if test="businessType != null and businessType != ''">
+            AND t.BUSINESS_TYPE = #{businessType}
+        </if>
+        <if test="state != null and state != ''">
+            AND t.state = #{state}
+        </if>
+        order by t.building_id
+
+    </select>
+
+    <insert id="addBusinessOpportunity" useGeneratedKeys="true">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="businessOpportunityId">
+            select seq_bd_business_opportunity.nextval as businessOpportunityId from dual
+        </selectKey>
+        insert into BD_BUSINESS_OPPORTUNITY
+        values
+        (#{businessOpportunityId},#{buildingId},#{customerName},#{businessSource},#{businessType},#{keyPerson},#{keyPersonContact},
+        #{introduction},#{state},#{signStaffName},to_date(#{signDate},'YYYY/MM/DD HH24:mi:ss'),#{deleteFlag},#{createStaffId},#{createDate},#{modifyStaffId},#{modifyDate},
+        #{modifyOp},#{customerGrowth})
+
+    </insert>
+
+    <!-- 通过id查询项目信息 -->
+    <select id="findById" resultType="cc.mrbird.building.domain.BusinessOpportunityEntity">
+        select
+        <include refid="selectColumn"/>
+        from BD_BUSINESS_OPPORTUNITY t
+        join bd_building a on t.building_id = a.building_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        and t.BUSINESS_OPPORTUNITY_ID = #{businessOpportunityId}
+        order by t.building_id
+
+    </select>
+
+    <update id="updateBusinessOpportunity">
+         update bd_business_opportunity t set t.building_id = #{buildingId},
+                 t.customer_name=#{customerName},t.customer_growth=#{customerGrowth},t.business_source=#{businessSource},
+                 t.business_type=#{businessType},t.key_person=#{keyPerson},
+                 t.key_person_contact=#{keyPersonContact},t.introduction=#{introduction},
+                 t.state=#{state},t.sign_staff_name=#{signStaffName},
+                 t.sign_date=#{signDate},delete_flag = #{deleteFlag},t.modify_staff_id=#{modifyStaffId},t.modify_date=#{modifyDate}
+                where t.business_opportunity_id = #{businessOpportunityId} and t.delete_flag = 0
+
+    </update>
+
+    <!--删除商机-->
+    <update id="deleteBusinessOpportunity">
+         update bd_business_opportunity t set delete_flag = #{deleteFlag}
+                where t.business_opportunity_id = #{businessOpportunityId} and t.delete_flag = 0
+    </update>
+
+</mapper>

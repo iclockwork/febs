@@ -1,0 +1,173 @@
+<div class="modal fade" id="businessOpportunity-add" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="businessOpportunity-add-modal-title">新增商机</h3>
+            </div>
+            <div class="modal-body">
+                <form id="businessOpportunity-add-form">
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 楼宇编码：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="buildingNo" class="form-control">
+                                    <input type="text" hidden name="businessOpportunityId" class="form-control">
+                                    <input type="text" hidden name="buildingId" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 楼宇名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="buildingName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 客户联系人：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="keyPerson" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 联系人电话：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="keyPersonContact" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 商机介绍：</span>
+                                <div class="form-group">
+                                    <input type="text" name="introduction" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 商机状态：</span>
+                                <div class="form-group">
+                                    <select class="form-control" name="state">
+                                        <option value="" selected>---请选择---</option>
+                                        <option value="1">待转化</option>
+                                        <option value="2">待签约</option>
+                                        <option value="3">已签约</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="display:none;" id="signStaff">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 签约人：</span>
+                                <div class="form-group">
+                                    <input type="text" name="signStaffName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="display:none;" id="signStaff2">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon">签约时间：</span>
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" name="signDate" readonly >
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 商机来源：</span>
+                                <div class="form-group">
+                                    <select class="form-control" name="businessSource">
+                                        <option value="" selected>---请选择---</option>
+                                        <option value="1">竞争对手</option>
+                                        <option value="2">市场活动</option>
+                                        <option value="3">客户</option>
+                                        <option value="4">互联网</option>
+                                        <option value="0">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 商机类型：</span>
+                                <div class="form-group">
+                                    <select class="form-control" name="businessType">
+                                        <option value="" selected>---请选择---</option>
+                                        <option value="1">移动业务</option>
+                                        <option value="2">固网业务</option>
+                                        <option value="3">融合业务</option>
+                                        <option value="4">创新业务</option>
+                                        <option value="0">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 客户名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="customerName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
+                                <span class="input-group-addon"> 客户成长空间预判：</span>
+                                <div class="form-group">
+                                    <select class="form-control" name="customerGrowth">
+                                        <option value="" selected>---请选择---</option>
+                                        <option value="1">高</option>
+                                        <option value="2">中</option>
+                                        <option value="3">低</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save" id="save-button" name="save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close" id="close-button">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/building/businessOpportunity/businessOpportunityAdd.js}"></script>

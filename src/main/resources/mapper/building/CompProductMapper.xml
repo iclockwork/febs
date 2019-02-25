@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.building.dao.CompProductMapper">
+    <sql id="selectColumn">
+        a.building_no as buildingNo,a.building_name as buildingName, b.doc_name as docName,t.COMP_PRODUCT_ID as
+        compProductId,t.BUILDING_ID as buildingId,t.OPERATOR as operator, t.BUSINESS_TYPE as businessType,
+        t.INTRODUCTION as introduction, t.DELETE_FLAG as deleteFlag, t.CREATE_STAFF_ID as createStaffId,
+        t.CREATE_DATE as createDate, t.MODIFY_STAFF_ID as modifyStaffId, t.MODIFY_DATE as modifyDate, t.MODIFY_OP as modifyOp
+
+    </sql>
+
+    <select id="queryCompProduct" resultType="cc.mrbird.building.domain.CompProduct">
+        select
+        <include refid="selectColumn"/>
+        from BD_COMP_PRODUCT t
+        join bd_building a on t.building_id = a.building_id
+        left join  bd_comp_product_doc b on t.comp_product_id = b.comp_product_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_no like
+            '%'||#{buildingNo}||'%')
+        </if>
+        <if test="buildingName != null and buildingName != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_name like
+            '%'||#{buildingName}||'%')
+        </if>
+        <if test="businessType != null and businessType != ''">
+            AND t.BUSINESS_TYPE = #{businessType}
+        </if>
+        <if test="operator != null and operator != ''">
+            AND t.operator = #{operator}
+        </if>
+        order by t.comp_product_id desc
+
+    </select>
+</mapper>
