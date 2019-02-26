@@ -39,12 +39,14 @@ $(function () {
 function closeModal() {
     $("#save-button").attr("name", "save");
     $("#businessOpportunity-add-modal-title").html('新增商机');
+    $('#signStaff').hide();
+    $('#signStaff2').hide();
     $MB.closeAndRestModal("businessOpportunity-add");
 }
 
 function initDate() {
     $("input[name='signDate']").datetimepicker({
-        format:'yyyy-mm-dd hh:ii:ss',  //格式  如果只有yyyy-mm-dd那就是0000-00-00
+        format:'yyyy-mm-dd hh:mi:ss',  //格式  如果只有yyyy-mm-dd那就是0000-00-00
         autoclose:true,//选择后是否自动关闭
         minView:0,//最精准的时间选择为日期  0-分 1-时 2-日 3-月
         language:  'zh-CN', //中文
@@ -61,7 +63,7 @@ function initDate() {
     });
 }
 function showSignStaff() {
-    $("select[name='state']").change(function() {
+    $("select[name='state']").unbind("change").change(function() {
         if (this.value === '3') {
             $('#signStaff').show();
             $('#signStaff2').show();

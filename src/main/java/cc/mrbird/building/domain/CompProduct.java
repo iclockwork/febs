@@ -31,12 +31,15 @@ public class CompProduct implements Serializable {
     private Long buildingId;
 
     @Column(name = "OPERATOR")
+    @ExportConfig(value = "运营商")
     private Short operator;
 
     @Column(name = "BUSINESS_TYPE")
+    @ExportConfig(value = "业务类型")
     private Short businessType;
 
     @Column(name = "INTRODUCTION")
+    @ExportConfig(value = "资费描述")
     private String introduction;
 
     @Column(name = "DELETE_FLAG")
@@ -46,6 +49,7 @@ public class CompProduct implements Serializable {
     private Integer createStaffId;
 
     @Column(name = "CREATE_DATE")
+    @ExportConfig(value = "录入时间")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")
@@ -57,22 +61,16 @@ public class CompProduct implements Serializable {
     @Column(name = "MODIFY_OP")
     private String modifyOp;
 
-    @ExportConfig(value = "竞争产品附件ID")
     private Long compProductDocId;
 
-    @ExportConfig(value = "附件ID")
     private Long docId;
 
-    @ExportConfig(value = "附件名称")
     private String docName;
 
-    @ExportConfig(value = "附件ID")
     private Long fileId;
 
-    @ExportConfig(value = "附件名称")
     private String fileName;
 
-    @ExportConfig(value = "附件内容")
     private byte[] fileContent;
 
 

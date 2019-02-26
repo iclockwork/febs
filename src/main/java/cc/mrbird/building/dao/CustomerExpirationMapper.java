@@ -7,5 +7,13 @@ import java.util.List;
 
 public interface CustomerExpirationMapper extends MyMapper<CustomerExpiration> {
     List<CustomerExpiration> queryCustomerExpiration(CustomerExpiration customerExpiration);
+
+    void addCustomerExpiration(CustomerExpiration customerExpiration);
+
+    CustomerExpiration findById(Long customerExpirationId);
+
+    void updateCustomerExpiration(CustomerExpiration customerExpiration);
+
+    void deleteCustomerExpiration(String ids, int deleteFlag);
 }
 

@@ -1,6 +1,7 @@
 package cc.mrbird.building.controller;
 
 
+import cc.mrbird.building.domain.BusinessOpportunityEntity;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.BusinessOpportunityService;
 import cc.mrbird.building.service.CustomerExpirationService;
@@ -45,90 +46,86 @@ public class CustomerExpirationController extends BaseController {
 
         return  super.selectByPageNumSize(request, () -> this.customerExpirationService.queryCustomerExpiration(customerExpiration));
     }
-//
-//    @RequestMapping("businessOpportunity/excel")
-//    @ResponseBody
-//    public ResponseBo exportExcel(BusinessOpportunityEntity businessOpportunityEntity,QueryRequest request) {
-//        try {
-//            List<BusinessOpportunityEntity> list = this.businessOpportunityService.queryBusinessOpportunity(businessOpportunityEntity, request);
-//            return FileUtils.createExcelByPOIKit("商机表", list, BusinessOpportunityEntity.class);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseBo.error("导出Excel失败，请联系网站管理员！");
-//        }
-//    }
-//
-//    @RequestMapping("businessOpportunity/csv")
-//    @ResponseBody
-//    public ResponseBo exportCsv(BusinessOpportunityEntity businessOpportunityEntity,QueryRequest request) {
-//        try {
-//            List<BusinessOpportunityEntity> list = this.businessOpportunityService.queryBusinessOpportunity(businessOpportunityEntity,request);
-//            return FileUtils.createCsv("商机表", list, BusinessOpportunityEntity.class);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseBo.error("导出Csv失败，请联系网站管理员！");
-//        }
-//    }
-//
-//    @Log("新增商机")
-//    @RequiresPermissions("businessOpportunity:add")
-//    @RequestMapping("businessOpportunity/add")
-//    @ResponseBody
-//    public ResponseBo addBusinessOpportunity(BusinessOpportunityEntity businessOpportunityEntity) {
-//        try {
-//
-//            this.businessOpportunityService.addBusinessOpportunity(businessOpportunityEntity);
-//            return ResponseBo.ok("新增商机成功！");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseBo.error("新增商机失败，请联系网站管理员！");
-//        }
-//    }
-//
-//    @RequestMapping("businessOpportunity/getBusinessOpportunity")
-//    @ResponseBody
-//    public ResponseBo getBusinessOpportunity(Long businessOpportunityId) {
-//        try {
-//            BusinessOpportunityEntity businessOpportunityEntity  = this.businessOpportunityService.findById(businessOpportunityId);
-//            return ResponseBo.ok(businessOpportunityEntity);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseBo.error("获取商机信息失败，请联系网站管理员！");
-//        }
-//    }
+
+    @RequestMapping("customerExpiration/excel")
+    @ResponseBody
+    public ResponseBo exportExcel(CustomerExpiration customerExpiration,QueryRequest request) {
+        try {
+            List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(customerExpiration);
+            return FileUtils.createExcelByPOIKit("客户到期提醒表", list, CustomerExpiration.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("导出Excel失败，请联系网站管理员！");
+        }
+    }
+
+    @RequestMapping("customerExpiration/csv")
+    @ResponseBody
+    public ResponseBo exportCsv(CustomerExpiration customerExpiration,QueryRequest request) {
+        try {
+            List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(customerExpiration);
+            return FileUtils.createCsv("客户到期提醒表", list, CustomerExpiration.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("导出Csv失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("新增客户到期提醒")
+    @RequiresPermissions("customerExpiration:add")
+    @RequestMapping("customerExpiration/add")
+    @ResponseBody
+    public ResponseBo addCustomerExpiration(CustomerExpiration customerExpiration) {
+        try {
+
+            this.customerExpirationService.addCustomerExpiration(customerExpiration);
+            return ResponseBo.ok("新增客户到期提醒成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("新增客户到期提醒失败，请联系网站管理员！");
+        }
+    }
+
+    @RequestMapping("customerExpiration/getCustomerExpiration")
+    @ResponseBody
+    public ResponseBo getCustomerExpiration(Long customerExpirationId) {
+        try {
+            CustomerExpiration customerExpiration  = this.customerExpirationService.findById(customerExpirationId);
+            return ResponseBo.ok(customerExpiration);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取客户到期提醒信息失败，请联系网站管理员！");
+        }
+    }
 
 
-//    @Log("修改商机")
-//    @RequiresPermissions("businessOpportunity:update")
-//    @RequestMapping("businessOpportunity/update")
-//    @ResponseBody
-//    public ResponseBo updateUser(User user, Long[] rolesSelect) {
-//        try {
-//            if (ON.equalsIgnoreCase(user.getStatus()))
-//                user.setStatus("1");
-//            else
-//                user.setStatus("0");
-//            this.userService.updateUser(user, rolesSelect);
-//            return ResponseBo.ok("修改用户成功！");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseBo.error("修改用户失败，请联系网站管理员！");
-//        }
-//    }
-//
-//    @Log("删除用户")
-//    @RequiresPermissions("user:delete")
-//    @RequestMapping("user/delete")
-//    @ResponseBody
-//    public ResponseBo deleteUsers(String ids) {
-//        try {
-//            this.userService.deleteUsers(ids);
-//            return ResponseBo.ok("删除用户成功！");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseBo.error("删除用户失败，请联系网站管理员！");
-//        }
-//    }
+    @Log("修改客户到期提醒")
+    @RequiresPermissions("customerExpiration:update")
+    @RequestMapping("customerExpiration/update")
+    @ResponseBody
+    public ResponseBo updateCustomerExpiration(CustomerExpiration customerExpiration) {
+        try {
+            this.customerExpirationService.updateCustomerExpiration(customerExpiration);
+            return ResponseBo.ok("修改客户到期提醒成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("修改客户到期提醒失败，请联系网站管理员！");
+        }
+    }
 
-
+    @Log("删除客户到期提醒")
+    @RequiresPermissions("customerExpiration:delete")
+    @RequestMapping("customerExpiration/delete")
+    @ResponseBody
+    public ResponseBo deleteCustomerExpiration(String ids) {
+        try {
+            //声明删除标记
+            int deleteFlag = 1;
+            this.customerExpirationService.deleteCustomerExpiration(ids,deleteFlag);
+            return ResponseBo.ok("删除客户到期提醒成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("删除客户到期提醒失败，请联系网站管理员！");
+        }
+    }
 }

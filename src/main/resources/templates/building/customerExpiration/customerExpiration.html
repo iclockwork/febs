@@ -1,5 +1,5 @@
 <div class="card" xmlns:shiro="http://www.w3.org/1999/xhtml">
-    <!--<div data-th-include="building/customerExpiration/customerExpirationAdd"></div>-->
+    <div data-th-include="building/customerExpiration/customerExpirationAdd"></div>
     <div class="card-block">
         <div class="table-responsive">
             <div id="data-table_wrapper" class="dataTables_wrapper">
@@ -15,14 +15,14 @@
                                 CSV (.csv) </a>
                         </ul>
                     </div>
-                    <!--<div class="dropdown actions__item" shiro:hasAnyPermissions="businessOpportunity:add,businessOpportunity:delete,businessOpportunity:update">-->
-                        <!--<i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>-->
-                        <!--<div class="dropdown-menu dropdown-menu-right">-->
-                            <!--<a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#businessOpportunity-add" shiro:hasPermission="businessOpportunity:add">新增商机</a>-->
-                            <!--<a href="javascript:void(0)" class="dropdown-item" onclick="updateBusinessOpportunity()" shiro:hasPermission="businessOpportunity:update">修改商机</a>-->
-                            <!--<a href="javascript:void(0)" class="dropdown-item" onclick="deleteBusinessOpportunity()" shiro:hasPermission="businessOpportunity:delete">删除商机</a>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                    <div class="dropdown actions__item" shiro:hasAnyPermissions="customerExpiration:add,customerExpiration:delete,customerExpiration:update">
+                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#customerExpiration-add" shiro:hasPermission="customerExpiration:add">新增客户到期</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="update" shiro:hasPermission="customerExpiration:update">修改客户到期</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="delete" shiro:hasPermission="customerExpiration:delete">删除客户到期</a>
+                        </div>
+                    </div>
                 </div>
                 <div id="data-table_filter" class="dataTables_filter">
                     <form class="customerExpiration-table-form">
@@ -55,7 +55,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"> 提醒时间： </span>
                                     <div class="form-group">
-                                        <input type="text" name="remindDate" class="form-control"> <i class="form-group__bar"></i>
+                                        <input type="text" name="remindDate" class="form-control form_datetime"> <i class="form-group__bar"></i>
                                     </div>
                                 </div>
                             </div>

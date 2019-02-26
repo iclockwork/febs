@@ -2,10 +2,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title pull-left" id="compProduct-add-modal-title">新增商机</h3>
+                <h3 class="modal-title pull-left" id="compProduct-add-modal-title">新增竞争产品</h3>
             </div>
             <div class="modal-body">
-                <form id="businessOpportunity-add-form">
+                <form id="compProduct-add-form">
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
@@ -13,7 +13,8 @@
 					            </span>
                                 <div class="form-group">
                                     <input type="text" name="buildingNo" class="form-control">
-                                    <input type="text" hidden name="businessOpportunityId" class="form-control">
+                                    <input type="text" hidden name="compProductId" class="form-control">
+                                    <input type="text" hidden name="buildingId" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -32,46 +33,13 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 客户联系人：
-					            </span>
+                                <span class="input-group-addon"> 运营商：</span>
                                 <div class="form-group">
-                                    <input type="text" name="keyPerson" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 联系人电话：
-					            </span>
-                                <div class="form-group">
-                                    <input type="text" name="keyPersonContact" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 商机介绍：</span>
-                                <div class="form-group">
-                                    <input type="text" name="introduction" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 商机来源：</span>
-                                <div class="form-group">
-                                    <select class="form-control" name="businessSource">
+                                    <select class="form-control" name="operator">
                                         <option value="" selected>---请选择---</option>
-                                        <option value="1">竞争对手</option>
-                                        <option value="2">市场活动</option>
-                                        <option value="3">客户</option>
-                                        <option value="4">互联网</option>
+                                        <option value="1">电信</option>
+                                        <option value="2">移动</option>
+                                        <option value="3">华数</option>
                                         <option value="0">其他</option>
                                     </select>
                                 </div>
@@ -81,7 +49,7 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 商机类型：</span>
+                                <span class="input-group-addon"> 业务类型：</span>
                                 <div class="form-group">
                                     <select class="form-control" name="businessType">
                                         <option value="" selected>---请选择---</option>
@@ -98,38 +66,26 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 商机状态：</span>
+                                <span class="input-group-addon"> 资费描述：
+					            </span>
                                 <div class="form-group">
-                                    <select class="form-control" name="state">
-                                        <option value="" selected>---请选择---</option>
-                                        <option value="1">待转化</option>
-                                        <option value="2">待签约</option>
-                                        <option value="3">已签约</option>
-                                    </select>
+                                    <input type="text" name="introduction" class="form-control">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row"  style="display:none;"  id="signStaff">
+                    <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 签约人：</span>
+                                <span class="input-group-addon"> 附件上传：
+					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="signStaffName" class="form-control">
+                                    <input id="input-2" name="input2" type="file fileloading" class="file" multiple
+                                           readonly="false" disabled="false"  data-show-upload="false" data-show-caption="true" data-show-preview="true" data-allowed-file-extensions='["jpg","png"]'>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--<div class="row"  style="display:none;" id="signStaff2" >-->
-                        <!--<div class="col-sm-11">-->
-                            <!--<div class="input-group">-->
-                                <!--<span class="input-group-addon">签约时间：</span>-->
-                                <!--<div class='input-group date'>-->
-                                    <!--<input type='text' name="signDate" class="form-control form_datetime" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </form>
             </div>
             <div class="modal-footer">

@@ -33,4 +33,41 @@
         order by t.comp_product_id desc
 
     </select>
+
+    <insert id="addCompProduct" useGeneratedKeys="true">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="compProductId">
+            select seq_bd_comp_product.nextval as compProductId from dual
+        </selectKey>
+        insert into BD_COMP_PRODUCT
+        values
+        (#{compProductId},#{buildingId},#{operator},#{businessType},#{introduction},#{deleteFlag},#{createStaffId},
+        #{createDate},#{modifyStaffId},#{modifyDate}, #{modifyOp})
+
+    </insert>
+
+    <!-- 通过id查询项目信息 -->
+    <select id="findById" resultType="cc.mrbird.building.domain.CompProduct">
+        select
+        <include refid="selectColumn"/>
+        from BD_COMP_PRODUCT t
+        join bd_building a on t.building_id = a.building_id
+        left join  bd_comp_product_doc b on t.comp_product_id = b.comp_product_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        and t.COMP_PRODUCT_ID = #{compProductId}
+        order by t.COMP_PRODUCT_ID
+
+    </select>
+
+    <update id="updateCompProduct">
+         update BD_COMP_PRODUCT t set t.building_id = #{buildingId},
+                 t.OPERATOR=#{operator},t.BUSINESS_TYPE=#{businessType},t.INTRODUCTION=#{introduction},
+                 t.modify_staff_id=#{modifyStaffId},t.modify_date=#{modifyDate}
+                where t.COMP_PRODUCT_ID = #{compProductId} and t.delete_flag = 0
+    </update>
+
+    <!--删除竞争产品-->
+    <update id="deleteCompProduct">
+         update BD_COMP_PRODUCT t set delete_flag = #{deleteFlag}
+                where t.COMP_PRODUCT_ID = #{compProductId} and t.delete_flag = 0
+    </update>
 </mapper>

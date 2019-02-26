@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title pull-left" id="customerExpiration-add-modal-title">新增商机</h3>
+                <h3 class="modal-title pull-left" id="customerExpiration-add-modal-title">新增客户到期</h3>
             </div>
             <div class="modal-body">
                 <form id="customerExpiration-add-form">
@@ -13,7 +13,8 @@
 					            </span>
                                 <div class="form-group">
                                     <input type="text" name="buildingNo" class="form-control">
-                                    <input type="text" hidden name="businessOpportunityId" class="form-control">
+                                    <input type="text" hidden name="customerExpirationId" class="form-control">
+                                    <input type="text" hidden name="buildingId" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -32,10 +33,10 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 客户联系人：
+                                <span class="input-group-addon"> 客户名称：
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="keyPerson" class="form-control">
+                                    <input type="text" name="customerName" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -43,93 +44,27 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 联系人电话：
-					            </span>
+                                <span class="input-group-addon"> 是否需要提醒：</span>
                                 <div class="form-group">
-                                    <input type="text" name="keyPersonContact" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 商机介绍：</span>
-                                <div class="form-group">
-                                    <input type="text" name="introduction" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 商机来源：</span>
-                                <div class="form-group">
-                                    <select class="form-control" name="businessSource">
+                                    <select class="form-control" name="remindFlag">
                                         <option value="" selected>---请选择---</option>
-                                        <option value="1">竞争对手</option>
-                                        <option value="2">市场活动</option>
-                                        <option value="3">客户</option>
-                                        <option value="4">互联网</option>
-                                        <option value="0">其他</option>
+                                        <option value="0">不需要</option>
+                                        <option value="1">需要</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row"  style="display:none;" id="remindId" >
                         <div class="col-sm-11">
                             <div class="input-group">
-                                <span class="input-group-addon"> 商机类型：</span>
-                                <div class="form-group">
-                                    <select class="form-control" name="businessType">
-                                        <option value="" selected>---请选择---</option>
-                                        <option value="1">移动业务</option>
-                                        <option value="2">固网业务</option>
-                                        <option value="3">融合业务</option>
-                                        <option value="4">创新业务</option>
-                                        <option value="0">其他</option>
-                                    </select>
+                                <span class="input-group-addon">提醒时间：</span>
+                                <div class='input-group date'>
+                                    <input type='text' name="remindDate" class="form-control form_datetime" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 商机状态：</span>
-                                <div class="form-group">
-                                    <select class="form-control" name="state">
-                                        <option value="" selected>---请选择---</option>
-                                        <option value="1">待转化</option>
-                                        <option value="2">待签约</option>
-                                        <option value="3">已签约</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row"  style="display:none;"  id="signStaff">
-                        <div class="col-sm-11">
-                            <div class="input-group">
-                                <span class="input-group-addon"> 签约人：</span>
-                                <div class="form-group">
-                                    <input type="text" name="signStaffName" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<div class="row"  style="display:none;" id="signStaff2" >-->
-                        <!--<div class="col-sm-11">-->
-                            <!--<div class="input-group">-->
-                                <!--<span class="input-group-addon">签约时间：</span>-->
-                                <!--<div class='input-group date'>-->
-                                    <!--<input type='text' name="signDate" class="form-control form_datetime" />-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </form>
             </div>
             <div class="modal-footer">

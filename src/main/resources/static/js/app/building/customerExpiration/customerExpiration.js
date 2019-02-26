@@ -49,44 +49,36 @@ $(function () {
         $MB.refreshTable('customerExpirationTable');
     });
 
-    $("#refresh").click(function () {
-        $(".businessOpportunity-table-form")[0].reset();
-        $MB.refreshTable('customerExpirationTable');
-    });
+    refresh();
 
-// function deleteBusinessOpportunity() {
-//     var selected = $("#customerExpirationTable").bootstrapTable('getSelections');
-//     var selected_length = selected.length;
-//     var contain = false;
-//     if (!selected_length) {
-//         $MB.n_warning('请勾选需要删除的用户！');
-//         return;
-//     }
-//     var ids = "";
-//     for (var i = 0; i < selected_length; i++) {
-//         ids += selected[i].userId;
-//         if (i !== (selected_length - 1)) ids += ",";
-//         if (userName === selected[i].username) contain = true;
-//     }
-//     if (contain) {
-//         $MB.n_warning('勾选用户中包含当前登录用户，无法删除！');
-//         return;
-//     }
-//
-//     $MB.confirm({
-//         text: "确定删除选中用户？",
-//         confirmButtonText: "确定删除"
-//     }, function () {
-//         $.post(ctx + 'user/delete', {"ids": ids}, function (r) {
-//             if (r.code === 0) {
-//                 $MB.n_success(r.msg);
-//                 refresh();
-//             } else {
-//                 $MB.n_danger(r.msg);
-//             }
-//         });
-//     });
-// }
+    $("#delete").click(function () {
+
+        var selected = $("#customerExpirationTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要删除的用户！');
+            return;
+        }
+        var ids = "";
+        for (var i = 0; i < selected_length; i++) {
+            ids += selected[i].customerExpirationId;
+            if (i !== (selected_length - 1)) ids += ",";
+        }
+
+        $MB.confirm({
+            text: "确定删除选中用户？",
+            confirmButtonText: "确定删除"
+        }, function () {
+            $.post(ctx + 'customerExpiration/delete', {"ids": ids}, function (r) {
+                if (r.code === 0) {
+                    $MB.n_success(r.msg);
+                    refresh();
+                } else {
+                    $MB.n_danger(r.msg);
+                }
+            });
+        });
+    });
 
     $("#exportExcel").click(function () {
         $.post(ctx + "customerExpiration/excel", $(".customerExpiration-table-form").serialize(), function (r) {
@@ -109,3 +101,9 @@ $(function () {
     });
 });
 
+function refresh() {
+    $("#refresh").click(function () {
+        $(".customerExpiration-table-form")[0].reset();
+        $MB.refreshTable('customerExpirationTable');
+    });
+}

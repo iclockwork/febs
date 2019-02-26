@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class CustomerExpiration {
     @Id
     @Column(name = "CUSTOMER_EXPIRATION_ID")
-    private Integer customerExpirationId;
+    private Long customerExpirationId;
 
     @Column(name = "BUILDING_NO")
     @ExportConfig(value = "楼宇编码")
@@ -23,9 +23,11 @@ public class CustomerExpiration {
     private Integer buildingId;
 
     @Column(name = "CUSTOMER_NAME")
+    @ExportConfig(value = "客户名称")
     private String customerName;
 
     @Column(name = "REMIND_DATE")
+    @ExportConfig(value = "提醒时间")
     private String  remindDate;
 
     @Column(name = "DELETE_FLAG")
@@ -35,6 +37,7 @@ public class CustomerExpiration {
     private Date createDate;
 
     @Column(name = "REMIND_FLAG")
+    @ExportConfig(value = "是否需要提醒")
     private Short remindFlag;
 
 
@@ -54,17 +57,11 @@ public class CustomerExpiration {
         this.buildingName = buildingName;
     }
 
-    /**
-     * @return CUSTOMER_EXPIRATION_ID
-     */
-    public Integer getCustomerExpirationId() {
+    public Long getCustomerExpirationId() {
         return customerExpirationId;
     }
 
-    /**
-     * @param customerExpirationId
-     */
-    public void setCustomerExpirationId(Integer customerExpirationId) {
+    public void setCustomerExpirationId(Long customerExpirationId) {
         this.customerExpirationId = customerExpirationId;
     }
 

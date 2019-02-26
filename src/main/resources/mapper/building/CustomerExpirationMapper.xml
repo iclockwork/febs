@@ -16,7 +16,7 @@
 
     <sql id="selectColumn">
         a.building_no as buildingNo,a.building_name as buildingName, t.CUSTOMER_EXPIRATION_ID as
-        customerExpirationId,t.BUILDING_ID as buildingId,t.CUSTOMER_NAME as customerName, t.REMIND_DATE as remindDate,
+        customerExpirationId,t.BUILDING_ID as buildingId,t.CUSTOMER_NAME as customerName, to_char(t.REMIND_DATE, 'yyyy-mm-dd') as remindDate,
         t.DELETE_FLAG as deleteFlag, t.CREATE_DATE as createDate, t.REMIND_FLAG as remindFlag
 
     </sql>
@@ -39,11 +39,45 @@
             AND t.customer_name like '%'||#{customerName}||'%'
         </if>
         <if test="remindDate != null and remindDate != ''">
-            AND to_char(t.remind_date, 'yyyy-mm-dd hh24:mi') like '%'||#{remindDate}||'%'
+            AND to_char(t.remind_date, 'yyyy-mm-dd') like '%'||#{remindDate}||'%'
         </if>
         order by t.customer_expiration_id desc
 
     </select>
 
+    <insert id="addCustomerExpiration" useGeneratedKeys="true">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="customerExpirationId">
+            select seq_bd_customer_expiration.nextval as customerExpirationId from dual
+        </selectKey>
+        insert into bd_customer_expiration
+        values
+        (#{customerExpirationId},#{buildingId},#{customerName},#{deleteFlag},
+        #{createDate},#{remindFlag},to_date(#{remindDate},'YYYY/MM/DD'))
+
+    </insert>
+
+    <!-- 通过id查询项目信息 -->
+    <select id="findById" resultType="cc.mrbird.building.domain.CustomerExpiration">
+        select
+        <include refid="selectColumn"/>
+        from bd_customer_expiration t
+        join bd_building a on t.building_id = a.building_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        and t.CUSTOMER_EXPIRATION_ID = #{customerExpirationId}
+        order by t.CUSTOMER_EXPIRATION_ID
+
+    </select>
+
+    <update id="updateCustomerExpiration">
+         update bd_customer_expiration t set t.building_id = #{buildingId},
+                 t.CUSTOMER_NAME=#{customerName},t.REMIND_FLAG=#{remindFlag},t.REMIND_DATE = to_date(#{remindDate},'YYYY/MM/DD')
+                where t.CUSTOMER_EXPIRATION_ID = #{customerExpirationId} and t.delete_flag = 0
+    </update>
+
+    <!--删除竞争产品-->
+    <update id="deleteCustomerExpiration">
+         update bd_customer_expiration t set delete_flag = #{deleteFlag}
+                where t.CUSTOMER_EXPIRATION_ID in (#{ids})
+    </update>
 
 </mapper>

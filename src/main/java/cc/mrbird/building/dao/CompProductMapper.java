@@ -11,5 +11,14 @@ import java.util.List;
  * Features:
  */
 public interface CompProductMapper extends MyMapper<CompProduct> {
+
     List<CompProduct> queryCompProduct(CompProduct compProduct);
+
+    void addCompProduct(CompProduct compProduct);
+
+    CompProduct findById(Long compProductId);
+
+    void updateCompProduct(CompProduct compProduct);
+
+    void deleteCompProduct(Long compProductId);
 }
