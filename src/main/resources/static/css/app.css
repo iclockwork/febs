@@ -2041,8 +2041,8 @@ pre code {
 }
 .table th,
 .table td {
-  padding: 1rem 1.5rem;
-  vertical-align: top;
+  /*padding: 1rem 1.5rem;*/
+  vertical-align: middle;
   border-top: 1px solid #f2f2f2;
 }
 .table td i {
@@ -2076,8 +2076,12 @@ pre code {
   border-bottom-width: 2px;
 }
 
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
 .table-striped tbody tr:nth-of-type(even) {
-  background-color: #fbfbfb;
+  /*background-color: #fbfbfb;*/
 }
 
 .table-hover tbody tr:hover {
@@ -8849,7 +8853,7 @@ progress::-webkit-progress-bar {
   border: 0;
 }
 .table th {
-  font-weight: 500;
+  /*font-weight: 500;*/
 }
 .table:not(.table-bordered) > thead:first-child th, .table:not(.table-bordered) > thead:first-child td, .table:not(.table-bordered) > tbody:first-child th, .table:not(.table-bordered) > tbody:first-child td {
   border-top: 0;
@@ -9194,15 +9198,15 @@ select::-ms-expand {
 }
 
 .page-link {
-  border-radius: 50% !important;
-  width: 2.5rem;
+  /*border-radius: 50% !important;*/
+  /*width: 2.5rem;*/
   height: 2.5rem;
   line-height: 2.5rem;
   text-align: center;
   z-index: 1;
   cursor: pointer;
   transition: background-color 300ms, color 300ms;
-  margin: 0 1px;
+  /*margin: 0 1px;*/
 }
 .page-link > .zmdi {
   font-size: 1.5rem;

@@ -82,7 +82,7 @@
                     }
                     tr.append(td);
                 }else{
-                    var td = $('<td style="'+((column.width)?('width:'+column.width):'')+'"></td>');
+                    var td = $('<td ></td>');
                     // 增加formatter渲染
                     if (column.formatter) {
                         td.html(column.formatter.call(this, item, index));
@@ -106,7 +106,7 @@
                     hasSelectItem = true;
                     th = $('<th style="text-align:center;width:36px;vertical-align:middle"><input name="select_item_all" type="checkbox"></input></th>');
                 }else{
-                    th = $('<th style="padding:8px;'+((item.width)?('width:'+item.width):'')+'"></th>');
+                    th = $('<th></th>');
                 }
                 th.text(item.title);
                 thr.append(th);
