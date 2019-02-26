@@ -97,6 +97,25 @@ $(function () {
                     527,
                     538
                 ]
+            }, {
+                label: 'C型专线',
+                fill: false,
+                backgroundColor: "#f39c12",
+                borderColor: "#f39c12",
+                data: [
+                    12,
+                    21,
+                    46,
+                    67,
+                    153,
+                    211,
+                    303,
+                    375,
+                    414,
+                    486,
+                    527,
+                    598
+                ]
             }]
         };
         var options = {
