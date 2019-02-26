@@ -2226,7 +2226,7 @@ pre code {
 }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.55rem + 2px);
+  /*height: calc(2.55rem + 2px);*/
 }
 select.form-control:focus::-ms-value {
   color: #464a4c;
@@ -2989,12 +2989,6 @@ tbody.collapse.show {
   /*bottom: 0;*/
   /*left: 0;*/
   /*z-index: 990;*/
-}
-
-.dropup .dropdown-menu {
-  top: auto;
-  bottom: 100%;
-  margin-bottom: 0;
 }
 
 .btn-group,
@@ -8583,10 +8577,6 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   vertical-align: top;
   font-size: 1.4rem;
   width: 2rem;
-}
-
-.dropup .dropdown-menu {
-  bottom: 0;
 }
 
 .caret:before {
