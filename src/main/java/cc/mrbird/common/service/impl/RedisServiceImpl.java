@@ -2,6 +2,8 @@ package cc.mrbird.common.service.impl;
 
 import cc.mrbird.common.domain.RedisInfo;
 import cc.mrbird.common.service.RedisService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Client;
@@ -21,6 +23,8 @@ import java.util.function.Function;
 @SuppressWarnings("unchecked")
 public class RedisServiceImpl implements RedisService {
 
+    private Logger log = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     JedisPool jedisPool;
 
@@ -31,18 +35,18 @@ public class RedisServiceImpl implements RedisService {
      * @param f 处理逻辑，通过lambda行为参数化
      * @return 处理结果
      */
-    private Object executeByJedis(Function<Jedis, Object> f) {
+    private Object excuteByJedis(Function<Jedis, Object> f) {
         try (Jedis jedis = jedisPool.getResource()) {
             return f.apply(jedis);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage());
             return null;
         }
     }
 
     @Override
     public List<RedisInfo> getRedisInfo() {
-        String info = (String) this.executeByJedis(
+        String info = (String) this.excuteByJedis(
                 j -> {
                     Client client = j.getClient();
                     client.info();
@@ -70,7 +74,7 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public Map<String, Object> getKeysSize() {
-        long dbSize = (long) this.executeByJedis(
+        long dbSize = (long) this.excuteByJedis(
                 j -> {
                     Client client = j.getClient();
                     client.dbSize();
@@ -85,7 +89,7 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public Map<String, Object> getMemoryInfo() {
-        String info = (String) this.executeByJedis(
+        String info = (String) this.excuteByJedis(
                 j -> {
                     Client client = j.getClient();
                     client.info();
@@ -99,7 +103,7 @@ public class RedisServiceImpl implements RedisService {
             if ("used_memory".equals(detail[0])) {
                 map = new HashMap<>();
                 map.put("used_memory", detail[1].substring(0, detail[1].length() - 1));
-                map.put("create_time", new Date().getTime());
+                map.put("create_time", System.currentTimeMillis());
                 break;
             }
         }
@@ -108,36 +112,36 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public Set<String> getKeys(String pattern) {
-        return (Set<String>) this.executeByJedis(j -> j.keys(pattern));
+        return (Set<String>) this.excuteByJedis(j -> j.keys(pattern));
     }
 
     @Override
     public String get(String key) {
-        return (String) this.executeByJedis(j -> j.get(key));
+        return (String) this.excuteByJedis(j -> j.get(key));
     }
 
     @Override
     public String set(String key, String value) {
-        return (String) this.executeByJedis(j -> j.set(key, value));
+        return (String) this.excuteByJedis(j -> j.set(key, value));
     }
 
     @Override
     public Long del(String... key) {
-        return (Long) this.executeByJedis(j -> j.del(key));
+        return (Long) this.excuteByJedis(j -> j.del(key));
     }
 
     @Override
     public Boolean exists(String key) {
-        return (Boolean) this.executeByJedis(j -> j.exists(key));
+        return (Boolean) this.excuteByJedis(j -> j.exists(key));
     }
 
     @Override
     public Long pttl(String key) {
-        return (Long) this.executeByJedis(j -> j.pttl(key));
+        return (Long) this.excuteByJedis(j -> j.pttl(key));
     }
 
     @Override
     public Long pexpire(String key, Long milliseconds) {
-        return (Long) this.executeByJedis(j -> j.pexpire(key, milliseconds));
+        return (Long) this.excuteByJedis(j -> j.pexpire(key, milliseconds));
     }
 }
