@@ -6,7 +6,6 @@ import cc.mrbird.system.domain.User;
 import cc.mrbird.system.domain.UserWithRole;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -17,7 +16,6 @@ public interface UserService extends IService<User> {
 
     User findByName(String userName);
 
-    @Cacheable(key = "#p0.toString() + (#p1 != null ? #p1.toString() : '')")
     List<User> findUserWithDept(User user, QueryRequest request);
 
     @CacheEvict(key = "#p0", allEntries = true)

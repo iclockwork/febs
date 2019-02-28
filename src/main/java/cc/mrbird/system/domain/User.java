@@ -1,310 +1,332 @@
 package cc.mrbird.system.domain;
 
-import java.io.Serializable;
-import java.util.Date;
+import cc.mrbird.common.annotation.ExportConfig;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import cc.mrbird.common.annotation.ExportConfig;
+import java.io.Serializable;
+import java.util.Date;
 
 @Table(name = "T_USER")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = -4852732617765810959L;
-	/**
-	 * 账户状态
-	 */
-	public static final String STATUS_VALID = "1";
+    private static final long serialVersionUID = -4852732617765810959L;
+    /**
+     * 账户状态
+     */
+    public static final String STATUS_VALID = "1";
 
-	public static final String STATUS_LOCK = "0";
+    public static final String STATUS_LOCK = "0";
 
-	public static final String DEFAULT_THEME = "green";
+    public static final String DEFAULT_THEME = "green";
 
-	public static final String DEFAULT_AVATAR = "default.jpg";
+    public static final String DEFAULT_AVATAR = "default.jpg";
 
-	/**
-	 * 性别
-	 */
-	public static final String SEX_MALE = "0";
+    /**
+     * 性别
+     */
+    public static final String SEX_MALE = "0";
 
-	public static final String SEX_FEMALE = "1";
+    public static final String SEX_FEMALE = "1";
 
-	public static final String SEX_UNKNOW = "2";
+    public static final String SEX_UNKNOW = "2";
 
-	public static final String SEQ = "seq_user";
+    public static final String SEQ = "seq_user";
 
-	@Id
-	@Column(name = "USER_ID")
-	private Long userId;
+    @Id
+    @Column(name = "USER_ID")
+    private Long userId;
 
-	@Column(name = "USERNAME")
-	@ExportConfig(value = "用户名")
-	private String username;
+    @Column(name = "USERNAME")
+    @ExportConfig(value = "用户名")
+    private String username;
 
-	@Column(name = "PASSWORD")
-	private String password;
+    @Column(name = "PASSWORD")
+    private String password;
 
-	@Column(name = "DEPT_ID")
-	private Long deptId;
+    @Column(name = "DEPT_ID")
+    private Long deptId;
 
-	@Transient
-	@ExportConfig(value = "部门")
-	private String deptName;
+    @Transient
+    @ExportConfig(value = "部门")
+    private String deptName;
 
-	@Column(name = "EMAIL")
-	@ExportConfig(value = "邮箱")
-	private String email;
+    @Column(name = "EMAIL")
+    @ExportConfig(value = "邮箱")
+    private String email;
 
-	@Column(name = "MOBILE")
-	@ExportConfig(value = "手机")
-	private String mobile;
+    @Column(name = "MOBILE")
+    @ExportConfig(value = "手机")
+    private String mobile;
 
-	@Column(name = "STATUS")
-	@ExportConfig(value = "状态", convert = "s:0=锁定,1=有效")
-	private String status = STATUS_VALID;
+    @Column(name = "STATUS")
+    @ExportConfig(value = "状态", convert = "s:0=锁定,1=有效")
+    private String status = STATUS_VALID;
 
-	@Column(name = "CRATE_TIME")
-	@ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
-	private Date crateTime;
+    @Column(name = "CRATE_TIME")
+    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
+    private Date crateTime;
 
-	@Column(name = "MODIFY_TIME")
-	private Date modifyTime;
+    @Column(name = "MODIFY_TIME")
+    private Date modifyTime;
 
-	@Column(name = "LAST_LOGIN_TIME")
-	private Date lastLoginTime;
+    @Column(name = "LAST_LOGIN_TIME")
+    private Date lastLoginTime;
 
-	@Column(name = "SSEX")
-	@ExportConfig(value = "性别", convert = "s:0=男,1=女,2=保密")
-	private String ssex;
+    @Column(name = "SSEX")
+    @ExportConfig(value = "性别", convert = "s:0=男,1=女,2=保密")
+    private String ssex;
 
-	@Column(name = "THEME")
-	private String theme;
+    @Column(name = "THEME")
+    private String theme;
 
-	@Column(name = "AVATAR")
-	private String avatar;
+    @Column(name = "AVATAR")
+    private String avatar;
 
-	@Column(name = "DESCRIPTION")
-	private String description;
-	
-	@Transient
-	private String roleName;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
-	/**
-	 * @return USER_ID
-	 */
-	public Long getUserId() {
-		return userId;
-	}
+    @Column(name = "REGION_ID")
+    private String regionId;
 
-	/**
-	 * @param userId
-	 */
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
+    @Transient
+    @ExportConfig(value = "所属区域")
+    private String regionName;
 
-	/**
-	 * @return USERNAME
-	 */
-	public String getUsername() {
-		return username;
-	}
+    @Transient
+    private String roleName;
 
-	/**
-	 * @param username
-	 */
-	public void setUsername(String username) {
-		this.username = username == null ? null : username.trim();
-	}
+    /**
+     * @return USER_ID
+     */
+    public Long getUserId() {
+        return userId;
+    }
 
-	/**
-	 * @return PASSWORD
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * @param userId
+     */
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-	/**
-	 * @param password
-	 */
-	public void setPassword(String password) {
-		this.password = password == null ? null : password.trim();
-	}
+    /**
+     * @return USERNAME
+     */
+    public String getUsername() {
+        return username;
+    }
 
-	/**
-	 * @return DEPT_ID
-	 */
-	public Long getDeptId() {
-		return deptId;
-	}
+    /**
+     * @param username
+     */
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
 
-	/**
-	 * @param deptId
-	 */
-	public void setDeptId(Long deptId) {
-		this.deptId = deptId;
-	}
+    /**
+     * @return PASSWORD
+     */
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * @return EMAIL
-	 */
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
 
-	/**
-	 * @param email
-	 */
-	public void setEmail(String email) {
-		this.email = email == null ? null : email.trim();
-	}
+    /**
+     * @return DEPT_ID
+     */
+    public Long getDeptId() {
+        return deptId;
+    }
 
-	/**
-	 * @return MOBILE
-	 */
-	public String getMobile() {
-		return mobile;
-	}
+    /**
+     * @param deptId
+     */
+    public void setDeptId(Long deptId) {
+        this.deptId = deptId;
+    }
 
-	/**
-	 * @param mobile
-	 */
-	public void setMobile(String mobile) {
-		this.mobile = mobile == null ? null : mobile.trim();
-	}
+    /**
+     * @return EMAIL
+     */
+    public String getEmail() {
+        return email;
+    }
 
-	/**
-	 * @return STATUS
-	 */
-	public String getStatus() {
-		return status;
-	}
+    /**
+     * @param email
+     */
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
 
-	/**
-	 * @param status
-	 */
-	public void setStatus(String status) {
-		this.status = status == null ? null : status.trim();
-	}
+    /**
+     * @return MOBILE
+     */
+    public String getMobile() {
+        return mobile;
+    }
 
-	/**
-	 * @return CRATE_TIME
-	 */
-	public Date getCrateTime() {
-		return crateTime;
-	}
+    /**
+     * @param mobile
+     */
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
+    }
 
-	/**
-	 * @param crateTime
-	 */
-	public void setCrateTime(Date crateTime) {
-		this.crateTime = crateTime;
-	}
+    /**
+     * @return STATUS
+     */
+    public String getStatus() {
+        return status;
+    }
 
-	/**
-	 * @return MODIFY_TIME
-	 */
-	public Date getModifyTime() {
-		return modifyTime;
-	}
+    /**
+     * @param status
+     */
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
 
-	/**
-	 * @param modifyTime
-	 */
-	public void setModifyTime(Date modifyTime) {
-		this.modifyTime = modifyTime;
-	}
+    /**
+     * @return CRATE_TIME
+     */
+    public Date getCrateTime() {
+        return crateTime;
+    }
 
-	/**
-	 * @return LAST_LOGIN_TIME
-	 */
-	public Date getLastLoginTime() {
-		return lastLoginTime;
-	}
+    /**
+     * @param crateTime
+     */
+    public void setCrateTime(Date crateTime) {
+        this.crateTime = crateTime;
+    }
 
-	/**
-	 * @param lastLoginTime
-	 */
-	public void setLastLoginTime(Date lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
+    /**
+     * @return MODIFY_TIME
+     */
+    public Date getModifyTime() {
+        return modifyTime;
+    }
 
-	/**
-	 * @return SSEX
-	 */
-	public String getSsex() {
-		return ssex;
-	}
+    /**
+     * @param modifyTime
+     */
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
+    }
 
-	/**
-	 * @param ssex
-	 */
-	public void setSsex(String ssex) {
-		this.ssex = ssex == null ? null : ssex.trim();
-	}
+    /**
+     * @return LAST_LOGIN_TIME
+     */
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
 
-	public String getTheme() {
-		return theme;
-	}
+    /**
+     * @param lastLoginTime
+     */
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
+    /**
+     * @return SSEX
+     */
+    public String getSsex() {
+        return ssex;
+    }
 
-	public String getDeptName() {
-		return deptName;
-	}
+    /**
+     * @param ssex
+     */
+    public void setSsex(String ssex) {
+        this.ssex = ssex == null ? null : ssex.trim();
+    }
 
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
-	}
+    public String getTheme() {
+        return theme;
+    }
 
-	public String getAvatar() {
-		return avatar;
-	}
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+    public String getDeptName() {
+        return deptName;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public String getRoleName() {
-		return roleName;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"userId=" + userId +
-				", username='" + username + '\'' +
-				", password='" + password + '\'' +
-				", deptId=" + deptId +
-				", deptName='" + deptName + '\'' +
-				", email='" + email + '\'' +
-				", mobile='" + mobile + '\'' +
-				", status='" + status + '\'' +
-				", crateTime=" + crateTime +
-				", modifyTime=" + modifyTime +
-				", lastLoginTime=" + lastLoginTime +
-				", ssex='" + ssex + '\'' +
-				", theme='" + theme + '\'' +
-				", avatar='" + avatar + '\'' +
-				", description='" + description + '\'' +
-				", roleName='" + roleName + '\'' +
-				'}';
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", status='" + status + '\'' +
+                ", crateTime=" + crateTime +
+                ", modifyTime=" + modifyTime +
+                ", lastLoginTime=" + lastLoginTime +
+                ", ssex='" + ssex + '\'' +
+                ", theme='" + theme + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", description='" + description + '\'' +
+                ", roleName='" + roleName + '\'' +
+                '}';
+    }
 }
