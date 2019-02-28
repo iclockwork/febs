@@ -8,6 +8,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -118,7 +119,7 @@ public class CustomerExpirationController extends BaseController {
     public ResponseBo deleteCustomerExpiration(String ids) {
         try {
             //声明删除标记
-            int deleteFlag = 1;
+            short deleteFlag = CommonConstant.INVALID;
             this.customerExpirationService.deleteCustomerExpiration(ids,deleteFlag);
             return ResponseBo.ok("删除客户到期提醒成功！");
         } catch (Exception e) {

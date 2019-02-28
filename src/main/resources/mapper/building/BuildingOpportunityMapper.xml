@@ -52,7 +52,7 @@
     </select>
 
     <insert id="addBuildingOpportunity" useGeneratedKeys="true">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="buildingId">
+        <selectKey resultType="Integer" order="BEFORE" keyProperty="buildingId">
             select seq_bd_building_opportunity.nextval as buildingId from dual
         </selectKey>
         insert into BD_BUILDING_OPPORTUNITY

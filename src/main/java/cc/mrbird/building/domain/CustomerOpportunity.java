@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Table(name = "BD_CUSTOMER_OPPORTUNITY")
 public class CustomerOpportunity {
+    @Id
     @Column(name = "CUSTOMER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
@@ -22,33 +23,43 @@ public class CustomerOpportunity {
     private String buildingName;
 
     @Column(name = "CUSTOMER_NAME")
+    @ExportConfig(value = "客户名称")
     private String customerName;
 
     @Column(name = "FLOOR_NUMBER")
+    @ExportConfig(value = "楼层")
     private Short floorNumber;
 
     @Column(name = "ROOM_NUMBER")
+    @ExportConfig(value = "房间号")
     private Integer roomNumber;
 
     @Column(name = "CUSTOMER_TYPE")
+    @ExportConfig(value = "客户类型")
     private String customerType;
 
     @Column(name = "CUSTOMER_INDUSTRY")
+    @ExportConfig(value = "客户行业")
     private String customerIndustry;
 
     @Column(name = "COMPETITOR_NAME")
+    @ExportConfig(value = "竞争对手名称")
     private String competitorName;
 
     @Column(name = "COMPETITOR_TYPE")
+    @ExportConfig(value = "竞争对手业务类型")
     private String competitorType;
 
     @Column(name = "COMPETITOR_END")
+    @ExportConfig(value = "竞争对手合同到期情况")
     private String competitorEnd;
 
     @Column(name = "KEY_PERSON")
+    @ExportConfig(value = "客户联系人")
     private String keyPerson;
 
     @Column(name = "KEY_PERSON_CONTACT")
+    @ExportConfig(value = "客户联系人电话")
     private String keyPersonContact;
 
     @Column(name = "REMARK")
@@ -61,6 +72,7 @@ public class CustomerOpportunity {
     private Integer createStaffId;
 
     @Column(name = "CREATE_DATE")
+    @ExportConfig(value = "创建时间")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")

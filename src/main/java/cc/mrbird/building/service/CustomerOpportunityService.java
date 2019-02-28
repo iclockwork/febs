@@ -16,7 +16,7 @@ public interface CustomerOpportunityService {
 
     void addCustomerOpportunity(CustomerOpportunity customerOpportunity);
 
-    BuildingOpportunity findById(Long customerId);
+    CustomerOpportunity findById(Long customerId);
 
     void updateCustomerOpportunity(CustomerOpportunity customerExpiration);
 

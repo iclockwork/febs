@@ -13,7 +13,7 @@ public interface BuildingOpportunityMapper extends MyMapper<BuildingOpportunity>
 
     BuildingOpportunity findById(Long buildingId);
 
-    void updateBuildingOpportunity(CustomerExpiration customerExpiration);
+    void updateBuildingOpportunity(BuildingOpportunity buildingOpportunity);
 
     void deleteBuildingOpportunity(String ids, int deleteFlag);
 }

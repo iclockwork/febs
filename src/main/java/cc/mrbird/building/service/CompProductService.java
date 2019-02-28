@@ -21,5 +21,5 @@ public interface CompProductService {
 
     void updateCompProduct(CompProduct compProduct);
 
-    void deleteCompProduct(Long compProductId);
+    void deleteCompProduct(String ids, int deleteFlag);
 }

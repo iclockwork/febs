@@ -3,11 +3,11 @@ $(function () {
         var selected = $("#compProductTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
         if (!selected_length) {
-            $MB.n_warning('请勾选需要修改的用户！');
+            $MB.n_warning('请勾选需要修改的竞争产品！');
             return;
         }
         if (selected_length > 1) {
-            $MB.n_warning('一次只能修改一个用户！');
+            $MB.n_warning('一次只能修改一个竞争产品！');
             return;
         }
         var compProductId = selected[0].compProductId;

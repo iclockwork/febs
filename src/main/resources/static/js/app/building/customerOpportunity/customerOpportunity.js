@@ -53,9 +53,6 @@ $(function () {
             field: 'keyPersonContact',
             title: '客户联系人电话'
         },{
-            field: 'createStaffId',
-            title: '创建人ID'
-        },{
             field: 'createDate',
             title: '创建时间'
         }]
@@ -67,7 +64,9 @@ $(function () {
         $MB.refreshTable('customerOpportunityTable');
     });
 
-    refresh();
+    $("#refresh").click(function () {
+        refresh();
+    });
 
 
 $("#delete").click(function () {
@@ -75,17 +74,17 @@ $("#delete").click(function () {
     var selected = $("#customerOpportunityTable").bootstrapTable('getSelections');
     var selected_length = selected.length;
     if (!selected_length) {
-        $MB.n_warning('请勾选需要删除的用户！');
+        $MB.n_warning('请勾选需要删除的商机客户！');
         return;
     }
     var ids = "";
     for (var i = 0; i < selected_length; i++) {
-        ids += selected[i].compProductId;
+        ids += selected[i].customerId;
         if (i !== (selected_length - 1)) ids += ",";
     }
 
     $MB.confirm({
-        text: "确定删除选中用户？",
+        text: "确定删除选中商机客户？",
         confirmButtonText: "确定删除"
     }, function () {
         $.post(ctx + 'customerOpportunity/delete', {"ids": ids}, function (r) {
@@ -121,8 +120,6 @@ $("#delete").click(function () {
 });
 
 function refresh() {
-    $("#refresh").click(function () {
-        $(".customerOpportunity-table-form")[0].reset();
-        $MB.refreshTable('customerOpportunityTable');
-    });
+    $(".customerOpportunity-table-form")[0].reset();
+    $MB.refreshTable('customerOpportunityTable');
 }

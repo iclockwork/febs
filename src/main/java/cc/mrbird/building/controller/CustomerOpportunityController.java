@@ -10,6 +10,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,8 +91,8 @@ public class CustomerOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo getCustomerOpportunity(Long customerId) {
         try {
-            BuildingOpportunity buildingOpportunity  = this.customerOpportunityService.findById(customerId);
-            return ResponseBo.ok(buildingOpportunity);
+            CustomerOpportunity customerOpportunity  = this.customerOpportunityService.findById(customerId);
+            return ResponseBo.ok(customerOpportunity);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("获取商机客户信息失败，请联系网站管理员！");
@@ -120,7 +121,7 @@ public class CustomerOpportunityController extends BaseController {
     public ResponseBo deleteCustomerOpportunity(String ids) {
         try {
             //声明删除标记
-            int deleteFlag = 1;
+            short deleteFlag = CommonConstant.INVALID;
             this.customerOpportunityService.deleteCustomerOpportunity(ids,deleteFlag);
             return ResponseBo.ok("删除商机客户成功！");
         } catch (Exception e) {

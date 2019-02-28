@@ -46,7 +46,8 @@ public class CompProductServiceImpl implements CompProductService {
     }
 
     @Override
-    public void deleteCompProduct(Long compProductId) {
-        compProductMapper.deleteCompProduct(compProductId);
+    public void deleteCompProduct(String ids, int deleteFlag) {
+        compProductMapper.deleteCompProduct(ids,deleteFlag);
     }
+
 }

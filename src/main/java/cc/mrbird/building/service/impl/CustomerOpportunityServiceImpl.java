@@ -30,11 +30,12 @@ public class CustomerOpportunityServiceImpl implements CustomerOpportunityServic
     public void addCustomerOpportunity(CustomerOpportunity customerOpportunity) {
         customerOpportunity.setDeleteFlag(CommonConstant.VALID);
         customerOpportunity.setCreateDate(new Date());
+        customerOpportunity.setCreateStaffId(123456);
         customerOpportunityMapper.addCustomerOpportunity(customerOpportunity);
     }
 
     @Override
-    public BuildingOpportunity findById(Long customerId) {
+    public CustomerOpportunity findById(Long customerId) {
         return customerOpportunityMapper.findById(customerId);
     }
 

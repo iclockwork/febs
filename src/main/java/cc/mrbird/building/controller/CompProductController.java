@@ -8,6 +8,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -116,9 +117,11 @@ public class CompProductController extends BaseController {
     @RequiresPermissions("compProduct:delete")
     @RequestMapping("compProduct/delete")
     @ResponseBody
-    public ResponseBo deleteCompProduct(Long compProductId) {
+    public ResponseBo deleteCompProduct(String ids) {
         try {
-            this.compProductService.deleteCompProduct(compProductId);
+            //声明删除标记
+            short deleteFlag = CommonConstant.INVALID;
+            this.compProductService.deleteCompProduct(ids,deleteFlag);
             return ResponseBo.ok("删除竞争产品成功！");
         } catch (Exception e) {
             e.printStackTrace();

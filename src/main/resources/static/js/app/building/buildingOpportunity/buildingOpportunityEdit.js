@@ -3,28 +3,32 @@ $(function () {
         var selected = $("#buildingOpportunityTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
         if (!selected_length) {
-            $MB.n_warning('请勾选需要修改的用户！');
+            $MB.n_warning('请勾选需要修改的商机楼宇！');
             return;
         }
         if (selected_length > 1) {
-            $MB.n_warning('一次只能修改一个用户！');
+            $MB.n_warning('一次只能修改一个商机楼宇！');
             return;
         }
-        var compProductId = selected[0].compProductId;
-        $.post(ctx + "buildingOpportunity/getBuildingOpportunity", {"compProductId": compProductId}, function (r) {
+        var buildingId = selected[0].buildingId;
+        $.post(ctx + "buildingOpportunity/getBuildingOpportunity", {"buildingId": buildingId}, function (r) {
             if (r.code === 0) {
                 var $form = $('#buildingOpportunity-add');
                 $form.modal();
-                var compProduct = r.msg;
-                $("#buildingOpportunity-add-modal-title").html('修改竞争产品');
-                $form.find("input[name='compProductId']").val(compProduct.compProductId);
-                $form.find("input[name='buildingNo']").val(compProduct.buildingNo);
-                $form.find("input[name='buildingName']").val(compProduct.buildingName);
-                $form.find("input[name='buildingId']").val(compProduct.buildingId);
-                $form.find("input[name='introduction']").val(compProduct.introduction);
-                $form.find("select[name='operator']").val(compProduct.operator);
-                $form.find("select[name='businessType']").val(compProduct.businessType);
-                $form.find("input[name='input2']").val(compProduct.input2);
+                var buildingOpportunity = r.msg;
+                $("#buildingOpportunity-add-modal-title").html('修改商机楼宇');
+                $form.find("input[name='buildingId']").val(buildingOpportunity.buildingId);
+                $form.find("select[name='buildingLevel']").val(buildingOpportunity.buildingLevel);
+                $form.find("select[name='buildingType']").val(buildingOpportunity.buildingType);
+                $form.find("input[name='buildingTypeName']").val(buildingOpportunity.buildingTypeName);
+                $form.find("input[name='buildingAddress']").val(buildingOpportunity.buildingAddress);
+                $form.find("input[name='buildingName']").val(buildingOpportunity.buildingName);
+                $form.find("input[name='floorNumber']").val(buildingOpportunity.floorNumber);
+                $form.find("input[name='area']").val(buildingOpportunity.area);
+                $form.find("input[name='householderNumber']").val(buildingOpportunity.householderNumber);
+                $form.find("input[name='propertyCompany']").val(buildingOpportunity.propertyCompany);
+                $form.find("input[name='propertyManager']").val(buildingOpportunity.propertyManager);
+                $form.find("input[name='propertyManagerContact']").val(buildingOpportunity.propertyManagerContact);
                 $("#save-button").attr("name", "update");
             } else {
                 $MB.n_danger(r.msg);

@@ -79,7 +79,9 @@ $(function () {
         $MB.refreshTable('buildingOpportunityTable');
     });
 
-    refresh();
+    $("#refresh").click(function () {
+        refresh();
+    });
 
 
 $("#delete").click(function () {
@@ -87,7 +89,7 @@ $("#delete").click(function () {
     var selected = $("#buildingOpportunityTable").bootstrapTable('getSelections');
     var selected_length = selected.length;
     if (!selected_length) {
-        $MB.n_warning('请勾选需要删除的用户！');
+        $MB.n_warning('请勾选需要删除的商机楼宇！');
         return;
     }
     var ids = "";
@@ -97,7 +99,7 @@ $("#delete").click(function () {
     }
 
     $MB.confirm({
-        text: "确定删除选中用户？",
+        text: "确定删除选中商机楼宇？",
         confirmButtonText: "确定删除"
     }, function () {
         $.post(ctx + 'buildingOpportunity/delete', {"ids": ids}, function (r) {
@@ -133,8 +135,6 @@ $("#delete").click(function () {
 });
 
 function refresh() {
-    $("#refresh").click(function () {
-        $(".buildingOpportunity-table-form")[0].reset();
-        $MB.refreshTable('buildingOpportunityTable');
-    });
+    $(".buildingOpportunity-table-form")[0].reset();
+    $MB.refreshTable('buildingOpportunityTable');
 }

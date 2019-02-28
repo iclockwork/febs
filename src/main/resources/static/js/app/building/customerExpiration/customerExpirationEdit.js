@@ -3,11 +3,11 @@ $(function () {
         var selected = $("#customerExpirationTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
         if (!selected_length) {
-            $MB.n_warning('请勾选需要修改的用户！');
+            $MB.n_warning('请勾选需要修改的客户到期提醒！');
             return;
         }
         if (selected_length > 1) {
-            $MB.n_warning('一次只能修改一个用户！');
+            $MB.n_warning('一次只能修改一个客户到期提醒！');
             return;
         }
         var customerExpirationId = selected[0].customerExpirationId;
@@ -16,7 +16,7 @@ $(function () {
                 var $form = $('#customerExpiration-add');
                 $form.modal();
                 var customerExpiration = r.msg;
-                $("#customerExpiration-add-modal-title").html('修改客户到期');
+                $("#customerExpiration-add-modal-title").html('修改客户到期提醒');
                 $form.find("input[name='customerExpirationId']").val(customerExpiration.customerExpirationId);
                 $form.find("input[name='buildingNo']").val(customerExpiration.buildingNo);
                 $form.find("input[name='buildingName']").val(customerExpiration.buildingName);

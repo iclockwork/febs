@@ -49,14 +49,16 @@ $(function () {
         $MB.refreshTable('customerExpirationTable');
     });
 
-    refresh();
+    $("#refresh").click(function () {
+        refresh();
+    });
 
     $("#delete").click(function () {
 
         var selected = $("#customerExpirationTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
         if (!selected_length) {
-            $MB.n_warning('请勾选需要删除的用户！');
+            $MB.n_warning('请勾选需要删除的客户到期提醒！');
             return;
         }
         var ids = "";
@@ -66,7 +68,7 @@ $(function () {
         }
 
         $MB.confirm({
-            text: "确定删除选中用户？",
+            text: "确定删除选中客户到期提醒？",
             confirmButtonText: "确定删除"
         }, function () {
             $.post(ctx + 'customerExpiration/delete', {"ids": ids}, function (r) {
@@ -102,8 +104,6 @@ $(function () {
 });
 
 function refresh() {
-    $("#refresh").click(function () {
-        $(".customerExpiration-table-form")[0].reset();
-        $MB.refreshTable('customerExpirationTable');
-    });
+    $(".customerExpiration-table-form")[0].reset();
+    $MB.refreshTable('customerExpirationTable');
 }

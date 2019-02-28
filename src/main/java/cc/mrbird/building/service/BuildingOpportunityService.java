@@ -16,9 +16,9 @@ public interface BuildingOpportunityService {
 
     void addBuildingOpportunity(BuildingOpportunity buildingOpportunity);
 
-    BuildingOpportunity findById(Long customerExpirationId);
+    BuildingOpportunity findById(Long buildingId);
 
-    void updateBuildingOpportunity(CustomerExpiration customerExpiration);
+    void updateBuildingOpportunity(BuildingOpportunity buildingOpportunity);
 
     void deleteBuildingOpportunity(String ids, int deleteFlag);
 }

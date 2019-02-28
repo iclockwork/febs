@@ -45,11 +45,14 @@ public class CompProduct implements Serializable {
     @Column(name = "DELETE_FLAG")
     private Short deleteFlag;
 
+    @ExportConfig(value = "附件名称")
+    private String docName;
+
     @Column(name = "CREATE_STAFF_ID")
     private Integer createStaffId;
 
     @Column(name = "CREATE_DATE")
-    @ExportConfig(value = "录入时间")
+    @ExportConfig(value = "录入时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")
@@ -64,8 +67,6 @@ public class CompProduct implements Serializable {
     private Long compProductDocId;
 
     private Long docId;
-
-    private String docName;
 
     private Long fileId;
 

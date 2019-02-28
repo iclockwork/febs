@@ -5,7 +5,7 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="CUSTOMER_ID" jdbcType="DECIMAL" property="customerId" />
+    <id column="CUSTOMER_ID" jdbcType="DECIMAL" property="customerId" />
     <result column="BUILDING_ID" jdbcType="DECIMAL" property="buildingId" />
     <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
     <result column="FLOOR_NUMBER" jdbcType="DECIMAL" property="floorNumber" />
@@ -58,14 +58,14 @@
     </select>
 
     <insert id="addCustomerOpportunity" useGeneratedKeys="true">
-        <selectKey resultType="Long" order="BEFORE" keyProperty="customerId">
+        <selectKey resultType="Integer" order="BEFORE" keyProperty="customerId">
             select seq_bd_customer_opportunity.nextval as customerId from dual
         </selectKey>
         insert into BD_CUSTOMER_OPPORTUNITY
         values
         (#{customerId},#{buildingId},#{customerName},#{floorNumber},#{roomNumber},#{customerType},#{customerIndustry},#{competitorName},
-        (#{competitorType},#{competitorEnd},#{keyPerson},#{keyPersonContact},#{remark},#{deleteFlag},#{createStaffId},#{createDate},
-        (#{modifyStaffId},#{modifyDate},#{modifyOp}
+        #{competitorType},#{competitorEnd},#{keyPerson},#{keyPersonContact},#{remark},#{deleteFlag},#{createStaffId},#{createDate},
+        #{modifyStaffId},#{modifyDate},#{modifyOp})
     </insert>
 
     <!-- 通过id查询项目信息 -->

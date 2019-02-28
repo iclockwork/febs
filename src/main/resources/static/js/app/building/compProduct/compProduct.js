@@ -64,7 +64,9 @@ $(function () {
         $MB.refreshTable('compProductTable');
     });
 
-    refresh();
+    $("#refresh").click(function () {
+        refresh();
+    });
 
 
 $("#delete").click(function () {
@@ -72,7 +74,7 @@ $("#delete").click(function () {
     var selected = $("#compProductTable").bootstrapTable('getSelections');
     var selected_length = selected.length;
     if (!selected_length) {
-        $MB.n_warning('请勾选需要删除的用户！');
+        $MB.n_warning('请勾选需要删除的竞争产品！');
         return;
     }
     var ids = "";
@@ -82,7 +84,7 @@ $("#delete").click(function () {
     }
 
     $MB.confirm({
-        text: "确定删除选中用户？",
+        text: "确定删除选中竞争产品？",
         confirmButtonText: "确定删除"
     }, function () {
         $.post(ctx + 'compProduct/delete', {"ids": ids}, function (r) {
@@ -118,8 +120,6 @@ $("#delete").click(function () {
 });
 
 function refresh() {
-    $("#refresh").click(function () {
-        $(".compProduct-table-form")[0].reset();
-        $MB.refreshTable('compProductTable');
-    });
+    $(".compProduct-table-form")[0].reset();
+    $MB.refreshTable('compProductTable');
 }

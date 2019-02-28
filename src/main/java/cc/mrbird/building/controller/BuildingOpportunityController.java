@@ -9,6 +9,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -87,9 +88,9 @@ public class BuildingOpportunityController extends BaseController {
 
     @RequestMapping("buildingOpportunity/getBuildingOpportunity")
     @ResponseBody
-    public ResponseBo getBuildingOpportunity(Long customerExpirationId) {
+    public ResponseBo getBuildingOpportunity(Long buildingId) {
         try {
-            BuildingOpportunity buildingOpportunity  = this.buildingOpportunityService.findById(customerExpirationId);
+            BuildingOpportunity buildingOpportunity  = this.buildingOpportunityService.findById(buildingId);
             return ResponseBo.ok(buildingOpportunity);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,9 +103,9 @@ public class BuildingOpportunityController extends BaseController {
     @RequiresPermissions("buildingOpportunity:update")
     @RequestMapping("buildingOpportunity/update")
     @ResponseBody
-    public ResponseBo updateBuildingOpportunity(CustomerExpiration customerExpiration) {
+    public ResponseBo updateBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
         try {
-            this.buildingOpportunityService.updateBuildingOpportunity(customerExpiration);
+            this.buildingOpportunityService.updateBuildingOpportunity(buildingOpportunity);
             return ResponseBo.ok("修改商机楼宇成功！");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,7 +120,7 @@ public class BuildingOpportunityController extends BaseController {
     public ResponseBo deleteBuildingOpportunity(String ids) {
         try {
             //声明删除标记
-            int deleteFlag = 1;
+            short deleteFlag = CommonConstant.INVALID;
             this.buildingOpportunityService.deleteBuildingOpportunity(ids,deleteFlag);
             return ResponseBo.ok("删除商机楼宇成功！");
         } catch (Exception e) {

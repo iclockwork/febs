@@ -4,9 +4,11 @@ import cc.mrbird.building.dao.BuildingOpportunityMapper;
 import cc.mrbird.building.domain.BuildingOpportunity;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.BuildingOpportunityService;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +29,10 @@ public class BuildingOpportunityServiceImpl implements BuildingOpportunityServic
 
     @Override
     public void addBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
+        buildingOpportunity.setDeleteFlag(CommonConstant.VALID);
+        buildingOpportunity.setCreateDate(new Date());
+        buildingOpportunity.setCreateStaffId(123457);
+        buildingOpportunity.setRegionId("213456");
         buildingOpportunityMapper.addBuildingOpportunity(buildingOpportunity);
     }
 
@@ -36,8 +42,8 @@ public class BuildingOpportunityServiceImpl implements BuildingOpportunityServic
     }
 
     @Override
-    public void updateBuildingOpportunity(CustomerExpiration customerExpiration) {
-        buildingOpportunityMapper.updateBuildingOpportunity(customerExpiration);
+    public void updateBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
+        buildingOpportunityMapper.updateBuildingOpportunity(buildingOpportunity);
     }
 
     @Override
