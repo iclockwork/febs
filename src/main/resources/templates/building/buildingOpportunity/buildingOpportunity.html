@@ -1,0 +1,64 @@
+<div class="card" xmlns:shiro="http://www.w3.org/1999/xhtml">
+    <div data-th-include="building/buildingOpportunity/buildingOpportunityAdd"></div>
+    <div class="card-block">
+        <div class="table-responsive">
+            <div id="data-table_wrapper" class="dataTables_wrapper">
+                <div class="dataTables_buttons hidden-sm-down actions">
+                    <span class="actions__item zmdi zmdi-search" id="search" title="搜索" />
+                    <span class="actions__item zmdi zmdi-refresh-alt" id="refresh" title="重置查询条件" />
+                    <div class="dropdown actions__item">
+                        <i data-toggle="dropdown" class="zmdi zmdi-download"> </i>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="excel" id="exportExcel">
+							Excel (.xlsx) </a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-table-action="csv" id="exportCsv">
+                                CSV (.csv) </a>
+                        </ul>
+                    </div>
+                    <div class="dropdown actions__item" shiro:hasAnyPermissions="buildingOpportunity:add,buildingOpportunity:delete,buildingOpportunity:update">
+                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#buildingOpportunity-add" shiro:hasPermission="buildingOpportunity:add">新增商机楼宇</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="update" shiro:hasPermission="buildingOpportunity:update">修改商机楼宇</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="delete" shiro:hasPermission="buildingOpportunity:delete">删除商机楼宇</a>
+                        </div>
+                    </div>
+                </div>
+                <div id="data-table_filter" class="dataTables_filter">
+                    <form class="buildingOpportunity-table-form">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 楼宇名称： </span>
+                                    <div class="form-group">
+                                        <input type="text" name="buildingName" class="form-control"> <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> 楼宇类型： </span>
+                                    <div class="form-group">
+                                        <select class="form-control" name="buildingType">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="SQLY">商务楼宇</option>
+                                            <option value="SQYQ">园区</option>
+                                            <option value="SQSC">专业市场</option>
+                                            <option value="SQSS">厂企宿舍</option>
+                                            <option value="SQWB">网吧</option>
+                                            <option value="SQJD">宾馆酒店</option>
+                                            <option value="SQQT">商企其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <table id="buildingOpportunityTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/building/buildingOpportunity/buildingOpportunity.js}"></script>
+<script data-th-src="@{js/app/building/buildingOpportunity/buildingOpportunityEdit.js}"></script>

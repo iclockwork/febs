@@ -3,6 +3,7 @@ package cc.mrbird.building.service.impl;
 import cc.mrbird.building.dao.CustomerExpirationMapper;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.CustomerExpirationService;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +28,7 @@ public class CustomerExpirationServiceImpl implements CustomerExpirationService 
 
     @Override
     public void addCustomerExpiration(CustomerExpiration customerExpiration) {
-        customerExpiration.setBuildingId(12345677);
-        customerExpiration.setDeleteFlag((short) 0);
+        customerExpiration.setDeleteFlag(CommonConstant.VALID);
         customerExpiration.setCreateDate(new Date());
         customerExpirationMapper.addCustomerExpiration(customerExpiration);
     }

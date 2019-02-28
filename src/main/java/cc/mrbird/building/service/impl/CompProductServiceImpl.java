@@ -3,6 +3,7 @@ package cc.mrbird.building.service.impl;
 import cc.mrbird.building.dao.CompProductMapper;
 import cc.mrbird.building.domain.CompProduct;
 import cc.mrbird.building.service.CompProductService;
+import cc.mrbird.defineConstant.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,7 @@ public class CompProductServiceImpl implements CompProductService {
 
     @Override
     public void addCompProduct(CompProduct compProduct) {
-        compProduct.setBuildingId(12345677L);
-        compProduct.setDeleteFlag((short) 0);
+        compProduct.setDeleteFlag(CommonConstant.VALID);
         compProduct.setCreateDate(new Date());
         compProduct.setCreateStaffId(12345);
         compProductMapper.addCompProduct(compProduct);

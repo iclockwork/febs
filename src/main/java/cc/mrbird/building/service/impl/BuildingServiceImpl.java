@@ -36,4 +36,9 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
             return new ArrayList<>();
         }
     }
+
+    @Override
+    public Building findById(Integer buildingId) {
+        return buildingMapper.findById(buildingId);
+    }
 }

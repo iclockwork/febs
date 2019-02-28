@@ -12,10 +12,13 @@
                                 <span class="input-group-addon"> 楼宇编码：
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="buildingNo" class="form-control">
+                                    <input type="text" name="buildingNo" class="form-control" readonly>
                                     <input type="text" hidden name="compProductId" class="form-control">
                                     <input type="text" hidden name="buildingId" class="form-control">
                                 </div>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#queryBuilding-modal"  id="queryButton">获取楼宇信息</button>
+					                </span>
                             </div>
                         </div>
                     </div>
@@ -25,7 +28,7 @@
                                 <span class="input-group-addon"> 楼宇名称：
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="buildingName" class="form-control">
+                                    <input type="text" name="buildingName" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -97,3 +100,4 @@
     </div>
 </div>
 <script data-th-src="@{js/app/building/compProduct/compProductAdd.js}"></script>
+<script data-th-src="@{js/app/building/building/queryBuildingModel.js}"></script>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.building.dao.CustomerOpportunityMapper">
+  <resultMap id="BaseResultMap" type="cc.mrbird.building.domain.CustomerOpportunity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="CUSTOMER_ID" jdbcType="DECIMAL" property="customerId" />
+    <result column="BUILDING_ID" jdbcType="DECIMAL" property="buildingId" />
+    <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName" />
+    <result column="FLOOR_NUMBER" jdbcType="DECIMAL" property="floorNumber" />
+    <result column="ROOM_NUMBER" jdbcType="DECIMAL" property="roomNumber" />
+    <result column="CUSTOMER_TYPE" jdbcType="VARCHAR" property="customerType" />
+    <result column="CUSTOMER_INDUSTRY" jdbcType="VARCHAR" property="customerIndustry" />
+    <result column="COMPETITOR_NAME" jdbcType="VARCHAR" property="competitorName" />
+    <result column="COMPETITOR_TYPE" jdbcType="VARCHAR" property="competitorType" />
+    <result column="COMPETITOR_END" jdbcType="VARCHAR" property="competitorEnd" />
+    <result column="KEY_PERSON" jdbcType="VARCHAR" property="keyPerson" />
+    <result column="KEY_PERSON_CONTACT" jdbcType="VARCHAR" property="keyPersonContact" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag" />
+    <result column="CREATE_STAFF_ID" jdbcType="DECIMAL" property="createStaffId" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="MODIFY_STAFF_ID" jdbcType="DECIMAL" property="modifyStaffId" />
+    <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp" />
+  </resultMap>
+
+    <sql id="selectColumn">
+        a.building_no as buildingNo,a.building_name as buildingName, t.CUSTOMER_ID as
+        customerId,t.BUILDING_ID as buildingId,t.CUSTOMER_NAME as customerName, t.FLOOR_NUMBER as floorNumber,
+        t.ROOM_NUMBER as roomNumber, t.CUSTOMER_TYPE as customerType, t.CUSTOMER_INDUSTRY as customerIndustry,
+        t.COMPETITOR_NAME as competitorName, t.COMPETITOR_TYPE as competitorType, t.COMPETITOR_END as competitorEnd,
+        t.KEY_PERSON as keyPerson, t.KEY_PERSON_CONTACT as keyPersonContact, t.REMARK as remark,
+        t.DELETE_FLAG as deleteFlag, t.CREATE_STAFF_ID as createStaffId, t.CREATE_DATE as createDate,
+         t.MODIFY_STAFF_ID as modifyStaffId, t.MODIFY_DATE as modifyDate, t.MODIFY_OP as modifyOp
+    </sql>
+
+    <select id="queryCustomerOpportunity" resultType="cc.mrbird.building.domain.CustomerOpportunity">
+        select
+        <include refid="selectColumn"/>
+        from BD_CUSTOMER_OPPORTUNITY t
+        join bd_building a on t.building_id = a.building_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_no like
+            '%'||#{buildingNo}||'%')
+        </if>
+        <if test="buildingName != null and buildingName != ''">
+            AND t.building_id = (select A.building_id from bd_building A where A.building_name like
+            '%'||#{buildingName}||'%')
+        </if>
+        <if test="customerName != null and customerName != ''">
+            AND t.customer_name like '%'||#{customerName}||'%'
+        </if>
+        order by t.CUSTOMER_ID desc
+
+    </select>
+
+    <insert id="addCustomerOpportunity" useGeneratedKeys="true">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="customerId">
+            select seq_bd_customer_opportunity.nextval as customerId from dual
+        </selectKey>
+        insert into BD_CUSTOMER_OPPORTUNITY
+        values
+        (#{customerId},#{buildingId},#{customerName},#{floorNumber},#{roomNumber},#{customerType},#{customerIndustry},#{competitorName},
+        (#{competitorType},#{competitorEnd},#{keyPerson},#{keyPersonContact},#{remark},#{deleteFlag},#{createStaffId},#{createDate},
+        (#{modifyStaffId},#{modifyDate},#{modifyOp}
+    </insert>
+
+    <!-- 通过id查询项目信息 -->
+    <select id="findById" resultType="cc.mrbird.building.domain.CustomerOpportunity">
+        select
+        <include refid="selectColumn"/>
+        from BD_CUSTOMER_OPPORTUNITY t
+        join bd_building a on t.building_id = a.building_id
+        where t.delete_flag = 0 and a.delete_flag = 0
+        and t.CUSTOMER_ID = #{customerId}
+        order by t.CUSTOMER_ID
+
+    </select>
+
+    <update id="updateCustomerOpportunity">
+         update BD_CUSTOMER_OPPORTUNITY t set t.building_id = #{buildingId},
+                 t.CUSTOMER_NAME=#{customerName},t.FLOOR_NUMBER = #{floorNumber},t.ROOM_NUMBER=#{roomNumber},t.CUSTOMER_TYPE = #{customerType},
+                t.CUSTOMER_INDUSTRY=#{customerIndustry},t.COMPETITOR_NAME = #{competitorName},t.COMPETITOR_TYPE=#{competitorType},t.COMPETITOR_END = #{competitorEnd},
+                t.KEY_PERSON=#{keyPerson},t.KEY_PERSON_CONTACT = #{keyPersonContact},t.REMARK=#{remark},t.MODIFY_STAFF_ID = #{modifyStaffId},t.MODIFY_DATE = #{modifyDate}
+                where t.CUSTOMER_ID = #{customerId} and t.delete_flag = 0
+    </update>
+
+    <!--删除竞争产品-->
+    <update id="deleteCustomerOpportunity">
+         update BD_CUSTOMER_OPPORTUNITY t set delete_flag = #{deleteFlag}
+                where t.CUSTOMER_ID in (#{ids})
+    </update>
+
+</mapper>

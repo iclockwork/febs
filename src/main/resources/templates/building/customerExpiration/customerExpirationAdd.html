@@ -12,10 +12,13 @@
                                 <span class="input-group-addon"> 楼宇编码：
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="buildingNo" class="form-control">
+                                    <input type="text" name="buildingNo" class="form-control" readonly>
                                     <input type="text" hidden name="customerExpirationId" class="form-control">
                                     <input type="text" hidden name="buildingId" class="form-control">
                                 </div>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#queryBuilding-modal" id="queryButton">获取楼宇信息</button>
+					                </span>
                             </div>
                         </div>
                     </div>
@@ -25,7 +28,7 @@
                                 <span class="input-group-addon"> 楼宇名称：
 					            </span>
                                 <div class="form-group">
-                                    <input type="text" name="buildingName" class="form-control">
+                                    <input type="text" name="buildingName" class="form-control" readonly>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +50,6 @@
                                 <span class="input-group-addon"> 是否需要提醒：</span>
                                 <div class="form-group">
                                     <select class="form-control" name="remindFlag">
-                                        <option value="" selected>---请选择---</option>
                                         <option value="0">不需要</option>
                                         <option value="1">需要</option>
                                     </select>
@@ -55,13 +57,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row"  style="display:none;" id="remindId" >
+                    <div class="row" style="display:none;" id="remindId">
                         <div class="col-sm-11">
                             <div class="input-group">
                                 <span class="input-group-addon">提醒时间：</span>
-                                <div class='input-group date'>
-                                    <input type='text' name="remindDate" class="form-control form_datetime" />
-                                </div>
+                                <input type="text" name="remindDate" class="form-control form_datetime" readonly>
                             </div>
                         </div>
                     </div>
@@ -76,3 +76,4 @@
     </div>
 </div>
 <script data-th-src="@{js/app/building/customerExpiration/customerExpirationAdd.js}"></script>
+<script data-th-src="@{js/app/building/building/queryBuildingModel.js}"></script>

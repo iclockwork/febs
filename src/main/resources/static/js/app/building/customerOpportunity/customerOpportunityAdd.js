@@ -1,46 +1,46 @@
 var validator;
-var $compProductAddForm = $("#compProduct-add-form");
+var $customerOpportunityAddForm = $("#customerOpportunity-add-form");
 $(function () {
 
     $("#save-button").click(function () {
         var name = $(this).attr("name");
-        var validator = $compProductAddForm.validate();
+        var validator = $customerOpportunityAddForm.validate();
         var flag = validator.form();
         if (flag) {
             if (name === "save") {
-                $.post(ctx + "compProduct/add", $compProductAddForm.serialize(), function (r) {
+                $.post(ctx + "customerOpportunity/add", $customerOpportunityAddForm.serialize(), function (r) {
                     if (r.code === 0) {
                         closeModal();
                         $MB.n_success(r.msg);
-                        $MB.refreshTable("compProductTable");
+                        $MB.refreshTable("customerOpportunityTable");
                     } else $MB.n_danger(r.msg);
                 });
             }
             if (name === "update") {
-                $.post(ctx + "compProduct/update", $compProductAddForm.serialize(), function (r) {
+                $.post(ctx + "customerOpportunity/update", $customerOpportunityAddForm.serialize(), function (r) {
                     if (r.code === 0) {
                         closeModal();
                         $MB.n_success(r.msg);
-                        $MB.refreshTable("compProductTable");
+                        $MB.refreshTable("customerOpportunityTable");
                     } else $MB.n_danger(r.msg);
                 });
             }
         }
     });
 
-    $("#compProduct-add .btn-close").click(function () {
+    $("#customerOpportunity-add .btn-close").click(function () {
         closeModal();
     });
 
     $("#queryButton").click(function () {
-        $("#modelId").val("#compProduct-add");
+        $("#modelId").val("#customerOpportunity-add");
     })
 });
 
 function closeModal() {
     $("#save-button").attr("name", "save");
-    $("#compProduct-add-modal-title").html('新增竞争产品');
-    $MB.closeAndRestModal("compProduct-add");
+    $("#customerOpportunity-add-modal-title").html('新增竞争产品');
+    $MB.closeAndRestModal("customerOpportunity-add");
 }
 
 

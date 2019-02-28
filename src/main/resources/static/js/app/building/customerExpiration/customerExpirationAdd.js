@@ -33,6 +33,10 @@ $(function () {
         closeModal();
     });
 
+
+    $("#queryButton").click(function () {
+        $("#modelId").val("#customerExpiration-add");
+    })
 });
 
 function closeModal() {
@@ -67,9 +71,9 @@ function showSignStaff() {
             $('#remindId').show();
         } else {
             $('#remindId').hide();
+            $("input[name='remindDate']").val(null);
         }
     });
 }
-
 
 

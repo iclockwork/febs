@@ -65,4 +65,17 @@ public class BuildingController extends BaseController {
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }
     }
+
+
+    @RequestMapping("building/getBuilding")
+    @ResponseBody
+    public ResponseBo getBuildingOpportunity(Integer buildingId) {
+        try {
+            Building building  = this.buildingService.findById(buildingId);
+            return ResponseBo.ok(building);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取楼宇信息失败，请联系网站管理员！");
+        }
+    }
 }

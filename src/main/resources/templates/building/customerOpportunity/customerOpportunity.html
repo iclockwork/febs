@@ -1,5 +1,5 @@
 <div class="card" xmlns:shiro="http://www.w3.org/1999/xhtml">
-    <div data-th-include="building/customerExpiration/customerExpirationAdd"></div>
+    <div data-th-include="building/customerOpportunity/customerOpportunityAdd"></div>
     <div data-th-include="building/building/queryBuildingModel"></div>
     <div class="card-block">
         <div class="table-responsive">
@@ -16,26 +16,18 @@
                                 CSV (.csv) </a>
                         </ul>
                     </div>
-                    <div class="dropdown actions__item" shiro:hasAnyPermissions="customerExpiration:add,customerExpiration:delete,customerExpiration:update">
+                    <div class="dropdown actions__item" shiro:hasAnyPermissions="customerOpportunity:add,customerOpportunity:delete,customerOpportunity:update">
                         <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#customerExpiration-add" shiro:hasPermission="customerExpiration:add">新增客户到期</a>
-                            <a href="javascript:void(0)" class="dropdown-item" id="update" shiro:hasPermission="customerExpiration:update">修改客户到期</a>
-                            <a href="javascript:void(0)" class="dropdown-item" id="delete" shiro:hasPermission="customerExpiration:delete">删除客户到期</a>
+                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#customerOpportunity-add" shiro:hasPermission="customerOpportunity:add">新增商机客户</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="update" shiro:hasPermission="customerOpportunity:update">修改商机客户</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="delete" shiro:hasPermission="customerOpportunity:delete">删除商机客户</a>
                         </div>
                     </div>
                 </div>
                 <div id="data-table_filter" class="dataTables_filter">
-                    <form class="customerExpiration-table-form">
+                    <form class="customerOpportunity-table-form">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 楼宇编码： </span>
-                                    <div class="form-group">
-                                        <input type="text" name="buildingNo" class="form-control"> <i class="form-group__bar"></i>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon"> 楼宇名称： </span>
@@ -52,21 +44,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon"> 提醒时间： </span>
-                                    <div class="form-group">
-                                        <input type="text" name="remindDate" class="form-control form_datetime" readonly> <i class="form-group__bar"></i>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </form>
                 </div>
-                <table id="customerExpirationTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
+                <table id="customerOpportunityTable" data-mobile-responsive="true" class="mb-bootstrap-table text-nowrap"></table>
             </div>
         </div>
     </div>
 </div>
-<script data-th-src="@{js/app/building/customerExpiration/customerExpiration.js}"></script>
-<script data-th-src="@{js/app/building/customerExpiration/customerExpirationEdit.js}"></script>
+<script data-th-src="@{js/app/building/customerOpportunity/customerOpportunity.js}"></script>
+<script data-th-src="@{js/app/building/customerOpportunity/customerOpportunityEdit.js}"></script>
