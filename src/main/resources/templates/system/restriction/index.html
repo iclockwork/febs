@@ -21,15 +21,15 @@
                     </div>
                 </div>
                 <div id="data-table_filter" class="dataTables_filter">
-                    <form class="customer-table-form">
+                    <form class="restriction-table-form">
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-					               	客户编码：
+					               	流水号：
 					            </span>
                                     <div class="form-group">
-                                        <input type="text" name="customerNo" class="form-control">
+                                        <input type="text" name="serialNo" class="form-control">
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
@@ -37,10 +37,32 @@
                             <div class="col-sm-3">
                                 <div class="input-group">
                                     <span class="input-group-addon">
-					               	客户名称：
+					               	属性名称：
 					            </span>
                                     <div class="form-group">
-                                        <input type="text" name="customerName" class="form-control">
+                                        <input type="text" name="descChina" class="form-control">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	关键字：
+					            </span>
+                                    <div class="form-group">
+                                        <input type="text" name="keyword" class="form-control">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	关键字描述：
+					            </span>
+                                    <div class="form-group">
+                                        <input type="text" name="keywordDesc" class="form-control">
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
@@ -48,10 +70,10 @@
                         </div>
                     </form>
                 </div>
-                <table id="customerTable" data-mobile-responsive="true"
+                <table id="restrictionTable" data-mobile-responsive="true"
                        class="mb-bootstrap-table text-nowrap table-striped"></table>
             </div>
         </div>
     </div>
 </div>
-<script data-th-src="@{js/app/building/customer/index.js}"></script>
+<script data-th-src="@{js/app/system/restriction/index.js}"></script>

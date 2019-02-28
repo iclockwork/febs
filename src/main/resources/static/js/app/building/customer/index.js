@@ -6,6 +6,7 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
+                customerNo: $(".customer-table-form").find("input[name='customerNo']").val().trim(),
                 customerName: $(".customer-table-form").find("input[name='customerName']").val().trim()
             };
         },

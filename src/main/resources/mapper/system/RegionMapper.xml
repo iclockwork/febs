@@ -36,8 +36,10 @@
         <result column="COUNTRY_TYPE" jdbcType="DECIMAL" property="countryType"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.system.domain.Region">
+    <select id="findAll" resultType="cc.mrbird.system.domain.Region" parameterType="cc.mrbird.system.domain.Region">
         <bind name="bindRegionName" value="'%' + regionName + '%'"/>
+        <bind name="bindRegionNo" value="'%' + regionNo + '%'"/>
+        <bind name="bindSuperRegionName" value="'%' + superRegionName + '%'"/>
         SELECT A.REGION_ID as regionId,
         A.REGION_NAME as regionName,
         A.REGION_NO as regionNo,
@@ -54,6 +56,15 @@
         AND A.SUPER_REGION_ID = B.REGION_ID(+)
         <if test="regionName != null and regionName != ''">
             AND A.REGION_NAME like #{bindRegionName}
+        </if>
+        <if test="regionNo != null and regionNo != ''">
+            AND A.REGION_NO like #{bindRegionNo}
+        </if>
+        <if test="superRegionName != null and superRegionName != ''">
+            AND B.REGION_NAME like #{bindSuperRegionName}
+        </if>
+        <if test="gradeId != null and gradeId != ''">
+            AND A.GRADE_ID = #{gradeId}
         </if>
         order by A.REGION_ID asc
     </select>

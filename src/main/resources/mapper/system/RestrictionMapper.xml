@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.RestrictionMapper">
+  <resultMap id="restriction" type="cc.mrbird.system.domain.Restriction">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="SERIAL_NO" jdbcType="DECIMAL" property="serialNo" />
+    <result column="DESC_ID" jdbcType="DECIMAL" property="descId" />
+    <result column="DESC_CHINA" jdbcType="VARCHAR" property="descChina" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="KEYWORD" jdbcType="VARCHAR" property="keyword" />
+    <result column="IS_DISPLAY" jdbcType="CHAR" property="isDisplay" />
+    <result column="KEYWORD_DESC" jdbcType="VARCHAR" property="keywordDesc" />
+    <result column="DELETE_STATE" jdbcType="CHAR" property="deleteState" />
+    <result column="DELETE_TIME" jdbcType="TIMESTAMP" property="deleteTime" />
+    <result column="OLD_ID_EQP" jdbcType="VARCHAR" property="oldIdEqp" />
+    <result column="OLD_SP" jdbcType="VARCHAR" property="oldSp" />
+    <result column="LAN_ID" jdbcType="VARCHAR" property="lanId" />
+  </resultMap>
+</mapper>

@@ -20,7 +20,8 @@
         <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.building.domain.Customer">
+    <select id="findAll" resultType="cc.mrbird.building.domain.Customer" parameterType="cc.mrbird.building.domain.Customer">
+        <bind name="bindCustomerNo" value="'%' + customerNo + '%'"/>
         <bind name="bindCustomerName" value="'%' + customerName + '%'"/>
         select t.customer_id as customerId,
         t.customer_no as customerNo,
@@ -32,6 +33,9 @@
         t.create_date as createDate
         from BD_CUSTOMER t
         where t.delete_flag = 0
+        <if test="customerNo != null and customerNo != ''">
+            AND t.customer_no like #{bindCustomerNo}
+        </if>
         <if test="customerName != null and customerName != ''">
             AND t.customer_name like #{bindCustomerName}
         </if>

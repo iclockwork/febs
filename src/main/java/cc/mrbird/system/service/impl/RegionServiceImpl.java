@@ -29,7 +29,7 @@ public class RegionServiceImpl extends BaseService<Region> implements RegionServ
     @Override
     public List<Region> findAll(Region region) {
         try {
-            List<Region> list = this.regionMapper.findAll(region.getRegionName());
+            List<Region> list = this.regionMapper.findAll(region);
             return list;
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,7 +6,10 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
-                regionName: $(".region-table-form").find("input[name='regionName']").val().trim()
+                regionName: $(".region-table-form").find("input[name='regionName']").val().trim(),
+                regionNo: $(".region-table-form").find("input[name='regionNo']").val().trim(),
+                superRegionName: $(".region-table-form").find("input[name='superRegionName']").val().trim(),
+                gradeId: $(".region-table-form").find("select[name='gradeId']").val()
             };
         },
         columns: [{
@@ -58,6 +61,19 @@ $(function () {
         });
     }
 
+    function initGrade() {
+        $.post(ctx + "restriction/list", {
+            keyword: "REGION_GRADE"
+        }, function (r) {
+            var data = r.rows;
+            var html = [];
+            for (var i = 0; i < data.length; i++) {
+                html.push("<option value='" + data[i].serialNo + "'>" + data[i].descChina + "</option>");
+            }
+            $(".region-table-form").find("select[name='gradeId']").append(html.join(''));
+        });
+    }
+
     $MB.initTable('regionTable', settings);
 
     $(".zmdi-search").click(function () {
@@ -75,4 +91,6 @@ $(function () {
     $("#exportCsv").click(function () {
         exportFile("csv")
     });
+
+    initGrade();
 });
