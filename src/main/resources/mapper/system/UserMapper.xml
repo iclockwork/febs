@@ -23,11 +23,24 @@
     </resultMap>
 
     <select id="findUserWithDept" resultType="user" parameterType="user">
-        select u.user_id userId,u.username,u.email,u.mobile,u.status,u.crate_time crateTime,
-        u.ssex,d.dept_name deptName,u.region_id regionId,r.region_name regionName from t_user u
-        left join t_dept d on(u.dept_id = d.dept_id)
-        left join spc_region r on(u.region_id = r.region_id)
-        where 1=1
+        <bind name="bindStaffName" value="'%' + staffName + '%'"/>
+        select u.user_id userId,
+        u.username,
+        u.email,
+        u.mobile,
+        u.status,
+        u.crate_time crateTime,
+        u.ssex,
+        d.dept_name deptName,
+        u.staff_id staffId,
+        s.name staffName,
+        s.region_id regionId,
+        r.region_name regionName
+        from t_user u, t_dept d, staff s, spc_region r
+        where 1 = 1
+        and u.dept_id = d.dept_id(+)
+        and u.staff_id = s.staff_id(+)
+        and s.region_id = r.region_id(+)
         <if test="username != null and username != ''">
             AND lower(u.username) = #{username}
         </if>
@@ -40,52 +53,75 @@
         <if test="status != null and status != ''">
             AND u.status = #{status}
         </if>
+        <if test="staffName != null and staffName != ''">
+            AND s.name like #{bindStaffName}
+        </if>
         order by u.user_id
     </select>
 
 
     <select id="findUserWithRole" resultType="userWithRole">
-		select u.user_id userId,u.username,u.dept_id deptId,u.email,u.mobile,
-		u.status,u.ssex,ur.role_id roleId,u.region_id regionId,r.region_name regionName from t_user u
-		left join t_user_role ur on (u.user_id = ur.user_id)
-		left join spc_region r on(u.region_id = r.region_id)
-		where u.user_id = #{userId}
+        select u.user_id     userId,
+               u.username,
+               u.dept_id     deptId,
+               u.email,
+               u.mobile,
+               u.status,
+               u.ssex,
+               ur.role_id    roleId,
+               u.staff_id    staffId,
+               s.name        staffName,
+               s.region_id   regionId,
+               r.region_name regionName
+          from t_user u, t_user_role ur, staff s, spc_region r
+         where 1 = 1
+           and u.user_id = ur.user_id(+)
+           and u.staff_id = s.staff_id(+)
+           and s.region_id = r.region_id(+)
+		   and u.user_id = #{userId}
   </select>
 
     <select id="findUserProfile" resultType="user" parameterType="user">
-	SELECT
-		U .USERNAME,
-		U .USER_ID userId,
-		D .DEPT_NAME deptName,
-		U .mobile,
-		U .email,
-		U .avatar,
-		U .description,
-		U .ssex,
-		U .dept_id deptId,
-		listagg (r.role_name, '，') WITHIN GROUP (ORDER BY r.role_id) AS roleName,
-		u.region_id regionId,
-		r.region_name regionName
-	FROM
-		t_user U
-	LEFT JOIN t_dept D ON U .DEPT_ID = D .DEPT_ID
-	LEFT JOIN T_USER_ROLE ur ON U .user_id = ur.user_id
-	LEFT JOIN t_role r ON r.role_id = ur.role_id
-	left join spc_region r on(u.region_id = r.region_id)
-	WHERE
-		U .USER_ID = #{userId}
-	GROUP BY
-		U .username,
-		D .dept_name,
-		U .mobile,
-		U .email,
-		U .avatar,
-		U .description,
-		U .ssex,
-		U .USER_ID,
-		U .dept_id,
-		u.region_id,
-        r.region_name
+        SELECT U.USERNAME,
+               U.USER_ID userId,
+               D.DEPT_NAME deptName,
+               U.mobile,
+               U.email,
+               U.avatar,
+               U.description,
+               U.ssex,
+               U.dept_id deptId,
+               listagg(r.role_name, '，') WITHIN GROUP(ORDER BY r.role_id) AS roleName,
+               u.staff_id staffId,
+               s.name staffName,
+               s.region_id regionId,
+               r.region_name regionName
+          FROM t_user U
+          LEFT JOIN t_dept D
+            ON U.DEPT_ID = D.DEPT_ID
+          LEFT JOIN T_USER_ROLE ur
+            ON U.user_id = ur.user_id
+          LEFT JOIN t_role r
+            ON r.role_id = ur.role_id
+          left join staff s
+            on (u.staff_id = s.staff_id)
+          left join spc_region r
+            on (s.region_id = r.region_id)
+         WHERE 1 = 1
+           and U .USER_ID = #{userId}
+         GROUP BY U.username,
+                  D.dept_name,
+                  U.mobile,
+                  U.email,
+                  U.avatar,
+                  U.description,
+                  U.ssex,
+                  U.USER_ID,
+                  U.dept_id,
+                  u.staff_id,
+                  s.name,
+                  s.region_id,
+                  r.region_name
   </select>
 
 </mapper>

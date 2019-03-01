@@ -9,7 +9,8 @@ $(function () {
                 pageNum: params.offset / params.limit + 1,
                 username: $userTableForm.find("input[name='username']").val().trim(),
                 ssex: $userTableForm.find("select[name='ssex']").val(),
-                status: $userTableForm.find("select[name='status']").val()
+                status: $userTableForm.find("select[name='status']").val(),
+                staffName: $userTableForm.find("input[name='staffName']").val().trim()
             };
         },
         columns: [{
@@ -20,6 +21,12 @@ $(function () {
         }, {
             field: 'username',
             title: '用户名'
+        }, {
+            field: 'staffName',
+            title: '姓名'
+        }, {
+            field: 'regionName',
+            title: '所属区域'
         }, {
             field: 'deptName',
             title: '部门'
@@ -47,9 +54,6 @@ $(function () {
                 if (value === '1') return '<span class="badge badge-success">有效</span>';
                 if (value === '0') return '<span class="badge badge-warning">锁定</span>';
             }
-        }, {
-            field: 'regionName',
-            title: '所属区域'
         }
 
         ]

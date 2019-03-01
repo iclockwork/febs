@@ -49,6 +49,20 @@ public class User implements Serializable {
     @Column(name = "DEPT_ID")
     private Long deptId;
 
+    @Column(name = "STAFF_ID")
+    private Long staffId;
+
+    @Transient
+    @ExportConfig(value = "姓名")
+    private String staffName;
+
+    @Transient
+    private String regionId;
+
+    @Transient
+    @ExportConfig(value = "所属区域")
+    private String regionName;
+
     @Transient
     @ExportConfig(value = "部门")
     private String deptName;
@@ -87,13 +101,6 @@ public class User implements Serializable {
 
     @Column(name = "DESCRIPTION")
     private String description;
-
-    @Column(name = "REGION_ID")
-    private String regionId;
-
-    @Transient
-    @ExportConfig(value = "所属区域")
-    private String regionName;
 
     @Transient
     private String roleName;
@@ -290,6 +297,22 @@ public class User implements Serializable {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public Long getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(Long staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
     }
 
     public String getRegionId() {
