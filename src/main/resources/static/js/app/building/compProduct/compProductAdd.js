@@ -1,6 +1,44 @@
 var validator;
 var $compProductAddForm = $("#compProduct-add-form");
 $(function () {
+    //文件上传
+    var option = {
+        language: "zh",
+        showCaption: false,
+        showRemove: false,
+        showUpload: false,
+        showCancel: false,
+        showClose: false,
+        maxFileCount: 1,
+        removeFromPreviewOnError: true,
+        overwriteInitial: true,
+        showUploadedThumbs: false,
+        autoReplace: true,
+        layoutTemplates: {progress: '', actions: ''},
+        uploadUrl: ctx + "/file/upload/single",
+        uploadExtraData: {
+            relative: "test"
+        },
+        allowedFileTypes: ["image"],
+        allowedFileExtensions: ["jpg", "png", "gif"],
+        maxFileSize: 5000
+    };
+
+    $("#pictureFile").fileinput(option).on('fileloaded', function (event) {
+        $(this).fileinput('upload');
+    }).on('fileuploaded', function (event, data) {
+        var response = data.response;
+        //文件上传自定义参数返回码
+        var returnCode = response.returnCode;
+        if ("1" == returnCode) {
+            //成功
+            //设置成功的自定义文件保存位置
+            $("#picture").val(response.filePreviewPath);
+        } else {
+            //失败
+            console.log(response.msg);
+        }
+    });
 
     $("#save-button").click(function () {
         var name = $(this).attr("name");
