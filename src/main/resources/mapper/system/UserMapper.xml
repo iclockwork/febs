@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.mrbird.system.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="cc.mrbird.system.domain.User">
+    <resultMap id="user" type="cc.mrbird.system.domain.User">
         <!--
           WARNING - @mbg.generated
         -->
@@ -21,6 +21,34 @@
         <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
         <result column="REGION_ID" jdbcType="VARCHAR" property="regionId"/>
     </resultMap>
+
+    <select id="findByName" resultType="user">
+        select u.user_id userId,
+        u.username,
+        u.password,
+        u.dept_id deptId,
+        u.email,
+        u.mobile,
+        u.status,
+        u.crate_time crateTime,
+        u.modify_time modifyTime,
+        u.LAST_LOGIN_TIME lastLoginTime,
+        u.ssex,
+        u.theme theme,
+        u.avatar,
+        u.description,
+        d.dept_name deptName,
+        u.staff_id staffId,
+        s.name staffName,
+        s.region_id regionId,
+        r.region_name regionName
+        from t_user u, t_dept d, staff s, spc_region r
+        where 1 = 1
+        and u.dept_id = d.dept_id(+)
+        and u.staff_id = s.staff_id(+)
+        and s.region_id = r.region_id(+)
+		and lower(u.username) = #{userName}
+  </select>
 
     <select id="findUserWithDept" resultType="user" parameterType="user">
         <bind name="bindStaffName" value="'%' + staffName + '%'"/>

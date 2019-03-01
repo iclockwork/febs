@@ -43,10 +43,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
     @Override
     public User findByName(String userName) {
-        Example example = new Example(User.class);
-        example.createCriteria().andCondition("lower(username)=", userName.toLowerCase());
-        List<User> list = this.selectByExample(example);
-        return list.size() == 0 ? null : list.get(0);
+        return this.userMapper.findByName(userName);
     }
 
     @Override
