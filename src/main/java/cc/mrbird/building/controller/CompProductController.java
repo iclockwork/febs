@@ -7,14 +7,24 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.defineConstant.CommonConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +37,7 @@ import java.util.Map;
 
 @Controller
 public class CompProductController extends BaseController {
+    private final static Logger logger = LoggerFactory.getLogger(CompProductController.class);
 
 
     @Autowired
@@ -76,8 +87,10 @@ public class CompProductController extends BaseController {
     @ResponseBody
     public ResponseBo addCompProduct(CompProduct compProduct) {
         try {
-
             this.compProductService.addCompProduct(compProduct);
+            if (compProduct.getUploadFlag().equalsIgnoreCase(Constant.UPLOAD_FLAG_YES)){
+                this.compProductService.addCompProductDoc(compProduct);
+            }
             return ResponseBo.ok("新增竞争产品成功！");
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,6 +118,13 @@ public class CompProductController extends BaseController {
     public ResponseBo updateCompProduct(CompProduct compProduct) {
         try {
             this.compProductService.updateCompProduct(compProduct);
+            if (compProduct.getUploadFlag().equalsIgnoreCase(Constant.UPLOAD_FLAG_YES)){
+                if ( this.compProductService.queryDocByCompProductId(compProduct.getCompProductId()) != null){
+                    this.compProductService.updateCompProductDoc(compProduct);
+                }else {
+                    this.compProductService.addCompProductDoc(compProduct);
+                }
+            }
             return ResponseBo.ok("修改竞争产品成功！");
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,9 +139,7 @@ public class CompProductController extends BaseController {
     @ResponseBody
     public ResponseBo deleteCompProduct(String ids) {
         try {
-            //声明删除标记
-            short deleteFlag = CommonConstant.INVALID;
-            this.compProductService.deleteCompProduct(ids,deleteFlag);
+            this.compProductService.deleteCompProduct(ids);
             return ResponseBo.ok("删除竞争产品成功！");
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,4 +147,53 @@ public class CompProductController extends BaseController {
         }
     }
 
+    @RequestMapping("compProduct/upload")
+    @ResponseBody
+    public ResponseBo upload(HttpServletResponse response, HttpServletRequest request) {
+        try {
+            request.setCharacterEncoding("UTF-8");
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+
+            /** 页面控件的文件流* */
+            MultipartFile multipartFile = null;
+            Map map =multipartRequest.getFileMap();
+            for (Iterator i = map.keySet().iterator(); i.hasNext();) {
+                Object obj = i.next();
+                multipartFile=(MultipartFile) map.get(obj);
+
+            }
+            /** 获取文件的后缀* */
+            String filename = multipartFile.getOriginalFilename();
+            String tempPath = System.getProperty("java.io.tmpdir");
+            File file = new File(tempPath);
+            if (!file.exists()) {
+                if (!file.mkdirs()) {
+                    logger.info("创建目录失败！");
+                }
+            }
+            String filePath = file.getPath() + "\\" + filename;
+            File xmlFile = new File(filePath);
+            if (xmlFile.exists()) {
+                if (!xmlFile.delete()) {
+                    logger.info("文件删除失败！");
+                }
+            }
+            multipartFile.transferTo(xmlFile);
+
+            this.compProductService.saveFile(filePath,filename);
+
+            return ResponseBo.ok(filename);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("上传失败，请联系网站管理员！");
+        }
+    }
+
+
+    @RequestMapping("compProduct/queryDoc")
+    @ResponseBody
+    public String queryDoc(HttpServletRequest request, HttpServletResponse response,Long rowId) {
+        request.setAttribute("rowId", rowId);
+        return "building/compProduct/compProductDoc";
+    }
 }

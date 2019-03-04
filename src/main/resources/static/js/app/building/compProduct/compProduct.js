@@ -51,10 +51,19 @@ $(function () {
             title: '资费描述'
         }, {
             field: 'docName',
-            title: '附件名称'
+            title: '附件名称',
+            formatter: function (value, row, index) {
+               return value;
+            }
+
         },{
             field: 'createDate',
             title: '录入时间'
+        }, {
+            title: '操作',
+            formatter: function (value, row, index) {
+                return "<a href='#' onclick='queryDoc(\"" + row.id + "\")'>查看附件</a>";
+            }
         }]
     };
 
@@ -122,4 +131,15 @@ $("#delete").click(function () {
 function refresh() {
     $(".compProduct-table-form")[0].reset();
     $MB.refreshTable('compProductTable');
+}
+
+function queryDoc(id) {
+    $.get(ctx + "compProduct/queryDoc", {"id": id}, function (r) {
+        if (r.code === 0) {
+            $MB.n_success('该用户已强制下线！');
+            $MB.refreshTable('onlineTable');
+        } else {
+            $MB.n_danger(r.msg);
+        }
+    }, "json");
 }

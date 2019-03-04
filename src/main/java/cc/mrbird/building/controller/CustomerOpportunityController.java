@@ -1,7 +1,6 @@
 package cc.mrbird.building.controller;
 
 
-import cc.mrbird.building.domain.BuildingOpportunity;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.domain.CustomerOpportunity;
 import cc.mrbird.building.service.CustomerOpportunityService;
@@ -10,7 +9,6 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.defineConstant.CommonConstant;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -120,9 +118,7 @@ public class CustomerOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo deleteCustomerOpportunity(String ids) {
         try {
-            //声明删除标记
-            short deleteFlag = CommonConstant.INVALID;
-            this.customerOpportunityService.deleteCustomerOpportunity(ids,deleteFlag);
+            this.customerOpportunityService.deleteCustomerOpportunity(ids);
             return ResponseBo.ok("删除商机客户成功！");
         } catch (Exception e) {
             e.printStackTrace();

@@ -15,4 +15,15 @@ public class Constant {
      * 删除标记：是
      */
     public static final String DELETE_FLAG_YES = "1";
+
+    /**
+     * 上传标识：是
+     */
+
+    public static final String UPLOAD_FLAG_YES = "1";
+
+    /**
+     * 上传标识：否
+     */
+    public static final String UPLOAD_FLAG_NO = "0";
 }

@@ -84,9 +84,12 @@
     </update>
 
     <!--删除竞争产品-->
-    <update id="deleteBuildingOpportunity">
-         update BD_BUILDING_OPPORTUNITY t set delete_flag = #{deleteFlag}
-                where t.BUILDING_ID in (#{ids})
+    <update id="deleteBuildingOpportunity" parameterType="int[]">
+         update BD_BUILDING_OPPORTUNITY t set delete_flag = 1
+                where t.BUILDING_ID in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
 </mapper>

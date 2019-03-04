@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <h3 class="modal-title pull-left" id="compProduct-add-modal-title">新增竞争产品</h3>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="compProductBody">
                 <form id="compProduct-add-form">
                     <div class="row">
                         <div class="col-sm-11">
@@ -83,9 +83,9 @@
                                 <span class="input-group-addon"> 附件上传：
 					            </span>
                                 <div class="form-group">
-                                    <input type="hidden" id="picture">
-                                    <input type="file" id="pictureFile" name="file" multiple="true"
-                                           class="file-loading" accept="image/*">
+                                    <input name="uploadFlag" hidden type="text">
+                                    <input  name="docName" hidden type="text">
+                                    <input type="file" id="pictureFile" multiple class="file-loading">
                                 </div>
                             </div>
                         </div>

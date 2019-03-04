@@ -1,6 +1,5 @@
 package cc.mrbird.building.dao;
 
-import cc.mrbird.building.domain.BuildingOpportunity;
 import cc.mrbird.building.domain.CustomerOpportunity;
 import cc.mrbird.common.config.MyMapper;
 
@@ -15,5 +14,5 @@ public interface CustomerOpportunityMapper extends MyMapper<CustomerOpportunity>
 
     void updateCustomerOpportunity(CustomerOpportunity customerExpiration);
 
-    void deleteCustomerOpportunity(String ids, int deleteFlag);
+    void deleteCustomerOpportunity(int[] ids);
 }

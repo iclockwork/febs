@@ -19,5 +19,5 @@ public interface CustomerExpirationService {
 
     void updateCustomerExpiration(CustomerExpiration customerExpiration);
 
-    void deleteCustomerExpiration(String ids, int deleteFlag);
+    void deleteCustomerExpiration(String ids);
 }

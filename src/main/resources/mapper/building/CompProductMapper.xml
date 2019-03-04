@@ -66,8 +66,53 @@
     </update>
 
     <!--删除竞争产品-->
-    <update id="deleteCompProduct">
-         update BD_COMP_PRODUCT t set delete_flag = #{deleteFlag}
-                where t.COMP_PRODUCT_ID = #{compProductId} and t.delete_flag = 0
+    <update id="deleteCompProduct" parameterType="int[]">
+         update BD_COMP_PRODUCT t set delete_flag = 1
+                where t.COMP_PRODUCT_ID in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
+
+
+    <!--存入上传文件 -->
+    <insert id="saveFile" useGeneratedKeys="true">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="fileId">
+            select seq_bd_comp_product_content.nextval as fileId from dual
+        </selectKey>
+        insert into BD_COMP_PRODUCT_CONTENT
+        values
+        (#{fileId},#{filename},#{fileInput})
+
+    </insert>
+
+    <!--存入竞争产品与附件关系 -->
+    <insert id="addCompProductDoc" useGeneratedKeys="true">
+        <selectKey resultType="Long" order="BEFORE" keyProperty="compProductDocId">
+            select seq_bd_comp_product_doc.nextval as fileId from dual
+        </selectKey>
+        insert into BD_COMP_PRODUCT_DOC
+        values
+        (#{compProductDocId},#{compProductId},#{docId},#{docName})
+
+    </insert>
+
+    <!--查询是否已经存在产品与附件的对应关系-->
+    <select id="queryDocByCompProductId" resultType="Long">
+         select t.doc_id from bd_comp_product_doc t where t.comp_product_id = #{compProductId}
+
+    </select>
+    <!-- 有竞争产品与附件关系存在时，更新对应的关系-->
+    <update id="updateCompProductDoc">
+         update BD_COMP_PRODUCT_DOC t
+         set  t.doc_id = #{docId},
+              t.doc_name = #{docName}
+        where t.COMP_PRODUCT_ID = #{compProductId}
+    </update>
+
+    <!-- 获取最新附件ID-->
+    <select id="getDocId" resultType="Long">
+         select * from ( select  file_id  from bd_comp_product_content order by file_id desc) where rownum = 1
+
+    </select>
 </mapper>

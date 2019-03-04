@@ -15,5 +15,5 @@ public interface BuildingOpportunityMapper extends MyMapper<BuildingOpportunity>
 
     void updateBuildingOpportunity(BuildingOpportunity buildingOpportunity);
 
-    void deleteBuildingOpportunity(String ids, int deleteFlag);
+    void deleteBuildingOpportunity(int[] ids);
 }

@@ -74,6 +74,16 @@ public class CompProduct implements Serializable {
 
     private byte[] fileContent;
 
+    //是否上传文件标识
+    private String uploadFlag;
+
+    public String getUploadFlag() {
+        return uploadFlag;
+    }
+
+    public void setUploadFlag(String uploadFlag) {
+        this.uploadFlag = uploadFlag;
+    }
 
     public Long getFileId() {
         return fileId;

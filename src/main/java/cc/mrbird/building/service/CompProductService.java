@@ -21,5 +21,13 @@ public interface CompProductService {
 
     void updateCompProduct(CompProduct compProduct);
 
-    void deleteCompProduct(String ids, int deleteFlag);
+    void deleteCompProduct(String ids);
+
+    void saveFile(String filePath, String filename);
+
+    void addCompProductDoc(CompProduct compProduct);
+
+    void updateCompProductDoc(CompProduct compProduct);
+
+    Long queryDocByCompProductId(Long compProductId);
 }

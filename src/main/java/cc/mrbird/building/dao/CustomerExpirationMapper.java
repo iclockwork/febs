@@ -14,6 +14,6 @@ public interface CustomerExpirationMapper extends MyMapper<CustomerExpiration> {
 
     void updateCustomerExpiration(CustomerExpiration customerExpiration);
 
-    void deleteCustomerExpiration(String ids, int deleteFlag);
+    void deleteCustomerExpiration(int[] ids);
 }
 

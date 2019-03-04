@@ -20,5 +20,5 @@ public interface CustomerOpportunityService {
 
     void updateCustomerOpportunity(CustomerOpportunity customerExpiration);
 
-    void deleteCustomerOpportunity(String ids, int deleteFlag);
+    void deleteCustomerOpportunity(String ids);
 }

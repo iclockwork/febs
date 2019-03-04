@@ -188,6 +188,9 @@ $(function () {
     function closeModal() {
         $("#queryBuilding-modal-title").html('楼宇查询');
         refresh();
+        setTimeout(function(){
+            $('body').addClass('modal-open')
+        },1000);
         $MB.closeAndRestModal("queryBuilding-modal");
     }
 

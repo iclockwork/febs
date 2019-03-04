@@ -89,9 +89,12 @@
     </update>
 
     <!--删除竞争产品-->
-    <update id="deleteCustomerOpportunity">
-         update BD_CUSTOMER_OPPORTUNITY t set delete_flag = #{deleteFlag}
-                where t.CUSTOMER_ID in (#{ids})
+    <update id="deleteCustomerOpportunity" parameterType="int[]">
+         update BD_CUSTOMER_OPPORTUNITY t set delete_flag = 1
+                where t.CUSTOMER_ID in
+        <foreach item="item" collection="array" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
 </mapper>

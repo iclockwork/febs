@@ -3,10 +3,11 @@ package cc.mrbird.building.service.impl;
 import cc.mrbird.building.dao.CustomerExpirationMapper;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.CustomerExpirationService;
-import cc.mrbird.defineConstant.CommonConstant;
+import cc.mrbird.common.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class CustomerExpirationServiceImpl implements CustomerExpirationService 
 
     @Override
     public void addCustomerExpiration(CustomerExpiration customerExpiration) {
-        customerExpiration.setDeleteFlag(CommonConstant.VALID);
+        customerExpiration.setDeleteFlag(Short.valueOf(Constant.DELETE_FLAG_NO));
         customerExpiration.setCreateDate(new Date());
         customerExpirationMapper.addCustomerExpiration(customerExpiration);
     }
@@ -44,7 +45,8 @@ public class CustomerExpirationServiceImpl implements CustomerExpirationService 
     }
 
     @Override
-    public void deleteCustomerExpiration(String ids, int deleteFlag) {
-        customerExpirationMapper.deleteCustomerExpiration(ids,deleteFlag);
+    public void deleteCustomerExpiration(String ids) {
+        int[] ints = Arrays.stream(ids.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
+        customerExpirationMapper.deleteCustomerExpiration(ints);
     }
 }

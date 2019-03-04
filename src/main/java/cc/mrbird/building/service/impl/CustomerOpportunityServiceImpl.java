@@ -1,13 +1,13 @@
 package cc.mrbird.building.service.impl;
 
 import cc.mrbird.building.dao.CustomerOpportunityMapper;
-import cc.mrbird.building.domain.BuildingOpportunity;
 import cc.mrbird.building.domain.CustomerOpportunity;
 import cc.mrbird.building.service.CustomerOpportunityService;
-import cc.mrbird.defineConstant.CommonConstant;
+import cc.mrbird.common.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class CustomerOpportunityServiceImpl implements CustomerOpportunityServic
 
     @Override
     public void addCustomerOpportunity(CustomerOpportunity customerOpportunity) {
-        customerOpportunity.setDeleteFlag(CommonConstant.VALID);
+        customerOpportunity.setDeleteFlag(Short.valueOf(Constant.DELETE_FLAG_NO));
         customerOpportunity.setCreateDate(new Date());
         customerOpportunity.setCreateStaffId(123456);
         customerOpportunityMapper.addCustomerOpportunity(customerOpportunity);
@@ -45,7 +45,8 @@ public class CustomerOpportunityServiceImpl implements CustomerOpportunityServic
     }
 
     @Override
-    public void deleteCustomerOpportunity(String ids, int deleteFlag) {
-        customerOpportunityMapper.deleteCustomerOpportunity(ids,deleteFlag);
+    public void deleteCustomerOpportunity(String ids) {
+        int[] ints = Arrays.stream(ids.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
+        customerOpportunityMapper.deleteCustomerOpportunity(ints);
     }
 }

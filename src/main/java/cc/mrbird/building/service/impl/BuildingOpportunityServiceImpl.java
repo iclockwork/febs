@@ -2,12 +2,12 @@ package cc.mrbird.building.service.impl;
 
 import cc.mrbird.building.dao.BuildingOpportunityMapper;
 import cc.mrbird.building.domain.BuildingOpportunity;
-import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.BuildingOpportunityService;
-import cc.mrbird.defineConstant.CommonConstant;
+import cc.mrbird.common.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class BuildingOpportunityServiceImpl implements BuildingOpportunityServic
 
     @Override
     public void addBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
-        buildingOpportunity.setDeleteFlag(CommonConstant.VALID);
+        buildingOpportunity.setDeleteFlag(Short.valueOf(Constant.DELETE_FLAG_NO));
         buildingOpportunity.setCreateDate(new Date());
         buildingOpportunity.setCreateStaffId(123457);
         buildingOpportunity.setRegionId("213456");
@@ -47,7 +47,8 @@ public class BuildingOpportunityServiceImpl implements BuildingOpportunityServic
     }
 
     @Override
-    public void deleteBuildingOpportunity(String ids, int deleteFlag) {
-        buildingOpportunityMapper.deleteBuildingOpportunity(ids,deleteFlag);
+    public void deleteBuildingOpportunity(String ids) {
+        int[] ints = Arrays.stream(ids.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
+        buildingOpportunityMapper.deleteBuildingOpportunity(ints);
     }
 }

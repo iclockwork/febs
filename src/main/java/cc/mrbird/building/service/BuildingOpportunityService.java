@@ -20,5 +20,5 @@ public interface BuildingOpportunityService {
 
     void updateBuildingOpportunity(BuildingOpportunity buildingOpportunity);
 
-    void deleteBuildingOpportunity(String ids, int deleteFlag);
+    void deleteBuildingOpportunity(String ids);
 }

@@ -5,6 +5,7 @@ $(function () {
     var option = {
         language: "zh",
         showCaption: false,
+        showPreview:true,
         showRemove: false,
         showUpload: false,
         showCancel: false,
@@ -15,9 +16,9 @@ $(function () {
         showUploadedThumbs: false,
         autoReplace: true,
         layoutTemplates: {progress: '', actions: ''},
-        uploadUrl: ctx + "/file/upload/single",
+        uploadUrl: ctx + "compProduct/upload",
         uploadExtraData: {
-            relative: "test"
+            docName:"docName"
         },
         allowedFileTypes: ["image"],
         allowedFileExtensions: ["jpg", "png", "gif"],
@@ -29,14 +30,15 @@ $(function () {
     }).on('fileuploaded', function (event, data) {
         var response = data.response;
         //文件上传自定义参数返回码
-        var returnCode = response.returnCode;
-        if ("1" == returnCode) {
+        var returnCode = response.code;
+        if (0 === returnCode) {
+            $compProductAddForm.find("input[name='uploadFlag']").val("1");
+            $compProductAddForm.find("input[name='docName']").val(response.msg);
             //成功
-            //设置成功的自定义文件保存位置
-            $("#picture").val(response.filePreviewPath);
+            $MB.n_warning('上传成功！');
         } else {
             //失败
-            console.log(response.msg);
+            $MB.n_warning('上传失败！请联系网站管理员');
         }
     });
 
@@ -72,7 +74,8 @@ $(function () {
 
     $("#queryButton").click(function () {
         $("#modelId").val("#compProduct-add");
-    })
+    });
+
 });
 
 function closeModal() {
