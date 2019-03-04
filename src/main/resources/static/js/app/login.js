@@ -1,9 +1,16 @@
 $(document).ready(function () {
-
     $('input').iCheck({
         checkboxClass: 'icheckbox_minimal-green',
         radioClass: 'iradio_minimal-green',
         increaseArea: '20%'
+    });
+
+    $("#validateCodeImg").click(function () {
+        reloadCode();
+    });
+
+    $("#loginButton").click(function () {
+        login();
     });
 });
 
@@ -14,10 +21,10 @@ function reloadCode() {
 
 function login() {
     var $loginButton = $("#loginButton");
-    var username = $(".one input[name='username']").val().trim();
-    var password = $(".one input[name='password']").val().trim();
-    var code = $(".one input[name='code']").val().trim();
-    var rememberMe = $(".one input[name='rememberme']").is(':checked');
+    var username = $("#username").val().trim();
+    var password = $("#password").val().trim();
+    var code = $("#code").val().trim();
+    var rememberMe = $("#rememberMe").is(':checked');
     if (username === "") {
         $MB.n_warning("请输入用户名！");
         return;
@@ -49,54 +56,6 @@ function login() {
                 if (r.msg === '验证码错误！') reloadCode();
                 $MB.n_warning(r.msg);
                 $loginButton.html("登录");
-            }
-        }
-    });
-}
-
-function regist() {
-    var username = $(".two input[name='username']").val().trim();
-    var password = $(".two input[name='password']").val().trim();
-    var cpassword = $(".two input[name='cpassword']").val().trim();
-    if (username === "") {
-        $MB.n_warning("用户名不能为空！");
-        return;
-    } else if (username.length > 10) {
-        $MB.n_warning("用户名长度不能超过10个字符！");
-        return;
-    } else if (username.length < 3) {
-        $MB.n_warning("用户名长度不能少于3个字符！");
-        return;
-    }
-    if (password === "") {
-        $MB.n_warning("密码不能为空！");
-        return;
-    }
-    if (cpassword === "") {
-        $MB.n_warning("请再次输入密码！");
-        return;
-    }
-    if (cpassword !== password) {
-        $MB.n_warning("两次密码输入不一致！");
-        return;
-    }
-    $.ajax({
-        type: "post",
-        url: ctx + "user/regist",
-        data: {
-            "username": username,
-            "password": password,
-        },
-        dataType: "json",
-        success: function (r) {
-            if (r.code === 0) {
-                $MB.n_success("注册成功，请登录");
-                $(".two input[name='username']").val("");
-                $(".two input[name='password']").val("");
-                $(".two input[name='cpassword']").val("");
-                $('.form-toggle').trigger('click');
-            } else {
-                $MB.n_warning(r.msg);
             }
         }
     });

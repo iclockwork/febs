@@ -3,3 +3,16 @@
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
+.common-footer {
+    margin: 20px;
+    color: #ffffff;
+}
+
+.common-footer p{
+    color: #ffffff;
+}
+
+.common-footer a {
+    color: #ffffff;
+}

@@ -3,12 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="edge" />
+    <meta http-equiv="X-UA-Compatible" content="edge"/>
     <title>江苏联通商务楼宇管理系统</title>
-    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}" />
-    <link rel="stylesheet" th:href="@{css/app/login.css}" type="text/css">
+    <link rel="shortcut icon" type="image/png" th:href="@{/img/favicon.ico}"/>
+    <!-- AdminLTE styles -->
+    <link rel="stylesheet" data-th-href="@{js/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" data-th-href="@{js/plugins/adminlte/css/AdminLTE.min.css}">
+    <link rel="stylesheet" data-th-href="@{js/plugins/adminlte/css/skins/_all-skins.min.css}">
     <link rel="stylesheet" th:href="@{css/plugins/iCheck/minimal/green.css}" type="text/css">
     <link rel="stylesheet" th:href="@{css/app.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{css/app/login.css}" type="text/css">
+    <!-- Glyphicons -->
+    <link rel="stylesheet" data-th-href="@{css/plugins/glyphicons.css}">
+    <link rel="stylesheet" data-th-href="@{css/reset.css}">
+    <link rel="stylesheet" data-th-href="@{css/common.css}">
     <!-- animate -->
     <link rel="stylesheet" th:href="@{css/plugins/animate/animate.min.css}" type="text/css">
     <script th:src="@{js/plugins/jquery.min.js}"></script>
@@ -19,42 +27,62 @@
 <style>
 
 </style>
-<body>
-    <!-- Form-->
-    <div class="form">
-        <div class="form-toggle"></div>
-        <div class="form-panel one">
-            <div class="form-header">
-                <h1>江苏联通商务楼宇管理系统</h1>
-            </div>
-            <div class="form-content">
-                <div class="form-group">
-                    <label>用户名</label>
-                    <input type="text" name="username" />
-                </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <input type="password" name="password" />
-                </div>
-                <div class="form-group" style="display:inline-block">
-                    <label>验证码</label>
-                    <input type="text" name="code" style="width:50%; display:inline-block" />
-                    <img data-th-src="@{gifCode}" id="validateCodeImg" onclick="reloadCode()" style="display:inline-block" />
-                </div>
-                <div class="form-group" style="margin: 0px;">
-                    <p>
-                        <input type="checkbox" name="rememberme" />&nbsp;&nbsp;记住我</p>
-                </div>
-                <div class="form-group">
-                    <button onclick="login()" id="loginButton">登录</button>
+<body class="hold-transition login-page">
+<section>
+    <div class="login-logo-nav">
+        <a href="index" class="login-logo"></a>江苏联通商务楼宇管理系统
+    </div>
+    <div class="row">
+        <div class="col-sm-6 login-bg"></div>
+        <div class="col-sm-6 login-box">
+            <div class="login-box-body">
+                <div class="login-form">
+                    <div class="form-header">
+                        <h4>欢迎登录</h4>
+                    </div>
+                    <div class="form-content">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input type="text" class="form-control" id='username' placeholder="帐号"
+                                       autofocus>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input type="password" class="form-control" id='password'
+                                       placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-font"></i></span>
+                                <input type="text" class="form-control" id="code"/>
+                                <img data-th-src="@{gifCode}" id="validateCodeImg"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p>
+                                <input type="checkbox" id="rememberMe"/>
+                                <span>记住我</span>
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-block" id="loginButton">
+                                登录
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div data-th-include="common/footer"></div>
+</section>
+<div data-th-include="common/footer"></div>
 </body>
 <script th:inline="javascript">
-	var ctx = [[@{/}]];
+    var ctx = [[@{/}]];
 </script>
 <script data-th-src="@{js/app/login.js}"></script>
 </html>

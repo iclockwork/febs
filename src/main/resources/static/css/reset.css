@@ -1,3 +1,49 @@
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
     border-bottom-width: 0;
 }
+
+.login-page {
+    background: #DE3A3B;
+}
+
+.login-logo-nav {
+    margin: 45px 0 0 120px;
+    color: #ffffff;
+    font-size: 24px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.login-logo {
+    width: 40px;
+    height: 30px;
+    float: left;
+    vertical-align: middle;
+    margin-right: 10px;
+    padding-right: 10px;
+    background: url(../img/unicom-logo.png) no-repeat;
+    display: inline-block;
+}
+
+.login-bg {
+    margin-top: 20px;
+    background: url("../img/login-bg.png") no-repeat top;
+    width: 100%;
+}
+
+.login-box {
+    margin-top: 20px;
+}
+
+.login-box-body {
+    margin:50px 60px 0 60px ;
+    background: #fff;
+    padding: 20px;
+    border-top: 0;
+    color: #666;
+    border-radius: 4px;
+}
+
+
+
