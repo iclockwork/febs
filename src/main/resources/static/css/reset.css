@@ -37,6 +37,7 @@
 }
 
 .login-box-body {
+    width: 400px;
     margin:50px 60px 0 60px ;
     background: #fff;
     padding: 20px;
