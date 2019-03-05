@@ -14,7 +14,11 @@
                 <img class="user__img">
                 <div>
                     <div class="user__name" data-th-utext="${user.username}"></div>
-                    <div class="user__email" data-th-utext="${user.email}"></div>
+                    <div class="user__email">
+                        <span data-th-utext="${user.regionName}"></span>
+                        -
+                        <span data-th-utext="${user.staffName}"></span>
+                    </div>
                 </div>
             </div>
             <div class="dropdown-menu">
