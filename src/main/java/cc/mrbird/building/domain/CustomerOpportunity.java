@@ -69,7 +69,7 @@ public class CustomerOpportunity {
     private Short deleteFlag;
 
     @Column(name = "CREATE_STAFF_ID")
-    private Integer createStaffId;
+    private Long createStaffId;
 
     @Column(name = "CREATE_DATE")
     @ExportConfig(value = "创建时间")
@@ -297,17 +297,11 @@ public class CustomerOpportunity {
         this.deleteFlag = deleteFlag;
     }
 
-    /**
-     * @return CREATE_STAFF_ID
-     */
-    public Integer getCreateStaffId() {
+    public Long getCreateStaffId() {
         return createStaffId;
     }
 
-    /**
-     * @param createStaffId
-     */
-    public void setCreateStaffId(Integer createStaffId) {
+    public void setCreateStaffId(Long createStaffId) {
         this.createStaffId = createStaffId;
     }
 

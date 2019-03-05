@@ -4,6 +4,7 @@ import cc.mrbird.building.dao.CompProductMapper;
 import cc.mrbird.building.domain.CompProduct;
 import cc.mrbird.building.service.CompProductService;
 import cc.mrbird.common.util.Constant;
+import cc.mrbird.system.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,6 @@ public class CompProductServiceImpl implements CompProductService {
     public void addCompProduct(CompProduct compProduct) {
         compProduct.setDeleteFlag(Short.valueOf(Constant.DELETE_FLAG_NO));
         compProduct.setCreateDate(new Date());
-        compProduct.setCreateStaffId(12345);
         compProductMapper.addCompProduct(compProduct);
     }
 
@@ -81,7 +81,14 @@ public class CompProductServiceImpl implements CompProductService {
     }
 
     @Override
+    //查看是否存在竞争产品与附件关系
     public Long queryDocByCompProductId(Long compProductId) {
         return compProductMapper.queryDocByCompProductId(compProductId);
+    }
+
+    @Override
+    //查看附件内容
+    public CompProduct queryDocById(Long docId) {
+        return compProductMapper.queryDocById(docId);
     }
 }

@@ -30,4 +30,6 @@ public interface CompProductService {
     void updateCompProductDoc(CompProduct compProduct);
 
     Long queryDocByCompProductId(Long compProductId);
+
+    CompProduct queryDocById(Long compProductId);
 }

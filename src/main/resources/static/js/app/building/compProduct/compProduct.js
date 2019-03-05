@@ -62,7 +62,7 @@ $(function () {
         }, {
             title: '操作',
             formatter: function (value, row, index) {
-                return "<a href='#' onclick='queryDoc(\"" + row.id + "\")'>查看附件</a>";
+                return "<a href='#' onclick='queryDoc(\"" + row.compProductId + "\")'>查看附件</a>";
             }
         }]
     };
@@ -133,13 +133,20 @@ function refresh() {
     $MB.refreshTable('compProductTable');
 }
 
-function queryDoc(id) {
-    $.get(ctx + "compProduct/queryDoc", {"id": id}, function (r) {
+function queryDoc(compProductId) {
+    $.post(ctx + "compProduct/queryDoc", {"compProductId": compProductId}, function (r) {
         if (r.code === 0) {
-            $MB.n_success('该用户已强制下线！');
-            $MB.refreshTable('onlineTable');
+            var docId = r.msg;
+            if (docId){
+                var $form = $('#compProduct-doc');
+                $form.modal();
+                $("#imgId").attr("src","compProduct/downloadDoc?docId="+ docId) ;
+            }else {
+                $MB.n_warning("此竞争产品未上传附件");
+            }
+
         } else {
             $MB.n_danger(r.msg);
         }
-    }, "json");
+    });
 }

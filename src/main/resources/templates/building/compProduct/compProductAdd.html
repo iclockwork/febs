@@ -84,8 +84,9 @@
 					            </span>
                                 <div class="form-group">
                                     <input name="uploadFlag" hidden type="text">
+                                    <input  name="docId" hidden type="text">
                                     <input  name="docName" hidden type="text">
-                                    <input type="file" id="pictureFile" multiple class="file-loading">
+                                    <input type="file" id="pictureFile" multiple="false" class="file-loading">
                                 </div>
                             </div>
                         </div>
@@ -101,4 +102,4 @@
     </div>
 </div>
 <script data-th-src="@{js/app/building/compProduct/compProductAdd.js}"></script>
-<script data-th-src="@{js/app/building/building/queryBuildingModal.js}"></script>
+

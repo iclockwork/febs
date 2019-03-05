@@ -30,7 +30,6 @@ public class CustomerOpportunityServiceImpl implements CustomerOpportunityServic
     public void addCustomerOpportunity(CustomerOpportunity customerOpportunity) {
         customerOpportunity.setDeleteFlag(Short.valueOf(Constant.DELETE_FLAG_NO));
         customerOpportunity.setCreateDate(new Date());
-        customerOpportunity.setCreateStaffId(123456);
         customerOpportunityMapper.addCustomerOpportunity(customerOpportunity);
     }
 

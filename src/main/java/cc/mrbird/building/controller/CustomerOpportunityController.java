@@ -9,6 +9,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,6 +78,9 @@ public class CustomerOpportunityController extends BaseController {
     public ResponseBo addCustomerOpportunity(CustomerOpportunity customerOpportunity) {
         try {
 
+            User user = super.getCurrentUser();
+            Long staffId = user.getStaffId();
+            customerOpportunity.setCreateStaffId(staffId);
             this.customerOpportunityService.addCustomerOpportunity(customerOpportunity);
             return ResponseBo.ok("新增商机客户成功！");
         } catch (Exception e) {

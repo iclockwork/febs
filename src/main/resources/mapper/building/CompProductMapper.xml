@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.mrbird.building.dao.CompProductMapper">
     <sql id="selectColumn">
-        a.building_no as buildingNo,a.building_name as buildingName, b.doc_name as docName,t.COMP_PRODUCT_ID as
+        a.building_no as buildingNo,a.building_name as buildingName,b.doc_id as docId, b.doc_name as docName,t.COMP_PRODUCT_ID as
         compProductId,t.BUILDING_ID as buildingId,t.OPERATOR as operator, t.BUSINESS_TYPE as businessType,
         t.INTRODUCTION as introduction, t.DELETE_FLAG as deleteFlag, t.CREATE_STAFF_ID as createStaffId,
         t.CREATE_DATE as createDate, t.MODIFY_STAFF_ID as modifyStaffId, t.MODIFY_DATE as modifyDate, t.MODIFY_OP as modifyOp
@@ -97,7 +97,7 @@
 
     </insert>
 
-    <!--查询是否已经存在产品与附件的对应关系-->
+    <!--查询是否已经存在产品与附件的对应关系  返回附件id-->
     <select id="queryDocByCompProductId" resultType="Long">
          select t.doc_id from bd_comp_product_doc t where t.comp_product_id = #{compProductId}
 
@@ -113,6 +113,10 @@
     <!-- 获取最新附件ID-->
     <select id="getDocId" resultType="Long">
          select * from ( select  file_id  from bd_comp_product_content order by file_id desc) where rownum = 1
+    </select>
 
+    <!--获取附件内容-->
+    <select id="queryDocById" resultType="cc.mrbird.building.domain.CompProduct">
+       select a.file_content as fileContent from bd_comp_product_content a where a.file_id = #{docId}
     </select>
 </mapper>

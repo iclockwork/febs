@@ -31,7 +31,6 @@ public class BuildingOpportunityServiceImpl implements BuildingOpportunityServic
     public void addBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
         buildingOpportunity.setDeleteFlag(Short.valueOf(Constant.DELETE_FLAG_NO));
         buildingOpportunity.setCreateDate(new Date());
-        buildingOpportunity.setCreateStaffId(123457);
         buildingOpportunity.setRegionId("213456");
         buildingOpportunityMapper.addBuildingOpportunity(buildingOpportunity);
     }

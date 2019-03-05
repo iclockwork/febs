@@ -49,7 +49,7 @@ public class CompProduct implements Serializable {
     private String docName;
 
     @Column(name = "CREATE_STAFF_ID")
-    private Integer createStaffId;
+    private Long createStaffId;
 
     @Column(name = "CREATE_DATE")
     @ExportConfig(value = "录入时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
@@ -221,17 +221,11 @@ public class CompProduct implements Serializable {
         this.deleteFlag = deleteFlag;
     }
 
-    /**
-     * @return CREATE_STAFF_ID
-     */
-    public Integer getCreateStaffId() {
+    public Long getCreateStaffId() {
         return createStaffId;
     }
 
-    /**
-     * @param createStaffId
-     */
-    public void setCreateStaffId(Integer createStaffId) {
+    public void setCreateStaffId(Long createStaffId) {
         this.createStaffId = createStaffId;
     }
 

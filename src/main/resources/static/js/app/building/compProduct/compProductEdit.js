@@ -24,7 +24,7 @@ $(function () {
                 $form.find("input[name='introduction']").val(compProduct.introduction);
                 $form.find("select[name='operator']").val(compProduct.operator);
                 $form.find("select[name='businessType']").val(compProduct.businessType);
-                $form.find("input[name='docName']").val(compProduct.docName);
+                $form.find("input[name='docId']").val(compProduct.docId);
                 $("#save-button").attr("name", "update");
             } else {
                 $MB.n_danger(r.msg);

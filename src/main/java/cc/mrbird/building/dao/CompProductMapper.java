@@ -33,4 +33,5 @@ public interface CompProductMapper extends MyMapper<CompProduct> {
 
     Long queryDocByCompProductId(Long compProductId);
 
+    CompProduct queryDocById(Long docId);
 }

@@ -9,6 +9,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.User;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -76,7 +77,9 @@ public class BuildingOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo addBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
         try {
-
+            User user = super.getCurrentUser();
+            Long staffId = user.getStaffId();
+            buildingOpportunity.setCreateStaffId(staffId);
             this.buildingOpportunityService.addBuildingOpportunity(buildingOpportunity);
             return ResponseBo.ok("新增商机楼宇成功！");
         } catch (Exception e) {

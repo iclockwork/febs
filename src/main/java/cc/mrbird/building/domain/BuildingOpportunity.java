@@ -54,7 +54,7 @@ public class BuildingOpportunity {
     private Short deleteFlag;
 
     @Column(name = "CREATE_STAFF_ID")
-    private Integer createStaffId;
+    private Long createStaffId;
 
     @Column(name = "CREATE_DATE")
     private Date createDate;
@@ -278,17 +278,11 @@ public class BuildingOpportunity {
         this.deleteFlag = deleteFlag;
     }
 
-    /**
-     * @return CREATE_STAFF_ID
-     */
-    public Integer getCreateStaffId() {
+    public Long getCreateStaffId() {
         return createStaffId;
     }
 
-    /**
-     * @param createStaffId
-     */
-    public void setCreateStaffId(Integer createStaffId) {
+    public void setCreateStaffId(Long createStaffId) {
         this.createStaffId = createStaffId;
     }
 

@@ -2,6 +2,8 @@ var validator;
 var $compProductAddForm = $("#compProduct-add-form");
 $(function () {
     //文件上传
+    var docId = $compProductAddForm.find("input[name='docId']").val();
+    $("#intiImg").attr("src","compProduct/downloadDoc?docId="+ docId) ;
     var option = {
         language: "zh",
         showCaption: false,
@@ -18,8 +20,10 @@ $(function () {
         layoutTemplates: {progress: '', actions: ''},
         uploadUrl: ctx + "compProduct/upload",
         uploadExtraData: {
-            docName:"docName"
         },
+        initialPreview:[
+            "<img id='intiImg' class='file-preview-image' alt='Desert' title='Desert'/>"
+        ],
         allowedFileTypes: ["image"],
         allowedFileExtensions: ["jpg", "png", "gif"],
         maxFileSize: 5000
