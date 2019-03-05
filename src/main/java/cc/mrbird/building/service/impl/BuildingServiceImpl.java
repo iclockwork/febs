@@ -29,7 +29,7 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
     @Override
     public List<Building> findAll(Building building) {
         try {
-            List<Building> list = this.buildingMapper.findAll(building.getBuildingName());
+            List<Building> list = this.buildingMapper.findAll(building);
             return list;
         } catch (Exception e) {
             e.printStackTrace();

@@ -42,6 +42,18 @@ public class RegionController extends BaseController {
         return super.selectByPageNumSize(request, () -> this.regionService.findAll(region));
     }
 
+    @RequestMapping("region/options")
+    @ResponseBody
+    public ResponseBo regions(QueryRequest request, Region region) {
+        try {
+            List<Region> regions = this.regionService.regions(region);
+            return ResponseBo.ok(regions);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取区域失败！");
+        }
+    }
+
     @RequestMapping("region/excel")
     @ResponseBody
     public ResponseBo excel(Region region) {

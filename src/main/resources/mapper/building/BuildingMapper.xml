@@ -50,7 +50,8 @@
         <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.building.domain.Building">
+    <select id="findAll" resultType="cc.mrbird.building.domain.Building"
+            parameterType="cc.mrbird.building.domain.Building">
         <bind name="bindBuildingName" value="'%' + buildingName + '%'"/>
         select t.building_id as buildingId,
         ds.region_id as dsRegionId,
@@ -151,6 +152,16 @@
         and t.segm_id = a.segm_id(+)
         and t.access_area_id = area.access_area_id(+)
         and t.room_id = room.room_id(+)
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND t.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND t.region_id = #{regionId}
+        </if>
         <if test="buildingName != null and buildingName != ''">
             AND t.building_name like #{bindBuildingName}
         </if>

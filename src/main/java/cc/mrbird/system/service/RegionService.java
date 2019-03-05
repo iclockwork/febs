@@ -15,4 +15,6 @@ import java.util.List;
  */
 public interface RegionService extends IService<Region> {
     List<Region> findAll(Region region);
+
+    List<Region> regions(Region region);
 }

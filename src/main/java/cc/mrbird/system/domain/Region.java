@@ -5,6 +5,7 @@ import cc.mrbird.common.annotation.ExportConfig;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -32,12 +33,14 @@ public class Region implements Serializable {
     @Column(name = "SUPER_REGION_ID")
     private String superRegionId;
 
+    @Transient
     @ExportConfig(value = "上级区域")
     private String superRegionName;
 
     @Column(name = "GRADE_ID")
     private Integer gradeId;
 
+    @Transient
     @ExportConfig(value = "区域等级")
     private String gradeName;
 

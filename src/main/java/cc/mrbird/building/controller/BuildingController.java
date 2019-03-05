@@ -7,6 +7,8 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +41,10 @@ public class BuildingController extends BaseController {
     @RequestMapping("building/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Building building) {
+        User user = super.getCurrentUser();
+        if (StringUtils.isBlank(building.getDsRegionId())) {
+            building.setDsRegionId(user.getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.buildingService.findAll(building));
     }
 
@@ -71,7 +77,7 @@ public class BuildingController extends BaseController {
     @ResponseBody
     public ResponseBo getBuildingOpportunity(Integer buildingId) {
         try {
-            Building building  = this.buildingService.findById(buildingId);
+            Building building = this.buildingService.findById(buildingId);
             return ResponseBo.ok(building);
         } catch (Exception e) {
             e.printStackTrace();

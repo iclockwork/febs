@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface BuildingMapper extends MyMapper<Building> {
-    List<Building> findAll(@Param("buildingName") String buildingName);
+    List<Building> findAll(Building building);
 
     Building findById(Integer buildingId);
 }
