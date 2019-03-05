@@ -9,9 +9,7 @@ import cc.mrbird.common.util.vcode.Captcha;
 import cc.mrbird.common.util.vcode.GifCaptcha;
 import cc.mrbird.system.domain.User;
 import cc.mrbird.system.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,16 +39,7 @@ public class LoginController extends BaseController {
 
     @PostMapping("/login")
     @ResponseBody
-    public ResponseBo login(String username, String password, String code, Boolean rememberMe) {
-        if (!StringUtils.isNotBlank(code)) {
-            return ResponseBo.warn("验证码不能为空！");
-        }
-        Session session = super.getSession();
-        String sessionCode = (String) session.getAttribute("_code");
-        session.removeAttribute("_code");
-        if (!code.toLowerCase().equals(sessionCode)) {
-            return ResponseBo.warn("验证码错误！");
-        }
+    public ResponseBo login(String username, String password, Boolean rememberMe) {
         // 密码 MD5 加密
         password = MD5Utils.encrypt(username.toLowerCase(), password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
