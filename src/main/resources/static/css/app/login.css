@@ -409,3 +409,16 @@ body {
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both
 }
+
+.common-footer {
+    margin-top: 5%;
+    color: #ffffff;
+}
+
+.common-footer p{
+    color: #ffffff;
+}
+
+.common-footer a {
+    color: #ffffff;
+}
