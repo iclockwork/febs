@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.system.dao.StaffMapper">
+    <resultMap id="staff" type="cc.mrbird.system.domain.Staff">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="STAFF_ID" jdbcType="DECIMAL" property="staffId"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="TITLE" jdbcType="DECIMAL" property="title"/>
+        <result column="STATION" jdbcType="CHAR" property="station"/>
+        <result column="PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="DEPARTMENT" jdbcType="CHAR" property="department"/>
+        <result column="WORKGROUP_ID" jdbcType="DECIMAL" property="workgroupId"/>
+        <result column="SITE_ID" jdbcType="DECIMAL" property="siteId"/>
+        <result column="DEPT_LEVEL_ID" jdbcType="DECIMAL" property="deptLevelId"/>
+        <result column="EFF_DATE" jdbcType="TIMESTAMP" property="effDate"/>
+        <result column="EXP_DATE" jdbcType="TIMESTAMP" property="expDate"/>
+        <result column="STATE" jdbcType="CHAR" property="state"/>
+        <result column="STATE_DATE" jdbcType="TIMESTAMP" property="stateDate"/>
+        <result column="IP_LIMIT" jdbcType="CHAR" property="ipLimit"/>
+        <result column="IP_SUBNET" jdbcType="CHAR" property="ipSubnet"/>
+        <result column="IP_NETMASK" jdbcType="CHAR" property="ipNetmask"/>
+        <result column="IP_HOSTNAME" jdbcType="CHAR" property="ipHostname"/>
+        <result column="PC_LIMIT" jdbcType="DECIMAL" property="pcLimit"/>
+        <result column="PC_ID" jdbcType="DECIMAL" property="pcId"/>
+        <result column="INVOICE_SERIAL_NBR" jdbcType="DECIMAL" property="invoiceSerialNbr"/>
+        <result column="LAST_DATE" jdbcType="TIMESTAMP" property="lastDate"/>
+        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
+        <result column="PHONE_NO" jdbcType="VARCHAR" property="phoneNo"/>
+        <result column="DELETE_STATE" jdbcType="CHAR" property="deleteState"/>
+        <result column="DELETE_TIME" jdbcType="TIMESTAMP" property="deleteTime"/>
+        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
+        <result column="STAFF_ALIAS" jdbcType="VARCHAR" property="staffAlias"/>
+        <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName"/>
+        <result column="PWD_MOD_DATE" jdbcType="TIMESTAMP" property="pwdModDate"/>
+        <result column="LAN_ID" jdbcType="VARCHAR" property="lanId"/>
+        <result column="LOGINUID" jdbcType="VARCHAR" property="loginuid"/>
+        <result column="STAFF_CODE" jdbcType="VARCHAR" property="staffCode"/>
+        <result column="STAFF_STATE" jdbcType="DECIMAL" property="staffState"/>
+        <result column="LAST_LOGIN_DATE" jdbcType="TIMESTAMP" property="lastLoginDate"/>
+        <result column="ERRO_TIMES" jdbcType="DECIMAL" property="erroTimes"/>
+        <result column="CAPTCHA" jdbcType="VARCHAR" property="captcha"/>
+        <result column="VALIDATE_TIME" jdbcType="TIMESTAMP" property="validateTime"/>
+        <result column="HIS_PWD" jdbcType="VARCHAR" property="hisPwd"/>
+        <result column="SAFE_STRATEGY" jdbcType="DECIMAL" property="safeStrategy"/>
+        <result column="IDENTITY_ID" jdbcType="CHAR" property="identityId"/>
+        <result column="HR_CODE" jdbcType="CHAR" property="hrCode"/>
+        <result column="UNIT_ID" jdbcType="DECIMAL" property="unitId"/>
+        <result column="REGION_ID" jdbcType="VARCHAR" property="regionId"/>
+    </resultMap>
+
+    <select id="findAll" resultType="cc.mrbird.system.domain.Staff" parameterType="cc.mrbird.system.domain.Staff">
+        <bind name="bindLoginName" value="'%' + loginName + '%'"/>
+        <bind name="bindName" value="'%' + name + '%'"/>
+        <bind name="bindPhoneNo" value="'%' + phoneNo + '%'"/>
+        SELECT A.STAFF_ID as staffId,
+        A.LOGIN_NAME as loginName,
+        A.NAME as name,
+        A.region_id as regionId,
+        r.region_name as regionName,
+        A.SITE_ID as siteId,
+        B.DEPT_NAME as deptName,
+        A.PHONE_NO as phoneNo,
+        A.EXP_DATE as expDate,
+        A.IDENTITY_ID as identityId,
+        A.HR_CODE as hrCode
+        FROM (select * from STAFF where nvl(delete_state, '0') = '0') A,
+        (select * from DEPARTMENT where nvl(delete_state, '0') = '0') B,
+        SPC_REGION r
+        WHERE 1 = 1
+        AND B.DEPT_ID = A.SITE_ID
+        and A.region_id = r.region_id(+)
+        <if test="loginName != null and loginName != ''">
+            AND lower(A.LOGIN_NAME) like #{bindLoginName}
+        </if>
+        <if test="name != null and name != ''">
+            AND A.NAME like #{bindName}
+        </if>
+        <if test="phoneNo != null and phoneNo != ''">
+            AND A.PHONE_NO like #{bindPhoneNo}
+        </if>
+    </select>
+</mapper>
