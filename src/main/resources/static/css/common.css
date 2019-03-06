@@ -15,3 +15,9 @@
 .common-footer a {
     color: #333;
 }
+
+@media (min-width: 850px) {
+    .common_modal-lg {
+        max-width: 500px;
+    }
+}

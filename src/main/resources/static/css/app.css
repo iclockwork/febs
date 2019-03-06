@@ -4823,12 +4823,6 @@ button.close {
   }
 }
 
-@media (min-width: 850px) {
-    .modal-ll {
-        max-width: 500px;
-    }
-}
-
 .tooltip {
   position: absolute;
   z-index: 1070;
