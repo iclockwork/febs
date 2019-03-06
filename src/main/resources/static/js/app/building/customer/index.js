@@ -20,6 +20,9 @@ $(function () {
             field: 'keyPerson',
             title: '客户联系人'
         }, {
+            field: 'keyPersonContact',
+            title: '客户联系电话'
+        }, {
             field: 'monthFee',
             title: '月费'
         }, {
