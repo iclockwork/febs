@@ -17,7 +17,7 @@
     <sql id="selectColumn">
         a.building_no as buildingNo,a.building_name as buildingName, t.CUSTOMER_EXPIRATION_ID as
         customerExpirationId,t.BUILDING_ID as buildingId,t.CUSTOMER_NAME as customerName, to_char(t.REMIND_DATE, 'yyyy-mm-dd') as remindDate,
-        t.DELETE_FLAG as deleteFlag, t.CREATE_DATE as createDate, t.REMIND_FLAG as remindFlag
+        t.DELETE_FLAG as deleteFlag, t.CREATE_DATE as createDate, t.REMIND_FLAG as remindFlag,decode(t.REMIND_FLAG, 0, '不需要', 1, '需要') as remindFlagName
 
     </sql>
 

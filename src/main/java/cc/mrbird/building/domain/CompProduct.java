@@ -31,12 +31,16 @@ public class CompProduct implements Serializable {
     private Long buildingId;
 
     @Column(name = "OPERATOR")
-    @ExportConfig(value = "运营商")
     private Short operator;
 
+    @ExportConfig(value = "运营商")
+    private String operatorName;
+
     @Column(name = "BUSINESS_TYPE")
-    @ExportConfig(value = "业务类型")
     private Short businessType;
+
+    @ExportConfig(value = "业务类型")
+    private String businessTypeName;
 
     @Column(name = "INTRODUCTION")
     @ExportConfig(value = "资费描述")
@@ -76,6 +80,23 @@ public class CompProduct implements Serializable {
 
     //是否上传文件标识
     private String uploadFlag;
+
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
+    public String getBusinessTypeName() {
+        return businessTypeName;
+    }
+
+    public void setBusinessTypeName(String businessTypeName) {
+        this.businessTypeName = businessTypeName;
+    }
 
     public String getUploadFlag() {
         return uploadFlag;

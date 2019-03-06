@@ -10,6 +10,7 @@ import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +44,10 @@ public class BuildingOpportunityController extends BaseController {
     @RequestMapping("buildingOpportunity/list")
     @ResponseBody
     public Map<String, Object> queryBuildingOpportunity(QueryRequest request, BuildingOpportunity buildingOpportunity) {
-
+        User user = super.getCurrentUser();
+        if (StringUtils.isBlank(buildingOpportunity.getDsRegionId())) {
+            buildingOpportunity.setDsRegionId(user.getRegionId());
+        }
         return  super.selectByPageNumSize(request, () -> this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity));
     }
 
@@ -52,7 +56,7 @@ public class BuildingOpportunityController extends BaseController {
     public ResponseBo exportExcel(BuildingOpportunity buildingOpportunity,QueryRequest request) {
         try {
             List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity);
-            return FileUtils.createExcelByPOIKit("商机楼宇表", list, CustomerExpiration.class);
+            return FileUtils.createExcelByPOIKit("商机楼宇表", list, BuildingOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -64,14 +68,14 @@ public class BuildingOpportunityController extends BaseController {
     public ResponseBo exportCsv(BuildingOpportunity buildingOpportunity,QueryRequest request) {
         try {
             List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity);
-            return FileUtils.createCsv("商机楼宇表", list, CustomerExpiration.class);
+            return FileUtils.createCsv("商机楼宇表", list, BuildingOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }
     }
 
-    @Log("新增客户到期提醒")
+    @Log("新增商机楼宇")
     @RequiresPermissions("buildingOpportunity:add")
     @RequestMapping("buildingOpportunity/add")
     @ResponseBody

@@ -27,8 +27,10 @@ public class CustomerExpiration {
     private String customerName;
 
     @Column(name = "REMIND_FLAG")
-    @ExportConfig(value = "是否需要提醒")
     private Short remindFlag;
+
+    @ExportConfig(value = "是否需要提醒")
+    private String remindFlagName;
 
     @Column(name = "REMIND_DATE")
     @ExportConfig(value = "提醒时间")
@@ -40,6 +42,14 @@ public class CustomerExpiration {
     @Column(name = "CREATE_DATE")
     private Date createDate;
 
+
+    public String getRemindFlagName() {
+        return remindFlagName;
+    }
+
+    public void setRemindFlagName(String remindFlagName) {
+        this.remindFlagName = remindFlagName;
+    }
 
     public String getBuildingNo() {
         return buildingNo;

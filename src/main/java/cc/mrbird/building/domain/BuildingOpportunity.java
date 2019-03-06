@@ -1,5 +1,7 @@
 package cc.mrbird.building.domain;
 
+import cc.mrbird.common.annotation.ExportConfig;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -14,37 +16,59 @@ public class BuildingOpportunity {
     @Column(name = "BUILDING_NAME")
     private String buildingName;
 
+    @ExportConfig(value = "地市")
+    private String dsRegionName;
+
+    @ExportConfig(value = "区县")
+    private String regionName;
+
     @Column(name = "BUILDING_LEVEL")
     private String buildingLevel;
+
+    @ExportConfig(value = "楼宇等级")
+    private String buildingLevelName;
 
     @Column(name = "BUILDING_TYPE")
     private String buildingType;
 
+    @ExportConfig(value = "楼宇所属区域类型")
+    private String buildingTypeDesc;
+
     @Column(name = "BUILDING_TYPE_NAME")
+    @ExportConfig(value = "楼宇所属区域名称")
     private String buildingTypeName;
 
     @Column(name = "BUILDING_ADDRESS")
+    @ExportConfig(value = "楼宇地址")
     private String buildingAddress;
+
+    private String dsRegionId;
 
     @Column(name = "REGION_ID")
     private String regionId;
 
     @Column(name = "FLOOR_NUMBER")
+    @ExportConfig(value = "楼层数")
     private Short floorNumber;
 
     @Column(name = "AREA")
+    @ExportConfig(value = "建筑面积（万m2）")
     private BigDecimal area;
 
     @Column(name = "HOUSEHOLDER_NUMBER")
+    @ExportConfig(value = "商户数（户）")
     private Short householderNumber;
 
     @Column(name = "PROPERTY_COMPANY")
+    @ExportConfig(value = "物业单位")
     private String propertyCompany;
 
     @Column(name = "PROPERTY_MANAGER")
+    @ExportConfig(value = "物业联系人")
     private String propertyManager;
 
     @Column(name = "PROPERTY_MANAGER_CONTACT")
+    @ExportConfig(value = "物业联系人电话")
     private String propertyManagerContact;
 
     @Column(name = "REMARK")
@@ -67,6 +91,46 @@ public class BuildingOpportunity {
 
     @Column(name = "MODIFY_OP")
     private String modifyOp;
+
+    public String getBuildingLevelName() {
+        return buildingLevelName;
+    }
+
+    public void setBuildingLevelName(String buildingLevelName) {
+        this.buildingLevelName = buildingLevelName;
+    }
+
+    public String getBuildingTypeDesc() {
+        return buildingTypeDesc;
+    }
+
+    public void setBuildingTypeDesc(String buildingTypeDesc) {
+        this.buildingTypeDesc = buildingTypeDesc;
+    }
+
+    public String getDsRegionName() {
+        return dsRegionName;
+    }
+
+    public void setDsRegionName(String dsRegionName) {
+        this.dsRegionName = dsRegionName;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
 
     /**
      * @return BUILDING_ID

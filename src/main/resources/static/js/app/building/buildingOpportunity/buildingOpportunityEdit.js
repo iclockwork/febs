@@ -18,6 +18,10 @@ $(function () {
                 var buildingOpportunity = r.msg;
                 $("#buildingOpportunity-add-modal-title").html('修改商机楼宇');
                 $form.find("input[name='buildingId']").val(buildingOpportunity.buildingId);
+                $form.find("select[name='ds']").val(buildingOpportunity.dsRegionId);
+                $form.find("select[name='ds']").trigger("change");
+                $form.find("select[name='qx']").val(buildingOpportunity.regionId);
+                $form.find("select[name='qx']").trigger("change");
                 $form.find("select[name='buildingLevel']").val(buildingOpportunity.buildingLevel);
                 $form.find("select[name='buildingType']").val(buildingOpportunity.buildingType);
                 $form.find("input[name='buildingTypeName']").val(buildingOpportunity.buildingTypeName);

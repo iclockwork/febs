@@ -52,7 +52,7 @@ public class CustomerOpportunityController extends BaseController {
     public ResponseBo exportExcel(CustomerOpportunity customerOpportunity,QueryRequest request) {
         try {
             List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity);
-            return FileUtils.createExcelByPOIKit("商机客户表", list, CustomerExpiration.class);
+            return FileUtils.createExcelByPOIKit("商机客户表", list, CustomerOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Excel失败，请联系网站管理员！");
@@ -64,7 +64,7 @@ public class CustomerOpportunityController extends BaseController {
     public ResponseBo exportCsv(CustomerOpportunity customerOpportunity,QueryRequest request) {
         try {
             List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity);
-            return FileUtils.createCsv("商机客户表", list, CustomerExpiration.class);
+            return FileUtils.createCsv("商机客户表", list, CustomerOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");

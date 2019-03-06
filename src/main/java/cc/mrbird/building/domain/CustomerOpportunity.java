@@ -72,7 +72,7 @@ public class CustomerOpportunity {
     private Long createStaffId;
 
     @Column(name = "CREATE_DATE")
-    @ExportConfig(value = "创建时间")
+    @ExportConfig(value = "创建时间", convert = "c:cc.mrbird.common.util.poi.convert.TimeConvert")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")

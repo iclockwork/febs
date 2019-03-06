@@ -53,17 +53,15 @@ $(function () {
             field: 'docName',
             title: '附件名称',
             formatter: function (value, row, index) {
-               return value;
+                if (value===null) {
+                    return value
+                }
+               return "<a href='#' onclick='queryDoc(\"" + row.compProductId + "\")'>" + value + "</a>";
             }
 
         },{
             field: 'createDate',
             title: '录入时间'
-        }, {
-            title: '操作',
-            formatter: function (value, row, index) {
-                return "<a href='#' onclick='queryDoc(\"" + row.compProductId + "\")'>查看附件</a>";
-            }
         }]
     };
 

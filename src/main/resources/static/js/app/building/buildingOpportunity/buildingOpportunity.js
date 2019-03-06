@@ -7,8 +7,9 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
-                buildingName: $buildingOpportunityTableForm.find("input[name='buildingName']").val().trim(),
-                buildingType: $buildingOpportunityTableForm.find("select[name='buildingType']").val()
+                dsRegionId: $("#dsId").val(),
+                regionId: $("#qxId").val(),
+                buildingName: $buildingOpportunityTableForm.find("input[name='buildingName']").val().trim()
             };
         },
         columns: [{
@@ -17,18 +18,18 @@ $(function () {
             field: 'buildingId',
             visible: false
         }, {
-            field: 'ds',
+            field: 'dsRegionName',
             title: '地市'
         }, {
-            field: 'qx',
+            field: 'regionName',
             title: '区县'
         }, {
             field: 'buildingLevel',
             title: '楼宇等级',
             formatter: function (value, row, index) {
-                if (value === 1) return 'A';
-                else if (value === 2) return 'B';
-                else if (value === 3) return 'C';
+                if (value === '1') return 'A';
+                else if (value === '2') return 'B';
+                else if (value === '3') return 'C';
                 else return '其他';
             }
         }, {
@@ -132,6 +133,63 @@ $("#delete").click(function () {
             }
         });
     });
+
+    function initDs() {
+        var _ds = $("#dsId");
+        _ds.empty();
+        $.post(ctx + "region/options", {
+            gradeId: "2000004"
+        }, function (r) {
+            if (r.code === 0) {
+                var data = r.msg;
+                var html = [];
+                html.push("<option value='' selected>---请选择---</option>");
+                for (var i = 0; i < data.length; i++) {
+                    var isSelectStr = "";
+                    if (G_REGION_ID === data[i].regionId) {
+                        isSelectStr = "selected=true";
+                        $("#dsId").attr("disabled", "disabled");
+                    }
+                    html.push("<option value='" + data[i].regionId + "' " + isSelectStr + ">" + data[i].regionName + "</option>");
+                }
+                _ds.append(html.join(''));
+
+                _ds.change(function () {
+                    initQx();
+                });
+
+                initQx();
+            } else {
+                $MB.n_danger(r.msg);
+            }
+        });
+    }
+
+    function initQx() {
+        var _ds = $("#dsId");
+        var _qx = $("#qxId");
+        _qx.empty();
+        if (null !== _ds.val() && "" !== _ds.val()) {
+            $.post(ctx + "region/options", {
+                gradeId: "2000011",
+                superRegionId: $("#dsId").val()
+            }, function (r) {
+                if (r.code === 0) {
+                    var data = r.msg;
+                    var html = [];
+                    html.push("<option value='' selected>---请选择---</option>");
+                    for (var i = 0; i < data.length; i++) {
+                        html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
+                    }
+                    _qx.append(html.join(''));
+                } else {
+                    $MB.n_danger(r.msg);
+                }
+            });
+        }
+    }
+
+    initDs();
 });
 
 function refresh() {

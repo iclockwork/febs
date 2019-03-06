@@ -3,7 +3,8 @@
 <mapper namespace="cc.mrbird.building.dao.CompProductMapper">
     <sql id="selectColumn">
         a.building_no as buildingNo,a.building_name as buildingName,b.doc_id as docId, b.doc_name as docName,t.COMP_PRODUCT_ID as
-        compProductId,t.BUILDING_ID as buildingId,t.OPERATOR as operator, t.BUSINESS_TYPE as businessType,
+        compProductId,t.BUILDING_ID as buildingId,t.OPERATOR as operator, decode(t.OPERATOR, 0, '其它', 1, '电信', 2, '移动', 3, '华数') as operatorName,
+         t.BUSINESS_TYPE as businessType,decode(t.BUSINESS_TYPE, 0, '其它', 1, '移动业务', 2, '固网业务', 3, '融合业务',4,'创新业务') as businessTypeName,
         t.INTRODUCTION as introduction, t.DELETE_FLAG as deleteFlag, t.CREATE_STAFF_ID as createStaffId,
         t.CREATE_DATE as createDate, t.MODIFY_STAFF_ID as modifyStaffId, t.MODIFY_DATE as modifyDate, t.MODIFY_OP as modifyOp
 

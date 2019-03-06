@@ -28,9 +28,11 @@
   </resultMap>
 
     <sql id="selectColumn">
-        t.BUILDING_ID as buildingId,t.BUILDING_NAME as buildingName, t.BUILDING_LEVEL as buildingLevel,
-        t.BUILDING_TYPE as buildingType, t.BUILDING_TYPE_NAME as buildingTypeName, t.BUILDING_ADDRESS as buildingAddress,
-        t.REGION_ID as regionId,t.FLOOR_NUMBER as floorNumber, t.AREA as area,
+        t.BUILDING_ID as buildingId,t.BUILDING_NAME as buildingName,ds.REGION_ID as dsRegionId,
+        ds.REGION_NAME as dsRegionName,t.REGION_ID as regionId, r.REGION_NAME as regionName,t.AREA as area,
+        t.BUILDING_TYPE_NAME as buildingTypeName, t.BUILDING_ADDRESS as buildingAddress,t.FLOOR_NUMBER as floorNumber,
+        t.BUILDING_TYPE as buildingType,decode(t.BUILDING_TYPE,'QT','其它','SQLY', '商务楼宇','SQYQ','园区','SQSC', '专业市场','SQSS','厂企宿舍','SQWB','网吧','SQJD','宾馆酒店','SQQT','商企其他') as buildingTypeDesc,
+        t.BUILDING_LEVEL as buildingLevel,decode(t.BUILDING_LEVEL, 0, '其它', 1, 'A', 2, 'B', 3, 'C') as buildingLevelName,
         t.HOUSEHOLDER_NUMBER as householderNumber, t.PROPERTY_COMPANY as propertyCompany, t.PROPERTY_MANAGER as propertyManager,
         t.PROPERTY_MANAGER_CONTACT as propertyManagerContact,t.REMARK as remark, t.CREATE_STAFF_ID as createStaffId,
         t.CREATE_DATE as createDate, t.MODIFY_STAFF_ID as modifyStaffId, t.MODIFY_DATE as modifyDate
@@ -39,13 +41,24 @@
     <select id="queryBuildingOpportunity" resultType="cc.mrbird.building.domain.BuildingOpportunity">
         select
         <include refid="selectColumn"/>
-        from BD_BUILDING_OPPORTUNITY t
+        from BD_BUILDING_OPPORTUNITY t,
+        SPC_REGION r,
+        SPC_REGION ds
         where t.delete_flag = 0
+        and t.region_id = r.region_id
+        and r.super_region_id = ds.region_id
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND t.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND t.region_id = #{regionId}
+        </if>
         <if test="buildingName != null and buildingName != ''">
             AND t.BUILDING_NAME like '%'||#{buildingName}||'%'
-        </if>
-        <if test="buildingType != null and buildingType != ''">
-            AND t.BUILDING_TYPE = {#buildingType}
         </if>
         order by t.BUILDING_ID desc
 
@@ -67,10 +80,14 @@
     <select id="findById" resultType="cc.mrbird.building.domain.BuildingOpportunity">
         select
         <include refid="selectColumn"/>
-        from BD_BUILDING_OPPORTUNITY t
+        from BD_BUILDING_OPPORTUNITY t,
+        SPC_REGION r,
+        SPC_REGION ds
         where t.delete_flag = 0
+        and t.region_id = r.region_id
+        and r.super_region_id = ds.region_id
         and t.BUILDING_ID = #{buildingId}
-        order by t.BUILDING_ID
+        order by t.BUILDING_ID desc
 
     </select>
 
