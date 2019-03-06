@@ -6,9 +6,14 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
-                dsRegionId: $("#ds").val(),
-                regionId: $("#qx").val(),
-                buildingName: $(".building-table-form").find("input[name='buildingName']").val().trim()
+                dsRegionId: $(".building-table-form").find("select[name='dsRegionId']").val(),
+                regionId: $(".building-table-form").find("select[name='regionId']").val(),
+                buildingNo: $(".building-table-form").find("input[name='buildingNo']").val().trim(),
+                buildingName: $(".building-table-form").find("input[name='buildingName']").val().trim(),
+                buildingType: $("#buildingType").val(),
+                buildingTypeName: $(".building-table-form").find("input[name='buildingTypeName']").val().trim(),
+                buildingAddress: $(".building-table-form").find("input[name='buildingAddress']").val().trim(),
+                state: $(".building-table-form").find("select[name='state']").val()
             };
         },
         columns: [{

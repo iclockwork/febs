@@ -52,7 +52,6 @@
 
     <select id="findAll" resultType="cc.mrbird.building.domain.Building"
             parameterType="cc.mrbird.building.domain.Building">
-        <bind name="bindBuildingName" value="'%' + buildingName + '%'"/>
         select t.building_id as buildingId,
         ds.region_id as dsRegionId,
         ds.region_name as dsRegionName,
@@ -64,18 +63,20 @@
         decode(t.building_level, 0, '其它', 1, 'A', 2, 'B', 3, 'C') as buildingLevelName,
         t.building_type as buildingType,
         decode(t.building_type,
-        'QT',
-        '其它',
-        'XZ',
-        '写字楼',
-        'SC',
+        'SQQT',
+        '商企其他',
+        'SQLY',
+        '商务楼宇',
+        'SQYQ',
+        '园区',
+        'SQSC',
         '专业市场',
-        'GX',
-        '高校校园',
-        'YQ',
-        '工业园区',
-        'JD',
-        '酒店') as buildingTypeDesc,
+        'SQSS',
+        '厂企宿舍',
+        'SQWB',
+        '网吧',
+        'SQJD',
+        '宾馆酒店') as buildingTypeDesc,
         t.building_type_name as buildingTypeName,
         t.building_address as buildingAddress,
         t.longitude as longitude,
@@ -162,8 +163,27 @@
         <if test="regionId != null and regionId != ''">
             AND t.region_id = #{regionId}
         </if>
+        <if test="buildingNo != null and buildingNo != ''">
+            <bind name="bindBuildingNo" value="'%' + buildingNo + '%'"/>
+            AND t.building_no like #{bindBuildingNo}
+        </if>
         <if test="buildingName != null and buildingName != ''">
+            <bind name="bindBuildingName" value="'%' + buildingName + '%'"/>
             AND t.building_name like #{bindBuildingName}
+        </if>
+        <if test="buildingType != null and buildingType != ''">
+            AND t.building_type = #{buildingType}
+        </if>
+        <if test="buildingTypeName != null and buildingTypeName != ''">
+            <bind name="bindBuildingTypeName" value="'%' + buildingTypeName + '%'"/>
+            AND t.building_type_name like #{bindBuildingTypeName}
+        </if>
+        <if test="buildingAddress != null and buildingAddress != ''">
+            <bind name="bindBuildingAddress" value="'%' + buildingAddress + '%'"/>
+            AND t.building_address like #{bindBuildingAddress}
+        </if>
+        <if test="state != null">
+            AND t.state = #{state}
         </if>
         order by t.building_id desc
     </select>
@@ -181,18 +201,20 @@
         decode(t.building_level, 0, '其它', 1, 'A', 2, 'B', 3, 'C') as buildingLevelName,
         t.building_type as buildingType,
         decode(t.building_type,
-        'QT',
-        '其它',
-        'XZ',
-        '写字楼',
-        'SC',
+        'SQQT',
+        '商企其他',
+        'SQLY',
+        '商务楼宇',
+        'SQYQ',
+        '园区',
+        'SQSC',
         '专业市场',
-        'GX',
-        '高校校园',
-        'YQ',
-        '工业园区',
-        'JD',
-        '酒店') as buildingTypeDesc,
+        'SQSS',
+        '厂企宿舍',
+        'SQWB',
+        '网吧',
+        'SQJD',
+        '宾馆酒店') as buildingTypeDesc,
         t.building_type_name as buildingTypeName,
         t.building_address as buildingAddress,
         t.longitude as longitude,

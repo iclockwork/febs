@@ -29,7 +29,7 @@
 					               	地市：
 					            </span>
                                     <div class="form-group">
-                                        <select id="ds" class="form-control">
+                                        <select id="ds" name="dsRegionId" class="form-control">
                                         </select>
                                         <i class="form-group__bar"></i>
                                     </div>
@@ -41,8 +41,19 @@
 					               	区县：
 					            </span>
                                     <div class="form-group">
-                                        <select id="qx" class="form-control">
+                                        <select id="qx" name="regionId" class="form-control">
                                         </select>
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	楼宇编码：
+					            </span>
+                                    <div class="form-group">
+                                        <input type="text" name="buildingNo" class="form-control">
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
@@ -54,6 +65,65 @@
 					            </span>
                                     <div class="form-group">
                                         <input type="text" name="buildingName" class="form-control">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	区域类型：
+					            </span>
+                                    <div class="form-group">
+                                        <select id="buildingType" name="buildingType" class="form-control">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="SQLY">商务楼宇</option>
+                                            <option value="SQYQ">园区</option>
+                                            <option value="SQSC">专业市场</option>
+                                            <option value="SQSS">厂企宿舍</option>
+                                            <option value="SQWB">网吧</option>
+                                            <option value="SQJD">宾馆酒店</option>
+                                            <option value="SQQT">商企其他</option>
+                                        </select>
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	区域名称：
+					            </span>
+                                    <div class="form-group">
+                                        <input type="text" name="buildingTypeName" class="form-control">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	楼宇地址：
+					            </span>
+                                    <div class="form-group">
+                                        <input type="text" name="buildingAddress" class="form-control">
+                                        <i class="form-group__bar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+					               	楼宇状态：
+					            </span>
+                                    <div class="form-group">
+                                        <select id="state" name="state" class="form-control">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="1">已覆盖</option>
+                                            <option value="0">待覆盖</option>
+                                        </select>
                                         <i class="form-group__bar"></i>
                                     </div>
                                 </div>
