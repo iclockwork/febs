@@ -75,13 +75,43 @@ public class BuildingController extends BaseController {
 
     @RequestMapping("building/getBuilding")
     @ResponseBody
-    public ResponseBo getBuildingOpportunity(Integer buildingId) {
+    public ResponseBo get(Long buildingId) {
         try {
             Building building = this.buildingService.findById(buildingId);
             return ResponseBo.ok(building);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("获取楼宇信息失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("新增楼宇")
+    @RequiresPermissions("building:add")
+    @RequestMapping("building/add")
+    @ResponseBody
+    public ResponseBo add(Building building) {
+        try {
+            building.setCreateStaffId(super.getCurrentUser().getStaffId());
+            this.buildingService.add(building);
+            return ResponseBo.ok("新增楼宇成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("新增楼宇失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("修改楼宇")
+    @RequiresPermissions("building:update")
+    @RequestMapping("building/update")
+    @ResponseBody
+    public ResponseBo update(Building building) {
+        try {
+            building.setModifyStaffId(super.getCurrentUser().getStaffId());
+            this.buildingService.update(building);
+            return ResponseBo.ok("修改楼宇成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("修改楼宇失败，请联系网站管理员！");
         }
     }
 }

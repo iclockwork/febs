@@ -17,6 +17,8 @@ $(function () {
             };
         },
         columns: [{
+            checkbox: true
+        }, {
             field: 'dsRegionName',
             title: '地市'
         }, {
@@ -67,6 +69,9 @@ $(function () {
         }, {
             field: 'buildingManager',
             title: '楼长'
+        }, {
+            field: 'buildingManagerContact',
+            title: '楼长电话'
         }, {
             field: 'stateName',
             title: '楼宇状态'
@@ -216,6 +221,55 @@ $(function () {
         }
     }
 
+    function openUpdate() {
+        var selected = $("#buildingTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要修改的楼宇！');
+            return;
+        }
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能修改一个楼宇！');
+            return;
+        }
+        var buildingId = selected[0].buildingId;
+        $("#modal-building-edit-form").find("input[name='buildingId']").val(buildingId)
+        $("#buildingModalMode").val("update");
+        $("#modal-building-edit-title").html('修改楼宇');
+        $('#modal-building-edit').modal('show');
+    }
+
+    function del() {
+        var selected = $("#buildingTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        var contain = false;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要删除的楼宇！');
+            return;
+        }
+        var ids = "";
+        for (var i = 0; i < selected_length; i++) {
+            ids += selected[i].buildingId;
+            if (i !== (selected_length - 1)) ids += ",";
+        }
+
+        console.log(ids);
+
+        $MB.confirm({
+            text: "确定删除选中楼宇？",
+            confirmButtonText: "确定删除"
+        }, function () {
+            $.post(ctx + 'building/delete', {"ids": ids}, function (r) {
+                if (r.code === 0) {
+                    $MB.n_success(r.msg);
+                    refresh();
+                } else {
+                    $MB.n_danger(r.msg);
+                }
+            });
+        });
+    }
+
     $MB.initTable('buildingTable', settings);
 
     $(".zmdi-search").click(function () {
@@ -232,6 +286,20 @@ $(function () {
 
     $("#exportCsv").click(function () {
         exportFile("csv")
+    });
+
+    $(".building-add").click(function () {
+        $("#buildingModalMode").val("add");
+        $("#modal-building-edit-title").html('新增楼宇');
+        $('#modal-building-edit').modal('show');
+    });
+
+    $(".building-update").click(function () {
+        openUpdate();
+    });
+
+    $(".building-delete").click(function () {
+        del();
     });
 
     initDs();

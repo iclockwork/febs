@@ -5,24 +5,33 @@ import cc.mrbird.common.annotation.ExportConfig;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "BD_BUILDING")
 public class Building implements Serializable {
+    /**
+     * 序列
+     */
+    public static final String SEQ = "SEQ_BD_BUILDING";
+
     @Id
     @Column(name = "BUILDING_ID")
-    private Integer buildingId;
+    private Long buildingId;
 
+    @Transient
     private String dsRegionId;
 
+    @Transient
     @ExportConfig(value = "地市")
     private String dsRegionName;
 
     @Column(name = "REGION_ID")
     private String regionId;
 
+    @Transient
     @ExportConfig(value = "区县")
     private String regionName;
 
@@ -37,12 +46,14 @@ public class Building implements Serializable {
     @Column(name = "BUILDING_LEVEL")
     private String buildingLevel;
 
+    @Transient
     @ExportConfig(value = "楼宇等级")
     private String buildingLevelName;
 
     @Column(name = "BUILDING_TYPE")
     private String buildingType;
 
+    @Transient
     @ExportConfig(value = "楼宇所属区域类型")
     private String buildingTypeDesc;
 
@@ -87,14 +98,20 @@ public class Building implements Serializable {
     private String propertyManagerContact;
 
     @Column(name = "BUILDING_MANAGER_ID")
-    private Integer buildingManagerId;
+    private Long buildingManagerId;
 
+    @Transient
     @ExportConfig(value = "楼长")
     private String buildingManager;
+
+    @Transient
+    @ExportConfig(value = "楼长电话")
+    private String buildingManagerContact;
 
     @Column(name = "STATE")
     private Integer state;
 
+    @Transient
     @ExportConfig(value = "楼宇状态")
     private String stateName;
 
@@ -105,18 +122,21 @@ public class Building implements Serializable {
     @Column(name = "SEGM_ID")
     private String segmId;
 
+    @Transient
     @ExportConfig(value = "标准地址")
     private String standName;
 
     @Column(name = "ACCESS_AREA_ID")
     private String accessAreaId;
 
+    @Transient
     @ExportConfig(value = "综合业务接入区")
     private String accessAreaName;
 
     @Column(name = "ROOM_ID")
     private String roomId;
 
+    @Transient
     @ExportConfig(value = "综合业务接入机房")
     private String roomName;
 
@@ -139,12 +159,14 @@ public class Building implements Serializable {
     @Column(name = "ROOM_CABINET_FLAG")
     private Integer roomCabinetFlag;
 
+    @Transient
     @ExportConfig(value = "是否有机房/机柜")
     private String roomCabinetFlagName;
 
     @Column(name = "CABLE_ACCESS_FLAG")
     private Integer cableAccessFlag;
 
+    @Transient
     @ExportConfig(value = "光缆资源是否接入")
     private String cableAccessFlagName;
 
@@ -159,42 +181,49 @@ public class Building implements Serializable {
     @Column(name = "VERTICAL_COVERAGE_FLAG")
     private Integer verticalCoverageFlag;
 
+    @Transient
     @ExportConfig(value = "是否具备垂直覆盖")
     private String verticalCoverageFlagName;
 
     @Column(name = "HORIZONTAL_COVERAGE_FLAG")
     private Integer horizontalCoverageFlag;
 
+    @Transient
     @ExportConfig(value = "是否具备水平覆盖")
     private String horizontalCoverageFlagName;
 
     @Column(name = "COVERAGE_METHOD")
     private Integer coverageMethod;
 
+    @Transient
     @ExportConfig(value = "楼宇覆盖方式")
     private String coverageMethodName;
 
     @Column(name = "COOPERATION_METHOD")
     private Integer cooperationMethod;
 
+    @Transient
     @ExportConfig(value = "合作方式")
     private String cooperationMethodName;
 
     @Column(name = "INDOOR_DISTRIBUTION_FLAG")
     private Integer indoorDistributionFlag;
 
+    @Transient
     @ExportConfig(value = "是否具备室分")
     private String indoorDistributionFlagName;
 
     @Column(name = "COVERAGE_NETWORK_STANDARD")
     private Integer coverageNetworkStandard;
 
+    @Transient
     @ExportConfig(value = "已覆盖网络制式")
     private String coverageNetworkStandardName;
 
     @Column(name = "WLAN_FLAG")
     private Integer wlanFlag;
 
+    @Transient
     @ExportConfig(value = "WLAN是否已覆盖")
     private String wlanFlagName;
 
@@ -202,8 +231,9 @@ public class Building implements Serializable {
     private Integer deleteFlag;
 
     @Column(name = "CREATE_STAFF_ID")
-    private Integer createStaffId;
+    private Long createStaffId;
 
+    @Transient
     @ExportConfig(value = "录入人")
     private String createStaffName;
 
@@ -212,7 +242,7 @@ public class Building implements Serializable {
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")
-    private Integer modifyStaffId;
+    private Long modifyStaffId;
 
     @Column(name = "MODIFY_DATE")
     private Date modifyDate;
@@ -223,14 +253,14 @@ public class Building implements Serializable {
     /**
      * @return BUILDING_ID
      */
-    public Integer getBuildingId() {
+    public Long getBuildingId() {
         return buildingId;
     }
 
     /**
      * @param buildingId
      */
-    public void setBuildingId(Integer buildingId) {
+    public void setBuildingId(Long buildingId) {
         this.buildingId = buildingId;
     }
 
@@ -447,14 +477,14 @@ public class Building implements Serializable {
     /**
      * @return BUILDING_MANAGER_ID
      */
-    public Integer getBuildingManagerId() {
+    public Long getBuildingManagerId() {
         return buildingManagerId;
     }
 
     /**
      * @param buildingManagerId
      */
-    public void setBuildingManagerId(Integer buildingManagerId) {
+    public void setBuildingManagerId(Long buildingManagerId) {
         this.buildingManagerId = buildingManagerId;
     }
 
@@ -755,14 +785,14 @@ public class Building implements Serializable {
     /**
      * @return CREATE_STAFF_ID
      */
-    public Integer getCreateStaffId() {
+    public Long getCreateStaffId() {
         return createStaffId;
     }
 
     /**
      * @param createStaffId
      */
-    public void setCreateStaffId(Integer createStaffId) {
+    public void setCreateStaffId(Long createStaffId) {
         this.createStaffId = createStaffId;
     }
 
@@ -783,14 +813,14 @@ public class Building implements Serializable {
     /**
      * @return MODIFY_STAFF_ID
      */
-    public Integer getModifyStaffId() {
+    public Long getModifyStaffId() {
         return modifyStaffId;
     }
 
     /**
      * @param modifyStaffId
      */
-    public void setModifyStaffId(Integer modifyStaffId) {
+    public void setModifyStaffId(Long modifyStaffId) {
         this.modifyStaffId = modifyStaffId;
     }
 
@@ -980,5 +1010,13 @@ public class Building implements Serializable {
 
     public void setCreateStaffName(String createStaffName) {
         this.createStaffName = createStaffName;
+    }
+
+    public String getBuildingManagerContact() {
+        return buildingManagerContact;
+    }
+
+    public void setBuildingManagerContact(String buildingManagerContact) {
+        this.buildingManagerContact = buildingManagerContact;
     }
 }

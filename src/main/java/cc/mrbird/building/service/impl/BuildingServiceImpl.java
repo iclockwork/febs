@@ -4,12 +4,15 @@ import cc.mrbird.building.dao.BuildingMapper;
 import cc.mrbird.building.domain.Building;
 import cc.mrbird.building.service.BuildingService;
 import cc.mrbird.common.service.impl.BaseService;
+import cc.mrbird.common.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,7 +41,30 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
     }
 
     @Override
-    public Building findById(Integer buildingId) {
+    public Building findById(Long buildingId) {
         return buildingMapper.findById(buildingId);
+    }
+
+    @Override
+    @Transactional
+    public void add(Building building) {
+        building.setBuildingId(this.getSequence(Building.SEQ));
+        building.setDeleteFlag(Integer.valueOf(Constant.DELETE_FLAG_NO));
+        building.setCreateDate(new Date());
+        this.save(building);
+    }
+
+    @Override
+    @Transactional
+    public void update(Building building) {
+        building.setModifyDate(new Date());
+        this.updateNotNull(building);
+    }
+
+    @Override
+    @Transactional
+    public void delete(String buildingIds) {
+        List<String> list = Arrays.asList(buildingIds.split(","));
+        //TODO 修改
     }
 }

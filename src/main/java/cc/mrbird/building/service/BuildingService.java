@@ -16,5 +16,11 @@ import java.util.List;
 public interface BuildingService extends IService<Building> {
     List<Building> findAll(Building building);
 
-    Building findById(Integer buildingId);
+    Building findById(Long buildingId);
+
+    void add(Building building);
+
+    void update(Building building);
+
+    void delete(String buildingIds);
 }

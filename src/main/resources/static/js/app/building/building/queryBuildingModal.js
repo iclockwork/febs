@@ -66,6 +66,9 @@ $(function () {
             field: 'buildingManager',
             title: '楼长'
         }, {
+            field: 'buildingManagerContact',
+            title: '楼长电话'
+        }, {
             field: 'stateName',
             title: '楼宇状态'
         }, {
