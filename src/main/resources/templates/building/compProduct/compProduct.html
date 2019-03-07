@@ -1,7 +1,7 @@
+<div data-th-include="building/compProduct/compProductDoc"></div>
+<div data-th-include="building/compProduct/compProductAdd"></div>
+<div data-th-include="building/building/queryBuildingModal"></div>
 <div class="card" xmlns:shiro="http://www.w3.org/1999/xhtml">
-    <div data-th-include="building/compProduct/compProductDoc"></div>
-    <div data-th-include="building/compProduct/compProductAdd"></div>
-    <div data-th-include="building/building/queryBuildingModal"></div>
     <div class="card-block">
         <div class="table-responsive">
             <div id="data-table_wrapper" class="dataTables_wrapper">
@@ -20,7 +20,7 @@
                     <div class="dropdown actions__item" shiro:hasAnyPermissions="compProduct:add,compProduct:delete,compProduct:update">
                         <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item" data-toggle="modal" data-target="#compProduct-add" shiro:hasPermission="compProduct:add">新增竞争产品</a>
+                            <a href="javascript:void(0)" class="dropdown-item" id="add" data-toggle="modal" data-target="#compProduct-add" shiro:hasPermission="compProduct:add">新增竞争产品</a>
                             <a href="javascript:void(0)" class="dropdown-item" id="update" shiro:hasPermission="compProduct:update">修改竞争产品</a>
                             <a href="javascript:void(0)" class="dropdown-item" id="delete" shiro:hasPermission="compProduct:delete">删除竞争产品</a>
                         </div>

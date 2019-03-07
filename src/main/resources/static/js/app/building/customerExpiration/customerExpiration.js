@@ -101,9 +101,8 @@ $(function () {
             }
         });
     });
+    function refresh() {
+        $(".customerExpiration-table-form")[0].reset();
+        $MB.refreshTable('customerExpirationTable');
+    }
 });
-
-function refresh() {
-    $(".customerExpiration-table-form")[0].reset();
-    $MB.refreshTable('customerExpirationTable');
-}

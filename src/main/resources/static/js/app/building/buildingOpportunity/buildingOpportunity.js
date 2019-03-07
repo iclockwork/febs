@@ -190,9 +190,9 @@ $("#delete").click(function () {
     }
 
     initDs();
-});
 
-function refresh() {
-    $(".buildingOpportunity-table-form")[0].reset();
-    $MB.refreshTable('buildingOpportunityTable');
-}
+    function refresh() {
+        $(".buildingOpportunity-table-form")[0].reset();
+        $MB.refreshTable('buildingOpportunityTable');
+    }
+});

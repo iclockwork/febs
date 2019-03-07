@@ -117,9 +117,10 @@ $("#delete").click(function () {
             }
         });
     });
+
+    function refresh() {
+        $(".customerOpportunity-table-form")[0].reset();
+        $MB.refreshTable('customerOpportunityTable');
+    }
 });
 
-function refresh() {
-    $(".customerOpportunity-table-form")[0].reset();
-    $MB.refreshTable('customerOpportunityTable');
-}

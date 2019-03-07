@@ -1,11 +1,12 @@
 $(function () {
     var settings = {
         url: ctx + "building/list",
-        pageSize: 10,
+        pageSize: 5,
         queryParams: function (params) {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
+                buildingNo: $(".building-table-form").find("input[name='buildingNo']").val().trim(),
                 buildingName: $(".building-table-form").find("input[name='buildingName']").val().trim()
             };
         },
@@ -195,63 +196,5 @@ $(function () {
             $('body').addClass('modal-open')
         },1000);
         $MB.closeAndRestModal("queryBuilding-modal");
-    }
-
-    initDs();
-
-
-    function initDs() {
-        var _ds = $("#ds");
-        _ds.empty();
-        $.post(ctx + "region/options", {
-            gradeId: "2000004"
-        }, function (r) {
-            if (r.code === 0) {
-                var data = r.msg;
-                var html = [];
-                html.push("<option value='' selected>---请选择---</option>");
-                for (var i = 0; i < data.length; i++) {
-                    var isSelectStr = "";
-                    if (G_REGION_ID === data[i].regionId) {
-                        isSelectStr = "selected=true";
-                        $("#ds").attr("disabled", "disabled");
-                    }
-                    html.push("<option value='" + data[i].regionId + "' " + isSelectStr + ">" + data[i].regionName + "</option>");
-                }
-                _ds.append(html.join(''));
-
-                _ds.change(function () {
-                    initQx();
-                });
-
-                initQx();
-            } else {
-                $MB.n_danger(r.msg);
-            }
-        });
-    }
-
-    function initQx() {
-        var _ds = $("#ds");
-        var _qx = $("#qx");
-        _qx.empty();
-        if (null !== _ds.val() && "" !== _ds.val()) {
-            $.post(ctx + "region/options", {
-                gradeId: "2000011",
-                superRegionId: $("#ds").val()
-            }, function (r) {
-                if (r.code === 0) {
-                    var data = r.msg;
-                    var html = [];
-                    html.push("<option value='' selected>---请选择---</option>");
-                    for (var i = 0; i < data.length; i++) {
-                        html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
-                    }
-                    _qx.append(html.join(''));
-                } else {
-                    $MB.n_danger(r.msg);
-                }
-            });
-        }
     }
 });

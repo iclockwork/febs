@@ -35,13 +35,15 @@ $(function () {
     $("#queryButton").click(function () {
         $("#modelId").val("#customerOpportunity-add");
     })
+
+    function closeModal() {
+        $("#save-button").attr("name", "save");
+        $("#customerOpportunity-add-modal-title").html('新增竞争产品');
+        $MB.closeAndRestModal("customerOpportunity-add");
+    }
+
 });
 
-function closeModal() {
-    $("#save-button").attr("name", "save");
-    $("#customerOpportunity-add-modal-title").html('新增竞争产品');
-    $MB.closeAndRestModal("customerOpportunity-add");
-}
 
 
 

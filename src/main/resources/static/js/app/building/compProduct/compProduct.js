@@ -124,12 +124,17 @@ $("#delete").click(function () {
             }
         });
     });
-});
 
-function refresh() {
-    $(".compProduct-table-form")[0].reset();
-    $MB.refreshTable('compProductTable');
-}
+    function refresh() {
+        $(".compProduct-table-form")[0].reset();
+        $MB.refreshTable('compProductTable');
+    }
+
+    $("#compProduct-doc .btn-close").click(function () {
+            $MB.closeAndRestModal("compProduct-doc");
+        });
+
+});
 
 function queryDoc(compProductId) {
     $.post(ctx + "compProduct/queryDoc", {"compProductId": compProductId}, function (r) {

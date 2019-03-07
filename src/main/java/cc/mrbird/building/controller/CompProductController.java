@@ -211,6 +211,9 @@ public class CompProductController extends BaseController {
     public ResponseBo downloadDoc(@PathParam("docId") Long docId, HttpServletResponse response,HttpServletRequest request) {
         try {
             CompProduct compProduct = this.compProductService.queryDocById(docId);
+            if (null==compProduct){
+                return null;
+            }
             byte[] fileContent = compProduct.getFileContent();
             OutputStream outputStream = response.getOutputStream();
             InputStream in = new ByteArrayInputStream(fileContent);
