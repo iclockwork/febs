@@ -183,7 +183,13 @@ $(function () {
                     for (var i = 0; i < data.length; i++) {
                         html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
                     }
+
                     _qx.append(html.join(''));
+
+                    if ($("#buildingModalMode").val() === "update") {
+                        var initRegionId = $editForm.find("select[name='regionId']").attr("initRegionId");
+                        _qx.val(initRegionId);
+                    }
                 } else {
                     $MB.n_danger(r.msg);
                 }
@@ -225,13 +231,31 @@ $(function () {
             $editForm.find("input[name='buildingManagerContact']").val(G_MOBILE);
         } else if (buildingModalMode === "update") {
             var buildingId = $editForm.find("input[name='buildingId']").val();
-            $.post(ctx + "building/getBuilding", {"buildingId": buildingId}, function (r) {
+            $.post(ctx + "building/getBuilding", {buildingId: buildingId}, function (r) {
                 if (r.code === 0) {
                     var building = r.msg;
                     $editForm.find("select[name='dsRegionId']").val(building.dsRegionId);
-                    $editForm.find("select[name='regionId']").val(building.regionId);
+                    $editForm.find("select[name='dsRegionId']").trigger("change");
+                    $editForm.find("select[name='regionId']").attr("initRegionId", building.regionId);
                     $editForm.find("select[name='buildingLevel']").val(building.buildingLevel);
+                    $editForm.find("select[name='buildingType']").val(building.buildingType);
+                    $editForm.find("input[name='buildingTypeName']").val(building.buildingTypeName);
+                    $editForm.find("input[name='buildingAddress']").val(building.buildingAddress);
                     $editForm.find("input[name='buildingNo']").val(building.buildingNo);
+                    $editForm.find("input[name='buildingName']").val(building.buildingName);
+                    $editForm.find("input[name='longitude']").val(building.longitude);
+                    $editForm.find("input[name='latitude']").val(building.latitude);
+                    $editForm.find("input[name='floorNumber']").val(building.floorNumber);
+                    $editForm.find("input[name='area']").val(building.area);
+                    $editForm.find("input[name='householderNumber']").val(building.householderNumber);
+                    $editForm.find("input[name='propertyCompany']").val(building.propertyCompany);
+                    $editForm.find("input[name='propertyManager']").val(building.propertyManager);
+                    $editForm.find("input[name='propertyManagerContact']").val(building.propertyManagerContact);
+                    $editForm.find("input[name='buildingManagerId']").val(building.buildingManagerId);
+                    $editForm.find("input[name='buildingManager']").val(building.buildingManager);
+                    $editForm.find("input[name='buildingManagerContact']").val(building.buildingManagerContact);
+                    $editForm.find("select[name='state']").val(building.state);
+                    $editForm.find("input[name='remark']").val(building.remark);
                 } else {
                     $MB.n_danger(r.msg);
                 }
@@ -244,14 +268,12 @@ $(function () {
     });
 
     //打开事件
-    $('#modal-building-edit').on('shown.bs.modal', function (event) {
-        console.log("shown");
+    $('#modal-building-edit').on('show.bs.modal', function (event) {
         init();
     });
 
     //隐藏事件
-    $('#modal-building-edit').on('hide.bs.modal', function (event) {
-        console.log("hide");
+    $('#modal-building-edit').on('hidden.bs.modal', function (event) {
         //重置
         validator.resetForm();
         $editForm[0].reset();

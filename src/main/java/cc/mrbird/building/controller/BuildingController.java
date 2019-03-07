@@ -72,7 +72,6 @@ public class BuildingController extends BaseController {
         }
     }
 
-
     @RequestMapping("building/getBuilding")
     @ResponseBody
     public ResponseBo get(Long buildingId) {
@@ -112,6 +111,21 @@ public class BuildingController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("修改楼宇失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("删除楼宇")
+    @RequiresPermissions("building:delete")
+    @RequestMapping("building/delete")
+    @ResponseBody
+    public ResponseBo delete(String buildingIds) {
+        try {
+            Long staffId = super.getCurrentUser().getStaffId();
+            this.buildingService.delete(buildingIds, staffId);
+            return ResponseBo.ok("删除楼宇成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("删除楼宇失败，请联系网站管理员！");
         }
     }
 }

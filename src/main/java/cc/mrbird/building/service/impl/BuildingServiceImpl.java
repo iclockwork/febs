@@ -63,8 +63,14 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
 
     @Override
     @Transactional
-    public void delete(String buildingIds) {
+    public void delete(String buildingIds, Long staffId) {
         List<String> list = Arrays.asList(buildingIds.split(","));
-        //TODO 修改
+        list.forEach(buildingId -> {
+            Building building = findById(Long.valueOf(buildingId));
+            building.setDeleteFlag(Integer.valueOf(Constant.DELETE_FLAG_YES));
+            building.setModifyStaffId(staffId);
+            building.setModifyDate(new Date());
+            this.updateNotNull(building);
+        });
     }
 }

@@ -247,19 +247,17 @@ $(function () {
             $MB.n_warning('请勾选需要删除的楼宇！');
             return;
         }
-        var ids = "";
+        var buildingIds = "";
         for (var i = 0; i < selected_length; i++) {
-            ids += selected[i].buildingId;
-            if (i !== (selected_length - 1)) ids += ",";
+            buildingIds += selected[i].buildingId;
+            if (i !== (selected_length - 1)) buildingIds += ",";
         }
-
-        console.log(ids);
 
         $MB.confirm({
             text: "确定删除选中楼宇？",
             confirmButtonText: "确定删除"
         }, function () {
-            $.post(ctx + 'building/delete', {"ids": ids}, function (r) {
+            $.post(ctx + 'building/delete', {buildingIds: buildingIds}, function (r) {
                 if (r.code === 0) {
                     $MB.n_success(r.msg);
                     refresh();
