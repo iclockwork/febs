@@ -172,12 +172,12 @@ $(function () {
         var buildingId = selected[0].buildingId;
         $.post(ctx + "building/getBuilding", {"buildingId": buildingId}, function (r) {
             if (r.code === 0) {
-                var isModel = $("#modelId").val();
-                var $form = $(isModel);
+                var isModal = $("#modalId").val();
+                var $modal = $(isModal);
                 var building = r.msg;
-                $form.find("input[name='buildingNo']").val(building.buildingNo);
-                $form.find("input[name='buildingName']").val(building.buildingName);
-                $form.find("input[name='buildingId']").val(building.buildingId);
+                $modal.find("input[name='buildingNo']").val(building.buildingNo);
+                $modal.find("input[name='buildingName']").val(building.buildingName);
+                $modal.find("input[name='buildingId']").val(building.buildingId);
                 closeModal();
             } else {
                 $MB.n_danger(r.msg);
@@ -193,8 +193,8 @@ $(function () {
         $("#queryBuilding-modal-title").html('楼宇查询');
         refresh();
         setTimeout(function(){
-            $('body').addClass('modal-open')
-        },1000);
+            $('body').addClass('modal-open');
+        },500);
         $MB.closeAndRestModal("queryBuilding-modal");
     }
 });

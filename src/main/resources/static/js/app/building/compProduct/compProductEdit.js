@@ -1,7 +1,8 @@
-var docId = $compProductAddForm.find("input[name=docId]").val();
 $(function () {
     $("#add").click(function () {
-        initFile(docId);
+        var docId = $compProductAddForm.find("input[name=docId]").val();
+        var docName = $compProductAddForm.find("input[name=docName]").val();
+        initFile(docId,docName);
     });
 
     $("#update").click(function () {
@@ -30,89 +31,92 @@ $(function () {
                 $form.find("select[name='operator']").val(compProduct.operator);
                 $form.find("select[name='businessType']").val(compProduct.businessType);
                 $form.find("input[name='docId']").val(compProduct.docId);
-                initFile(compProduct.docId);
+                $form.find("input[name='docName']").val(compProduct.docName);
+                initFile(compProduct.docId,compProduct.docName);
                 $("#save-button").attr("name", "update");
             } else {
                 $MB.n_danger(r.msg);
             }
         });
     });
-});
 
-function initFile(docId) {
-    //文件上传
-    var option;
-    if (docId && docId !== "") {
-         option = {
-            language: "zh",
-            showCaption: false,
-            showPreview: true,
-            showRemove: false,
-            showUpload: false,
-            showCancel: false,
-            showClose: false,
-            maxFileCount: 1,
-            removeFromPreviewOnError: true,
-            overwriteInitial: true,
-            showUploadedThumbs: false,
-            autoReplace: true,
-            layoutTemplates: {progress: '', actions: ''},
-            uploadUrl: ctx + "compProduct/upload",
-            uploadExtraData: {},
-            initialPreview: [
-                "<img src='compProduct/downloadDoc?docId=" + docId + "' " +
-                "class='file-preview-image' alt='Desert' title='Desert' height='100%'  width='100%'>"
-            ],
-            initialPreviewConfig: [
-                {
-                    caption: 'desert.jpg',
-                    width: '120px',
-                    frameAttr: {
-                        style: 'height:199px',
-                        title: 'My Custom Title'
+    function initFile(docId,docName) {
+        //文件上传
+        var option;
+        if (docId && docId !== "") {
+            option = {
+                language: "zh",
+                showCaption: false,
+                showPreview: true,
+                showRemove: false,
+                showUpload: false,
+                showCancel: false,
+                showClose: false,
+                maxFileCount: 1,
+                removeFromPreviewOnError: true,
+                overwriteInitial: true,
+                showUploadedThumbs: false,
+                autoReplace: true,
+                layoutTemplates: {progress: '', actions: ''},
+                uploadUrl: ctx + "compProduct/upload",
+                uploadExtraData: {},
+                initialPreview: [
+                    "<img src='compProduct/downloadDoc?docId=" + docId + "' " +
+                    "class='file-preview-image' alt='Desert' title='Desert' height='100%'  width='100%'>"
+                ],
+                initialPreviewConfig: [
+                    {
+                        caption: docName,
+                        width: '120px',
+                        frameAttr: {
+                            style: 'height:199px',
+                            title: 'My Custom Title'
+                        }
                     }
-                }
-            ],
-            allowedFileTypes: ["image"],
-            allowedFileExtensions: ["jpg", "png", "gif"],
-            maxFileSize: 5000
-        };
-    } else {
-         option = {
-            language: "zh",
-            showCaption: false,
-            showPreview: true,
-            showRemove: false,
-            showUpload: false,
-            showCancel: false,
-            showClose: false,
-            maxFileCount: 1,
-            removeFromPreviewOnError: true,
-            overwriteInitial: true,
-            showUploadedThumbs: false,
-            autoReplace: true,
-            layoutTemplates: {progress: '', actions: ''},
-            uploadUrl: ctx + "compProduct/upload",
-            uploadExtraData: {},
-            allowedFileTypes: ["image"],
-            allowedFileExtensions: ["jpg", "png", "gif"],
-            maxFileSize: 5000
-        };
-    }
-    $("#pictureFile").fileinput(option).on('fileloaded', function (event) {
-        $(this).fileinput('upload');
-    }).on('fileuploaded', function (event, data) {
-        var response = data.response;
-        //文件上传自定义参数返回码
-        var returnCode = response.code;
-        if (0 === returnCode) {
-            $compProductAddForm.find("input[name='uploadFlag']").val("1");
-            $compProductAddForm.find("input[name='docName']").val(response.msg);
-            //成功
-            $MB.n_warning('上传成功！');
+                ],
+                allowedFileTypes: ["image"],
+                allowedFileExtensions: ["jpg", "png", "gif"],
+                maxFileSize: 5000
+            };
         } else {
-            //失败
-            $MB.n_warning('上传失败！请联系网站管理员');
+            option = {
+                language: "zh",
+                showCaption: false,
+                showPreview: true,
+                showRemove: false,
+                showUpload: false,
+                showCancel: false,
+                showClose: false,
+                maxFileCount: 1,
+                removeFromPreviewOnError: true,
+                overwriteInitial: true,
+                showUploadedThumbs: false,
+                autoReplace: true,
+                layoutTemplates: {progress: '', actions: ''},
+                uploadUrl: ctx + "compProduct/upload",
+                uploadExtraData: {},
+                allowedFileTypes: ["image"],
+                allowedFileExtensions: ["jpg", "png", "gif"],
+                maxFileSize: 5000
+            };
         }
-    });
-}
+
+        $("#pictureFile").fileinput(option).on('fileloaded', function (event) {
+            $(this).fileinput('upload');
+        }).on('fileuploaded', function (event, data) {
+            var response = data.response;
+            //文件上传自定义参数返回码
+            var returnCode = response.code;
+            if (0 === returnCode) {
+                $compProductAddForm.find("input[name='uploadFlag']").val("1");
+                $compProductAddForm.find("input[name='docName']").val(response.msg);
+                //成功
+                $MB.n_warning('上传成功！');
+            } else {
+                //失败
+                $MB.n_warning('上传失败！请联系网站管理员');
+            }
+        });
+    }
+
+});

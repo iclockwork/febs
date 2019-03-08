@@ -35,7 +35,7 @@ $(function () {
 
 
     $("#queryButton").click(function () {
-        $("#modelId").val("#customerExpiration-add");
+        $("#modalId").val("#customerExpiration-add");
     });
 
     function closeModal() {
@@ -71,6 +71,27 @@ $(function () {
             } else {
                 $('#remindId').hide();
                 $("input[name='remindDate']").val(null);
+            }
+        });
+    }
+
+    validateRule();
+
+    function validateRule() {
+        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
+        validator = $customerExpirationAddForm.validate({
+            rules: {
+                buildingNo: {
+                    required: true
+                },
+                customerName: {
+                    required: true
+                }
+            },
+            messages: {
+                buildingNo:  icon + "请选择楼宇",
+                customerName: icon + "客户名称不能为空",
+                remindDate: icon + "提醒时间不能为空"
             }
         });
     }

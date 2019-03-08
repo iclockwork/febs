@@ -29,21 +29,46 @@ $(function () {
 
     $("#compProduct-add .btn-close").click(function () {
         closeModal();
-
-        if ($("#pictureFile").data('fileinput')) {
-            $("#pictureFile").fileinput('destroy');
-        }
     });
 
     $("#queryButton").click(function () {
-        $("#modelId").val("#compProduct-add");
+        $("#modalId").val("#compProduct-add");
     });
 
     function closeModal() {
         $("#save-button").attr("name", "save");
         $("#compProduct-add-modal-title").html('新增竞争产品');
         $MB.closeAndRestModal("compProduct-add");
+
+        if ($("#pictureFile").data('fileinput')) {
+            $("#pictureFile").fileinput('destroy');
+        }
     }
+
+    validateRule();
+
+    function validateRule() {
+        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
+        validator = $compProductAddForm.validate({
+            rules: {
+                buildingNo: {
+                    required: true
+                },
+                operator: {
+                    required: true
+                },
+                businessType: {
+                    required: true
+                }
+            },
+            messages: {
+                buildingNo:  icon + "请选择楼宇",
+                operator: icon + "请选择运营商",
+                businessType: icon + "请选择业务类型"
+            }
+        });
+    }
+
 });
 
 
