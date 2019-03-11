@@ -1,3 +1,4 @@
+var $form;
 $(function () {
     var settings = {
         url: ctx + "building/list",
@@ -159,6 +160,8 @@ $(function () {
 
 
     $("#determine-button").click(function () {
+        var formId = $("#formId").val();
+         $form = $(formId);
         var selected = $("#queryBuildingTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
         if (!selected_length) {
@@ -196,5 +199,8 @@ $(function () {
             $('body').addClass('modal-open');
         },500);
         $MB.closeAndRestModal("queryBuilding-modal");
+
+        var validate = $form.validate().element("input[name='buildingNo']");
+        validate.form;
     }
 });

@@ -35,13 +35,15 @@ $(function () {
     function closeModal() {
         $("#save-button").attr("name", "save");
         $("#buildingOpportunity-add-modal-title").html('新增商机楼宇');
+        var validator = $buildingOpportunityAddForm.validate();
+        validator.resetForm();
         $MB.closeAndRestModal("buildingOpportunity-add");
     }
 
     validateRule();
 
     function validateRule() {
-        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
+        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i>";
         validator = $buildingOpportunityAddForm.validate({
             rules: {
                 ds: {

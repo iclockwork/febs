@@ -34,18 +34,21 @@ $(function () {
 
     $("#queryButton").click(function () {
         $("#modalId").val("#customerOpportunity-add");
+        $("#formId").val("#customerOpportunity-add-form");
     });
 
     function closeModal() {
         $("#save-button").attr("name", "save");
         $("#customerOpportunity-add-modal-title").html('新增竞争产品');
+        var validator = $customerOpportunityAddForm.validate();
+        validator.resetForm();
         $MB.closeAndRestModal("customerOpportunity-add");
     }
 
     validateRule();
 
     function validateRule() {
-        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
+        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i>";
         validator = $customerOpportunityAddForm.validate({
             rules: {
                 buildingNo: {

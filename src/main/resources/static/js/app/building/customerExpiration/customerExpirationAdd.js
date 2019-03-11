@@ -36,12 +36,15 @@ $(function () {
 
     $("#queryButton").click(function () {
         $("#modalId").val("#customerExpiration-add");
+        $("#formId").val("#customerExpiration-add-form");
     });
 
     function closeModal() {
         $("#save-button").attr("name", "save");
         $("#customerExpiration-add-modal-title").html('新增客户到期');
         $('#remindId').hide();
+        var validator = $customerExpirationAddForm.validate();
+        validator.resetForm();
         $MB.closeAndRestModal("customerExpiration-add");
     }
 
@@ -78,7 +81,7 @@ $(function () {
     validateRule();
 
     function validateRule() {
-        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
+        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i>";
         validator = $customerExpirationAddForm.validate({
             rules: {
                 buildingNo: {

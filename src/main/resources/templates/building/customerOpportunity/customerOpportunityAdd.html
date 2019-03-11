@@ -9,6 +9,20 @@
                     <div class="row">
                         <div class="col-sm-11">
                             <div class="input-group">
+                                <span class="input-group-addon"> 楼宇编码：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" name="buildingNo" class="form-control" readonly>
+                                </div>
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#queryBuilding-modal" id="queryButton">获取楼宇信息</button>
+					                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <div class="input-group">
                                 <span class="input-group-addon"> 楼宇名称：
 					            </span>
                                 <div class="form-group">
@@ -16,9 +30,6 @@
                                     <input type="text" hidden name="customerId" class="form-control">
                                     <input type="text" hidden name="buildingId" class="form-control">
                                 </div>
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#queryBuilding-modal" id="queryButton">获取楼宇信息</button>
-					                </span>
                             </div>
                         </div>
                     </div>

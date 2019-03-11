@@ -33,13 +33,15 @@ $(function () {
 
     $("#queryButton").click(function () {
         $("#modalId").val("#compProduct-add");
+        $("#formId").val("#compProduct-add-form");
     });
 
     function closeModal() {
         $("#save-button").attr("name", "save");
         $("#compProduct-add-modal-title").html('新增竞争产品');
+        var validator = $compProductAddForm.validate();
+        validator.resetForm();
         $MB.closeAndRestModal("compProduct-add");
-
         if ($("#pictureFile").data('fileinput')) {
             $("#pictureFile").fileinput('destroy');
         }
@@ -48,7 +50,7 @@ $(function () {
     validateRule();
 
     function validateRule() {
-        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
+        var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i>";
         validator = $compProductAddForm.validate({
             rules: {
                 buildingNo: {

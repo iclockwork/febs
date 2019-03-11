@@ -19,7 +19,10 @@ $(function () {
         },{
             field: 'buildingId',
             visible: false
-        }, {
+        },  {
+            field: 'buildingNo',
+            title: '楼宇编码'
+        },{
             field: 'buildingName',
             title: '楼宇名称'
         }, {
