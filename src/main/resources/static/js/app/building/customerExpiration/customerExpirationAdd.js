@@ -86,15 +86,25 @@ $(function () {
                 },
                 customerName: {
                     required: true
+                },
+                remindDate:{
+                    unrequired:[]
                 }
             },
             messages: {
                 buildingNo:  icon + "请选择楼宇",
-                customerName: icon + "客户名称不能为空",
-                remindDate: icon + "提醒时间不能为空"
+                customerName: icon + "客户名称不能为空"
             }
         });
     }
+
+    jQuery.validator.addMethod("unrequired", function(value,element,params) {
+
+        return $("select[name='remindFlag']").val()!=='1' ||  $("input[name='remindDate']").val()!=="";
+
+    }, "需要提醒时，提醒时间不能为空!");
+
+
 });
 
 
