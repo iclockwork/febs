@@ -278,7 +278,6 @@ $(function () {
     }
 
     $editForm.find("select[name='buildingType']").unbind("change").change(function () {
-        console.log("generateBuildingNo");
         generateBuildingNo();
     });
 
