@@ -56,8 +56,7 @@ public class BuildingCountServiceImpl implements BuildingCountService {
             return countBusiness;
         }
         for (Building building : buildings) {
-            int zx = 0, kd = 0, gh = 0, y = 0, yw = 0, dl = 0;
-            List<Integer> business = new ArrayList<>();
+
             JSONObject data = new JSONObject();
             String buildingName = building.getBuildingName();
             data.put("buildingName", buildingName);
@@ -65,41 +64,57 @@ public class BuildingCountServiceImpl implements BuildingCountService {
             if (businessTypes.isEmpty()) {
                 continue;
             }
-            for (Integer businessType : businessTypes) {
-                switch (businessType) {
-                    case 1:
-                        zx++;
-                        break;
-                    case 2:
-                        kd++;
-                        break;
-                    case 3:
-                        gh++;
-                        break;
-                    case 4:
-                        y++;
-                        break;
-                    case 5:
-                        yw++;
-                        break;
-                    case 6:
-                        dl++;
-                        break;
-                        default:
-                            break;
-                }
-            }
-            business.add(zx);
-            business.add(kd);
-            business.add(gh);
-            business.add(y);
-            business.add(yw);
-            business.add(dl);
-            data.put("business",business);
+            setData(data, businessTypes);
             countBusiness.add(data);
         }
-
         return countBusiness;
+    }
+
+    @Override
+    public JSONObject queryBusiness(String regionId, Long createStaffId) {
+        JSONObject data = new JSONObject();
+        List<Integer> businessTypes = buildingCountMapper.queryBusiness(regionId, createStaffId);
+        if (businessTypes.isEmpty()) {
+            return  data;
+        }
+        setData(data, businessTypes);
+        return data;
+    }
+
+    private void setData(JSONObject data, List<Integer> businessTypes) {
+        int zx = 0, kd = 0, gh = 0, y = 0, yw = 0, dl = 0;
+        List<Integer> business = new ArrayList<>();
+        for (Integer businessType : businessTypes) {
+            switch (businessType) {
+                case 1:
+                    zx++;
+                    break;
+                case 2:
+                    kd++;
+                    break;
+                case 3:
+                    gh++;
+                    break;
+                case 4:
+                    y++;
+                    break;
+                case 5:
+                    yw++;
+                    break;
+                case 6:
+                    dl++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        business.add(zx);
+        business.add(kd);
+        business.add(gh);
+        business.add(y);
+        business.add(yw);
+        business.add(dl);
+        data.put("business",business);
     }
 
 }
