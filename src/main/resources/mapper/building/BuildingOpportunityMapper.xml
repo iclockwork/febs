@@ -47,6 +47,9 @@
         where t.delete_flag = 0
         and t.region_id = r.region_id
         and r.super_region_id = ds.region_id
+        <if test="createStaffId != null">
+            and t.CREATE_STAFF_ID = #{createStaffId}
+        </if>
         <if test="dsRegionId != null and dsRegionId != ''">
             AND t.region_id in
             (select r.region_id

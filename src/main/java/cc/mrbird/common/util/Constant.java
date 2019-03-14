@@ -26,4 +26,10 @@ public class Constant {
      * 上传标识：否
      */
     public static final String UPLOAD_FLAG_NO = "0";
+
+    /**
+     * 省份账号标识
+     */
+    public static final String PROVINCE_FLAG_YES = "000102000000000000007126";
+
 }

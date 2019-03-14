@@ -8,12 +8,16 @@
         <div class="card">
             <div class="card-block">
                 <div class="col-lg-12">
+                    <div>
+                        <h3>
+                          商务楼宇业务数据量统计
+                        </h3>
+                    </div>
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="small-box bg-aqua common-box-margin">
                                 <div class="inner">
-                                    <h4>
-                                        5565
+                                    <h4 id="buildingId">
                                     </h4>
                                     <p>楼宇总量（栋）</p>
                                 </div>
@@ -23,8 +27,7 @@
                             </div>
                             <div class="small-box bg-aqua common-box-margin">
                                 <div class="inner">
-                                    <h4>
-                                        7973
+                                    <h4 id="customerId">
                                     </h4>
                                     <p>客户总量（个）</p>
                                 </div>
@@ -34,34 +37,9 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <div class="small-box bg-orange common-box-margin">
-                                <div class="inner">
-                                    <h4>
-                                        28423
-                                    </h4>
-                                    <p>光缆已接入（栋）</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-toys"></i>
-                                </div>
-                            </div>
-                            <div class="small-box bg-orange common-box-margin">
-                                <div class="inner">
-                                    <h4>
-                                       4926
-                                    </h4>
-                                    <p>本网客户（个）</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-accounts-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
                             <div class="small-box bg-red common-box-margin">
                                 <div class="inner">
-                                    <h4>
-                                        76576
+                                    <h4 id="customerBusinessId">
                                     </h4>
                                     <p>客户业务量（条）</p>
                                 </div>
@@ -71,10 +49,9 @@
                             </div>
                             <div class="small-box bg-red common-box-margin">
                                 <div class="inner">
-                                    <h4>
-                                        1674.85
+                                    <h4 id="feeId">
                                     </h4>
-                                    <p>2019年收入（万元）</p>
+                                    <p>业务月费总计（万元）</p>
                                 </div>
                                 <div class="icon">
                                     <i class="zmdi zmdi-balance-wallet"></i>
@@ -88,7 +65,7 @@
                 </div>
             </div>
             <div class="card-block">
-                <canvas id="lineChart"></canvas>
+                <canvas id="barChart"></canvas>
             </div>
         </div>
     </div>

@@ -17,6 +17,9 @@
         join bd_building a on t.building_id = a.building_id
         left join  bd_comp_product_doc b on t.comp_product_id = b.comp_product_id
         where t.delete_flag = 0 and a.delete_flag = 0
+        <if test="createStaffId != null">
+            and a.CREATE_STAFF_ID = #{createStaffId}
+        </if>
         <if test="buildingNo != null and buildingNo != ''">
             AND t.building_id = (select A.building_id from bd_building A where A.building_no like
             '%'||#{buildingNo}||'%')

@@ -8,8 +8,10 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +45,9 @@ public class CustomerOpportunityController extends BaseController {
     @RequestMapping("customerOpportunity/list")
     @ResponseBody
     public Map<String, Object> queryCustomerOpportunity(QueryRequest request, CustomerOpportunity customerOpportunity) {
-
+        if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+            customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
+        }
         return  super.selectByPageNumSize(request, () -> this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity));
     }
 
@@ -51,6 +55,9 @@ public class CustomerOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo exportExcel(CustomerOpportunity customerOpportunity,QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+                customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity);
             return FileUtils.createExcelByPOIKit("商机客户表", list, CustomerOpportunity.class);
         } catch (Exception e) {
@@ -63,6 +70,9 @@ public class CustomerOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(CustomerOpportunity customerOpportunity,QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+                customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity);
             return FileUtils.createCsv("商机客户表", list, CustomerOpportunity.class);
         } catch (Exception e) {
@@ -77,10 +87,7 @@ public class CustomerOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo addCustomerOpportunity(CustomerOpportunity customerOpportunity) {
         try {
-
-            User user = super.getCurrentUser();
-            Long staffId = user.getStaffId();
-            customerOpportunity.setCreateStaffId(staffId);
+            customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
             this.customerOpportunityService.addCustomerOpportunity(customerOpportunity);
             return ResponseBo.ok("新增商机客户成功！");
         } catch (Exception e) {

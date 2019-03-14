@@ -2,12 +2,12 @@ package cc.mrbird.building.controller;
 
 
 import cc.mrbird.building.domain.BuildingOpportunity;
-import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.BuildingOpportunityService;
 import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
@@ -48,6 +48,10 @@ public class BuildingOpportunityController extends BaseController {
         if (StringUtils.isBlank(buildingOpportunity.getDsRegionId())) {
             buildingOpportunity.setDsRegionId(user.getRegionId());
         }
+        if (!StringUtils.equalsIgnoreCase(buildingOpportunity.getDsRegionId(), Constant.PROVINCE_FLAG_YES)){
+            buildingOpportunity.setCreateStaffId(user.getStaffId());
+        }
+
         return  super.selectByPageNumSize(request, () -> this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity));
     }
 
@@ -55,6 +59,9 @@ public class BuildingOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo exportExcel(BuildingOpportunity buildingOpportunity,QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(buildingOpportunity.getDsRegionId(), Constant.PROVINCE_FLAG_YES)){
+                buildingOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity);
             return FileUtils.createExcelByPOIKit("商机楼宇表", list, BuildingOpportunity.class);
         } catch (Exception e) {
@@ -67,6 +74,9 @@ public class BuildingOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(BuildingOpportunity buildingOpportunity,QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(buildingOpportunity.getDsRegionId(), Constant.PROVINCE_FLAG_YES)){
+                buildingOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity);
             return FileUtils.createCsv("商机楼宇表", list, BuildingOpportunity.class);
         } catch (Exception e) {
@@ -81,9 +91,7 @@ public class BuildingOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo addBuildingOpportunity(BuildingOpportunity buildingOpportunity) {
         try {
-            User user = super.getCurrentUser();
-            Long staffId = user.getStaffId();
-            buildingOpportunity.setCreateStaffId(staffId);
+            buildingOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
             this.buildingOpportunityService.addBuildingOpportunity(buildingOpportunity);
             return ResponseBo.ok("新增商机楼宇成功！");
         } catch (Exception e) {

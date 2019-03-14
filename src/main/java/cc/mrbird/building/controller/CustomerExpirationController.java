@@ -7,7 +7,9 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +43,9 @@ public class CustomerExpirationController extends BaseController {
     @RequestMapping("customerExpiration/list")
     @ResponseBody
     public Map<String, Object> queryCustomerExpiration(QueryRequest request, CustomerExpiration customerExpiration) {
-
+        if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+            customerExpiration.setCreateStaffId(super.getCurrentUser().getStaffId());
+        }
         return  super.selectByPageNumSize(request, () -> this.customerExpirationService.queryCustomerExpiration(customerExpiration));
     }
 
@@ -49,6 +53,9 @@ public class CustomerExpirationController extends BaseController {
     @ResponseBody
     public ResponseBo exportExcel(CustomerExpiration customerExpiration,QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+                customerExpiration.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(customerExpiration);
             return FileUtils.createExcelByPOIKit("客户到期提醒表", list, CustomerExpiration.class);
         } catch (Exception e) {
@@ -61,6 +68,9 @@ public class CustomerExpirationController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(CustomerExpiration customerExpiration,QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+                customerExpiration.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(customerExpiration);
             return FileUtils.createCsv("客户到期提醒表", list, CustomerExpiration.class);
         } catch (Exception e) {

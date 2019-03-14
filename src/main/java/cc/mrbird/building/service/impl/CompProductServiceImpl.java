@@ -7,6 +7,8 @@ import cc.mrbird.common.util.Constant;
 import cc.mrbird.system.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.util.Arrays;
@@ -16,10 +18,11 @@ import java.util.List;
 /**
  * Created with IntelliJ IDEA.
  * User: fang.yefei.
- * Date: 2019/ /
+ * Date: 2019/2 /28
  * Features:
  */
 @Service("compProductService")
+@Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
 public class CompProductServiceImpl implements CompProductService {
     @Autowired
      private CompProductMapper compProductMapper;

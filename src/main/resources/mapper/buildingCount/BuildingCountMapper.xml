@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.buildingCount.dao.BuildingCountMapper">
+
+    <select id="countBuilding" resultType="String">
+        select
+        count(*)
+        from BD_BUILDING t
+        where t.delete_flag = 0
+        <if test="createStaffId != null">
+            and t.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+
+    </select>
+
+    <select id="queryBuilding" resultType="cc.mrbird.building.domain.Building">
+        select
+        t.building_no as buildingNo,
+        t.building_name as buildingName
+        from BD_BUILDING t
+        where t.delete_flag = 0
+        <if test="createStaffId != null">
+            and t.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+
+    </select>
+
+
+
+    <select id="countCustomer" resultType="String">
+        select count(distinct t.customer_no)
+        from BD_BUILDING_CUSTOMER_RP t
+        join BD_BUILDING b on t.building_no=b.building_no
+        where t.delete_flag = '0' and b.delete_flag = '0'
+        <if test="createStaffId != null">
+            and b.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+
+    </select>
+
+    <select id="countCustomerBusiness" resultType="String">
+    select count(*) from BD_CUSTOMER_BUSINESS a
+    join BD_CUSTOMER b on a.customer_id = b.customer_id
+    join (select distinct c.customer_no
+    from BD_BUILDING_CUSTOMER_RP c
+    join BD_BUILDING d on c.building_no = d.building_no
+    where d.delete_flag = '0' and c.delete_flag = '0'
+    <if test="createStaffId != null">
+        and d.CREATE_STAFF_ID = #{createStaffId}
+    </if> ) e
+    on b.customer_no = e.customer_no
+</select>
+
+    <select id="queryCustomerBusiness" resultType="Integer">
+        select a.BUSINESS_TYPE from BD_CUSTOMER_BUSINESS a
+        join BD_CUSTOMER b on a.customer_id = b.customer_id
+        join (select distinct c.customer_no
+        from BD_BUILDING_CUSTOMER_RP c
+        join BD_BUILDING d on c.building_no = d.building_no
+        where d.delete_flag = '0' and c.delete_flag = '0'
+        and d.building_no = #{buildingNo}) e
+        on b.customer_no = e.customer_no
+    </select>
+
+
+    <select id="countCustomerFee" resultType="BigDecimal">
+        select sum(a.month_fee) from BD_CUSTOMER_BUSINESS a
+        join BD_CUSTOMER b on a.customer_id = b.customer_id
+        join (select distinct c.customer_no
+        from BD_BUILDING_CUSTOMER_RP c
+        join BD_BUILDING d on c.building_no = d.building_no
+        where d.delete_flag = '0' and c.delete_flag = '0'
+        <if test="createStaffId != null">
+            and d.CREATE_STAFF_ID = #{createStaffId}
+        </if> ) e
+        on b.customer_no = e.customer_no
+    </select>
+
+</mapper>

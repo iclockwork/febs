@@ -10,6 +10,7 @@ import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.User;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
-import java.io.*;
-import java.util.HashMap;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +57,9 @@ public class CompProductController extends BaseController {
     @RequestMapping("compProduct/list")
     @ResponseBody
     public Map<String, Object> queryCompProduct(QueryRequest request, CompProduct compProduct) {
-
+        if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+            compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
+        }
         return super.selectByPageNumSize(request, () -> this.compProductService.queryCompProduct(compProduct));
     }
 
@@ -62,6 +67,9 @@ public class CompProductController extends BaseController {
     @ResponseBody
     public ResponseBo exportExcel(CompProduct compProduct, QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+                compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<CompProduct> list = this.compProductService.queryCompProduct(compProduct);
             return FileUtils.createExcelByPOIKit("竞争产品表", list, CompProduct.class);
         } catch (Exception e) {
@@ -74,6 +82,9 @@ public class CompProductController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(CompProduct compProduct, QueryRequest request) {
         try {
+            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
+                compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
+            }
             List<CompProduct> list = this.compProductService.queryCompProduct(compProduct);
             return FileUtils.createCsv("竞争产品表", list, CompProduct.class);
         } catch (Exception e) {
@@ -88,9 +99,7 @@ public class CompProductController extends BaseController {
     @ResponseBody
     public ResponseBo addCompProduct(CompProduct compProduct) {
         try {
-            User user = super.getCurrentUser();
-            Long staffId = user.getStaffId();
-            compProduct.setCreateStaffId(staffId);
+            compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
             this.compProductService.addCompProduct(compProduct);
             if (compProduct.getUploadFlag().equalsIgnoreCase(Constant.UPLOAD_FLAG_YES)) {
                 this.compProductService.addCompProductDoc(compProduct);

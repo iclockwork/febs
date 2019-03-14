@@ -7,6 +7,7 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
+                buildingNo: $customerOpportunityTableForm.find("input[name='buildingNo']").val().trim(),
                 buildingName: $customerOpportunityTableForm.find("input[name='buildingName']").val().trim(),
                 customerName: $customerOpportunityTableForm.find("input[name='customerName']").val().trim()
             };

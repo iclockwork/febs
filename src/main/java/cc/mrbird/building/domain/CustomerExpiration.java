@@ -42,6 +42,15 @@ public class CustomerExpiration {
     @Column(name = "CREATE_DATE")
     private Date createDate;
 
+    private Long createStaffId;
+
+    public Long getCreateStaffId() {
+        return createStaffId;
+    }
+
+    public void setCreateStaffId(Long createStaffId) {
+        this.createStaffId = createStaffId;
+    }
 
     public String getRemindFlagName() {
         return remindFlagName;

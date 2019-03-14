@@ -16,6 +16,7 @@ public class CustomerOpportunity {
     private Integer buildingId;
 
     @Column(name = "BUILDING_NO")
+    @ExportConfig(value = "楼宇编码")
     private String buildingNo;
 
     @Column(name = "BUILDING_NAME")
