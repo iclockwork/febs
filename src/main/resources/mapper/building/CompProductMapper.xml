@@ -25,7 +25,7 @@
             '%'||#{buildingNo}||'%')
         </if>
         <if test="buildingName != null and buildingName != ''">
-            AND t.building_id = (select A.building_id from bd_building A where A.building_name like
+            AND t.building_id in (select A.building_id from bd_building A where A.building_name like
             '%'||#{buildingName}||'%')
         </if>
         <if test="businessType != null and businessType != ''">

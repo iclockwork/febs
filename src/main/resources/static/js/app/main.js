@@ -36,165 +36,61 @@ $(function () {
         }
     });
 
-
-    function buildPieChart() {
-        var data = {
+    function buildBarCustomerChart() {
+        var tempData = {
+            labels: ["专线业务","宽带业务","固话业务","云业务","移网业务","电路业务"],
             datasets: [{
-                data: [
-                    98,
-                    2
-                ],
-                backgroundColor: [
-                    "#00c0ef",
-                    "#d2d6de"
-                ]
-            }],
-            labels: [
-                '已覆盖',
-                '未覆盖'
-            ]
-        };
-        var options = {
-            //Boolean - Whether we should show a stroke on each segment
-            segmentShowStroke: true,
-            //String - The colour of each segment stroke
-            segmentStrokeColor: "#fff",
-            //Number - The width of each segment stroke
-            segmentStrokeWidth: 1,
-            //Number - The percentage of the chart that we cut out of the middle
-            percentageInnerCutout: 50, // This is 0 for Pie charts
-            //Number - Amount of animation steps
-            animationSteps: 100,
-            //String - Animation easing effect
-            animationEasing: "easeOutBounce",
-            //Boolean - Whether we animate the rotation of the Doughnut
-            animateRotate: true,
-            //Boolean - Whether we animate scaling the Doughnut from the centre
-            animateScale: false,
-            //Boolean - whether to make the chart responsive to window resizing
-            responsive: true,
-            // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-            maintainAspectRatio: false,
-            //String - A legend template
-            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>",
-            //String - A tooltip template
-            tooltipTemplate: "<%=value %> <%=label%> users",
-            title: {
-                display: true,
-                text: '光缆覆盖率'
-            }
-        };
-        var canvas = $("#coveragePieChart").get(0).getContext("2d");
-        var chart = new Chart(canvas, {
-            type: 'doughnut',
-            data: data,
-            options: options
-        });
-    }
-
-    function buildLineChart() {
-        var data = {
-            labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-            datasets: [{
-                label: 'A型专线',
-                fill: false,
-                backgroundColor: "#f56954",
-                borderColor: "#f56954",
-                data: [
-                    12,
-                    24,
-                    45,
-                    78,
-                    88,
-                    121,
-                    289,
-                    391,
-                    456,
-                    555,
-                    666,
-                    777
-                ]
-            }, {
-                label: 'B型专线',
-                fill: false,
-                backgroundColor: "#00c0ef",
-                borderColor: "#00c0ef",
-                data: [
-                    22,
-                    31,
-                    56,
-                    87,
-                    123,
-                    231,
-                    333,
-                    345,
-                    444,
-                    456,
-                    527,
-                    538
-                ]
-            }, {
-                label: 'C型专线',
-                fill: false,
-                backgroundColor: "#f39c12",
-                borderColor: "#f39c12",
-                data: [
-                    12,
-                    21,
-                    46,
-                    67,
-                    153,
-                    211,
-                    303,
-                    375,
-                    414,
-                    486,
-                    527,
-                    598
-                ]
+                label: "客户业务量",
+                data: [13,14,23,32,25,26],
+                backgroundColor: "#00c0ef"
             }]
         };
+
         var options = {
-            responsive: true,
+            //是否显示柱状图上面的数据
+            scaleOverlay: true,
+            //是否显示label值
+            scaleShowLabels: true,
+            //设置标题
             title: {
                 display: true,
-                text: '业务收入趋势'
+                fontColor: 'red',
+                fontSize: 18,
+                text: '楼长客户各业务量统计图'
             },
-            tooltips: {
-                mode: 'index',
-                intersect: false
-            },
-            hover: {
-                mode: 'nearest',
-                intersect: true
-            },
+
             scales: {
                 xAxes: [{
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: '月份'
+                        fontColor: 'red',
+                        fontSize: 18,
+                        labelString: '客户业务名称'
                     }
                 }],
                 yAxes: [{
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: '业务收入（万元）'
+                        fontColor: 'red',
+                        fontSize: 18,
+                        labelString: '客户业务量（条）'
                     }
                 }]
             }
         };
-        var canvas = $("#lineChart").get(0).getContext("2d");
+
+        var canvas = $("#barCustomerChart").get(0).getContext("2d");
         var chart = new Chart(canvas, {
-            type: 'line',
-            data: data,
+            type: 'bar',
+            data: tempData,
             options: options
         });
+
     }
 
-    // buildPieChart();
-    // buildLineChart();
+    buildBarCustomerChart();
     buildBarChart();
 
     function buildBarChart() {
@@ -254,12 +150,12 @@ $(function () {
                     label: "宽带业务",
                     data: kdData,
                     backgroundColor: [
-                        "#2b39b2",
-                        "#2b39b2",
-                        "#2b39b2",
-                        "#2b39b2",
-                        "#2b39b2",
-                        "#2b39b2"
+                        "#338aff",
+                        "#338aff",
+                        "#338aff",
+                        "#338aff",
+                        "#338aff",
+                        "#338aff"
                     ]
                 }, {
                     label: "固话业务",
@@ -320,10 +216,13 @@ $(function () {
                     fontSize: 18,
                     text: '各楼宇客户业务量统计图'
                 },
-
                 scales: {
                     xAxes: [{
                         display: true,
+                        //设置滚动条
+                        scrollbar: {
+                            enabled: true
+                        },
                         scaleLabel: {
                             display: true,
                             fontColor: 'red',
