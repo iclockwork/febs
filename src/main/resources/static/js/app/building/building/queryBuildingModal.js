@@ -200,7 +200,7 @@ $(function () {
         },500);
         $MB.closeAndRestModal("queryBuilding-modal");
 
-        var validate = $form.validate().element("input[name='buildingNo']");
-        validate.form;
+        // var validate = $form.validate().element("input[name='buildingNo']");
+        // validate.form;
     }
 });

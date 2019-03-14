@@ -8,7 +8,7 @@
     color: #333;
 }
 
-.common-footer p{
+.common-footer p {
     color: #333;
 }
 
@@ -16,8 +16,8 @@
     color: #333;
 }
 
-@media (min-width: 850px) {
-    .common_modal-lg {
-        max-width: 500px;
+@media (min-width: 992px) {
+    .modal-common-middle {
+        max-width: 700px;
     }
 }
