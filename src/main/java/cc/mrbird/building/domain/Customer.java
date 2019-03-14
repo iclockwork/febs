@@ -57,6 +57,28 @@ public class Customer implements Serializable {
     @Column(name = "MODIFY_OP")
     private String modifyOp;
 
+    private String dsRegionId;
+
+    @Column(name = "REGION_ID")
+    private String regionId;
+
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+
     /**
      * @return CUSTOMER_ID
      */

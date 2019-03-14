@@ -40,7 +40,17 @@ $(function () {
             title: '客户类型'
         }, {
             field: 'customerIndustry',
-            title: '客户行业'
+            title: '客户行业',
+            formatter: function (value, row, index) {
+                if (value === "201") return '生产制造';
+                else if (value === "202") return '批发零售';
+                else if (value === "203") return '信息技术';
+                else if (value === "204") return '金融保险';
+                else if (value === "205") return '政企机构及社会团体';
+                else if (value === "206") return '教育培训';
+                else if (value === "207") return '酒店住宿';
+                else return '其他';
+            }
         },{
             field: 'competitorName',
             title: '竞争对手名称'

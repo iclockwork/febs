@@ -1,6 +1,5 @@
 package cc.mrbird.buildingCount.controller;
 
-import cc.mrbird.building.controller.CompProductController;
 import cc.mrbird.buildingCount.service.BuildingCountService;
 import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
@@ -87,6 +86,9 @@ public class BuildingCountController extends BaseController {
             String regionId = getUserInfo.getRegionId();
             Long createStaffId = getUserInfo.getCreateStaffId();
             BigDecimal countCustomerFee =this.buildingCountService.countCustomerFee(regionId,createStaffId);
+            if (countCustomerFee == null){
+               return ResponseBo.ok("0");
+            }
             BigDecimal customerFee = countCustomerFee.divide(new BigDecimal("10000"));
             return ResponseBo.ok(customerFee);
         } catch (Exception e) {
