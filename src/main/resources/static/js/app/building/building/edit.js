@@ -270,6 +270,27 @@ $(function () {
                     $editForm.find("input[name='buildingManagerContact']").val(building.buildingManagerContact);
                     $editForm.find("select[name='state']").val(building.state);
                     $editForm.find("input[name='remark']").val(building.remark);
+                    $editForm.find("select[name='segmId']").val(building.segmId);
+                    $editForm.find("input[name='standName']").val(building.standName);
+                    $editForm.find("select[name='accessAreaId']").val(building.accessAreaId);
+                    $editForm.find("input[name='accessAreaName']").val(building.accessAreaName);
+                    $editForm.find("select[name='roomId']").val(building.roomId);
+                    $editForm.find("input[name='roomName']").val(building.roomName);
+                    $editForm.find("input[name='lightName']").val(building.lightName);
+                    $editForm.find("input[name='lightAddress']").val(building.lightAddress);
+                    $editForm.find("input[name='lightLongitude']").val(building.lightLongitude);
+                    $editForm.find("input[name='lightLatitude']").val(building.lightLatitude);
+                    $editForm.find("select[name='roomCabinetFlag']").val(building.roomCabinetFlag);
+                    $editForm.find("select[name='cableAccessFlag']").val(building.cableAccessFlag);
+                    $editForm.find("input[name='cableNumber']").val(building.cableNumber);
+                    $editForm.find("input[name='cableRemainNumber']").val(building.cableRemainNumber);
+                    $editForm.find("select[name='verticalCoverageFlag']").val(building.verticalCoverageFlag);
+                    $editForm.find("select[name='horizontalCoverageFlag']").val(building.horizontalCoverageFlag);
+                    $editForm.find("select[name='coverageMethod']").val(building.coverageMethod);
+                    $editForm.find("select[name='cooperationMethod']").val(building.cooperationMethod);
+                    $editForm.find("select[name='indoorDistributionFlag']").val(building.indoorDistributionFlag);
+                    $editForm.find("select[name='coverageNetworkStandard']").val(building.coverageNetworkStandard);
+                    $editForm.find("select[name='wlanFlag']").val(building.wlanFlag);
                 } else {
                     $MB.n_danger(r.msg);
                 }
@@ -279,6 +300,18 @@ $(function () {
 
     $editForm.find("select[name='buildingType']").unbind("change").change(function () {
         generateBuildingNo();
+    });
+
+    $("#queryAddress").click(function () {
+        console.log("queryAddress");
+    });
+
+    $("#queryAccessArea").click(function () {
+        console.log("queryAccessArea");
+    });
+
+    $("#queryRoom").click(function () {
+        console.log("queryRoom");
     });
 
     $(".building-save").click(function () {

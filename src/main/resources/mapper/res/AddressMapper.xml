@@ -77,8 +77,12 @@
         <result column="AUDITOR" jdbcType="VARCHAR" property="auditor"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.res.domain.Address">
+    <select id="findAll" resultType="cc.mrbird.res.domain.Address" parameterType="cc.mrbird.res.domain.Address">
         select a.segm_id as segmId,
+        ds.region_id as dsRegionId,
+        ds.region_name as dsRegionName,
+        a.region_id as regionId,
+        c.region_name as regionName,
         a.stand_name as standName,
         a.segm_name as segmName,
         a.alias as alias,
@@ -86,8 +90,6 @@
         a.parent_segm_id as parentSegmId,
         a.segm_type as segmType,
         sf_get_desc_china(a.segm_type) as segmTypeName,
-        c.region_name as regionName,
-        a.region_id as regionId,
         a.x as x,
         a.y as y,
         sf_get_desc_china(a.is_user) as isUserName,
@@ -104,6 +106,7 @@
         from spc_region
         where delete_state = '0'
         and res_type_id = '200') c,
+        SPC_REGION ds,
         (select *
         from spc_region
         where delete_state = '0'
@@ -114,10 +117,26 @@
         and res_type_id = '222') e
         where 1 = 1
         and a.region_id = c.region_id
+        and c.super_region_id = ds.region_id
         and a.parent_segm_id = b.segm_id(+)
         and a.com_id = d.region_id(+)
         and a.service_region_id = e.service_region_id(+)
-        AND a.stand_name = #{standName}
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND a.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND a.region_id = #{regionId}
+        </if>
+        <if test="segmType != null and segmType != ''">
+            AND a.segm_type = #{segmType}
+        </if>
+        <if test="standName != null and standName != ''">
+            AND a.stand_name = #{standName}
+        </if>
         order by a.stand_no asc
     </select>
 </mapper>

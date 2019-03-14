@@ -29,7 +29,7 @@ public class AddressServiceImpl extends BaseService<Address> implements AddressS
     @Override
     public List<Address> findAll(Address address) {
         try {
-            List<Address> list = this.addressMapper.findAll(address.getStandName());
+            List<Address> list = this.addressMapper.findAll(address);
             return list;
         } catch (Exception e) {
             e.printStackTrace();

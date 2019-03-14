@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal-building-edit" data-keyboard="false" data-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title pull-left" id="modal-building-edit-title">楼宇</h3>
@@ -10,11 +10,7 @@
                     <input type="hidden" name="buildingId">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-					               	 基本信息
-					            </span>
-                            </div>
+                            <strong><span><i class="zmdi zmdi-bookmark"></i> 基本信息</span></strong>
                         </div>
                     </div>
                     <div class="row">
@@ -259,10 +255,248 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
+                            <strong><span><i class="zmdi zmdi-bookmark"></i> 资源覆盖信息</span></strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
                             <div class="input-group">
                                 <span class="input-group-addon">
-					               	 资源覆盖信息
+					               	 标准地址：
 					            </span>
+                                <div class="form-group">
+                                    <input type="hidden" name="segmId"/>
+                                    <input type="text" class="form-control" name="standName" readonly>
+                                </div>
+                                <span class="actions__item zmdi zmdi-search" data-toggle="modal"
+                                      data-target="#address-query-modal" title="搜索" id="queryAddress"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 综合业务接入区：
+					            </span>
+                                <div class="form-group">
+                                    <input type="hidden" name="accessAreaId"/>
+                                    <input type="text" class="form-control" name="accessAreaName" readonly>
+                                </div>
+                                <span class="actions__item zmdi zmdi-search" data-toggle="modal"
+                                      data-target="#accessArea-query-modal" title="搜索" id="queryAccessArea"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 综合业务接入机房：
+					            </span>
+                                <div class="form-group">
+                                    <input type="hidden" name="roomId"/>
+                                    <input type="text" class="form-control" name="roomName" readonly>
+                                </div>
+                                <span class="actions__item zmdi zmdi-search" data-toggle="modal"
+                                      data-target="#room-query-modal" title="搜索" id="queryRoom"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 光交名称：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="lightName" maxLength="256">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 光交地址：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="lightAddress" maxLength="256">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 光交经度：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="lightLongitude" maxLength="11">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 光交纬度：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="lightLatitude" maxLength="256">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 是否有机房/机柜：
+					            </span>
+                                <div class="form-group">
+                                    <select name="roomCabinetFlag" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">机房</option>
+                                        <option value="2">机柜</option>
+                                        <option value="0">无</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 光缆资源是否接入：
+					            </span>
+                                <div class="form-group">
+                                    <select name="cableAccessFlag" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 进楼光缆条数：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="cableNumber" maxLength="9999"
+                                           placeholder="纤芯数大于等于24才算一条光缆">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 空余芯数：
+					            </span>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="cableRemainNumber" maxLength="9999">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 是否具备垂直覆盖：
+					            </span>
+                                <div class="form-group">
+                                    <select name="verticalCoverageFlag" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 是否具备水平覆盖：
+					            </span>
+                                <div class="form-group">
+                                    <select name="horizontalCoverageFlag" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 楼宇覆盖方式：
+					            </span>
+                                <div class="form-group">
+                                    <select name="coverageMethod" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="2">FTTB</option>
+                                        <option value="3">FTTH</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 合作方式：
+					            </span>
+                                <div class="form-group">
+                                    <select name="cooperationMethod" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">自建</option>
+                                        <option value="2">合建</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 是否具备室分：
+					            </span>
+                                <div class="form-group">
+                                    <select name="indoorDistributionFlag" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 已覆盖网络制式：
+					            </span>
+                                <div class="form-group">
+                                    <select name="coverageNetworkStandard" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">2G/3G</option>
+                                        <option value="2">2G/3G/4G</option>
+                                        <option value="3">2G/4G</option>
+                                        <option value="4">3G</option>
+                                        <option value="5">3G/4G</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+					               	 WLAN是否已覆盖：
+					            </span>
+                                <div class="form-group">
+                                    <select name="wlanFlag" class="form-control">
+                                        <option selected value="">----请选择----</option>
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
