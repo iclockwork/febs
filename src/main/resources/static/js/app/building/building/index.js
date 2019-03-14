@@ -170,58 +170,6 @@ $(function () {
         });
     }
 
-    function initDs() {
-        $ds.empty();
-        $.post(ctx + "region/options", {
-            gradeId: "2000004"
-        }, function (r) {
-            if (r.code === 0) {
-                var data = r.msg;
-                var html = [];
-                html.push("<option value='' selected>---请选择---</option>");
-                for (var i = 0; i < data.length; i++) {
-                    var isSelectStr = "";
-                    if (G_REGION_ID === data[i].regionId) {
-                        isSelectStr = "selected=true";
-                        $ds.attr("disabled", "disabled");
-                    }
-                    html.push("<option value='" + data[i].regionId + "' " + isSelectStr + ">" + data[i].regionName + "</option>");
-                }
-                $ds.append(html.join(''));
-
-                $ds.change(function () {
-                    initQx();
-                });
-
-                initQx();
-            } else {
-                $MB.n_danger(r.msg);
-            }
-        });
-    }
-
-    function initQx() {
-        $qx.empty();
-        if (null !== $ds.val() && "" !== $ds.val()) {
-            $.post(ctx + "region/options", {
-                gradeId: "2000011",
-                superRegionId: $ds.val()
-            }, function (r) {
-                if (r.code === 0) {
-                    var data = r.msg;
-                    var html = [];
-                    html.push("<option value='' selected>---请选择---</option>");
-                    for (var i = 0; i < data.length; i++) {
-                        html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
-                    }
-                    $qx.append(html.join(''));
-                } else {
-                    $MB.n_danger(r.msg);
-                }
-            });
-        }
-    }
-
     function openUpdate() {
         var selected = $("#buildingTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
@@ -301,5 +249,7 @@ $(function () {
         del();
     });
 
-    initDs();
+    $.region.initDsQx($ds, function () {
+    }, $qx, function () {
+    });
 });
