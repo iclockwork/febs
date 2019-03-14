@@ -84,6 +84,18 @@ public class BuildingController extends BaseController {
         }
     }
 
+    @RequestMapping("building/generateBuildingNo")
+    @ResponseBody
+    public ResponseBo generateBuildingNo(String buildingType) {
+        try {
+            String buildingNo = this.buildingService.generateBuildingNo(buildingType);
+            return ResponseBo.ok(buildingNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取楼宇编码失败，请联系网站管理员！");
+        }
+    }
+
     @Log("新增楼宇")
     @RequiresPermissions("building:add")
     @RequestMapping("building/add")

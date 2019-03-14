@@ -18,9 +18,11 @@ public interface BuildingService extends IService<Building> {
 
     Building findById(Long buildingId);
 
+    String generateBuildingNo(String buildingType);
+
     void add(Building building);
 
     void update(Building building);
 
-    void delete(String buildingIds,Long staffId);
+    void delete(String buildingIds, Long staffId);
 }

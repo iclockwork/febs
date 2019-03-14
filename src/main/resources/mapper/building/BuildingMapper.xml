@@ -294,4 +294,10 @@
         and t.building_id = #{buildingId}
         order by t.building_id desc
     </select>
+
+    <select id="getBuildingNo" resultType="String">
+        select lpad(count(t.building_id) + 1, 5, '0') as seq
+          from BD_BUILDING t
+        where t.building_type = #{buildingType}
+  </select>
 </mapper>

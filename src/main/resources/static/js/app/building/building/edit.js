@@ -197,6 +197,20 @@ $(function () {
         }
     }
 
+    function generateBuildingNo() {
+        var buildingModalMode = $("#buildingModalMode").val();
+        if (buildingModalMode === "add") {
+            $.post(ctx + "building/generateBuildingNo", {buildingType: $editForm.find("select[name='buildingType']").val()}, function (r) {
+                if (r.code === 0) {
+                    var buildingNo = r.msg;
+                    $editForm.find("input[name='buildingNo']").val(buildingNo);
+                } else {
+                    $MB.n_danger(r.msg);
+                }
+            });
+        }
+    }
+
     function save() {
         var buildingModalMode = $("#buildingModalMode").val();
         var flag = $editForm.validate().form();
@@ -262,6 +276,11 @@ $(function () {
             });
         }
     }
+
+    $editForm.find("select[name='buildingType']").unbind("change").change(function () {
+        console.log("generateBuildingNo");
+        generateBuildingNo();
+    });
 
     $(".building-save").click(function () {
         save();

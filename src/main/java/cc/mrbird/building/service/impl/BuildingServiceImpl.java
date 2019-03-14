@@ -46,6 +46,16 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
     }
 
     @Override
+    public String generateBuildingNo(String buildingType) {
+        //根据楼宇类型生成序号
+        String seq = buildingMapper.getBuildingNo(buildingType);
+        //地市名称英文首字母+楼宇所属区域类型缩写+四位序列号，如NJSC0001
+        String buildingNo = buildingType + seq;
+
+        return buildingNo;
+    }
+
+    @Override
     @Transactional
     public void add(Building building) {
         building.setBuildingId(this.getSequence(Building.SEQ));
