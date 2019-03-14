@@ -1,4 +1,8 @@
 $(function () {
+    var $form = $(".address-table-form");
+    var $ds = $form.find("select[name='dsRegionId']");
+    var $qx = $form.find("select[name='regionId']");
+
     var settings = {
         url: ctx + "address/list",
         pageSize: 10,
@@ -6,10 +10,10 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
-                dsRegionId: $(".address-table-form").find("select[name='dsRegionId']").val(),
-                regionId: $(".address-table-form").find("select[name='regionId']").val(),
-                segmType: $(".address-table-form").find("select[name='segmType']").val(),
-                standName: $(".address-table-form").find("input[name='standName']").val().trim()
+                dsRegionId: $ds.val(),
+                regionId: $qx.val(),
+                segmType: $form.find("select[name='segmType']").val(),
+                standName: $form.find("input[name='standName']").val().trim()
             };
         },
         columns: [{
@@ -71,7 +75,7 @@ $(function () {
     }
 
     function refresh() {
-        $(".address-table-form")[0].reset();
+        $form[0].reset();
         search();
     }
 
@@ -82,7 +86,7 @@ $(function () {
         } else if ("csv" === fileType) {
             url = ctx + "address/csv";
         }
-        $.post(url, $(".address-table-form").serialize(), function (r) {
+        $.post(url, $form.serialize(), function (r) {
             if (r.code === 0) {
                 window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
             } else {
@@ -92,8 +96,7 @@ $(function () {
     }
 
     function initDs() {
-        var _ds = $("#ds");
-        _ds.empty();
+        $ds.empty();
         $.post(ctx + "region/options", {
             gradeId: "2000004"
         }, function (r) {
@@ -105,13 +108,13 @@ $(function () {
                     var isSelectStr = "";
                     if (G_REGION_ID === data[i].regionId) {
                         isSelectStr = "selected=true";
-                        $("#ds").attr("disabled", "disabled");
+                        $ds.attr("disabled", "disabled");
                     }
                     html.push("<option value='" + data[i].regionId + "' " + isSelectStr + ">" + data[i].regionName + "</option>");
                 }
-                _ds.append(html.join(''));
+                $ds.append(html.join(''));
 
-                _ds.change(function () {
+                $ds.change(function () {
                     initQx();
                 });
 
@@ -123,13 +126,11 @@ $(function () {
     }
 
     function initQx() {
-        var _ds = $("#ds");
-        var _qx = $("#qx");
-        _qx.empty();
-        if (null !== _ds.val() && "" !== _ds.val()) {
+        $qx.empty();
+        if (null !== $ds.val() && "" !== $ds.val()) {
             $.post(ctx + "region/options", {
                 gradeId: "2000011",
-                superRegionId: $("#ds").val()
+                superRegionId: $ds.val()
             }, function (r) {
                 if (r.code === 0) {
                     var data = r.msg;
@@ -138,7 +139,7 @@ $(function () {
                     for (var i = 0; i < data.length; i++) {
                         html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
                     }
-                    _qx.append(html.join(''));
+                    $qx.append(html.join(''));
                 } else {
                     $MB.n_danger(r.msg);
                 }
@@ -148,19 +149,19 @@ $(function () {
 
     $MB.initTable('addressTable', settings);
 
-    $(".zmdi-search").click(function () {
+    $(".address-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".address-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
+    $(".address-export-excel").click(function () {
         exportFile("excel")
     });
 
-    $("#exportCsv").click(function () {
+    $(".address-export-csv").click(function () {
         exportFile("csv")
     });
 

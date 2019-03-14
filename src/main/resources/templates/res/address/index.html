@@ -1,26 +1,26 @@
 <div class="card">
     <div class="card-block">
         <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
+            <div class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" title="搜索"/>
-                    <span class="actions__item zmdi zmdi-refresh-alt" title="刷新"/>
+                    <span class="actions__item zmdi zmdi-search address-search" title="搜索"/>
+                    <span class="actions__item zmdi zmdi-refresh-alt address-refresh" title="刷新"/>
                     <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download">
                         </i>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" id="exportExcel" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item address-export-excel"
                                data-table-action="excel">
                                 Excel (.xlsx)
                             </a>
-                            <a href="javascript:void(0)" id="exportCsv" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item address-export-csv"
                                data-table-action="csv">
                                 CSV (.csv)
                             </a>
                         </ul>
                     </div>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
+                <div class="dataTables_filter">
                     <form class="address-table-form">
                         <div class="row">
                             <div class="col-sm-3">
@@ -29,7 +29,7 @@
 					               	地市：
 					            </span>
                                     <div class="form-group">
-                                        <select id="ds" name="dsRegionId" class="form-control">
+                                        <select name="dsRegionId" class="form-control">
                                         </select>
                                         <i class="form-group__bar"></i>
                                     </div>
@@ -41,7 +41,7 @@
 					               	区县：
 					            </span>
                                     <div class="form-group">
-                                        <select id="qx" name="regionId" class="form-control">
+                                        <select name="regionId" class="form-control">
                                         </select>
                                         <i class="form-group__bar"></i>
                                     </div>
@@ -53,7 +53,7 @@
 					               	地址等级：
 					            </span>
                                     <div class="form-group">
-                                        <select id="segmType" name="segmType" class="form-control">
+                                        <select name="segmType" class="form-control">
                                             <option value="" selected>---请选择---</option>
                                             <option value="180001">标准一级地址</option>
                                             <option value="180002">标准二级地址</option>

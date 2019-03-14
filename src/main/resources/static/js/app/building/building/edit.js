@@ -1,5 +1,7 @@
 $(function () {
     var $editForm = $("#modal-building-edit-form");
+    var $ds = $editForm.find("select[name='dsRegionId']");
+    var $qx = $editForm.find("select[name='regionId']");
 
     var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
     var validator = $editForm.validate({
@@ -137,8 +139,7 @@ $(function () {
     });
 
     function initDs() {
-        var _ds = $editForm.find("select[name='dsRegionId']");
-        _ds.empty();
+        $ds.empty();
         $.post(ctx + "region/options", {
             gradeId: "2000004"
         }, function (r) {
@@ -150,13 +151,13 @@ $(function () {
                     var isSelectStr = "";
                     if (G_REGION_ID === data[i].regionId) {
                         isSelectStr = "selected=true";
-                        _ds.attr("disabled", "disabled");
+                        $ds.attr("disabled", "disabled");
                     }
                     html.push("<option value='" + data[i].regionId + "' " + isSelectStr + ">" + data[i].regionName + "</option>");
                 }
-                _ds.append(html.join(''));
+                $ds.append(html.join(''));
 
-                _ds.change(function () {
+                $ds.change(function () {
                     initQx();
                 });
 
@@ -168,13 +169,11 @@ $(function () {
     }
 
     function initQx() {
-        var _ds = $editForm.find("select[name='dsRegionId']");
-        var _qx = $editForm.find("select[name='regionId']");
-        _qx.empty();
-        if (null !== _ds.val() && "" !== _ds.val()) {
+        $qx.empty();
+        if (null !== $ds.val() && "" !== $ds.val()) {
             $.post(ctx + "region/options", {
                 gradeId: "2000011",
-                superRegionId: _ds.val()
+                superRegionId: $ds.val()
             }, function (r) {
                 if (r.code === 0) {
                     var data = r.msg;
@@ -184,11 +183,11 @@ $(function () {
                         html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
                     }
 
-                    _qx.append(html.join(''));
+                    $qx.append(html.join(''));
 
                     if ($("#buildingModalMode").val() === "update") {
                         var initRegionId = $editForm.find("select[name='regionId']").attr("initRegionId");
-                        _qx.val(initRegionId);
+                        $qx.val(initRegionId);
                     }
                 } else {
                     $MB.n_danger(r.msg);

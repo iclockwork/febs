@@ -1,4 +1,8 @@
 $(function () {
+    var $form = $(".building-table-form");
+    var $ds = $form.find("select[name='dsRegionId']");
+    var $qx = $form.find("select[name='regionId']");
+
     var settings = {
         url: ctx + "building/list",
         pageSize: 10,
@@ -6,14 +10,14 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
-                dsRegionId: $(".building-table-form").find("select[name='dsRegionId']").val(),
-                regionId: $(".building-table-form").find("select[name='regionId']").val(),
-                buildingNo: $(".building-table-form").find("input[name='buildingNo']").val().trim(),
-                buildingName: $(".building-table-form").find("input[name='buildingName']").val().trim(),
-                buildingType: $(".building-table-form").find("select[name='buildingType']").val(),
-                buildingTypeName: $(".building-table-form").find("input[name='buildingTypeName']").val().trim(),
-                buildingAddress: $(".building-table-form").find("input[name='buildingAddress']").val().trim(),
-                state: $(".building-table-form").find("select[name='state']").val()
+                dsRegionId: $ds.val(),
+                regionId: $qx.val(),
+                buildingNo: $form.find("input[name='buildingNo']").val().trim(),
+                buildingName: $form.find("input[name='buildingName']").val().trim(),
+                buildingType: $form.find("select[name='buildingType']").val(),
+                buildingTypeName: $form.find("input[name='buildingTypeName']").val().trim(),
+                buildingAddress: $form.find("input[name='buildingAddress']").val().trim(),
+                state: $form.find("select[name='state']").val()
             };
         },
         columns: [{
@@ -146,7 +150,7 @@ $(function () {
     }
 
     function refresh() {
-        $(".building-table-form")[0].reset();
+        $form[0].reset();
         search();
     }
 
@@ -157,7 +161,7 @@ $(function () {
         } else if ("csv" === fileType) {
             url = ctx + "building/csv";
         }
-        $.post(url, $(".building-table-form").serialize(), function (r) {
+        $.post(url, $form.serialize(), function (r) {
             if (r.code === 0) {
                 window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
             } else {
@@ -167,8 +171,7 @@ $(function () {
     }
 
     function initDs() {
-        var _ds = $("#ds");
-        _ds.empty();
+        $ds.empty();
         $.post(ctx + "region/options", {
             gradeId: "2000004"
         }, function (r) {
@@ -180,13 +183,13 @@ $(function () {
                     var isSelectStr = "";
                     if (G_REGION_ID === data[i].regionId) {
                         isSelectStr = "selected=true";
-                        $("#ds").attr("disabled", "disabled");
+                        $ds.attr("disabled", "disabled");
                     }
                     html.push("<option value='" + data[i].regionId + "' " + isSelectStr + ">" + data[i].regionName + "</option>");
                 }
-                _ds.append(html.join(''));
+                $ds.append(html.join(''));
 
-                _ds.change(function () {
+                $ds.change(function () {
                     initQx();
                 });
 
@@ -198,13 +201,11 @@ $(function () {
     }
 
     function initQx() {
-        var _ds = $("#ds");
-        var _qx = $("#qx");
-        _qx.empty();
-        if (null !== _ds.val() && "" !== _ds.val()) {
+        $qx.empty();
+        if (null !== $ds.val() && "" !== $ds.val()) {
             $.post(ctx + "region/options", {
                 gradeId: "2000011",
-                superRegionId: $("#ds").val()
+                superRegionId: $ds.val()
             }, function (r) {
                 if (r.code === 0) {
                     var data = r.msg;
@@ -213,7 +214,7 @@ $(function () {
                     for (var i = 0; i < data.length; i++) {
                         html.push("<option value='" + data[i].regionId + "'>" + data[i].regionName + "</option>");
                     }
-                    _qx.append(html.join(''));
+                    $qx.append(html.join(''));
                 } else {
                     $MB.n_danger(r.msg);
                 }
@@ -270,19 +271,19 @@ $(function () {
 
     $MB.initTable('buildingTable', settings);
 
-    $(".zmdi-search").click(function () {
+    $(".building-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".building-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
+    $(".building-export-excel").click(function () {
         exportFile("excel")
     });
 
-    $("#exportCsv").click(function () {
+    $(".building-export-csv").click(function () {
         exportFile("csv")
     });
 
