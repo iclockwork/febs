@@ -6,6 +6,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
 import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,6 +98,22 @@ public class BuildingCountController extends BaseController {
         }
     }
 
+    @Log("统计客户各业务量")
+    @RequestMapping("business/count")
+    @ResponseBody
+    public ResponseBo countBusiness() {
+        try {
+            GetUserInfo getUserInfo = new GetUserInfo().invoke();
+            String regionId = getUserInfo.getRegionId();
+            Long createStaffId = getUserInfo.getCreateStaffId();
+            JSONObject countBusiness =this.buildingCountService.queryBusiness(regionId,createStaffId);
+            return ResponseBo.ok(countBusiness);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("统计客户各业务量查询失败，请联系网站管理员！");
+        }
+    }
+
     @Log("各楼宇客户业务统计")
     @RequestMapping("buildingBusiness/count")
     @ResponseBody
@@ -105,12 +122,12 @@ public class BuildingCountController extends BaseController {
             GetUserInfo getUserInfo = new GetUserInfo().invoke();
             String regionId = getUserInfo.getRegionId();
             Long createStaffId = getUserInfo.getCreateStaffId();
-            JSONArray objects = this.buildingCountService.countBuildingBusiness(regionId, createStaffId);
-            logger.info("objects is;" + objects);
-            return ResponseBo.ok(objects);
+            JSONArray countBuildingBusiness = this.buildingCountService.countBuildingBusiness(regionId, createStaffId);
+            logger.info("objects is;" + countBuildingBusiness);
+            return ResponseBo.ok(countBuildingBusiness);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseBo.error("统计客户业务查询失败，请联系网站管理员！");
+            return ResponseBo.error("各楼宇客户业务统计查询失败，请联系网站管理员！");
         }
     }
 

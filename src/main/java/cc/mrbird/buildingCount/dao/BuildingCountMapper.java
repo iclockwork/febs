@@ -20,4 +20,6 @@ public interface BuildingCountMapper {
     List<Building> queryBuilding(String regionId, Long createStaffId);
 
     List<Integer> queryCustomerBusiness(String buildingNo);
+
+    List<Integer>  queryBusiness(String regionId, Long createStaffId);
 }

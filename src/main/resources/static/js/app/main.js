@@ -37,55 +37,66 @@ $(function () {
     });
 
     function buildBarCustomerChart() {
-        var tempData = {
-            labels: ["专线业务","宽带业务","固话业务","云业务","移网业务","电路业务"],
-            datasets: [{
-                label: "客户业务量",
-                data: [13,14,23,32,25,26],
-                backgroundColor: "#00c0ef"
-            }]
-        };
-
-        var options = {
-            //是否显示柱状图上面的数据
-            scaleOverlay: true,
-            //是否显示label值
-            scaleShowLabels: true,
-            //设置标题
-            title: {
-                display: true,
-                fontColor: 'red',
-                fontSize: 18,
-                text: '楼长客户各业务量统计图'
-            },
-
-            scales: {
-                xAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        fontColor: 'red',
-                        fontSize: 18,
-                        labelString: '客户业务名称'
-                    }
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        fontColor: 'red',
-                        fontSize: 18,
-                        labelString: '客户业务量（条）'
-                    }
-                }]
+        var businessData = [];
+        //客户各业务量统计
+        $.post(ctx + "business/count", "", function (r) {
+            if (r.code === 0) {
+                var jsonDatas = r.msg;
+                 businessData = jsonDatas.business;
+            } else {
+                $MB.n_warning(r.msg);
             }
-        };
 
-        var canvas = $("#barCustomerChart").get(0).getContext("2d");
-        var chart = new Chart(canvas, {
-            type: 'bar',
-            data: tempData,
-            options: options
+            var tempData = {
+                labels: ["专线业务","宽带业务","固话业务","云业务","移网业务","电路业务"],
+                datasets: [{
+                    label: "客户业务量",
+                    data: businessData,
+                    backgroundColor: "#00c0ef"
+                }]
+            };
+
+            var options = {
+                //是否显示柱状图上面的数据
+                scaleOverlay: true,
+                //是否显示label值
+                scaleShowLabels: true,
+                //设置标题
+                title: {
+                    display: true,
+                    fontColor: 'red',
+                    fontSize: 18,
+                    text: '楼长客户各业务量统计图'
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        barPercentage: 0.5,
+                        scaleLabel: {
+                            display: true,
+                            fontColor: 'red',
+                            fontSize: 18,
+                            labelString: '客户业务名称'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            fontColor: 'red',
+                            fontSize: 18,
+                            labelString: '客户业务量（条）'
+                        }
+                    }]
+                }
+            };
+
+            var canvas = $("#barCustomerChart").get(0).getContext("2d");
+            var chart = new Chart(canvas, {
+                type: 'bar',
+                data: tempData,
+                options: options
+            });
         });
 
     }
@@ -95,7 +106,7 @@ $(function () {
 
     function buildBarChart() {
 
-        // 将获取到的json数据分别存放到两个数组中
+        // 将获取到的json数据分别存放到数组中
         var labels = [], zxData = [], kdData = [], ghData = [], yData = [], ywData = [], dlData = [];
         //各楼宇客户业务量统计
         $.post(ctx + "buildingBusiness/count", "", function (r) {

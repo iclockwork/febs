@@ -1,6 +1,7 @@
 package cc.mrbird.buildingCount.service;
 
 import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.json.JSONException;
 
 import java.math.BigDecimal;
@@ -21,4 +22,6 @@ public interface BuildingCountService {
     BigDecimal countCustomerFee(String regionId, Long createStaffId);
 
     JSONArray countBuildingBusiness(String regionId, Long createStaffId) throws JSONException;
+
+    JSONObject queryBusiness(String regionId, Long createStaffId);
 }
