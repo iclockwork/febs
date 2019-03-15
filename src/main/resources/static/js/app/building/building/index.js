@@ -154,22 +154,6 @@ $(function () {
         search();
     }
 
-    function exportFile(fileType) {
-        var url = ctx + "building/excel";
-        if ("excel" === fileType) {
-            url = ctx + "building/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "building/csv";
-        }
-        $.post(url, $form.serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
-        });
-    }
-
     function openUpdate() {
         var selected = $("#buildingTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
@@ -228,11 +212,11 @@ $(function () {
     });
 
     $(".building-export-excel").click(function () {
-        exportFile("excel")
+        $.utils.exportFile(ctx + "building/excel", $form.serialize());
     });
 
     $(".building-export-csv").click(function () {
-        exportFile("csv")
+        $.utils.exportFile(ctx + "building/csv", $form.serialize());
     });
 
     $(".building-add").click(function () {
