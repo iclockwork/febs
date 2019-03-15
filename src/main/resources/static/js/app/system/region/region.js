@@ -6,17 +6,17 @@
     /**
      * 地市级别
      */
-    $.region.grade_id_ds = "2000004";
+    $.region.gradeIdDs = "2000004";
 
     /**
      * 区县级别
      */
-    $.region.grade_id_qx = "2000011";
+    $.region.gradeIdQx = "2000011";
 
     function _initDs(ds, dsCallback, qx, qxCallback) {
         ds.empty();
         $.post(ctx + "region/options", {
-            gradeId: $.region.grade_id_ds
+            gradeId: $.region.gradeIdDs
         }, function (r) {
             if (r.code === 0) {
                 var data = r.msg;
@@ -49,7 +49,7 @@
         qx.empty();
         if (null !== ds.val() && "" !== ds.val()) {
             $.post(ctx + "region/options", {
-                gradeId: $.region.grade_id_qx,
+                gradeId: $.region.gradeIdQx,
                 superRegionId: ds.val()
             }, function (r) {
                 if (r.code === 0) {
