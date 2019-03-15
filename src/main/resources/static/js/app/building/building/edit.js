@@ -249,16 +249,18 @@ $(function () {
         generateBuildingNo();
     });
 
-    $("#queryAddress").click(function () {
-        console.log("queryAddress");
+    $("#selectAddressSingle").click(function () {
+        console.log("selectAddressSingle");
+
+        $("#address-select-modal").attr("selectBackFormId", "modal-building-edit-form");
     });
 
-    $("#queryAccessArea").click(function () {
-        console.log("queryAccessArea");
+    $("#selectAccessAreaSingle").click(function () {
+        console.log("selectAccessAreaSingle");
     });
 
-    $("#queryRoom").click(function () {
-        console.log("queryRoom");
+    $("#selectRoomSingle").click(function () {
+        console.log("selectRoomSingle");
     });
 
     $(".building-save").click(function () {

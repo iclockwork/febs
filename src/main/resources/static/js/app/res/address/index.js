@@ -2,73 +2,43 @@ $(function () {
     var $form = $(".address-table-form");
     var $ds = $form.find("select[name='dsRegionId']");
     var $qx = $form.find("select[name='regionId']");
+    var $selectMode = $("#addressTable").attr("selectMode");
 
-    var settings = {
-        url: ctx + "address/list",
-        pageSize: 10,
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                dsRegionId: $ds.val(),
-                regionId: $qx.val(),
-                segmType: $form.find("select[name='segmType']").val(),
-                standName: $form.find("input[name='standName']").val().trim()
-            };
-        },
-        columns: [{
-            field: 'dsRegionName',
-            title: '地市'
-        }, {
-            field: 'regionName',
-            title: '区县'
-        }, {
-            field: 'standName',
-            title: '标准地址全称'
-        }, {
-            field: 'segmName',
-            title: '分段地址名称'
-        }, {
-            field: 'alias',
-            title: '地址别名'
-        }, {
-            field: 'parentStandName',
-            title: '上级地址名称'
-        }, {
-            field: 'segmTypeName',
-            title: '地址等级'
-        }, {
-            field: 'x',
-            title: '经度'
-        }, {
-            field: 'y',
-            title: '纬度'
-        }, {
-            field: 'isUserName',
-            title: '是否可受理'
-        }, {
-            field: 'isBindDire',
-            title: '是否绑定局向'
-        }, {
-            field: 'isBindDevice',
-            title: '是否绑定设备'
-        }, {
-            field: 'comRegionName',
-            title: '接入点名称'
-        }, {
-            field: 'serviceRegionName',
-            title: '业务点名称'
-        }, {
-            field: 'custGroupName',
-            title: '客户分群'
-        }, {
-            field: 'createTime',
-            title: '录入时间'
-        }, {
-            field: 'modiryDate',
-            title: '修改时间'
-        }]
-    };
+    function initTable() {
+        var pageSize = 10;
+        var columns = [];
+
+        if ($.utils.selectModeSingle === $selectMode) {
+            pageSize = 5;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.address.tableColumns);
+        } else if ($.utils.selectModeMultiple === $selectMode) {
+            pageSize = 5;
+        } else {
+            pageSize = 10;
+            columns = $.address.tableColumns;
+        }
+
+        var settings = {
+            url: ctx + "address/list",
+            pageSize: pageSize,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    dsRegionId: $ds.val(),
+                    regionId: $qx.val(),
+                    segmType: $form.find("select[name='segmType']").val(),
+                    standName: $form.find("input[name='standName']").val().trim()
+                };
+            },
+            columns: columns
+        };
+
+        $MB.initTable('addressTable', settings);
+    }
 
     function search() {
         $MB.refreshTable('addressTable');
@@ -79,23 +49,32 @@ $(function () {
         search();
     }
 
-    function exportFile(fileType) {
-        var url = ctx + "address/excel";
-        if ("excel" === fileType) {
-            url = ctx + "address/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "address/csv";
+    function selectOk() {
+        var selected = $("#addressTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要选择的地址！');
+            return;
         }
-        $.post(url, $form.serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
-        });
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能选择一个地址！');
+            return;
+        }
+        var segmId = selected[0].segmId;
+        var standName = selected[0].standName;
+
+        console.log("segmId:" + segmId + ", standName:" + standName);
+
+        var selectBackFormId = $("#address-select-modal").attr("selectBackFormId");
+        if (selectBackFormId) {
+            $("#" + selectBackFormId).find("input[name='segmId']").val(segmId);
+            $("#" + selectBackFormId).find("input[name='standName']").val(standName);
+        }
+
+        $('#address-select-modal').modal('hide');
     }
 
-    $MB.initTable('addressTable', settings);
+    initTable();
 
     $(".address-search").click(function () {
         search();
@@ -106,11 +85,15 @@ $(function () {
     });
 
     $(".address-export-excel").click(function () {
-        exportFile("excel")
+        $.utils.exportFile(ctx + "address/excel", $form.serialize());
     });
 
     $(".address-export-csv").click(function () {
-        exportFile("csv")
+        $.utils.exportFile(ctx + "address/csv", $form.serialize());
+    });
+
+    $(".address-select-modal-ok").click(function () {
+        selectOk();
     });
 
     $.region.initDsQx($ds, function () {

@@ -269,7 +269,7 @@
                                     <input type="text" class="form-control" name="standName" readonly>
                                 </div>
                                 <span class="actions__item zmdi zmdi-search" data-toggle="modal"
-                                      data-target="#address-query-modal" title="搜索" id="queryAddress"></span>
+                                      data-target="#address-select-modal" title="搜索" id="selectAddressSingle"></span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -282,7 +282,7 @@
                                     <input type="text" class="form-control" name="accessAreaName" readonly>
                                 </div>
                                 <span class="actions__item zmdi zmdi-search" data-toggle="modal"
-                                      data-target="#accessArea-query-modal" title="搜索" id="queryAccessArea"></span>
+                                      data-target="#accessArea-query-modal" title="搜索" id="selectAccessAreaSingle"></span>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -295,7 +295,7 @@
                                     <input type="text" class="form-control" name="roomName" readonly>
                                 </div>
                                 <span class="actions__item zmdi zmdi-search" data-toggle="modal"
-                                      data-target="#room-query-modal" title="搜索" id="queryRoom"></span>
+                                      data-target="#room-query-modal" title="搜索" id="selectRoomSingle"></span>
                             </div>
                         </div>
                     </div>
@@ -510,4 +510,5 @@
         </div>
     </div>
 </div>
+<div data-th-include="res/address/select-modal-single"></div>
 <script data-th-src="@{js/app/building/building/edit.js}"></script>
