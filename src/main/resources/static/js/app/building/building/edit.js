@@ -253,6 +253,7 @@ $(function () {
         console.log("selectAddressSingle");
 
         $("#address-select-modal").attr("selectBackFormId", "modal-building-edit-form");
+        $("#address-select-modal").attr("segmType", "180007");
     });
 
     $("#selectAccessAreaSingle").click(function () {

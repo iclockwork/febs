@@ -1,11 +1,13 @@
 $(function () {
+    var $modal = $('#accessArea-select-modal');
+
     //打开事件
-    $('#accessArea-select-modal').on('show.bs.modal', function (event) {
+    $modal.on('show.bs.modal', function (event) {
 
     });
 
     //隐藏事件
-    $('#accessArea-select-modal').on('hidden.bs.modal', function (event) {
+    $modal.on('hidden.bs.modal', function (event) {
         $.utils.toggleBodyModal();
     });
 });
