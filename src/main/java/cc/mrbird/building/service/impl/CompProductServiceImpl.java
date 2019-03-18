@@ -63,7 +63,7 @@ public class CompProductServiceImpl implements CompProductService {
             File files = new File(filePath);
             FileInputStream fis = new FileInputStream(files);
             byte[] fl = new byte[(int) files.length()];
-            fis.read(fl);
+            fis.read(fl);//页面显示出图片
             ByteArrayInputStream fileInput = new ByteArrayInputStream(fl);
             compProductMapper.saveFile(fileInput,filename);
         } catch (IOException e) {
