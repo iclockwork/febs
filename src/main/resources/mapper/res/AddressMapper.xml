@@ -117,7 +117,7 @@
         and res_type_id = '222') e
         where 1 = 1
         and a.region_id = c.region_id
-        and c.super_region_id = ds.region_id
+        and c.super_region_id = ds.region_id(+)
         and a.parent_segm_id = b.segm_id(+)
         and a.com_id = d.region_id(+)
         and a.service_region_id = e.service_region_id(+)

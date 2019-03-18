@@ -1,87 +1,100 @@
 $(function () {
-    var settings = {
-        url: ctx + "accessArea/list",
-        pageSize: 10,
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                accessAreaName: $(".accessArea-table-form").find("input[name='accessAreaName']").val().trim()
-            };
-        },
-        columns: [{
-            field: 'accessAreaNo',
-            title: '综合接入区编码'
-        }, {
-            field: 'accessAreaName',
-            title: '综合接入区名称'
-        }, {
-            field: 'focusAreaName',
-            title: '汇聚区名称'
-        }, {
-            field: 'areaTypeName',
-            title: '所属区域'
-        }, {
-            field: 'dsRegionName',
-            title: '所属地市'
-        }, {
-            field: 'isCompleteName',
-            title: '是否已完成建设'
-        }, {
-            field: 'problem',
-            title: '目前存在问题'
-        }, {
-            field: 'workLoad',
-            title: '工作量'
-        }, {
-            field: 'notes',
-            title: '备注'
-        }, {
-            field: 'createTime',
-            title: '创建时间'
-        }]
-    };
+    var $form = $(".accessArea-table-form");
+    var $ds = $form.find("select[name='dsRegionId']");
+    var $qx = $form.find("select[name='regionId']");
+    var $selectMode = $("#accessAreaTable").attr("selectMode");
+
+    function initTable() {
+        var pageSize = 10;
+        var columns = [];
+
+        if ($.utils.selectModeSingle === $selectMode) {
+            pageSize = 5;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.accessArea.tableColumns);
+        } else if ($.utils.selectModeMultiple === $selectMode) {
+            pageSize = 5;
+        } else {
+            pageSize = 10;
+            columns = $.accessArea.tableColumns;
+        }
+
+        var settings = {
+            url: ctx + "accessArea/list",
+            pageSize: pageSize,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    dsRegionId: $ds.val(),
+                    accessAreaName: $form.find("input[name='accessAreaName']").val().trim()
+                };
+            },
+            columns: columns
+        };
+
+        $MB.initTable('accessAreaTable', settings);
+    }
 
     function search() {
         $MB.refreshTable('accessAreaTable');
     }
 
     function refresh() {
-        $(".accessArea-table-form")[0].reset();
+        $form[0].reset();
         search();
     }
 
-    function exportFile(fileType) {
-        var url = ctx + "accessArea/excel";
-        if ("excel" === fileType) {
-            url = ctx + "accessArea/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "accessArea/csv";
+    function selectOk() {
+        var selected = $("#accessAreaTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要选择的综合接入区！');
+            return;
         }
-        $.post(url, $(".accessArea-table-form").serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
-        });
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能选择一个综合接入区！');
+            return;
+        }
+        var accessAreaId = selected[0].accessAreaId;
+        var accessAreaName = selected[0].accessAreaName;
+
+        console.log("accessAreaId:" + accessAreaId + ", accessAreaName:" + accessAreaName);
+
+        var selectBackFormId = $("#accessArea-select-modal").attr("selectBackFormId");
+        if (selectBackFormId) {
+            $("#" + selectBackFormId).find("input[name='accessAreaId']").val(accessAreaId);
+            $("#" + selectBackFormId).find("input[name='accessAreaName']").val(accessAreaName);
+        }
+
+        $('#accessArea-select-modal').modal('hide');
     }
 
-    $MB.initTable('accessAreaTable', settings);
+    initTable();
 
-    $(".zmdi-search").click(function () {
+    $(".accessArea-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".accessArea-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
-        exportFile("excel")
+    $(".accessArea-export-excel").click(function () {
+        $.utils.exportFile(ctx + "accessArea/excel", $form.serialize());
     });
 
-    $("#exportCsv").click(function () {
-        exportFile("csv")
+    $(".accessArea-export-csv").click(function () {
+        $.utils.exportFile(ctx + "accessArea/csv", $form.serialize());
+    });
+
+    $(".accessArea-select-modal-ok").click(function () {
+        selectOk();
+    });
+
+    $.region.initDsQx($ds, function () {
+    }, $qx, function () {
     });
 });

@@ -5,6 +5,7 @@ import cc.mrbird.common.annotation.ExportConfig;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,6 +15,20 @@ public class Room implements Serializable {
     @Id
     @Column(name = "ROOM_ID")
     private String roomId;
+
+    @Transient
+    private String dsRegionId;
+
+    @Transient
+    @ExportConfig(value = "地市")
+    private String dsRegionName;
+
+    @Column(name = "REGION_ID")
+    private String regionId;
+
+    @Transient
+    @ExportConfig(value = "区县")
+    private String regionName;
 
     @Column(name = "CHINA_NAME")
     @ExportConfig(value = "机房名称")
@@ -32,9 +47,6 @@ public class Room implements Serializable {
 
     @ExportConfig(value = "所属局站")
     private String stationName;
-
-    @ExportConfig(value = "所属区域")
-    private String regionName;
 
     @Column(name = "NAME_AB")
     private String nameAb;
@@ -118,9 +130,6 @@ public class Room implements Serializable {
 
     @Column(name = "DISTRICT_ID")
     private String districtId;
-
-    @Column(name = "REGION_ID")
-    private String regionId;
 
     @Column(name = "ENVIR_GRADE")
     private String envirGrade;
@@ -1696,5 +1705,21 @@ public class Room implements Serializable {
 
     public void setConstructionShareName(String constructionShareName) {
         this.constructionShareName = constructionShareName;
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getDsRegionName() {
+        return dsRegionName;
+    }
+
+    public void setDsRegionName(String dsRegionName) {
+        this.dsRegionName = dsRegionName;
     }
 }

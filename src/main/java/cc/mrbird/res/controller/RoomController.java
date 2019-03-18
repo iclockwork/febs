@@ -7,6 +7,7 @@ import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.res.domain.Room;
 import cc.mrbird.res.service.RoomService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class RoomController extends BaseController {
     @RequestMapping("room/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Room room) {
+        if (StringUtils.isBlank(room.getDsRegionId())) {
+            room.setDsRegionId(super.getCurrentUser().getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.roomService.findAll(room));
     }
 
@@ -46,6 +50,9 @@ public class RoomController extends BaseController {
     @ResponseBody
     public ResponseBo excel(Room room) {
         try {
+            if (StringUtils.isBlank(room.getDsRegionId())) {
+                room.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Room> list = this.roomService.findAll(room);
             return FileUtils.createExcelByPOIKit("机房表", list, Room.class);
         } catch (Exception e) {
@@ -58,6 +65,9 @@ public class RoomController extends BaseController {
     @ResponseBody
     public ResponseBo csv(Room room) {
         try {
+            if (StringUtils.isBlank(room.getDsRegionId())) {
+                room.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Room> list = this.roomService.findAll(room);
             return FileUtils.createCsv("机房表", list, Room.class);
         } catch (Exception e) {

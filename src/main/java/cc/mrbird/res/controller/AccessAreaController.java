@@ -7,6 +7,7 @@ import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.res.domain.AccessArea;
 import cc.mrbird.res.service.AccessAreaService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class AccessAreaController extends BaseController {
     @RequestMapping("accessArea/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, AccessArea accessArea) {
+        if (StringUtils.isBlank(accessArea.getDsRegionId())) {
+            accessArea.setDsRegionId(super.getCurrentUser().getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.accessAreaService.findAll(accessArea));
     }
 
@@ -46,6 +50,9 @@ public class AccessAreaController extends BaseController {
     @ResponseBody
     public ResponseBo excel(AccessArea accessArea) {
         try {
+            if (StringUtils.isBlank(accessArea.getDsRegionId())) {
+                accessArea.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<AccessArea> list = this.accessAreaService.findAll(accessArea);
             return FileUtils.createExcelByPOIKit("综合接入区表", list, AccessArea.class);
         } catch (Exception e) {
@@ -58,6 +65,9 @@ public class AccessAreaController extends BaseController {
     @ResponseBody
     public ResponseBo csv(AccessArea accessArea) {
         try {
+            if (StringUtils.isBlank(accessArea.getDsRegionId())) {
+                accessArea.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<AccessArea> list = this.accessAreaService.findAll(accessArea);
             return FileUtils.createCsv("综合接入区表", list, AccessArea.class);
         } catch (Exception e) {

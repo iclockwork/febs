@@ -7,6 +7,7 @@ import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.res.domain.Address;
 import cc.mrbird.res.service.AddressService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class AddressController extends BaseController {
     @RequestMapping("address/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Address address) {
+        if (StringUtils.isBlank(address.getDsRegionId())) {
+            address.setDsRegionId(super.getCurrentUser().getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.addressService.findAll(address));
     }
 
@@ -46,6 +50,9 @@ public class AddressController extends BaseController {
     @ResponseBody
     public ResponseBo excel(Address address) {
         try {
+            if (StringUtils.isBlank(address.getDsRegionId())) {
+                address.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Address> list = this.addressService.findAll(address);
             return FileUtils.createExcelByPOIKit("标准地址表", list, Address.class);
         } catch (Exception e) {
@@ -58,6 +65,9 @@ public class AddressController extends BaseController {
     @ResponseBody
     public ResponseBo csv(Address address) {
         try {
+            if (StringUtils.isBlank(address.getDsRegionId())) {
+                address.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Address> list = this.addressService.findAll(address);
             return FileUtils.createCsv("标准地址表", list, Address.class);
         } catch (Exception e) {

@@ -29,7 +29,7 @@ public class RoomServiceImpl extends BaseService<Room> implements RoomService {
     @Override
     public List<Room> findAll(Room room) {
         try {
-            List<Room> list = this.roomMapper.findAll(room.getChinaName());
+            List<Room> list = this.roomMapper.findAll(room);
             return list;
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,8 +1,8 @@
-<div class="modal fade" id="address-select-modal" data-keyboard="false" data-backdrop="static" tabindex="-1">
+<div class="modal fade" id="room-select-modal" data-keyboard="false" data-backdrop="static" tabindex="-1">
     <div class="modal-dialog modal-common-middle">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title pull-left" id="address-select-modal-title">查询地址</h3>
+                <h3 class="modal-title pull-left" id="room-select-modal-title">查询机房</h3>
             </div>
             <div class="modal-body">
                 <div class="card">
@@ -10,11 +10,11 @@
                         <div class="table-responsive">
                             <div class="dataTables_wrapper">
                                 <div class="dataTables_buttons hidden-sm-down actions">
-                                    <span class="actions__item zmdi zmdi-search address-search" title="搜索"/>
-                                    <span class="actions__item zmdi zmdi-refresh-alt address-refresh" title="刷新"/>
+                                    <span class="actions__item zmdi zmdi-search room-search" title="搜索"/>
+                                    <span class="actions__item zmdi zmdi-refresh-alt room-refresh" title="刷新"/>
                                 </div>
                                 <div class="dataTables_filter">
-                                    <form class="address-table-form">
+                                    <form class="room-table-form">
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <div class="input-group">
@@ -43,33 +43,10 @@
                                             <div class="col-sm-3">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        地址等级：
+                                                        机房名称：
                                                     </span>
                                                     <div class="form-group">
-                                                        <select name="segmType" class="form-control">
-                                                            <option value="" selected>---请选择---</option>
-                                                            <option value="180001">标准一级地址</option>
-                                                            <option value="180002">标准二级地址</option>
-                                                            <option value="180003">标准三级地址</option>
-                                                            <option value="180004">标准四级地址</option>
-                                                            <option value="180005">标准五级地址</option>
-                                                            <option value="180006">标准六级地址</option>
-                                                            <option value="180007">标准七级地址</option>
-                                                            <option value="180008">标准八级地址</option>
-                                                            <option value="180009">标准九级地址</option>
-                                                        </select>
-                                                        <i class="form-group__bar"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        标准地址名称：
-                                                    </span>
-                                                    <div class="form-group">
-                                                        <input type="text" name="standName" class="form-control"
-                                                               value="江苏省南京市">
+                                                        <input type="text" name="chinaName" class="form-control">
                                                         <i class="form-group__bar"></i>
                                                     </div>
                                                 </div>
@@ -77,7 +54,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <table id="addressTable" selectMode="single" data-mobile-responsive="true"
+                                <table id="roomTable" selectMode="single" data-mobile-responsive="true"
                                        class="mb-bootstrap-table text-nowrap table-striped"></table>
                             </div>
                         </div>
@@ -85,13 +62,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-save address-select-modal-ok">确定</button>
+                <button type="button" class="btn btn-save room-select-modal-ok">确定</button>
                 <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">关闭</button>
                 <button class="btn-hide"></button>
             </div>
         </div>
     </div>
 </div>
-<script data-th-src="@{js/app/res/address/address.js}"></script>
-<script data-th-src="@{js/app/res/address/index.js}"></script>
-<script data-th-src="@{js/app/res/address/select-modal-single.js}"></script>
+<script data-th-src="@{js/app/res/room/room.js}"></script>
+<script data-th-src="@{js/app/res/room/index.js}"></script>
+<script data-th-src="@{js/app/res/room/select-modal-single.js}"></script>

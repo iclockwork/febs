@@ -257,10 +257,14 @@ $(function () {
 
     $("#selectAccessAreaSingle").click(function () {
         console.log("selectAccessAreaSingle");
+
+        $("#accessArea-select-modal").attr("selectBackFormId", "modal-building-edit-form");
     });
 
     $("#selectRoomSingle").click(function () {
         console.log("selectRoomSingle");
+
+        $("#room-select-modal").attr("selectBackFormId", "modal-building-edit-form");
     });
 
     $(".building-save").click(function () {

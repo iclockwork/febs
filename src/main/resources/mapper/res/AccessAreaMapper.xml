@@ -29,16 +29,16 @@
         <result column="AREA" jdbcType="DECIMAL" property="area"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.res.domain.AccessArea">
-        <bind name="bindAccessAreaName" value="'%' + accessAreaName + '%'"/>
+    <select id="findAll" resultType="cc.mrbird.res.domain.AccessArea" parameterType="cc.mrbird.res.domain.AccessArea">
         SELECT DISTINCT A.ACCESS_AREA_ID as accessAreaId,
+        a.region_id as dsRegionId,
+        c.region_name as dsRegionName,
         A.ACCESS_AREA_NO as accessAreaNo,
         A.ACCESS_AREA_NAME as accessAreaName,
         A.FOCUS_AREA_ID as focusAreaId,
         B.ACCESS_AREA_NAME as focusAreaName,
         A.RES_TYPE_ID as resTypeId,
         SF_GET_DESC_CHINA(A.AREA_TYPE_ID) as areaTypeName,
-        SF_GET_REGION(A.REGION_ID) as dsRegionName,
         SF_GET_DESC_CHINA(A.IS_COMPLETE) as isCompleteName,
         A.PROBLEM as problem,
         A.WORK_LOAD as workLoad,
@@ -48,10 +48,20 @@
         A.MODIFY_DATE as modifyDate,
         A.MODIFY_OP as modifyOp
         FROM (select * from SPC_ACCESS_AREA where nvl(delete_state, '0') = '0') A,
-        (select * from SPC_ACCESS_AREA where nvl(delete_state, '0') = '0') B
+        (select * from SPC_ACCESS_AREA where nvl(delete_state, '0') = '0') B,
+        (select * from SPC_REGION where nvl(delete_state, '0') = '0') C
         WHERE 1 = 1
         AND A.FOCUS_AREA_ID = B.ACCESS_AREA_ID(+)
+        AND A.REGION_ID = C.REGION_ID(+)
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND a.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
         <if test="accessAreaName != null and accessAreaName != ''">
+            <bind name="bindAccessAreaName" value="'%' + accessAreaName + '%'"/>
             AND A.ACCESS_AREA_NAME like #{bindAccessAreaName}
         </if>
     </select>

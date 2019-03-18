@@ -4,6 +4,7 @@ import cc.mrbird.common.annotation.ExportConfig;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +13,20 @@ import java.util.Date;
 public class AccessArea implements Serializable {
     @Column(name = "ACCESS_AREA_ID")
     private String accessAreaId;
+
+    @Transient
+    private String dsRegionId;
+
+    @Transient
+    @ExportConfig(value = "地市")
+    private String dsRegionName;
+
+    @Column(name = "REGION_ID")
+    private String regionId;
+
+    @Transient
+    @ExportConfig(value = "区县")
+    private String regionName;
 
     @Column(name = "ACCESS_AREA_NO")
     @ExportConfig(value = "综合接入区编码")
@@ -33,12 +48,6 @@ public class AccessArea implements Serializable {
 
     @ExportConfig(value = "所属区域")
     private String areaTypeName;
-
-    @Column(name = "REGION_ID")
-    private String regionId;
-
-    @ExportConfig(value = "所属地市")
-    private String dsRegionName;
 
     @Column(name = "IS_COMPLETE")
     private String isComplete;
@@ -422,5 +431,21 @@ public class AccessArea implements Serializable {
 
     public void setIsCompleteName(String isCompleteName) {
         this.isCompleteName = isCompleteName;
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
     }
 }

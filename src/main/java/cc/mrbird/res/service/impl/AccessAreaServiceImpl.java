@@ -29,7 +29,7 @@ public class AccessAreaServiceImpl extends BaseService<AccessArea> implements Ac
     @Override
     public List<AccessArea> findAll(AccessArea accessArea) {
         try {
-            List<AccessArea> list = this.accessAreaMapper.findAll(accessArea.getAccessAreaName());
+            List<AccessArea> list = this.accessAreaMapper.findAll(accessArea);
             return list;
         } catch (Exception e) {
             e.printStackTrace();

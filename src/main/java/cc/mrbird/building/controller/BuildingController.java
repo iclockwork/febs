@@ -7,7 +7,6 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +40,8 @@ public class BuildingController extends BaseController {
     @RequestMapping("building/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Building building) {
-        User user = super.getCurrentUser();
         if (StringUtils.isBlank(building.getDsRegionId())) {
-            building.setDsRegionId(user.getRegionId());
+            building.setDsRegionId(super.getCurrentUser().getRegionId());
         }
         return super.selectByPageNumSize(request, () -> this.buildingService.findAll(building));
     }
@@ -52,6 +50,9 @@ public class BuildingController extends BaseController {
     @ResponseBody
     public ResponseBo excel(Building building) {
         try {
+            if (StringUtils.isBlank(building.getDsRegionId())) {
+                building.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Building> list = this.buildingService.findAll(building);
             return FileUtils.createExcelByPOIKit("楼宇表", list, Building.class);
         } catch (Exception e) {
@@ -64,6 +65,9 @@ public class BuildingController extends BaseController {
     @ResponseBody
     public ResponseBo csv(Building building) {
         try {
+            if (StringUtils.isBlank(building.getDsRegionId())) {
+                building.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Building> list = this.buildingService.findAll(building);
             return FileUtils.createCsv("楼宇表", list, Building.class);
         } catch (Exception e) {

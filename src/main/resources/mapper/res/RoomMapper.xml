@@ -99,12 +99,14 @@
         <result column="WO_ID" jdbcType="DECIMAL" property="woId"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.res.domain.Room">
-        <bind name="bindChinaName" value="'%' + chinaName + '%'"/>
+    <select id="findAll" resultType="cc.mrbird.res.domain.Room" parameterType="cc.mrbird.res.domain.Room">
         SELECT A.ROOM_ID as roomId,
+        ds.region_id as dsRegionId,
+        ds.region_name as dsRegionName,
+        a.region_id as regionId,
+        c.region_name as regionName,
         A.CHINA_NAME as chinaName,
         A.ROOM_NO as roomNo,
-        A.REGION_ID as regionId,
         A.STATION_ID as stationId,
         A.ALIAS as alias,
         SF_GET_DESC_CHINA(A.TYPE_ID) as typeName,
@@ -126,12 +128,12 @@
         A.CONTRACT_EXPIRES_TIME as contractExpiresTime,
         A.AREA as area,
         SF_GET_DESC_CHINA(A.PROPERTY_BELONG) as propertyBelongName,
-        B.CHINA_NAME as stationName,
-        C.REGION_NAME as regionName
+        B.CHINA_NAME as stationName
         FROM (select * from ADDR_SEGM where nvl(delete_state, '0') = '0') D,
         (select * from SPC_ROOM where nvl(delete_state, '0') = '0') A,
         (select * from SPC_STATION where nvl(delete_state, '0') = '0') B,
         (select * from SPC_REGION where nvl(delete_state, '0') = '0') C,
+        SPC_REGION ds,
         (select * from STAFF where nvl(delete_state, '0') = '0') E
         WHERE 1 = 1
         AND A.CLASS_ID not in (12050001)
@@ -141,8 +143,20 @@
         AND A.ADDR_SEGM_ID = D.SEGM_ID(+)
         AND A.MODIFY_OP = E.STAFF_ID(+)
         AND A.REGION_ID = C.REGION_ID(+)
+        and c.super_region_id = ds.region_id(+)
         AND A.ADDR_SEGM_ID = D.SEGM_ID(+)
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND a.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND a.region_id = #{regionId}
+        </if>
         <if test="chinaName != null and chinaName != ''">
+            <bind name="bindChinaName" value="'%' + chinaName + '%'"/>
             AND A.CHINA_NAME like #{bindChinaName}
         </if>
     </select>
