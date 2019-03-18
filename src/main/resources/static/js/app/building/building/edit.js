@@ -31,19 +31,29 @@ $(function () {
                 required: true
             },
             longitude: {
-                required: true
+                required: true,
+                number: true,
+                range: [-180, 180]
             },
             latitude: {
-                required: true
+                required: true,
+                number: true,
+                range: [-180, 180]
             },
             floorNumber: {
-                required: true
+                required: true,
+                digits: true,
+                range: [1, 99]
             },
             area: {
-                required: true
+                required: true,
+                number: true,
+                range: [0, 1000000000000]
             },
             householderNumber: {
-                required: true
+                required: true,
+                digits: true,
+                range: [1, 9999]
             },
             propertyCompany: {
                 required: true
@@ -65,6 +75,68 @@ $(function () {
             },
             remark: {
                 required: false
+            },
+            segmId: {
+                required: false
+            },
+            accessAreaId: {
+                required: false
+            },
+            roomId: {
+                required: false
+            },
+            lightName: {
+                required: false
+            },
+            lightAddress: {
+                required: false
+            },
+            lightLongitude: {
+                required: false,
+                number: true,
+                range: [-180, 180]
+            },
+            lightLatitude: {
+                required: false,
+                number: true,
+                range: [-180, 180]
+            },
+            roomCabinetFlag: {
+                required: false
+            },
+            cableAccessFlag: {
+                required: false
+            },
+            cableNumber: {
+                required: false,
+                digits: true,
+                range: [1, 9999]
+            },
+            cableRemainNumber: {
+                required: false,
+                digits: true,
+                range: [1, 9999]
+            },
+            verticalCoverageFlag: {
+                required: false
+            },
+            horizontalCoverageFlag: {
+                required: false
+            },
+            coverageMethod: {
+                required: false
+            },
+            cooperationMethod: {
+                required: false
+            },
+            indoorDistributionFlag: {
+                required: false
+            },
+            coverageNetworkStandard: {
+                required: false
+            },
+            wlanFlag: {
+                required: false
             }
         },
         errorPlacement: function (error, element) {
@@ -74,68 +146,7 @@ $(function () {
                 error.insertAfter(element);
             }
         },
-        messages: {
-            dsRegionId: {
-                required: icon + "请输入"
-            },
-            regionId: {
-                required: icon + "请输入"
-            },
-            buildingLevel: {
-                required: icon + "请输入"
-            },
-            buildingType: {
-                required: icon + "请输入"
-            },
-            buildingTypeName: {
-                required: icon + "请输入"
-            },
-            buildingAddress: {
-                required: icon + "请输入"
-            },
-            buildingNo: {
-                required: icon + "请输入"
-            },
-            buildingName: {
-                required: icon + "请输入"
-            },
-            longitude: {
-                required: icon + "请输入"
-            },
-            latitude: {
-                required: icon + "请输入"
-            },
-            floorNumber: {
-                required: icon + "请输入"
-            },
-            area: {
-                required: icon + "请输入"
-            },
-            householderNumber: {
-                required: icon + "请输入"
-            },
-            propertyCompany: {
-                required: icon + "请输入"
-            },
-            propertyManager: {
-                required: icon + "请输入"
-            },
-            propertyManagerContact: {
-                required: icon + "请输入"
-            },
-            buildingManager: {
-                required: icon + "请输入"
-            },
-            buildingManagerContact: {
-                required: icon + "请输入"
-            },
-            state: {
-                required: icon + "请输入"
-            },
-            remark: {
-                required: icon + "请输入"
-            }
-        }
+        messages: {}
     });
 
     function generateBuildingNo() {
