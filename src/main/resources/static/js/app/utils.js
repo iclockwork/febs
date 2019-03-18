@@ -14,6 +14,13 @@
     $.utils.selectModeMultiple = "multiple";
 
     /**
+     * 临时解决多modal窗口滚动条不滚动问题
+     */
+    $.utils.toggleBodyModal = function () {
+        $('body').toggleClass('modal-open', $('.modal').hasClass('show'));
+    };
+
+    /**
      * 导出
      */
     $.utils.exportFile = function (url, param) {
