@@ -18,7 +18,10 @@ $(function () {
             pageSize = 5;
         } else {
             pageSize = 10;
-            columns = $.building.tableColumns;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.building.tableColumns);
         }
 
         var settings = {
