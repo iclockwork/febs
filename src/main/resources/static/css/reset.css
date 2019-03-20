@@ -47,7 +47,12 @@
 }
 
 .fixed-table-body {
-    min-height: 360px;
+    min-height: 160px;
+}
+
+.bootstrap-autocomplete {
+    height: 200px;
+    overflow: auto;
 }
 
 
