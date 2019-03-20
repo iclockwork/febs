@@ -13,7 +13,7 @@ import java.util.Date;
 public class BuildingCustomerRp implements Serializable {
     @Id
     @Column(name = "BUILDING_CUSTOMER_RP_ID")
-    private Integer buildingCustomerRpId;
+    private Long buildingCustomerRpId;
 
     private String dsRegionId;
 
@@ -62,13 +62,13 @@ public class BuildingCustomerRp implements Serializable {
     private Integer deleteFlag;
 
     @Column(name = "CREATE_STAFF_ID")
-    private Integer createStaffId;
+    private Long createStaffId;
 
     @Column(name = "CREATE_DATE")
     private Date createDate;
 
     @Column(name = "MODIFY_STAFF_ID")
-    private Integer modifyStaffId;
+    private Long modifyStaffId;
 
     @Column(name = "MODIFY_DATE")
     private Date modifyDate;
@@ -79,14 +79,14 @@ public class BuildingCustomerRp implements Serializable {
     /**
      * @return BUILDING_CUSTOMER_RP_ID
      */
-    public Integer getBuildingCustomerRpId() {
+    public Long getBuildingCustomerRpId() {
         return buildingCustomerRpId;
     }
 
     /**
      * @param buildingCustomerRpId
      */
-    public void setBuildingCustomerRpId(Integer buildingCustomerRpId) {
+    public void setBuildingCustomerRpId(Long buildingCustomerRpId) {
         this.buildingCustomerRpId = buildingCustomerRpId;
     }
 
@@ -149,14 +149,14 @@ public class BuildingCustomerRp implements Serializable {
     /**
      * @return CREATE_STAFF_ID
      */
-    public Integer getCreateStaffId() {
+    public Long getCreateStaffId() {
         return createStaffId;
     }
 
     /**
      * @param createStaffId
      */
-    public void setCreateStaffId(Integer createStaffId) {
+    public void setCreateStaffId(Long createStaffId) {
         this.createStaffId = createStaffId;
     }
 
@@ -177,14 +177,14 @@ public class BuildingCustomerRp implements Serializable {
     /**
      * @return MODIFY_STAFF_ID
      */
-    public Integer getModifyStaffId() {
+    public Long getModifyStaffId() {
         return modifyStaffId;
     }
 
     /**
      * @param modifyStaffId
      */
-    public void setModifyStaffId(Integer modifyStaffId) {
+    public void setModifyStaffId(Long modifyStaffId) {
         this.modifyStaffId = modifyStaffId;
     }
 

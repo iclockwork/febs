@@ -1,26 +1,38 @@
 <div class="card">
     <div class="card-block">
         <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
+            <div class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" title="搜索"/>
-                    <span class="actions__item zmdi zmdi-refresh-alt" title="刷新"/>
+                    <span class="actions__item zmdi zmdi-search buildingCustomerRp-search" title="搜索"/>
+                    <span class="actions__item zmdi zmdi-refresh-alt buildingCustomerRp-refresh" title="刷新"/>
                     <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download">
                         </i>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" id="exportExcel" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item building-export-excel"
                                data-table-action="excel">
                                 Excel (.xlsx)
                             </a>
-                            <a href="javascript:void(0)" id="exportCsv" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item building-export-csv"
                                data-table-action="csv">
                                 CSV (.csv)
                             </a>
                         </ul>
                     </div>
+                    <div class="dropdown actions__item"
+                         shiro:hasAnyPermissions="buildingCustomerRp:add,buildingCustomerRp:delete">
+                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="javascript:void(0)" class="dropdown-item buildingCustomerRp-add"
+                               data-toggle="modal"
+                               data-target="#modal-buildingCustomerRp-edit"
+                               shiro:hasPermission="buildingCustomerRp:add">新增楼宇客户关系</a>
+                            <a href="javascript:void(0)" class="dropdown-item buildingCustomerRp-delete"
+                               shiro:hasPermission="buildingCustomerRp:delete">删除楼宇客户关系</a>
+                        </div>
+                    </div>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
+                <div class="dataTables_filter">
                     <form class="buildingCustomerRp-table-form">
                         <div class="row">
                             <div class="col-sm-3">
@@ -76,4 +88,6 @@
         </div>
     </div>
 </div>
+<div data-th-include="building/buildingCustomerRp/edit-modal"></div>
+<script data-th-src="@{js/app/building/buildingCustomerRp/buildingCustomerRp.js}"></script>
 <script data-th-src="@{js/app/building/buildingCustomerRp/index.js}"></script>

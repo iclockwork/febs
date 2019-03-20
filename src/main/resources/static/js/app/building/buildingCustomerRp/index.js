@@ -1,52 +1,25 @@
 $(function () {
-    var settings = {
-        url: ctx + "buildingCustomerRp/list",
-        pageSize: 10,
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                buildingNo: $(".buildingCustomerRp-table-form").find("input[name='buildingNo']").val().trim(),
-                buildingName: $(".buildingCustomerRp-table-form").find("input[name='buildingName']").val().trim(),
-                customerNo: $(".buildingCustomerRp-table-form").find("input[name='customerNo']").val().trim(),
-                customerName: $(".buildingCustomerRp-table-form").find("input[name='customerName']").val().trim()
-            };
-        },
-        columns: [{
-            field: 'dsRegionName',
-            title: '地市'
-        }, {
-            field: 'regionName',
-            title: '区县'
-        }, {
-            field: 'buildingNo',
-            title: '楼宇编码'
-        }, {
-            field: 'buildingName',
-            title: '楼宇名称'
-        }, {
-            field: 'standName',
-            title: '九级地址名称'
-        }, {
-            field: 'customerNo',
-            title: '客户编码'
-        }, {
-            field: 'customerName',
-            title: '客户名称'
-        }, {
-            field: 'keyPerson',
-            title: '客户联系人'
-        }, {
-            field: 'keyPersonContact',
-            title: '客户联系电话'
-        }, {
-            field: 'monthFee',
-            title: '月费'
-        }, {
-            field: 'remark',
-            title: '备注'
-        }]
-    };
+    var $form = $(".buildingCustomerRp-table-form");
+
+    function initTable() {
+        var settings = {
+            url: ctx + "buildingCustomerRp/list",
+            pageSize: 10,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    buildingNo: $form.find("input[name='buildingNo']").val().trim(),
+                    buildingName: $form.find("input[name='buildingName']").val().trim(),
+                    customerNo: $form.find("input[name='customerNo']").val().trim(),
+                    customerName: $form.find("input[name='customerName']").val().trim()
+                };
+            },
+            columns: $.buildingCustomerRp.tableColumns
+        };
+
+        $MB.initTable('buildingCustomerRpTable', settings);
+    }
 
     function search() {
         $MB.refreshTable('buildingCustomerRpTable');
@@ -57,37 +30,60 @@ $(function () {
         search();
     }
 
-    function exportFile(fileType) {
-        var url = ctx + "buildingCustomerRp/excel";
-        if ("excel" === fileType) {
-            url = ctx + "buildingCustomerRp/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "buildingCustomerRp/csv";
+    function del() {
+        var selected = $("#buildingCustomerRpTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        var contain = false;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要删除的楼宇客户关系！');
+            return;
         }
-        $.post(url, $(".buildingCustomerRp-table-form").serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
+        var buildingCustomerRpIds = "";
+        for (var i = 0; i < selected_length; i++) {
+            buildingCustomerRpIds += selected[i].buildingCustomerRpId;
+            if (i !== (selected_length - 1)) buildingCustomerRpIds += ",";
+        }
+
+        $MB.confirm({
+            text: "确定删除选中楼宇客户关系？",
+            confirmButtonText: "确定删除"
+        }, function () {
+            $.post(ctx + 'buildingCustomerRp/delete', {buildingCustomerRpIds: buildingCustomerRpIds}, function (r) {
+                if (r.code === 0) {
+                    $MB.n_success(r.msg);
+                    refresh();
+                } else {
+                    $MB.n_danger(r.msg);
+                }
+            });
         });
     }
 
-    $MB.initTable('buildingCustomerRpTable', settings);
+    initTable();
 
-    $(".zmdi-search").click(function () {
+    $(".buildingCustomerRp-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".buildingCustomerRp-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
-        exportFile("excel")
+    $(".buildingCustomerRp-export-excel").click(function () {
+        $.utils.exportFile(ctx + "buildingCustomerRp/excel", $form.serialize());
     });
 
-    $("#exportCsv").click(function () {
-        exportFile("csv")
+    $(".buildingCustomerRp-export-csv").click(function () {
+        $.utils.exportFile(ctx + "buildingCustomerRp/csv", $form.serialize());
+    });
+
+    $(".buildingCustomerRp-add").click(function () {
+        $("#buildingCustomerRpModalMode").val("add");
+        $("#modal-buildingCustomerRp-edit-title").html('新增楼宇客户关系');
+        $('#modal-buildingCustomerRp-edit').modal('show');
+    });
+
+    $(".buildingCustomerRp-delete").click(function () {
+        del();
     });
 });

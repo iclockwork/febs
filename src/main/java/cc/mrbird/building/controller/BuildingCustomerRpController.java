@@ -71,4 +71,34 @@ public class BuildingCustomerRpController extends BaseController {
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }
     }
+
+    @Log("新增楼宇客户关系")
+    @RequiresPermissions("buildingCustomerRp:add")
+    @RequestMapping("buildingCustomerRp/add")
+    @ResponseBody
+    public ResponseBo add(BuildingCustomerRp buildingCustomerRp) {
+        try {
+            buildingCustomerRp.setCreateStaffId(super.getCurrentUser().getStaffId());
+
+            return ResponseBo.ok("新增楼宇客户关系成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("新增楼宇客户关系失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("删除楼宇客户关系")
+    @RequiresPermissions("buildingCustomerRp:delete")
+    @RequestMapping("buildingCustomerRp/delete")
+    @ResponseBody
+    public ResponseBo delete(String buildingIds) {
+        try {
+            Long staffId = super.getCurrentUser().getStaffId();
+
+            return ResponseBo.ok("删除楼宇客户关系成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("删除楼宇客户关系失败，请联系网站管理员！");
+        }
+    }
 }

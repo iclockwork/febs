@@ -1,0 +1,28 @@
+<div class="modal fade" id="modal-buildingCustomerRp-edit" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="modal-buildingCustomerRp-edit-title">楼宇客户关系</h3>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="buildingCustomerRpModalMode">
+                <form id="modal-buildingCustomerRp-edit-form">
+                    <input type="hidden" name="buildingCustomerRpId">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong><span><i class="zmdi zmdi-bookmark"></i> 基本信息</span></strong>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save buildingCustomerRp-save">保存</button>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div data-th-include="building/building/select-modal-single"></div>
+<div data-th-include="res/address/select-modal-single"></div>
+<script data-th-src="@{js/app/building/buildingCustomerRp/edit.js}"></script>
