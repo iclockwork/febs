@@ -7,6 +7,7 @@ $(function () {
         if (segmType) {
             $modal.find("select[name='segmType']").attr("disabled", "true");
             $modal.find("select[name='segmType']").val(segmType);
+            $modal.find("select[name='segmType']").attr("initValue", segmType);
             $(".address-search").trigger("click");
         }
     });

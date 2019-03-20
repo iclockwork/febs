@@ -134,6 +134,15 @@
         <if test="segmType != null and segmType != ''">
             AND a.segm_type = #{segmType}
         </if>
+        <if test="parentSegmId != null and parentSegmId != ''">
+            AND a.parent_segm_id = #{parentSegmId}
+        </if>
+        <if test="segmId != null and segmId != ''">
+            AND a.segm_id = #{segmId}
+        </if>
+        <if test="parentStandName != null and parentStandName != ''">
+            AND b.stand_name = #{parentStandName}
+        </if>
         <if test="standName != null and standName != ''">
             AND a.stand_name = #{standName}
         </if>

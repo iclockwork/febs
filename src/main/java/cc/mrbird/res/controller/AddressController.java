@@ -7,6 +7,7 @@ import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.res.domain.Address;
 import cc.mrbird.res.service.AddressService;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,19 @@ public class AddressController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("搜索地址")
+    @RequestMapping("address/search")
+    @ResponseBody
+    public ResponseBo search(String segmType, String parentSegmId, String keyword) {
+        try {
+            JSONObject msg = this.addressService.search(segmType, parentSegmId, keyword);
+            return ResponseBo.ok(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("搜索地址失败，请联系网站管理员！");
         }
     }
 }

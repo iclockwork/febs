@@ -2,6 +2,7 @@ package cc.mrbird.res.service;
 
 import cc.mrbird.common.service.IService;
 import cc.mrbird.res.domain.Address;
+import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ import java.util.List;
  */
 public interface AddressService extends IService<Address> {
     List<Address> findAll(Address address);
+
+    JSONObject search(String segmType, String parentSegmId, String segmName);
 }

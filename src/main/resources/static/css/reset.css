@@ -38,7 +38,7 @@
 
 .login-box-body {
     width: 400px;
-    margin:50px 60px 0 60px ;
+    margin: 50px 60px 0 60px;
     background: #fff;
     padding: 20px;
     border-top: 0;
@@ -46,5 +46,8 @@
     border-radius: 4px;
 }
 
+.fixed-table-body {
+    min-height: 360px;
+}
 
 

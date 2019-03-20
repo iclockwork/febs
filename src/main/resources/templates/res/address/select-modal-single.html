@@ -40,7 +40,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         地址等级：
@@ -62,12 +62,27 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
-                                                        标准地址名称：
+                                                        上级地址名称：
                                                     </span>
                                                     <div class="form-group">
+                                                        <input type="hidden" name="parentSegmId"/>
+                                                        <input type="text" name="parentStandName" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        地址名称：
+                                                    </span>
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="segmId"/>
                                                         <input type="text" name="standName" class="form-control"
                                                                value="江苏省">
                                                         <i class="form-group__bar"></i>
