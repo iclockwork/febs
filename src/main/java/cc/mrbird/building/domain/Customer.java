@@ -5,6 +5,7 @@ import cc.mrbird.common.annotation.ExportConfig;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,6 +16,20 @@ public class Customer implements Serializable {
     @Column(name = "CUSTOMER_ID")
     private Integer customerId;
 
+    @Transient
+    private String dsRegionId;
+
+    @Transient
+    @ExportConfig(value = "地市")
+    private String dsRegionName;
+
+    @Column(name = "REGION_ID")
+    private String regionId;
+
+    @Transient
+    @ExportConfig(value = "区县")
+    private String regionName;
+
     @Column(name = "CUSTOMER_NO")
     @ExportConfig(value = "客户编码")
     private String customerNo;
@@ -22,6 +37,13 @@ public class Customer implements Serializable {
     @Column(name = "CUSTOMER_NAME")
     @ExportConfig(value = "客户名称")
     private String customerName;
+
+    @Column(name = "INDUSTRY_TYPE")
+    private Integer industryType;
+
+    @Transient
+    @ExportConfig(value = "光缆资源是否接入")
+    private String industryTypeName;
 
     @Column(name = "KEY_PERSON")
     @ExportConfig(value = "客户联系人")
@@ -56,28 +78,6 @@ public class Customer implements Serializable {
 
     @Column(name = "MODIFY_OP")
     private String modifyOp;
-
-    private String dsRegionId;
-
-    @Column(name = "REGION_ID")
-    private String regionId;
-
-
-    public String getDsRegionId() {
-        return dsRegionId;
-    }
-
-    public void setDsRegionId(String dsRegionId) {
-        this.dsRegionId = dsRegionId;
-    }
-
-    public String getRegionId() {
-        return regionId;
-    }
-
-    public void setRegionId(String regionId) {
-        this.regionId = regionId;
-    }
 
     /**
      * @return CUSTOMER_ID
@@ -259,5 +259,53 @@ public class Customer implements Serializable {
      */
     public void setModifyOp(String modifyOp) {
         this.modifyOp = modifyOp == null ? null : modifyOp.trim();
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getDsRegionName() {
+        return dsRegionName;
+    }
+
+    public void setDsRegionName(String dsRegionName) {
+        this.dsRegionName = dsRegionName;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+
+    public String getRegionName() {
+        return regionName;
+    }
+
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
+    }
+
+    public Integer getIndustryType() {
+        return industryType;
+    }
+
+    public void setIndustryType(Integer industryType) {
+        this.industryType = industryType;
+    }
+
+    public String getIndustryTypeName() {
+        return industryTypeName;
+    }
+
+    public void setIndustryTypeName(String industryTypeName) {
+        this.industryTypeName = industryTypeName;
     }
 }

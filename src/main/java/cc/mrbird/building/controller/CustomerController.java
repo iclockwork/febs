@@ -6,9 +6,7 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +40,9 @@ public class CustomerController extends BaseController {
     @RequestMapping("customer/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Customer customer) {
-        customer.setDsRegionId(super.getCurrentUser().getRegionId());
+        if (StringUtils.isBlank(customer.getDsRegionId())) {
+            customer.setDsRegionId(super.getCurrentUser().getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.customerService.findAll(customer));
     }
 

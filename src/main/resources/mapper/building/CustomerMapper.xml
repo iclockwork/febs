@@ -20,19 +20,42 @@
         <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.building.domain.Customer" parameterType="cc.mrbird.building.domain.Customer">
-        <bind name="bindCustomerNo" value="'%' + customerNo + '%'"/>
-        <bind name="bindCustomerName" value="'%' + customerName + '%'"/>
+    <select id="findAll" resultType="cc.mrbird.building.domain.Customer"
+            parameterType="cc.mrbird.building.domain.Customer">
         select t.customer_id as customerId,
+        ds.region_id as dsRegionId,
+        ds.region_name as dsRegionName,
+        t.region_id as regionId,
+        r.region_name as regionName,
         t.customer_no as customerNo,
         t.customer_name as customerName,
+        t.industry_type as industryType,
+        decode(t.industry_type,
+        201,
+        '生产制造',
+        202,
+        '批发零售',
+        203,
+        '信息技术',
+        204,
+        '金融保险',
+        205,
+        '政企机构及社会团体',
+        206,
+        '教育培训',
+        207,
+        '酒店住宿',
+        208,
+        '其他') as industryTypeName,
         t.key_person as keyPerson,
         t.key_person_contact as keyPersonContact,
         t.month_fee as monthFee,
         t.remark as remark,
         t.create_date as createDate
-        from BD_CUSTOMER t
+        from BD_CUSTOMER t, SPC_REGION r, SPC_REGION ds
         where t.delete_flag = 0
+        and t.region_id = r.region_id
+        and r.super_region_id = ds.region_id
         <if test="dsRegionId != null and dsRegionId != ''">
             AND t.region_id in
             (select r.region_id
@@ -40,11 +63,16 @@
             start with r.region_id = #{dsRegionId}
             connect by prior r.region_id = r.super_region_id)
         </if>
+        <if test="regionId != null and regionId != ''">
+            AND t.region_id = #{regionId}
+        </if>
         <if test="customerNo != null and customerNo != ''">
+            <bind name="bindCustomerNo" value="'%' + customerNo + '%'"/>
             AND t.customer_no like #{bindCustomerNo}
         </if>
         <if test="customerName != null and customerName != ''">
             AND t.customer_name like #{bindCustomerName}
+            <bind name="bindCustomerName" value="'%' + customerName + '%'"/>
         </if>
         order by t.customer_id desc
     </select>

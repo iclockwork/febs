@@ -1,76 +1,73 @@
 $(function () {
-    var settings = {
-        url: ctx + "customer/list",
-        pageSize: 10,
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                customerNo: $(".customer-table-form").find("input[name='customerNo']").val().trim(),
-                customerName: $(".customer-table-form").find("input[name='customerName']").val().trim()
-            };
-        },
-        columns: [{
-            field: 'customerNo',
-            title: '客户编码'
-        }, {
-            field: 'customerName',
-            title: '客户名称'
-        }, {
-            field: 'keyPerson',
-            title: '客户联系人'
-        }, {
-            field: 'keyPersonContact',
-            title: '客户联系电话'
-        }, {
-            field: 'monthFee',
-            title: '月费'
-        }, {
-            field: 'remark',
-            title: '备注'
-        }]
-    };
+    var $form = $(".customer-table-form");
+    var $ds = $form.find("select[name='dsRegionId']");
+    var $qx = $form.find("select[name='regionId']");
+    var $selectMode = $("#customerTable").attr("selectMode");
+
+    function initTable() {
+        var pageSize = 10;
+        var columns = [];
+
+        if ($.utils.selectModeSingle === $selectMode) {
+            pageSize = 5;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.customer.tableColumns);
+        } else if ($.utils.selectModeMultiple === $selectMode) {
+            pageSize = 5;
+        } else {
+            pageSize = 10;
+            columns = $.customer.tableColumns;
+        }
+
+        var settings = {
+            url: ctx + "customer/list",
+            pageSize: pageSize,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    dsRegionId: $ds.val(),
+                    regionId: $qx.val(),
+                    customerNo: $form.find("input[name='customerNo']").val().trim(),
+                    customerName: $form.find("input[name='customerName']").val().trim()
+                };
+            },
+            columns: columns
+        };
+
+        $MB.initTable('customerTable', settings);
+    }
 
     function search() {
         $MB.refreshTable('customerTable');
     }
 
     function refresh() {
-        $(".customer-table-form")[0].reset();
+        $form[0].reset();
         search();
     }
 
-    function exportFile(fileType) {
-        var url = ctx + "customer/excel";
-        if ("excel" === fileType) {
-            url = ctx + "customer/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "customer/csv";
-        }
-        $.post(url, $(".customer-table-form").serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
-        });
-    }
+    initTable();
 
-    $MB.initTable('customerTable', settings);
-
-    $(".zmdi-search").click(function () {
+    $(".customer-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".customer-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
-        exportFile("excel")
+    $(".customer-export-excel").click(function () {
+        $.utils.exportFile(ctx + "customer/excel", $form.serialize());
     });
 
-    $("#exportCsv").click(function () {
-        exportFile("csv")
+    $(".customer-export-csv").click(function () {
+        $.utils.exportFile(ctx + "customer/csv", $form.serialize());
+    });
+
+    $.region.initDsQx($ds, function () {
+    }, $qx, function () {
     });
 });
