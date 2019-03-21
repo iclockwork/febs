@@ -65,6 +65,12 @@ public class Address implements Serializable {
     @Column(name = "PARENT_SEGM_ID")
     private String parentSegmId;
 
+    @Transient
+    private String parentSegmIdRecursive;
+
+    @Transient
+    private String parentSegmNameRecursive;
+
     @Column(name = "OUTSIDE")
     private Integer outside;
 
@@ -1331,5 +1337,21 @@ public class Address implements Serializable {
 
     public void setDsRegionName(String dsRegionName) {
         this.dsRegionName = dsRegionName;
+    }
+
+    public String getParentSegmIdRecursive() {
+        return parentSegmIdRecursive;
+    }
+
+    public void setParentSegmIdRecursive(String parentSegmIdRecursive) {
+        this.parentSegmIdRecursive = parentSegmIdRecursive;
+    }
+
+    public String getParentSegmNameRecursive() {
+        return parentSegmNameRecursive;
+    }
+
+    public void setParentSegmNameRecursive(String parentSegmNameRecursive) {
+        this.parentSegmNameRecursive = parentSegmNameRecursive;
     }
 }

@@ -146,6 +146,24 @@
         <if test="standName != null and standName != ''">
             AND a.stand_name = #{standName}
         </if>
+        <if test="parentSegmIdRecursive != null and parentSegmIdRecursive != ''">
+            and a.segm_id in
+            (select r.segm_id
+            from addr_segm r
+            where r.delete_state = '0'
+            and r.segm_type in (180006, 180007, 180008, 180009)
+            start with r.segm_id = #{parentSegmIdRecursive}
+            connect by prior r.segm_id = r.parent_segm_id)
+        </if>
+        <if test="parentSegmNameRecursive != null and parentSegmNameRecursive != ''">
+            and a.segm_id in
+            (select r.segm_id
+            from addr_segm r
+            where r.delete_state = '0'
+            and r.segm_type in (180006, 180007, 180008, 180009)
+            start with r.stand_name = #{parentSegmNameRecursive}
+            connect by prior r.segm_id = r.parent_segm_id)
+        </if>
         order by a.stand_no asc
     </select>
 </mapper>

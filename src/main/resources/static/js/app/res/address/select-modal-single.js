@@ -10,6 +10,19 @@ $(function () {
             $modal.find("select[name='segmType']").attr("initValue", segmType);
             $(".address-search").trigger("click");
         }
+        var parentSegmIdRecursive = $modal.attr("parentSegmIdRecursive");
+        var parentSegmNameRecursive = $modal.attr("parentSegmNameRecursive");
+        if (parentSegmNameRecursive) {
+            $modal.find("input[name='parentSegmIdRecursive']").val(parentSegmIdRecursive);
+            $modal.find("input[name='parentSegmIdRecursive']").attr("initValue", parentSegmIdRecursive);
+            $modal.find("input[name='parentSegmNameRecursive']").attr("disabled", "true");
+            $modal.find("input[name='parentSegmNameRecursive']").val(parentSegmNameRecursive);
+            $modal.find("input[name='parentSegmNameRecursive']").attr("initValue", parentSegmNameRecursive);
+
+            $modal.find("input[name='standName']").val(null);
+
+            $(".address-search").trigger("click");
+        }
     });
 
     //隐藏事件

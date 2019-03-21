@@ -53,6 +53,12 @@ $(function () {
 
     function refresh() {
         $form[0].reset();
+
+        var stateInitValue = $form.find("select[name='state']").attr("initValue");
+        if (stateInitValue) {
+            $form.find("select[name='state']").val(stateInitValue);
+        }
+
         search();
     }
 
@@ -115,14 +121,26 @@ $(function () {
             return;
         }
         var buildingId = selected[0].buildingId;
+        var buildingNo = selected[0].buildingNo;
         var buildingName = selected[0].buildingName;
+        var segmId = selected[0].segmId;
+        var standName = selected[0].standName;
 
-        console.log("buildingId:" + buildingId + ", buildingName:" + buildingName);
+        var stateQuery = $form.find("select[name='state']").val();
+        if ("1" == stateQuery && !segmId) {
+            $MB.n_warning('请选择已覆盖并绑定了标准地址的楼宇！');
+            return;
+        }
+
+        console.log("buildingId:" + buildingId + ", buildingNo:" + buildingNo + ", buildingName:" + buildingName + ", segmId:" + segmId + ", standName:" + standName);
 
         var selectBackFormId = $("#building-select-modal").attr("selectBackFormId");
         if (selectBackFormId) {
             $("#" + selectBackFormId).find("input[name='buildingId']").val(buildingId);
+            $("#" + selectBackFormId).find("input[name='buildingNo']").val(buildingNo);
             $("#" + selectBackFormId).find("input[name='buildingName']").val(buildingName);
+            $("#" + selectBackFormId).find("input[name='buildingSegmId']").val(segmId);
+            $("#" + selectBackFormId).find("input[name='buildingSegmStandName']").val(standName);
         }
 
         $('#building-select-modal').modal('hide');

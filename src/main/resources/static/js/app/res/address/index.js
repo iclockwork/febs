@@ -31,6 +31,7 @@ $(function () {
                     dsRegionId: $ds.val(),
                     regionId: $qx.val(),
                     segmType: $form.find("select[name='segmType']").val(),
+                    parentSegmNameRecursive: $form.find("input[name='parentSegmNameRecursive']").val(),
                     parentStandName: $form.find("input[name='parentStandName']").val().trim(),
                     standName: $form.find("input[name='standName']").val().trim()
                 };
@@ -55,8 +56,28 @@ $(function () {
     }
 
     function initAutoComplete() {
+        var _parentSegmNameRecursive = $form.find("input[name='parentSegmNameRecursive']");
         var _parentStandName = $form.find("input[name='parentStandName']");
         var _standName = $form.find("input[name='standName']");
+
+        _parentSegmNameRecursive.autoComplete({
+            resolver: 'custom',
+            formatResult: function (item) {
+                return {
+                    value: item.id,
+                    text: item.name
+                };
+            },
+            events: {
+                search: function (keyword, callback) {
+                    searchPost({keyword: keyword}, callback);
+                }
+            }
+        });
+
+        _parentSegmNameRecursive.on('autocomplete.select', function (evt, item) {
+            $form.find("input[name='parentSegmIdRecursive']").val(item.id);
+        });
 
         _parentStandName.autoComplete({
             resolver: 'custom',
@@ -113,9 +134,25 @@ $(function () {
     function refresh() {
         $form[0].reset();
 
+        $form.find("input[name='parentSegmIdRecursive']").val(null);
+        $form.find("input[name='parentSegmId']").val(null);
+        $form.find("input[name='segmId']").val(null);
+
         var segmTypeInitValue = $form.find("select[name='segmType']").attr("initValue");
         if (segmTypeInitValue) {
             $form.find("select[name='segmType']").val(segmTypeInitValue);
+        }
+
+        var parentSegmIdRecursiveInitValue = $form.find("input[name='parentSegmIdRecursive']").attr("initValue");
+        if (parentSegmIdRecursiveInitValue) {
+            $form.find("input[name='parentSegmIdRecursive']").val(parentSegmIdRecursiveInitValue);
+        }
+
+        var parentSegmNameRecursiveInitValue = $form.find("input[name='parentSegmNameRecursive']").attr("initValue");
+        if (parentSegmNameRecursiveInitValue) {
+            $form.find("input[name='parentSegmNameRecursive']").val(parentSegmNameRecursiveInitValue);
+
+            $form.find("input[name='standName']").val(null);
         }
 
         search();

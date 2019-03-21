@@ -1,5 +1,5 @@
 <div class="modal fade" id="address-select-modal" data-keyboard="false" data-backdrop="static" tabindex="-1">
-    <div class="modal-dialog modal-common-middle">
+    <div class="modal-dialog modal-common-large">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title pull-left" id="address-select-modal-title">查询地址</h3>
@@ -64,7 +64,20 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        小区/楼栋/单元：
+                                                    </span>
+                                                    <div class="form-group">
+                                                        <input type="hidden" name="parentSegmIdRecursive"/>
+                                                        <input type="text" name="parentSegmNameRecursive"
+                                                               class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         上级地址名称：
@@ -76,7 +89,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         地址名称：
