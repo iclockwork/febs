@@ -49,6 +49,33 @@ $(function () {
         search();
     }
 
+    function selectOk() {
+        var selected = $("#customerTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要选择的客户！');
+            return;
+        }
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能选择一个客户！');
+            return;
+        }
+        var customerId = selected[0].customerId;
+        var customerNo = selected[0].customerNo;
+        var customerName = selected[0].customerName;
+
+        console.log("customerId:" + customerId + ", customerNo:" + customerNo + ", customerName:" + customerName);
+
+        var selectBackFormId = $("#customer-select-modal").attr("selectBackFormId");
+        if (selectBackFormId) {
+            $("#" + selectBackFormId).find("input[name='customerId']").val(customerId);
+            $("#" + selectBackFormId).find("input[name='customerNo']").val(customerNo);
+            $("#" + selectBackFormId).find("input[name='customerName']").val(customerName);
+        }
+
+        $('#customer-select-modal').modal('hide');
+    }
+
     initTable();
 
     $(".customer-search").click(function () {
@@ -65,6 +92,10 @@ $(function () {
 
     $(".customer-export-csv").click(function () {
         $.utils.exportFile(ctx + "customer/csv", $form.serialize());
+    });
+
+    $(".customer-select-modal-ok").click(function () {
+        selectOk();
     });
 
     $.region.initDsQx($ds, function () {

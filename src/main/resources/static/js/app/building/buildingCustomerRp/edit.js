@@ -29,7 +29,10 @@ $(function () {
         var flag = $editForm.validate().form();
         if (flag) {
             if (buildingCustomerRpModalMode === "add") {
-                console.log("add");
+                var buildingNo = $editForm.find("input[name='buildingNo']").val();
+                var segmId = $editForm.find("input[name='segmId']").val();
+                var customerNo = $editForm.find("input[name='customerNo']").val();
+                console.log("add:buildingNo:" + buildingNo + ", segmId:" + segmId + ", customerNo:" + customerNo);
             }
         }
     }
@@ -45,7 +48,7 @@ $(function () {
     });
 
     $("#selectAddressSingle").click(function () {
-        var buildingNo = $editForm.find("input[name='buildingName']").val();
+        var buildingNo = $editForm.find("input[name='buildingNo']").val();
         if (buildingNo) {
             console.log("selectAddressSingle");
             var buildingSegmId = $editForm.find("input[name='buildingSegmId']").val();
@@ -67,6 +70,9 @@ $(function () {
         if (segmId) {
             console.log("selectCustomerSingle");
 
+            $("#customer-select-modal").attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
+
+            $('#customer-select-modal').modal('show');
         } else {
             $MB.n_warning('请先选择九级地址！');
         }

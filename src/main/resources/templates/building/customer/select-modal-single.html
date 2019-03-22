@@ -1,0 +1,85 @@
+<div class="modal fade" id="customer-select-modal" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-common-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="customer-select-modal-title">查询客户</h3>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <div class="dataTables_wrapper">
+                                <div class="dataTables_buttons hidden-sm-down actions">
+                                    <span class="actions__item zmdi zmdi-search customer-search" title="搜索"/>
+                                    <span class="actions__item zmdi zmdi-refresh-alt customer-refresh" title="刷新"/>
+                                </div>
+                                <div class="dataTables_filter">
+                                    <form class="customer-table-form">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        地市：
+                                                    </span>
+                                                    <div class="form-group">
+                                                        <select name="dsRegionId" class="form-control">
+                                                        </select>
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        区县：
+                                                    </span>
+                                                    <div class="form-group">
+                                                        <select name="regionId" class="form-control">
+                                                        </select>
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        客户编码：
+                                                    </span>
+                                                    <div class="form-group">
+                                                        <input type="text" name="customerNo" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        客户名称：
+                                                    </span>
+                                                    <div class="form-group">
+                                                        <input type="text" name="customerName" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <table id="customerTable" selectMode="single" data-mobile-responsive="true"
+                                       class="mb-bootstrap-table text-nowrap table-striped"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-save customer-select-modal-ok">确定</button>
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/building/customer/customer.js}"></script>
+<script data-th-src="@{js/app/building/customer/index.js}"></script>
+<script data-th-src="@{js/app/building/customer/select-modal-single.js}"></script>
