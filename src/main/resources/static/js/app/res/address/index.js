@@ -16,6 +16,10 @@ $(function () {
             columns = checkboxColumns.concat($.address.tableColumns);
         } else if ($.utils.selectModeMultiple === $selectMode) {
             pageSize = 5;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.address.tableColumns);
         } else {
             pageSize = 10;
             columns = $.address.tableColumns;
@@ -165,19 +169,31 @@ $(function () {
             $MB.n_warning('请勾选需要选择的地址！');
             return;
         }
-        if (selected_length > 1) {
-            $MB.n_warning('一次只能选择一个地址！');
-            return;
-        }
-        var segmId = selected[0].segmId;
-        var standName = selected[0].standName;
 
-        console.log("segmId:" + segmId + ", standName:" + standName);
+        var segmIds = [];
+        var standNames = [];
+        if ($.utils.selectModeSingle === $selectMode) {
+            if (selected_length > 1) {
+                $MB.n_warning('一次只能选择一个地址！');
+                return;
+            }
+
+            segmIds.push(selected[0].segmId);
+            standNames.push(selected[0].standName);
+        } else if ($.utils.selectModeMultiple === $selectMode) {
+            for (var i = 0; i < selected_length; i++) {
+                segmIds.push(selected[i].segmId);
+                standNames.push(selected[i].standName);
+            }
+        }
+
+        console.log("segmIds:" + segmIds.join(',') + ", standNames:" + standNames.join(','));
 
         var selectBackFormId = $("#address-select-modal").attr("selectBackFormId");
         if (selectBackFormId) {
-            $("#" + selectBackFormId).find("input[name='segmId']").val(segmId);
-            $("#" + selectBackFormId).find("input[name='standName']").val(standName);
+            $("#" + selectBackFormId).find("input[name='segmId']").val(segmIds.join(','));
+            $("#" + selectBackFormId).find("input[name='segmId']").data("addresses", selected);
+            $("#" + selectBackFormId).find("input[name='standName']").val(standNames.join(','));
         }
 
         $('#address-select-modal').modal('hide');

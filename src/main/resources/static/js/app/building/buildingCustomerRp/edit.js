@@ -30,9 +30,48 @@ $(function () {
         if (flag) {
             if (buildingCustomerRpModalMode === "add") {
                 var buildingNo = $editForm.find("input[name='buildingNo']").val();
+                var buildingName = $editForm.find("input[name='buildingName']").val();
                 var segmId = $editForm.find("input[name='segmId']").val();
+                var standName = $editForm.find("input[name='standName']").val();
                 var customerNo = $editForm.find("input[name='customerNo']").val();
+                var customerName = $editForm.find("input[name='customerName']").val();
                 console.log("add:buildingNo:" + buildingNo + ", segmId:" + segmId + ", customerNo:" + customerNo);
+                var addresses = $editForm.find("input[name='segmId']").data("addresses");
+                console.log(addresses);
+
+                var buildingCustomerRps = [];
+                for (var i = 0; i < addresses.length; i++) {
+                    var buildingCustomerRp = {
+                        buildingNo: buildingNo,
+                        buildingName: buildingName,
+                        segmId: addresses[i].segmId,
+                        standName: addresses[i].standName,
+                        customerNo: customerNo,
+                        customerName: customerName
+                    };
+
+                    buildingCustomerRps.push(buildingCustomerRp);
+                }
+
+                $.ajax({
+                    url: ctx + "buildingCustomerRp/checkBind",
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify(buildingCustomerRps),
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (response) {
+                        if (response.code === 0) {
+                            $MB.n_success(response.msg);
+                        } else {
+                            $MB.n_danger(response.msg)
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState == 0) {
+                            $MB.n_warning('Slow down, please refresh the page, the request being sent!');
+                        }
+                    }
+                });
             }
         }
     }

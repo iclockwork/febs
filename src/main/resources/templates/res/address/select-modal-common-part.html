@@ -1,0 +1,90 @@
+<form class="address-table-form">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    地市：
+                </div>
+                <div class="form-group">
+                    <select name="dsRegionId" class="form-control">
+                    </select>
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    区县：
+                </div>
+                <div class="form-group">
+                    <select name="regionId" class="form-control">
+                    </select>
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    地址等级：
+                </div>
+                <div class="form-group">
+                    <select name="segmType" class="form-control">
+                        <option value="" selected>---请选择---</option>
+                        <option value="180001">标准一级地址</option>
+                        <option value="180002">标准二级地址</option>
+                        <option value="180003">标准三级地址</option>
+                        <option value="180004">标准四级地址</option>
+                        <option value="180005">标准五级地址</option>
+                        <option value="180006">标准六级地址</option>
+                        <option value="180007">标准七级地址</option>
+                        <option value="180008">标准八级地址</option>
+                        <option value="180009">标准九级地址</option>
+                    </select>
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    小区/楼栋/单元：
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="parentSegmIdRecursive"/>
+                    <input type="text" name="parentSegmNameRecursive"
+                           class="form-control">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    上级地址名称：
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="parentSegmId"/>
+                    <input type="text" name="parentStandName" class="form-control">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="input-group">
+                <div class="input-group-addon">
+                    地址名称：
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="segmId"/>
+                    <input type="text" name="standName" class="form-control"
+                           value="江苏省">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -72,6 +73,23 @@ public class BuildingCustomerRpController extends BaseController {
         }
     }
 
+    @RequestMapping("buildingCustomerRp/checkBind")
+    @ResponseBody
+    public ResponseBo checkBind(@RequestBody BuildingCustomerRp[] buildingCustomerRps) {
+        try {
+            if (null != buildingCustomerRps) {
+                for (int i = 0, length = buildingCustomerRps.length; i < length; i++) {
+
+                }
+
+            }
+            return ResponseBo.ok("校验楼宇客户关系成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("校验楼宇客户关系失败，请联系网站管理员！");
+        }
+    }
+
     @Log("新增楼宇客户关系")
     @RequiresPermissions("buildingCustomerRp:add")
     @RequestMapping("buildingCustomerRp/add")
@@ -91,7 +109,7 @@ public class BuildingCustomerRpController extends BaseController {
     @RequiresPermissions("buildingCustomerRp:delete")
     @RequestMapping("buildingCustomerRp/delete")
     @ResponseBody
-    public ResponseBo delete(String buildingIds) {
+    public ResponseBo delete(String buildingCustomerRpId) {
         try {
             Long staffId = super.getCurrentUser().getStaffId();
 
