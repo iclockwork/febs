@@ -84,8 +84,11 @@ $(function () {
 
     $("#selectBuildingSingle").click(function () {
         console.log("selectBuildingSingle");
-        $("#building-select-modal").attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
-        $("#building-select-modal").attr("state", "1");
+        var _buildingSelectModal = $('#building-select-modal');
+        _buildingSelectModal.attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
+        _buildingSelectModal.attr("state", "1");
+
+        _buildingSelectModal.modal('show');
     });
 
     $("#selectAddressSingle").click(function () {
@@ -95,12 +98,13 @@ $(function () {
             var buildingSegmId = $editForm.find("input[name='buildingSegmId']").val();
 
             var buildingSegmStandName = $editForm.find("input[name='buildingSegmStandName']").val();
-            $("#address-select-modal").attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
-            $("#address-select-modal").attr("segmType", "180009");
-            $("#address-select-modal").attr("parentSegmIdRecursive", buildingSegmId);
-            $("#address-select-modal").attr("parentSegmNameRecursive", buildingSegmStandName);
+            var _addressSelectModal = $('#address-select-modal');
+            _addressSelectModal.attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
+            _addressSelectModal.attr("segmType", "180009");
+            _addressSelectModal.attr("parentSegmIdRecursive", buildingSegmId);
+            _addressSelectModal.attr("parentSegmNameRecursive", buildingSegmStandName);
 
-            $('#address-select-modal').modal('show');
+            _addressSelectModal.modal('show');
         } else {
             $MB.n_warning('请先选择楼宇！');
         }
@@ -110,10 +114,10 @@ $(function () {
         var segmId = $editForm.find("input[name='segmId']").val();
         if (segmId) {
             console.log("selectCustomerSingle");
+            var _customerSelectModal = $('#customer-select-modal');
+            _customerSelectModal.attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
 
-            $("#customer-select-modal").attr("selectBackFormId", "modal-buildingCustomerRp-edit-form");
-
-            $('#customer-select-modal').modal('show');
+            _customerSelectModal.modal('show');
         } else {
             $MB.n_warning('请先选择九级地址！');
         }

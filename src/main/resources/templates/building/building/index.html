@@ -3,8 +3,8 @@
         <div class="table-responsive">
             <div class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search building-search" title="搜索"/>
-                    <span class="actions__item zmdi zmdi-refresh-alt building-refresh" title="刷新"/>
+                    <div class="actions__item zmdi zmdi-search building-search" title="搜索"></div>
+                    <div class="actions__item zmdi zmdi-refresh-alt building-refresh" title="刷新"></div>
                     <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download">
                         </i>
@@ -29,6 +29,7 @@
                                shiro:hasPermission="building:update">修改楼宇</a>
                             <a href="javascript:void(0)" class="dropdown-item building-delete"
                                shiro:hasPermission="building:delete">删除楼宇</a>
+                            <a href="javascript:void(0)" class="dropdown-item building-inspection">查看巡检记录</a>
                         </div>
                     </div>
                 </div>
@@ -37,9 +38,9 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	地市：
-					            </span>
+                                    <div class="input-group-addon">
+                                        地市：
+                                    </div>
                                     <div class="form-group">
                                         <select name="dsRegionId" class="form-control">
                                         </select>
@@ -49,9 +50,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	区县：
-					            </span>
+                                    <div class="input-group-addon">
+                                        区县：
+                                    </div>
                                     <div class="form-group">
                                         <select name="regionId" class="form-control">
                                         </select>
@@ -61,9 +62,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	楼宇编码：
-					            </span>
+                                    <div class="input-group-addon">
+                                        楼宇编码：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="buildingNo" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -72,9 +73,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	楼宇名称：
-					            </span>
+                                    <div class="input-group-addon">
+                                        楼宇名称：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="buildingName" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -85,9 +86,9 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	区域类型：
-					            </span>
+                                    <div class="input-group-addon">
+                                        区域类型：
+                                    </div>
                                     <div class="form-group">
                                         <select name="buildingType" class="form-control">
                                             <option value="" selected>---请选择---</option>
@@ -105,9 +106,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	区域名称：
-					            </span>
+                                    <div class="input-group-addon">
+                                        区域名称：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="buildingTypeName" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -116,9 +117,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	楼宇地址：
-					            </span>
+                                    <div class="input-group-addon">
+                                        楼宇地址：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="buildingAddress" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -127,9 +128,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	楼宇状态：
-					            </span>
+                                    <div class="input-group-addon">
+                                        楼宇状态：
+                                    </div>
                                     <div class="form-group">
                                         <select name="state" class="form-control">
                                             <option value="" selected>---请选择---</option>
@@ -149,6 +150,7 @@
         </div>
     </div>
 </div>
+<div data-th-include="building/inspection/query-modal.html"></div>
 <div data-th-include="building/building/edit-modal"></div>
 <script data-th-src="@{js/app/building/building/building.js}"></script>
 <script data-th-src="@{js/app/building/building/index.js}"></script>

@@ -263,8 +263,9 @@ $(function () {
     $("#selectAddressSingle").click(function () {
         console.log("selectAddressSingle");
 
-        $("#address-select-modal").attr("selectBackFormId", "modal-building-edit-form");
-        $("#address-select-modal").attr("segmType", "180007");
+        var _addressSelectModal = $('#address-select-modal');
+        _addressSelectModal.attr("selectBackFormId", "modal-building-edit-form");
+        _addressSelectModal.attr("segmType", "180007");
     });
 
     $("#selectAccessAreaSingle").click(function () {

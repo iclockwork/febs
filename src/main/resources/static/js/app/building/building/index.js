@@ -109,6 +109,25 @@ $(function () {
         });
     }
 
+    function viewInspection() {
+        var selected = $("#buildingTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要查看巡检记录的楼宇！');
+            return;
+        }
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能查看一个楼宇！');
+            return;
+        }
+        var buildingId = selected[0].buildingId;
+        var buildingNo = selected[0].buildingNo;
+        var _viewInspectionModal = $('#inspection-query-modal');
+        _viewInspectionModal.attr("inspectionType", "1");
+        _viewInspectionModal.attr("inspectionNo", buildingNo);
+        _viewInspectionModal.modal('show');
+    }
+
     function selectOk() {
         var selected = $("#buildingTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
@@ -127,23 +146,25 @@ $(function () {
         var standName = selected[0].standName;
 
         var stateQuery = $form.find("select[name='state']").val();
-        if ("1" == stateQuery && !segmId) {
+        if ("1" === stateQuery && !segmId) {
             $MB.n_warning('请选择已覆盖并绑定了标准地址的楼宇！');
             return;
         }
 
         console.log("buildingId:" + buildingId + ", buildingNo:" + buildingNo + ", buildingName:" + buildingName + ", segmId:" + segmId + ", standName:" + standName);
 
-        var selectBackFormId = $("#building-select-modal").attr("selectBackFormId");
+        var _selectModal = $("#building-select-modal");
+        var selectBackFormId = _selectModal.attr("selectBackFormId");
         if (selectBackFormId) {
-            $("#" + selectBackFormId).find("input[name='buildingId']").val(buildingId);
-            $("#" + selectBackFormId).find("input[name='buildingNo']").val(buildingNo);
-            $("#" + selectBackFormId).find("input[name='buildingName']").val(buildingName);
-            $("#" + selectBackFormId).find("input[name='buildingSegmId']").val(segmId);
-            $("#" + selectBackFormId).find("input[name='buildingSegmStandName']").val(standName);
+            var _selectBackForm = $("#" + selectBackFormId);
+            _selectBackForm.find("input[name='buildingId']").val(buildingId);
+            _selectBackForm.find("input[name='buildingNo']").val(buildingNo);
+            _selectBackForm.find("input[name='buildingName']").val(buildingName);
+            _selectBackForm.find("input[name='buildingSegmId']").val(segmId);
+            _selectBackForm.find("input[name='buildingSegmStandName']").val(standName);
         }
 
-        $('#building-select-modal').modal('hide');
+        _selectModal.modal('hide');
     }
 
     initTable();
@@ -180,6 +201,10 @@ $(function () {
 
     $(".building-delete").click(function () {
         del();
+    });
+
+    $(".building-inspection").click(function () {
+        viewInspection();
     });
 
     $.region.initDsQx($ds, function () {

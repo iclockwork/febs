@@ -18,7 +18,10 @@ $(function () {
             pageSize = 5;
         } else {
             pageSize = 10;
-            columns = $.customer.tableColumns;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.customer.tableColumns);
         }
 
         var settings = {
@@ -49,6 +52,25 @@ $(function () {
         search();
     }
 
+    function viewInspection() {
+        var selected = $("#customerTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要查看巡检记录的客户！');
+            return;
+        }
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能查看一个客户！');
+            return;
+        }
+        var customerId = selected[0].customerId;
+        var customerNo = selected[0].customerNo;
+        var _viewInspectionModal = $('#inspection-query-modal');
+        _viewInspectionModal.attr("inspectionType", "2");
+        _viewInspectionModal.attr("inspectionNo", customerNo);
+        _viewInspectionModal.modal('show');
+    }
+
     function selectOk() {
         var selected = $("#customerTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
@@ -66,14 +88,16 @@ $(function () {
 
         console.log("customerId:" + customerId + ", customerNo:" + customerNo + ", customerName:" + customerName);
 
-        var selectBackFormId = $("#customer-select-modal").attr("selectBackFormId");
+        var _selectModal = $("#customer-select-modal");
+        var selectBackFormId = _selectModal.attr("selectBackFormId");
         if (selectBackFormId) {
-            $("#" + selectBackFormId).find("input[name='customerId']").val(customerId);
-            $("#" + selectBackFormId).find("input[name='customerNo']").val(customerNo);
-            $("#" + selectBackFormId).find("input[name='customerName']").val(customerName);
+            var _selectBackForm = $("#" + selectBackFormId);
+            _selectBackForm.find("input[name='customerId']").val(customerId);
+            _selectBackForm.find("input[name='customerNo']").val(customerNo);
+            _selectBackForm.find("input[name='customerName']").val(customerName);
         }
 
-        $('#customer-select-modal').modal('hide');
+        _selectModal.modal('hide');
     }
 
     initTable();
@@ -92,6 +116,10 @@ $(function () {
 
     $(".customer-export-csv").click(function () {
         $.utils.exportFile(ctx + "customer/csv", $form.serialize());
+    });
+
+    $(".customer-inspection").click(function () {
+        viewInspection();
     });
 
     $(".customer-select-modal-ok").click(function () {

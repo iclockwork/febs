@@ -10,7 +10,7 @@ import java.util.Date;
 public class Staff implements Serializable {
     @Id
     @Column(name = "STAFF_ID")
-    private Integer staffId;
+    private Long staffId;
 
     @Column(name = "LOGIN_NAME")
     @ExportConfig(value = "登录名")
@@ -152,14 +152,14 @@ public class Staff implements Serializable {
     /**
      * @return STAFF_ID
      */
-    public Integer getStaffId() {
+    public Long getStaffId() {
         return staffId;
     }
 
     /**
      * @param staffId
      */
-    public void setStaffId(Integer staffId) {
+    public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 
