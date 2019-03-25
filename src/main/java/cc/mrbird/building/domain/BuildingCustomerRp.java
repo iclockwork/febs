@@ -15,7 +15,7 @@ public class BuildingCustomerRp implements Serializable {
     /**
      * 序列
      */
-    public static final String SEQ = "BUILDING_CUSTOMER_RP";
+    public static final String SEQ = "SEQ_BD_BUILDING_CUSTOMER_RP";
 
 
     @Id

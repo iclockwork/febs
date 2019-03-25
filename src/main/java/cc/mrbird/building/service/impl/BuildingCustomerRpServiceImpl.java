@@ -1,7 +1,6 @@
 package cc.mrbird.building.service.impl;
 
 import cc.mrbird.building.dao.BuildingCustomerRpMapper;
-import cc.mrbird.building.domain.Building;
 import cc.mrbird.building.domain.BuildingCustomerRp;
 import cc.mrbird.building.service.BuildingCustomerRpService;
 import cc.mrbird.common.exception.BusinessException;
@@ -67,7 +66,7 @@ public class BuildingCustomerRpServiceImpl extends BaseService<BuildingCustomerR
                     sb.append("楼宇九级地址").append(buildingCustomerRp.getStandName()).append("与客户").append(buildingCustomerRp.getCustomerName()).append("已经存在关联关系");
                     throw new BusinessException(sb.toString());
                 } else {
-                    buildingCustomerRp.setBuildingCustomerRpId(this.getSequence(Building.SEQ));
+                    buildingCustomerRp.setBuildingCustomerRpId(this.getSequence(BuildingCustomerRp.SEQ));
                     buildingCustomerRp.setDeleteFlag(Integer.valueOf(Constant.DELETE_FLAG_NO));
                     buildingCustomerRp.setCreateStaffId(staffId);
                     buildingCustomerRp.setCreateDate(new Date());
