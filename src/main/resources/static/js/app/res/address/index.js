@@ -189,14 +189,16 @@ $(function () {
 
         console.log("segmIds:" + segmIds.join(',') + ", standNames:" + standNames.join(','));
 
-        var selectBackFormId = $("#address-select-modal").attr("selectBackFormId");
+        var _selectModal = $("#address-select-modal");
+        var selectBackFormId = _selectModal.attr("selectBackFormId");
         if (selectBackFormId) {
-            $("#" + selectBackFormId).find("input[name='segmId']").val(segmIds.join(','));
-            $("#" + selectBackFormId).find("input[name='segmId']").data("addresses", selected);
-            $("#" + selectBackFormId).find("input[name='standName']").val(standNames.join(','));
+            var _selectBackForm = $("#" + selectBackFormId);
+            _selectBackForm.find("input[name='segmId']").val(segmIds.join(','));
+            _selectBackForm.find("input[name='segmId']").data("addresses", selected);
+            _selectBackForm.find("input[name='standName']").val(standNames.join(','));
         }
 
-        $('#address-select-modal').modal('hide');
+        _selectModal.modal('hide');
     }
 
 

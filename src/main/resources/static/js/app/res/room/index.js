@@ -64,13 +64,15 @@ $(function () {
 
         console.log("roomId:" + roomId + ", roomName:" + roomName);
 
-        var selectBackFormId = $("#room-select-modal").attr("selectBackFormId");
+        var _selectModal = $("#room-select-modal");
+        var selectBackFormId = _selectModal.attr("selectBackFormId");
         if (selectBackFormId) {
-            $("#" + selectBackFormId).find("input[name='roomId']").val(roomId);
-            $("#" + selectBackFormId).find("input[name='roomName']").val(roomName);
+            var _selectBackForm = $("#" + selectBackFormId);
+            _selectBackForm.find("input[name='roomId']").val(roomId);
+            _selectBackForm.find("input[name='roomName']").val(roomName);
         }
 
-        $('#room-select-modal').modal('hide');
+        _selectModal.modal('hide');
     }
 
     initTable();

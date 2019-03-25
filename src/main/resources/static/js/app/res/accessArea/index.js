@@ -63,13 +63,15 @@ $(function () {
 
         console.log("accessAreaId:" + accessAreaId + ", accessAreaName:" + accessAreaName);
 
-        var selectBackFormId = $("#accessArea-select-modal").attr("selectBackFormId");
+        var _selectModal = $("#accessArea-select-modal");
+        var selectBackFormId = _selectModal.attr("selectBackFormId");
         if (selectBackFormId) {
-            $("#" + selectBackFormId).find("input[name='accessAreaId']").val(accessAreaId);
-            $("#" + selectBackFormId).find("input[name='accessAreaName']").val(accessAreaName);
+            var _selectBackForm = $("#" + selectBackFormId);
+            _selectBackForm.find("input[name='accessAreaId']").val(accessAreaId);
+            _selectBackForm.find("input[name='accessAreaName']").val(accessAreaName);
         }
 
-        $('#accessArea-select-modal').modal('hide');
+        _selectModal.modal('hide');
     }
 
     initTable();
