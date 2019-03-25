@@ -15,4 +15,10 @@ import java.util.List;
  */
 public interface BuildingCustomerRpService extends IService<BuildingCustomerRp> {
     List<BuildingCustomerRp> findAll(BuildingCustomerRp buildingCustomerRp);
+
+    BuildingCustomerRp findById(Long buildingCustomerRpId);
+
+    void add(BuildingCustomerRp[] buildingCustomerRps, Long staffId);
+
+    void delete(String buildingCustomerRpIds, Long staffId);
 }

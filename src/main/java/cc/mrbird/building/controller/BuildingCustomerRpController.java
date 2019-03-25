@@ -6,6 +6,7 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.exception.BusinessException;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
@@ -94,11 +95,12 @@ public class BuildingCustomerRpController extends BaseController {
     @RequiresPermissions("buildingCustomerRp:add")
     @RequestMapping("buildingCustomerRp/add")
     @ResponseBody
-    public ResponseBo add(BuildingCustomerRp buildingCustomerRp) {
+    public ResponseBo add(@RequestBody BuildingCustomerRp[] buildingCustomerRps) {
         try {
-            buildingCustomerRp.setCreateStaffId(super.getCurrentUser().getStaffId());
-
+            this.buildingCustomerRpService.add(buildingCustomerRps, super.getCurrentUser().getStaffId());
             return ResponseBo.ok("新增楼宇客户关系成功！");
+        } catch (BusinessException e) {
+            return ResponseBo.error(e.getErrorMsg());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("新增楼宇客户关系失败，请联系网站管理员！");
@@ -109,10 +111,10 @@ public class BuildingCustomerRpController extends BaseController {
     @RequiresPermissions("buildingCustomerRp:delete")
     @RequestMapping("buildingCustomerRp/delete")
     @ResponseBody
-    public ResponseBo delete(String buildingCustomerRpId) {
+    public ResponseBo delete(String buildingCustomerRpIds) {
         try {
             Long staffId = super.getCurrentUser().getStaffId();
-
+            this.buildingCustomerRpService.delete(buildingCustomerRpIds, staffId);
             return ResponseBo.ok("删除楼宇客户关系成功！");
         } catch (Exception e) {
             e.printStackTrace();

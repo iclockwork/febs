@@ -5,24 +5,34 @@ import cc.mrbird.common.annotation.ExportConfig;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "BD_BUILDING_CUSTOMER_RP")
 public class BuildingCustomerRp implements Serializable {
+    /**
+     * 序列
+     */
+    public static final String SEQ = "SEQ_BD_BUILDING";
+
+
     @Id
     @Column(name = "BUILDING_CUSTOMER_RP_ID")
     private Long buildingCustomerRpId;
 
+    @Transient
     private String dsRegionId;
 
+    @Transient
     @ExportConfig(value = "地市")
     private String dsRegionName;
 
-    @Column(name = "REGION_ID")
+    @Transient
     private String regionId;
 
+    @Transient
     @ExportConfig(value = "区县")
     private String regionName;
 
@@ -30,12 +40,14 @@ public class BuildingCustomerRp implements Serializable {
     @ExportConfig(value = "楼宇编码")
     private String buildingNo;
 
+    @Transient
     @ExportConfig(value = "楼宇名称")
     private String buildingName;
 
     @Column(name = "SEGM_ID")
     private String segmId;
 
+    @Transient
     @ExportConfig(value = "九级地址名称")
     private String standName;
 
@@ -43,18 +55,23 @@ public class BuildingCustomerRp implements Serializable {
     @ExportConfig(value = "客户编码")
     private String customerNo;
 
+    @Transient
     @ExportConfig(value = "客户名称")
     private String customerName;
 
+    @Transient
     @ExportConfig(value = "客户联系人")
     private String keyPerson;
 
+    @Transient
     @ExportConfig(value = "客户联系电话")
     private String keyPersonContact;
 
+    @Transient
     @ExportConfig(value = "月费")
     private BigDecimal monthFee;
 
+    @Transient
     @ExportConfig(value = "备注")
     private String remark;
 

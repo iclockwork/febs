@@ -17,8 +17,7 @@
         <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.building.domain.BuildingCustomerRp"
-            parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
+    <sql id="findCommon">
         select t.building_customer_rp_id as buildingCustomerRpId,
         ds.region_name as dsRegionName,
         r.region_name as regionName,
@@ -47,6 +46,11 @@
         and t.building_no = b.building_no
         and t.customer_no = c.customer_no
         and t.segm_id = a.segm_id
+    </sql>
+
+    <select id="findAll" resultType="cc.mrbird.building.domain.BuildingCustomerRp"
+            parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
+        <include refid="findCommon"/>
         <if test="dsRegionId != null and dsRegionId != ''">
             AND b.region_id in
             (select r.region_id
@@ -74,5 +78,10 @@
             AND c.customer_name like #{bindCustomerName}
         </if>
         order by b.building_id desc
+    </select>
+
+    <select id="findById" resultType="cc.mrbird.building.domain.BuildingCustomerRp">
+        <include refid="findCommon"/>
+        and t.building_customer_rp_id = #{buildingCustomerRpId}
     </select>
 </mapper>

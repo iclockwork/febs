@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface BuildingCustomerRpMapper extends MyMapper<BuildingCustomerRp> {
     List<BuildingCustomerRp> findAll(BuildingCustomerRp buildingCustomerRp);
+
+    BuildingCustomerRp findById(Long buildingCustomerRpId);
 }

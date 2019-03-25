@@ -4,6 +4,11 @@
     });
 
     /**
+     * 提示
+     */
+    $.utils.tipsNetSlow = "网络迟缓，请刷新页面重试！";
+
+    /**
      * 单选
      */
     $.utils.selectModeSingle = "single";

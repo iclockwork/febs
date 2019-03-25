@@ -54,21 +54,23 @@ $(function () {
                 }
 
                 $.ajax({
-                    url: ctx + "buildingCustomerRp/checkBind",
+                    url: ctx + "buildingCustomerRp/add",
                     type: "POST",
                     dataType: "json",
                     data: JSON.stringify(buildingCustomerRps),
                     contentType: 'application/json;charset=utf-8',
                     success: function (response) {
                         if (response.code === 0) {
+                            $('#modal-buildingCustomerRp-edit').modal('hide');
                             $MB.n_success(response.msg);
+                            $MB.refreshTable("buildingCustomerRpTable");
                         } else {
                             $MB.n_danger(response.msg)
                         }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState == 0) {
-                            $MB.n_warning('Slow down, please refresh the page, the request being sent!');
+                            $MB.n_warning($.utils.tipsNetSlow);
                         }
                     }
                 });
