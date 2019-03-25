@@ -74,23 +74,6 @@ public class BuildingCustomerRpController extends BaseController {
         }
     }
 
-    @RequestMapping("buildingCustomerRp/checkBind")
-    @ResponseBody
-    public ResponseBo checkBind(@RequestBody BuildingCustomerRp[] buildingCustomerRps) {
-        try {
-            if (null != buildingCustomerRps) {
-                for (int i = 0, length = buildingCustomerRps.length; i < length; i++) {
-
-                }
-
-            }
-            return ResponseBo.ok("校验楼宇客户关系成功！");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseBo.error("校验楼宇客户关系失败，请联系网站管理员！");
-        }
-    }
-
     @Log("新增楼宇客户关系")
     @RequiresPermissions("buildingCustomerRp:add")
     @RequestMapping("buildingCustomerRp/add")
