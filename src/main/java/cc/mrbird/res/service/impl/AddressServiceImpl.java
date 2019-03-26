@@ -8,7 +8,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -43,8 +42,7 @@ public class AddressServiceImpl extends BaseService<Address> implements AddressS
     @Override
     public List<Address> findAll(Address address) {
         try {
-            List<Address> list = this.addressMapper.findAll(address);
-            return list;
+            return this.addressMapper.findAll(address);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -103,8 +101,6 @@ public class AddressServiceImpl extends BaseService<Address> implements AddressS
             msg = JSONObject.parseObject(response);
             String total = msg.getString("total");
             log.info("total:" + total);
-        } catch (HttpException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.building.dao.CustomerBusinessMapper">
+    <resultMap id="customerBusiness" type="cc.mrbird.building.domain.CustomerBusiness">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="CUSTOMER_BUSINESS_ID" jdbcType="DECIMAL" property="customerBusinessId"/>
+        <result column="CUSTOMER_ID" jdbcType="DECIMAL" property="customerId"/>
+        <result column="BUSINESS_TYPE" jdbcType="DECIMAL" property="businessType"/>
+        <result column="BUSINESS_PHONE" jdbcType="VARCHAR" property="businessPhone"/>
+        <result column="MONTH_FEE" jdbcType="DECIMAL" property="monthFee"/>
+        <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag"/>
+        <result column="CREATE_STAFF_ID" jdbcType="DECIMAL" property="createStaffId"/>
+        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="MODIFY_STAFF_ID" jdbcType="DECIMAL" property="modifyStaffId"/>
+        <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate"/>
+    </resultMap>
+
+    <select id="findAll" resultType="cc.mrbird.building.domain.CustomerBusiness"
+            parameterType="cc.mrbird.building.domain.CustomerBusiness">
+        select t.customer_business_id as customerBusinessId,
+        t.customer_id as customerId,
+        c.customer_no as customerNo,
+        c.customer_name as customerName,
+        t.business_type as businessType,
+        decode(t.business_type,
+        1,
+        '专线',
+        2,
+        '宽带',
+        3,
+        '固话',
+        4,
+        '云',
+        5,
+        '移网',
+        6,
+        '电路') as businessTypeName,
+        t.business_phone as businessPhone,
+        t.month_fee as monthFee,
+        s.name as createStaffName,
+        t.create_date as createDate
+        from bd_customer_business t, staff s, bd_customer c
+        where t.delete_flag = 0
+        and t.create_staff_id = s.staff_id
+        and t.customer_id = c.customer_id
+        <if test="customerNo != null and customerNo != ''">
+            AND c.customer_no = #{customerNo}
+        </if>
+        order by t.customer_business_id desc
+    </select>
+
+    <select id="findTotal" resultType="Long" parameterType="cc.mrbird.building.domain.CustomerBusiness">
+        select count(*)
+        from bd_customer_business t
+        where t.delete_flag = 0
+        <if test="customerId != null and customerId != ''">
+            AND t.customer_id = #{customerId}
+        </if>
+    </select>
+</mapper>

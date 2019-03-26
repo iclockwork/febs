@@ -37,9 +37,9 @@
      * 初始化
      */
     $.inspection.view = function (inspectionType, inspectionNo) {
-        var _viewInspectionModal = $('#inspection-query-modal');
-        _viewInspectionModal.attr("inspectionType", inspectionType);
-        _viewInspectionModal.attr("inspectionNo", inspectionNo);
-        _viewInspectionModal.modal('show');
+        var _viewModal = $('#inspection-query-modal');
+        _viewModal.attr("inspectionType", inspectionType);
+        _viewModal.attr("inspectionNo", inspectionNo);
+        _viewModal.modal('show');
     };
 })(jQuery);

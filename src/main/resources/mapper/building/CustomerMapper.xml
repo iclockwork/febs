@@ -19,7 +19,9 @@
 
         <result column="inspectionType" property="inspectionType"/>
         <association property="inspectionTotal" column="{inspectionType=inspectionType,inspectionNo=customerNo}"
-                     select="cc.mrbird.building.dao.InspectionMapper.findInspectionTotal"/>
+                     select="cc.mrbird.building.dao.InspectionMapper.findTotal"/>
+        <association property="customerBusinessTotal" column="{customerId=customerId}"
+                     select="cc.mrbird.building.dao.CustomerBusinessMapper.findTotal"/>
     </resultMap>
 
     <select id="findAll" resultMap="customer" parameterType="cc.mrbird.building.domain.Customer">

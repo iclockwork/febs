@@ -34,6 +34,21 @@
             }
         }
     }, {
+        field: 'customerBusinessTotal',
+        title: '客户业务',
+        formatter: function (value, row, index) {
+            if (value && value > 0) {
+                return '<a href="javascript:void(0)" class="operate-customerBusiness">' + value + '</a>';
+            } else {
+                return value
+            }
+        },
+        events: {
+            'click .operate-customerBusiness': function (e, value, row, index) {
+                $.customerBusiness.view(row.customerNo);
+            }
+        }
+    }, {
         field: 'industryTypeName',
         title: '所属行业'
     }, {

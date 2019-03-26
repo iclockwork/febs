@@ -68,6 +68,22 @@ $(function () {
         $.inspection.view(2, customerNo);
     }
 
+    function viewCustomerBusiness() {
+        var selected = $("#customerTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要查看客户业务的客户！');
+            return;
+        }
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能查看一个客户！');
+            return;
+        }
+        var customerId = selected[0].customerId;
+        var customerNo = selected[0].customerNo;
+        $.customerBusiness.view(customerNo);
+    }
+
     function selectOk() {
         var selected = $("#customerTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
@@ -117,6 +133,10 @@ $(function () {
 
     $(".customer-inspection").click(function () {
         viewInspection();
+    });
+
+    $(".customer-customerBusiness").click(function () {
+        viewCustomerBusiness();
     });
 
     $(".customer-select-modal-ok").click(function () {

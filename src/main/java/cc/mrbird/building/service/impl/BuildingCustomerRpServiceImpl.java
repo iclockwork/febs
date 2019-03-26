@@ -34,8 +34,7 @@ public class BuildingCustomerRpServiceImpl extends BaseService<BuildingCustomerR
     @Override
     public List<BuildingCustomerRp> findAll(BuildingCustomerRp buildingCustomerRp) {
         try {
-            List<BuildingCustomerRp> list = this.buildingCustomerRpMapper.findAll(buildingCustomerRp);
-            return list;
+            return this.buildingCustomerRpMapper.findAll(buildingCustomerRp);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -50,8 +49,7 @@ public class BuildingCustomerRpServiceImpl extends BaseService<BuildingCustomerR
     @Override
     public void add(BuildingCustomerRp[] buildingCustomerRps, Long staffId) {
         if (null != buildingCustomerRps) {
-            for (int i = 0, length = buildingCustomerRps.length; i < length; i++) {
-                BuildingCustomerRp buildingCustomerRp = buildingCustomerRps[i];
+            for (BuildingCustomerRp buildingCustomerRp : buildingCustomerRps) {
                 Example example = new Example(BuildingCustomerRp.class);
                 Example.Criteria criteria = example.createCriteria();
                 criteria.andCondition("building_no=", buildingCustomerRp.getBuildingNo());

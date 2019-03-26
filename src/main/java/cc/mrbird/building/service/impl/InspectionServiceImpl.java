@@ -29,8 +29,7 @@ public class InspectionServiceImpl extends BaseService<Inspection> implements In
     @Override
     public List<Inspection> findAll(Inspection inspection) {
         try {
-            List<Inspection> list = this.inspectionMapper.findAll(inspection);
-            return list;
+            return this.inspectionMapper.findAll(inspection);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

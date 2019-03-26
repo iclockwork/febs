@@ -33,8 +33,7 @@ public class StaffServiceImpl extends BaseService<Staff> implements StaffService
             if (StringUtils.isNotBlank(staff.getLoginName())) {
                 staff.setLoginName(staff.getLoginName().toLowerCase());
             }
-            List<Staff> list = this.staffMapper.findAll(staff);
-            return list;
+            return this.staffMapper.findAll(staff);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

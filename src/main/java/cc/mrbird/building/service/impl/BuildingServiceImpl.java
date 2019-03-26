@@ -32,8 +32,7 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
     @Override
     public List<Building> findAll(Building building) {
         try {
-            List<Building> list = this.buildingMapper.findAll(building);
-            return list;
+            return this.buildingMapper.findAll(building);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
@@ -50,9 +49,7 @@ public class BuildingServiceImpl extends BaseService<Building> implements Buildi
         //根据楼宇类型生成序号
         String seq = buildingMapper.getBuildingNo(buildingType);
         //地市名称英文首字母+楼宇所属区域类型缩写+四位序列号，如NJSC0001
-        String buildingNo = buildingType + seq;
-
-        return buildingNo;
+        return buildingType + seq;
     }
 
     @Override

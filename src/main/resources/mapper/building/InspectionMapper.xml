@@ -43,7 +43,7 @@
         order by t.inspection_id desc
     </select>
 
-    <select id="findInspectionTotal" resultType="Long" parameterType="cc.mrbird.building.domain.Inspection">
+    <select id="findTotal" resultType="Long" parameterType="cc.mrbird.building.domain.Inspection">
         select count(*)
         from BD_INSPECTION t
         where t.delete_flag = 0

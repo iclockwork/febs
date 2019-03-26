@@ -29,8 +29,7 @@ public class RoomServiceImpl extends BaseService<Room> implements RoomService {
     @Override
     public List<Room> findAll(Room room) {
         try {
-            List<Room> list = this.roomMapper.findAll(room);
-            return list;
+            return this.roomMapper.findAll(room);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();

@@ -29,8 +29,7 @@ public class CustomerServiceImpl extends BaseService<Customer> implements Custom
     @Override
     public List<Customer> findAll(Customer customer) {
         try {
-            List<Customer> list = this.customerMapper.findAll(customer);
-            return list;
+            return this.customerMapper.findAll(customer);
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
