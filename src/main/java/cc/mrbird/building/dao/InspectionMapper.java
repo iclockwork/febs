@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface InspectionMapper extends MyMapper<Inspection> {
     List<Inspection> findAll(Inspection inspection);
+
+    Long findInspectionTotal(Inspection inspection);
 }

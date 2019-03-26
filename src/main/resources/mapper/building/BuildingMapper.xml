@@ -2,52 +2,69 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.mrbird.building.dao.BuildingMapper">
     <resultMap id="building" type="cc.mrbird.building.domain.Building">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="BUILDING_ID" jdbcType="DECIMAL" property="buildingId"/>
-        <result column="BUILDING_NO" jdbcType="VARCHAR" property="buildingNo"/>
-        <result column="BUILDING_NAME" jdbcType="VARCHAR" property="buildingName"/>
-        <result column="BUILDING_LEVEL" jdbcType="VARCHAR" property="buildingLevel"/>
-        <result column="BUILDING_TYPE" jdbcType="VARCHAR" property="buildingType"/>
-        <result column="BUILDING_TYPE_NAME" jdbcType="VARCHAR" property="buildingTypeName"/>
-        <result column="BUILDING_ADDRESS" jdbcType="VARCHAR" property="buildingAddress"/>
-        <result column="REGION_ID" jdbcType="VARCHAR" property="regionId"/>
-        <result column="LONGITUDE" jdbcType="DECIMAL" property="longitude"/>
-        <result column="LATITUDE" jdbcType="DECIMAL" property="latitude"/>
-        <result column="FLOOR_NUMBER" jdbcType="DECIMAL" property="floorNumber"/>
-        <result column="AREA" jdbcType="DECIMAL" property="area"/>
-        <result column="HOUSEHOLDER_NUMBER" jdbcType="DECIMAL" property="householderNumber"/>
-        <result column="PROPERTY_COMPANY" jdbcType="VARCHAR" property="propertyCompany"/>
-        <result column="PROPERTY_MANAGER" jdbcType="VARCHAR" property="propertyManager"/>
-        <result column="PROPERTY_MANAGER_CONTACT" jdbcType="VARCHAR" property="propertyManagerContact"/>
-        <result column="BUILDING_MANAGER_ID" jdbcType="DECIMAL" property="buildingManagerId"/>
-        <result column="STATE" jdbcType="DECIMAL" property="state"/>
-        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
-        <result column="SEGM_ID" jdbcType="VARCHAR" property="segmId"/>
-        <result column="ACCESS_AREA_ID" jdbcType="VARCHAR" property="accessAreaId"/>
-        <result column="ROOM_ID" jdbcType="VARCHAR" property="roomId"/>
-        <result column="LIGHT_NAME" jdbcType="VARCHAR" property="lightName"/>
-        <result column="LIGHT_ADDRESS" jdbcType="VARCHAR" property="lightAddress"/>
-        <result column="LIGHT_LONGITUDE" jdbcType="DECIMAL" property="lightLongitude"/>
-        <result column="LIGHT_LATITUDE" jdbcType="DECIMAL" property="lightLatitude"/>
-        <result column="ROOM_CABINET_FLAG" jdbcType="DECIMAL" property="roomCabinetFlag"/>
-        <result column="CABLE_ACCESS_FLAG" jdbcType="DECIMAL" property="cableAccessFlag"/>
-        <result column="CABLE_NUMBER" jdbcType="DECIMAL" property="cableNumber"/>
-        <result column="CABLE_REMAIN_NUMBER" jdbcType="DECIMAL" property="cableRemainNumber"/>
-        <result column="VERTICAL_COVERAGE_FLAG" jdbcType="DECIMAL" property="verticalCoverageFlag"/>
-        <result column="HORIZONTAL_COVERAGE_FLAG" jdbcType="DECIMAL" property="horizontalCoverageFlag"/>
-        <result column="COVERAGE_METHOD" jdbcType="DECIMAL" property="coverageMethod"/>
-        <result column="COOPERATION_METHOD" jdbcType="DECIMAL" property="cooperationMethod"/>
-        <result column="INDOOR_DISTRIBUTION_FLAG" jdbcType="DECIMAL" property="indoorDistributionFlag"/>
-        <result column="COVERAGE_NETWORK_STANDARD" jdbcType="DECIMAL" property="coverageNetworkStandard"/>
-        <result column="WLAN_FLAG" jdbcType="DECIMAL" property="wlanFlag"/>
-        <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag"/>
-        <result column="CREATE_STAFF_ID" jdbcType="DECIMAL" property="createStaffId"/>
-        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="MODIFY_STAFF_ID" jdbcType="DECIMAL" property="modifyStaffId"/>
-        <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate"/>
-        <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp"/>
+        <id column="buildingId" property="buildingId"/>
+        <result column="dsRegionId" property="dsRegionId"/>
+        <result column="dsRegionName" property="dsRegionName"/>
+        <result column="regionId" property="regionId"/>
+        <result column="regionName" property="regionName"/>
+        <result column="buildingNo" property="buildingNo"/>
+        <result column="buildingName" property="buildingName"/>
+        <result column="buildingLevel" property="buildingLevel"/>
+        <result column="buildingLevelName" property="buildingLevelName"/>
+        <result column="buildingType" property="buildingType"/>
+        <result column="buildingTypeDesc" property="buildingTypeDesc"/>
+        <result column="buildingTypeName" property="buildingTypeName"/>
+        <result column="buildingAddress" property="buildingAddress"/>
+        <result column="longitude" property="longitude"/>
+        <result column="latitude" property="latitude"/>
+        <result column="floorNumber" property="floorNumber"/>
+        <result column="area" property="area"/>
+        <result column="householderNumber" property="householderNumber"/>
+        <result column="propertyCompany" property="propertyCompany"/>
+        <result column="propertyManager" property="propertyManager"/>
+        <result column="propertyManagerContact" property="propertyManagerContact"/>
+        <result column="buildingManagerId" property="buildingManagerId"/>
+        <result column="buildingManager" property="buildingManager"/>
+        <result column="buildingManagerContact" property="buildingManagerContact"/>
+        <result column="state" property="state"/>
+        <result column="stateName" property="stateName"/>
+        <result column="remark" property="remark"/>
+        <result column="segmId" property="segmId"/>
+        <result column="standName" property="standName"/>
+        <result column="accessAreaId" property="accessAreaId"/>
+        <result column="accessAreaName" property="accessAreaName"/>
+        <result column="roomId" property="roomId"/>
+        <result column="roomName" property="roomName"/>
+        <result column="lightName" property="lightName"/>
+        <result column="lightAddress" property="lightAddress"/>
+        <result column="lightLongitude" property="lightLongitude"/>
+        <result column="lightLatitude" property="lightLatitude"/>
+        <result column="roomCabinetFlag" property="roomCabinetFlag"/>
+        <result column="roomCabinetFlagName" property="roomCabinetFlagName"/>
+        <result column="cableAccessFlag" property="cableAccessFlag"/>
+        <result column="cableAccessFlagName" property="cableAccessFlagName"/>
+        <result column="cableNumber" property="cableNumber"/>
+        <result column="cableRemainNumber" property="cableRemainNumber"/>
+        <result column="verticalCoverageFlag" property="verticalCoverageFlag"/>
+        <result column="verticalCoverageFlagName" property="verticalCoverageFlagName"/>
+        <result column="horizontalCoverageFlag" property="horizontalCoverageFlag"/>
+        <result column="horizontalCoverageFlagName" property="horizontalCoverageFlagName"/>
+        <result column="coverageMethod" property="coverageMethod"/>
+        <result column="coverageMethodName" property="coverageMethodName"/>
+        <result column="cooperationMethod" property="cooperationMethod"/>
+        <result column="cooperationMethodName" property="cooperationMethodName"/>
+        <result column="indoorDistributionFlag" property="indoorDistributionFlag"/>
+        <result column="indoorDistributionFlagName" property="indoorDistributionFlagName"/>
+        <result column="coverageNetworkStandard" property="coverageNetworkStandard"/>
+        <result column="coverageNetworkStandardName" property="coverageNetworkStandardName"/>
+        <result column="wlanFlag" property="wlanFlag"/>
+        <result column="wlanFlagName" property="wlanFlagName"/>
+        <result column="createStaffName" property="createStaffName"/>
+        <result column="createDate" property="createDate"/>
+
+        <result column="inspectionType" property="inspectionType"/>
+        <association property="inspectionTotal" column="{inspectionType=inspectionType,inspectionNo=buildingNo}"
+                     select="cc.mrbird.building.dao.InspectionMapper.findInspectionTotal"/>
     </resultMap>
 
     <sql id="findCommon">
@@ -58,6 +75,7 @@
         r.region_name as regionName,
         t.building_no as buildingNo,
         t.building_name as buildingName,
+        1 as inspectionType,
         t.building_level as buildingLevel,
         decode(t.building_level, 0, '其它', 1, 'A', 2, 'B', 3, 'C') as buildingLevelName,
         t.building_type as buildingType,
@@ -154,8 +172,7 @@
         and t.room_id = room.room_id(+)
     </sql>
 
-    <select id="findAll" resultType="cc.mrbird.building.domain.Building"
-            parameterType="cc.mrbird.building.domain.Building">
+    <select id="findAll" resultMap="building" parameterType="cc.mrbird.building.domain.Building">
         <include refid="findCommon"/>
         <if test="dsRegionId != null and dsRegionId != ''">
             AND t.region_id in

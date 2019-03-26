@@ -122,10 +122,7 @@ $(function () {
         }
         var buildingId = selected[0].buildingId;
         var buildingNo = selected[0].buildingNo;
-        var _viewInspectionModal = $('#inspection-query-modal');
-        _viewInspectionModal.attr("inspectionType", "1");
-        _viewInspectionModal.attr("inspectionNo", buildingNo);
-        _viewInspectionModal.modal('show');
+        $.inspection.view(1, buildingNo);
     }
 
     function selectOk() {

@@ -42,4 +42,16 @@
         </if>
         order by t.inspection_id desc
     </select>
+
+    <select id="findInspectionTotal" resultType="Long" parameterType="cc.mrbird.building.domain.Inspection">
+        select count(*)
+        from BD_INSPECTION t
+        where t.delete_flag = 0
+        <if test="inspectionType != null and inspectionType != ''">
+            AND t.inspection_type = #{inspectionType}
+        </if>
+        <if test="inspectionNo != null and inspectionNo != ''">
+            AND t.inspection_no = #{inspectionNo}
+        </if>
+    </select>
 </mapper>

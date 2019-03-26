@@ -2,26 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.mrbird.building.dao.CustomerMapper">
     <resultMap id="customer" type="cc.mrbird.building.domain.Customer">
-        <!--
-          WARNING - @mbg.generated
-        -->
-        <id column="CUSTOMER_ID" jdbcType="DECIMAL" property="customerId"/>
-        <result column="CUSTOMER_NO" jdbcType="VARCHAR" property="customerNo"/>
-        <result column="CUSTOMER_NAME" jdbcType="VARCHAR" property="customerName"/>
-        <result column="KEY_PERSON" jdbcType="VARCHAR" property="keyPerson"/>
-        <result column="KEY_PERSON_CONTACT" jdbcType="VARCHAR" property="keyPersonContact"/>
-        <result column="MONTH_FEE" jdbcType="DECIMAL" property="monthFee"/>
-        <result column="REMARK" jdbcType="VARCHAR" property="remark"/>
-        <result column="DELETE_FLAG" jdbcType="DECIMAL" property="deleteFlag"/>
-        <result column="CREATE_STAFF_ID" jdbcType="DECIMAL" property="createStaffId"/>
-        <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
-        <result column="MODIFY_STAFF_ID" jdbcType="DECIMAL" property="modifyStaffId"/>
-        <result column="MODIFY_DATE" jdbcType="TIMESTAMP" property="modifyDate"/>
-        <result column="MODIFY_OP" jdbcType="VARCHAR" property="modifyOp"/>
+        <id column="customerId" property="customerId"/>
+        <result column="dsRegionId" property="dsRegionId"/>
+        <result column="dsRegionName" property="dsRegionName"/>
+        <result column="regionId" property="regionId"/>
+        <result column="regionName" property="regionName"/>
+        <result column="customerNo" property="customerNo"/>
+        <result column="customerName" property="customerName"/>
+        <result column="industryType" property="industryType"/>
+        <result column="industryTypeName" property="industryTypeName"/>
+        <result column="keyPerson" property="keyPerson"/>
+        <result column="keyPersonContact" property="keyPersonContact"/>
+        <result column="monthFee" property="monthFee"/>
+        <result column="remark" property="remark"/>
+        <result column="createDate" property="createDate"/>
+
+        <result column="inspectionType" property="inspectionType"/>
+        <association property="inspectionTotal" column="{inspectionType=inspectionType,inspectionNo=customerNo}"
+                     select="cc.mrbird.building.dao.InspectionMapper.findInspectionTotal"/>
     </resultMap>
 
-    <select id="findAll" resultType="cc.mrbird.building.domain.Customer"
-            parameterType="cc.mrbird.building.domain.Customer">
+    <select id="findAll" resultMap="customer" parameterType="cc.mrbird.building.domain.Customer">
         select t.customer_id as customerId,
         ds.region_id as dsRegionId,
         ds.region_name as dsRegionName,
@@ -29,6 +30,7 @@
         r.region_name as regionName,
         t.customer_no as customerNo,
         t.customer_name as customerName,
+        2 as inspectionType,
         t.industry_type as industryType,
         decode(t.industry_type,
         201,

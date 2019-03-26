@@ -38,6 +38,13 @@ public class Customer implements Serializable {
     @ExportConfig(value = "客户名称")
     private String customerName;
 
+    @Transient
+    private Integer inspectionType;
+
+    @Transient
+    @ExportConfig(value = "巡检记录")
+    private Long inspectionTotal;
+
     @Column(name = "INDUSTRY_TYPE")
     private Integer industryType;
 
@@ -307,5 +314,21 @@ public class Customer implements Serializable {
 
     public void setIndustryTypeName(String industryTypeName) {
         this.industryTypeName = industryTypeName;
+    }
+
+    public Integer getInspectionType() {
+        return inspectionType;
+    }
+
+    public void setInspectionType(Integer inspectionType) {
+        this.inspectionType = inspectionType;
+    }
+
+    public Long getInspectionTotal() {
+        return inspectionTotal;
+    }
+
+    public void setInspectionTotal(Long inspectionTotal) {
+        this.inspectionTotal = inspectionTotal;
     }
 }

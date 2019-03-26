@@ -65,10 +65,7 @@ $(function () {
         }
         var customerId = selected[0].customerId;
         var customerNo = selected[0].customerNo;
-        var _viewInspectionModal = $('#inspection-query-modal');
-        _viewInspectionModal.attr("inspectionType", "2");
-        _viewInspectionModal.attr("inspectionNo", customerNo);
-        _viewInspectionModal.modal('show');
+        $.inspection.view(2, customerNo);
     }
 
     function selectOk() {

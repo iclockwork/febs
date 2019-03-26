@@ -19,6 +19,21 @@
         field: 'buildingName',
         title: '楼宇名称'
     }, {
+        field: 'inspectionTotal',
+        title: '巡检记录',
+        formatter: function (value, row, index) {
+            if (value && value > 0) {
+                return '<a href="javascript:void(0)" class="operate-inspection">' + value + '</a>';
+            } else {
+                return value
+            }
+        },
+        events: {
+            'click .operate-inspection': function (e, value, row, index) {
+                $.inspection.view(1, row.buildingNo);
+            }
+        }
+    }, {
         field: 'buildingLevelName',
         title: '楼宇等级'
     }, {
