@@ -74,7 +74,7 @@ $(function () {
             return;
         }
         var buildingId = selected[0].buildingId;
-        $("#modal-building-edit-form").find("input[name='buildingId']").val(buildingId)
+        $("#modal-building-edit-form").find("input[name='buildingId']").val(buildingId);
         $("#buildingModalMode").val("update");
         $("#modal-building-edit-title").html('修改楼宇');
         $('#modal-building-edit').modal('show');
