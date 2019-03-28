@@ -149,69 +149,27 @@ $(function () {
                 datasets: [{
                     label: "专线业务",
                     data: zxData,
-                    backgroundColor: [
-                        "#00c0ef",
-                        "#00c0ef",
-                        "#00c0ef",
-                        "#00c0ef",
-                        "#00c0ef",
-                        "#00c0ef"
-                    ]
+                    backgroundColor: "#00c0ef"
                 }, {
                     label: "宽带业务",
                     data: kdData,
-                    backgroundColor: [
-                        "#338aff",
-                        "#338aff",
-                        "#338aff",
-                        "#338aff",
-                        "#338aff",
-                        "#338aff"
-                    ]
+                    backgroundColor: "#338aff"
                 }, {
                     label: "固话业务",
                     data: ghData,
-                    backgroundColor: [
-                        "#80c14a",
-                        "#80c14a",
-                        "#80c14a",
-                        "#80c14a",
-                        "#80c14a",
-                        "#80c14a"
-                    ]
+                    backgroundColor: "#80c14a"
                 }, {
                     label: "云业务",
                     data: yData,
-                    backgroundColor: [
-                        "#cf706c",
-                        "#cf706c",
-                        "#cf706c",
-                        "#cf706c",
-                        "#cf706c",
-                        "#cf706c"
-                    ]
+                    backgroundColor: "#cf706c"
                 }, {
                     label: "移网业务",
                     data: ywData,
-                    backgroundColor: [
-                        "#bb7cc1",
-                        "#bb7cc1",
-                        "#bb7cc1",
-                        "#bb7cc1",
-                        "#bb7cc1",
-                        "#bb7cc1"
-                    ]
+                    backgroundColor: "#bb7cc1"
                 }, {
                     label: "电路业务",
                     data: dlData,
-                    backgroundColor: [
-                        "#f400ae",
-                        "#f400ae",
-                        "#f400ae",
-                        "#f400ae",
-                        "#f400ae",
-                        "#f400ae"
-                    ]
+                    backgroundColor: "#f400ae"
                 }]
             };
 
