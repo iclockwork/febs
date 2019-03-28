@@ -81,7 +81,7 @@ $(function () {
         }
         var customerId = selected[0].customerId;
         var customerNo = selected[0].customerNo;
-        $.customerBusiness.view(customerNo);
+        $.customerBusiness.view(customerId, customerNo);
     }
 
     function selectOk() {

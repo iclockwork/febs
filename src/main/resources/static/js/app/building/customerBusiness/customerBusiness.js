@@ -33,8 +33,9 @@
     /**
      * 初始化
      */
-    $.customerBusiness.view = function (customerNo) {
+    $.customerBusiness.view = function (customerId, customerNo) {
         var _viewModal = $('#customerBusiness-query-modal');
+        _viewModal.attr("customerId", customerId);
         _viewModal.attr("customerNo", customerNo);
         _viewModal.modal('show');
     };

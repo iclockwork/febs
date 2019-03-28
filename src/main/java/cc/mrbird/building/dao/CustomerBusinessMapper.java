@@ -8,5 +8,7 @@ import java.util.List;
 public interface CustomerBusinessMapper extends MyMapper<CustomerBusiness> {
     List<CustomerBusiness> findAll(CustomerBusiness customerBusiness);
 
+    CustomerBusiness findById(Long customerBusinessId);
+
     Long findTotal(CustomerBusiness customerBusiness);
 }

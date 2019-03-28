@@ -15,4 +15,12 @@ import java.util.List;
  */
 public interface CustomerBusinessService extends IService<CustomerBusiness> {
     List<CustomerBusiness> findAll(CustomerBusiness customerBusiness);
+
+    CustomerBusiness findById(Long customerBusinessId);
+
+    void add(CustomerBusiness customerBusiness);
+
+    void update(CustomerBusiness customerBusiness);
+
+    void delete(String customerBusinessIds, Long staffId);
 }

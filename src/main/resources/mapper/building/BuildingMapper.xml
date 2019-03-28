@@ -209,11 +209,9 @@
         order by t.building_id desc
     </select>
 
-
     <select id="findById" resultType="cc.mrbird.building.domain.Building">
         <include refid="findCommon"/>
         and t.building_id = #{buildingId}
-        order by t.building_id desc
     </select>
 
     <select id="getBuildingNo" resultType="String">

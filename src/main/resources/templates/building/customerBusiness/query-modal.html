@@ -14,6 +14,15 @@
                                          title="搜索"></div>
                                     <div class="actions__item zmdi zmdi-refresh-alt customerBusiness-refresh"
                                          title="刷新"></div>
+                                    <div class="dropdown actions__item">
+                                        <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a href="javascript:void(0)"
+                                               class="dropdown-item customerBusiness-add">新增业务</a>
+                                            <a href="javascript:void(0)" class="dropdown-item customerBusiness-update">修改业务</a>
+                                            <a href="javascript:void(0)" class="dropdown-item customerBusiness-delete">删除业务</a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="dataTables_filter">
                                     <form class="customerBusiness-table-form">
@@ -46,6 +55,7 @@
         </div>
     </div>
 </div>
+<div data-th-include="building/customerBusiness/edit-modal"></div>
 <script data-th-src="@{js/app/building/customerBusiness/customerBusiness.js}"></script>
 <script data-th-src="@{js/app/building/customerBusiness/index.js}"></script>
 <script data-th-src="@{js/app/building/customerBusiness/query-modal.js}"></script>

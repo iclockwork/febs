@@ -63,4 +63,58 @@ public class CustomerBusinessController extends BaseController {
             return ResponseBo.error("导出Csv失败，请联系网站管理员！");
         }
     }
+
+    @RequestMapping("customerBusiness/getCustomerBusiness")
+    @ResponseBody
+    public ResponseBo get(Long customerBusinessId) {
+        try {
+            CustomerBusiness customerBusiness = this.customerBusinessService.findById(customerBusinessId);
+            return ResponseBo.ok(customerBusiness);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取客户业务信息失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("新增客户业务")
+    @RequestMapping("customerBusiness/add")
+    @ResponseBody
+    public ResponseBo add(CustomerBusiness customerBusiness) {
+        try {
+            customerBusiness.setCreateStaffId(super.getCurrentUser().getStaffId());
+            this.customerBusinessService.add(customerBusiness);
+            return ResponseBo.ok("新增客户业务成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("新增客户业务失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("修改客户业务")
+    @RequestMapping("customerBusiness/update")
+    @ResponseBody
+    public ResponseBo update(CustomerBusiness customerBusiness) {
+        try {
+            customerBusiness.setModifyStaffId(super.getCurrentUser().getStaffId());
+            this.customerBusinessService.update(customerBusiness);
+            return ResponseBo.ok("修改客户业务成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("修改客户业务失败，请联系网站管理员！");
+        }
+    }
+
+    @Log("删除客户业务")
+    @RequestMapping("customerBusiness/delete")
+    @ResponseBody
+    public ResponseBo delete(String customerBusinessIds) {
+        try {
+            Long staffId = super.getCurrentUser().getStaffId();
+            this.customerBusinessService.delete(customerBusinessIds, staffId);
+            return ResponseBo.ok("删除楼宇成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("删除楼宇失败，请联系网站管理员！");
+        }
+    }
 }
