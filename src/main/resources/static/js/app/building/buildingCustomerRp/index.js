@@ -1,5 +1,7 @@
 $(function () {
     var $form = $(".buildingCustomerRp-table-form");
+    var $ds = $form.find("select[name='dsRegionId']");
+    var $qx = $form.find("select[name='regionId']");
 
     function initTable() {
         var settings = {
@@ -9,6 +11,8 @@ $(function () {
                 return {
                     pageSize: params.limit,
                     pageNum: params.offset / params.limit + 1,
+                    dsRegionId: $ds.val(),
+                    regionId: $qx.val(),
                     buildingNo: $form.find("input[name='buildingNo']").val().trim(),
                     buildingName: $form.find("input[name='buildingName']").val().trim(),
                     customerNo: $form.find("input[name='customerNo']").val().trim(),
@@ -85,5 +89,9 @@ $(function () {
 
     $(".buildingCustomerRp-delete").click(function () {
         del();
+    });
+
+    $.region.initDsQx($ds, function () {
+    }, $qx, function () {
     });
 });
