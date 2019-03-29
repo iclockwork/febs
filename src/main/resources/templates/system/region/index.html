@@ -1,33 +1,33 @@
 <div class="card">
     <div class="card-block">
         <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
+            <div class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" title="搜索"/>
-                    <span class="actions__item zmdi zmdi-refresh-alt" title="刷新"/>
+                    <div class="actions__item zmdi zmdi-search region-search" title="搜索"></div>
+                    <div class="actions__item zmdi zmdi-refresh-alt region-refresh" title="刷新"></div>
                     <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download">
                         </i>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" id="exportExcel" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item region-export-excel"
                                data-table-action="excel">
                                 Excel (.xlsx)
                             </a>
-                            <a href="javascript:void(0)" id="exportCsv" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item region-export-csv"
                                data-table-action="csv">
                                 CSV (.csv)
                             </a>
                         </ul>
                     </div>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
+                <div class="dataTables_filter">
                     <form class="region-table-form">
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	区域名称：
-					            </span>
+                                    <div class="input-group-addon">
+                                        区域名称：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="regionName" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -36,9 +36,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	区域编码：
-					            </span>
+                                    <div class="input-group-addon">
+                                        区域编码：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="regionNo" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -47,9 +47,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	上级区域：
-					            </span>
+                                    <div class="input-group-addon">
+                                        上级区域：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="superRegionName" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -58,9 +58,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	区域等级：
-					            </span>
+                                    <div class="input-group-addon">
+                                        区域等级：
+                                    </div>
                                     <div class="form-group">
                                         <select name="gradeId" class="form-control">
                                             <option value="" selected>所有</option>

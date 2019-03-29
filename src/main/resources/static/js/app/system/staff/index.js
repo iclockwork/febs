@@ -1,83 +1,97 @@
 $(function () {
-    var settings = {
-        url: ctx + "staff/list",
-        pageSize: 10,
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                loginName: $(".staff-table-form").find("input[name='loginName']").val().trim(),
-                name: $(".staff-table-form").find("input[name='name']").val().trim(),
-                phoneNo: $(".staff-table-form").find("input[name='phoneNo']").val().trim()
-            };
-        },
-        columns: [{
-            field: 'loginName',
-            title: '登录名'
-        }, {
-            field: 'name',
-            title: '姓名'
-        }, {
-            field: 'regionName',
-            title: '区域名称'
-        }, {
-            field: 'deptName',
-            title: '部门名称'
-        }, {
-            field: 'phoneNo',
-            title: '电话'
-        }, {
-            field: 'expDate',
-            title: '帐号有效期'
-        }, {
-            field: 'identityId',
-            title: '身份证号'
-        }, {
-            field: 'hrCode',
-            title: '人力资源编码'
-        }]
-    };
+    var $form = $(".staff-table-form");
+    var $selectMode = $("#staffTable").attr("selectMode");
+
+    function initTable() {
+        var pageSize = 10;
+        var columns = [];
+
+        if ($.utils.selectModeSingle === $selectMode) {
+            pageSize = 5;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.staff.tableColumns);
+        } else if ($.utils.selectModeMultiple === $selectMode) {
+            pageSize = 5;
+        } else {
+            pageSize = 10;
+            columns = $.staff.tableColumns;
+        }
+
+        var settings = {
+            url: ctx + "staff/list",
+            pageSize: pageSize,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    loginName: $form.find("input[name='loginName']").val().trim(),
+                    name: $form.find("input[name='name']").val().trim(),
+                    phoneNo: $form.find("input[name='phoneNo']").val().trim()
+                };
+            },
+            columns: columns
+        };
+
+        $MB.initTable('staffTable', settings);
+    }
 
     function search() {
         $MB.refreshTable('staffTable');
     }
 
     function refresh() {
-        $(".staff-table-form")[0].reset();
+        $form[0].reset();
         search();
     }
 
-    function exportFile(fileType) {
-        var url = ctx + "staff/excel";
-        if ("excel" === fileType) {
-            url = ctx + "staff/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "staff/csv";
+    function selectOk() {
+        var selected = $("#staffTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要选择的人员！');
+            return;
         }
-        $.post(url, $(".staff-table-form").serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
-        });
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能选择一个人员！');
+            return;
+        }
+        var staffId = selected[0].staffId;
+        var staffName = selected[0].name;
+
+        console.log("staffId:" + staffId + ", staffName:" + staffName);
+
+        var _selectModal = $("#staff-select-modal");
+        var selectBackFormId = _selectModal.attr("selectBackFormId");
+        if (selectBackFormId) {
+            var _selectBackForm = $("#" + selectBackFormId);
+            _selectBackForm.find("input[name='staffId']").val(staffId);
+            _selectBackForm.find("input[name='staffName']").val(staffName);
+        }
+
+        _selectModal.modal('hide');
     }
 
-    $MB.initTable('staffTable', settings);
+    initTable();
 
-    $(".zmdi-search").click(function () {
+    $(".staff-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".staff-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
-        exportFile("excel")
+    $(".staff-export-excel").click(function () {
+        $.utils.exportFile(ctx + "staff/excel", $form.serialize());
     });
 
-    $("#exportCsv").click(function () {
-        exportFile("csv")
+    $(".staff-export-csv").click(function () {
+        $.utils.exportFile(ctx + "staff/csv", $form.serialize());
+    });
+
+    $(".staff-select-modal-ok").click(function () {
+        selectOk();
     });
 });

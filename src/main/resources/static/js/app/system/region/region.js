@@ -13,6 +13,32 @@
      */
     $.region.gradeIdQx = "2000011";
 
+    /**
+     * 表格内容
+     */
+    $.region.tableColumns = [{
+        field: 'regionName',
+        title: '区域名称'
+    }, {
+        field: 'regionNo',
+        title: '区域编码'
+    }, {
+        field: 'chinaNameAb',
+        title: '区域简称'
+    }, {
+        field: 'superRegionName',
+        title: '上级区域'
+    }, {
+        field: 'gradeName',
+        title: '区域等级'
+    }, {
+        field: 'address',
+        title: '区域中心地址'
+    }, {
+        field: 'createDate',
+        title: '创建时间'
+    }];
+
     function _initDs(ds, dsCallback, qx, qxCallback) {
         if (ds.length > 0) {
             ds.empty();

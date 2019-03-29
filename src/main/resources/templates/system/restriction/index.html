@@ -1,33 +1,33 @@
 <div class="card">
     <div class="card-block">
         <div class="table-responsive">
-            <div id="data-table_wrapper" class="dataTables_wrapper">
+            <div class="dataTables_wrapper">
                 <div class="dataTables_buttons hidden-sm-down actions">
-                    <span class="actions__item zmdi zmdi-search" title="搜索"/>
-                    <span class="actions__item zmdi zmdi-refresh-alt" title="刷新"/>
+                    <div class="actions__item zmdi zmdi-search restriction-search" title="搜索"></div>
+                    <div class="actions__item zmdi zmdi-refresh-alt restriction-refresh" title="刷新"></div>
                     <div class="dropdown actions__item">
                         <i data-toggle="dropdown" class="zmdi zmdi-download">
                         </i>
                         <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" id="exportExcel" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item restriction-export-excel"
                                data-table-action="excel">
                                 Excel (.xlsx)
                             </a>
-                            <a href="javascript:void(0)" id="exportCsv" class="dropdown-item"
+                            <a href="javascript:void(0)" class="dropdown-item restriction-export-csv"
                                data-table-action="csv">
                                 CSV (.csv)
                             </a>
                         </ul>
                     </div>
                 </div>
-                <div id="data-table_filter" class="dataTables_filter">
+                <div class="dataTables_filter">
                     <form class="restriction-table-form">
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	流水号：
-					            </span>
+                                    <div class="input-group-addon">
+                                        流水号：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="serialNo" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -36,9 +36,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	属性名称：
-					            </span>
+                                    <div class="input-group-addon">
+                                        属性名称：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="descChina" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -47,9 +47,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	关键字：
-					            </span>
+                                    <div class="input-group-addon">
+                                        关键字：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="keyword" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -58,9 +58,9 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-					               	关键字描述：
-					            </span>
+                                    <div class="input-group-addon">
+                                        关键字描述：
+                                    </div>
                                     <div class="form-group">
                                         <input type="text" name="keywordDesc" class="form-control">
                                         <i class="form-group__bar"></i>
@@ -76,4 +76,5 @@
         </div>
     </div>
 </div>
+<script data-th-src="@{js/app/system/restriction/restriction.js}"></script>
 <script data-th-src="@{js/app/system/restriction/index.js}"></script>

@@ -1,64 +1,33 @@
 $(function () {
-    var settings = {
-        url: ctx + "region/list",
-        pageSize: 10,
-        queryParams: function (params) {
-            return {
-                pageSize: params.limit,
-                pageNum: params.offset / params.limit + 1,
-                regionName: $(".region-table-form").find("input[name='regionName']").val().trim(),
-                regionNo: $(".region-table-form").find("input[name='regionNo']").val().trim(),
-                superRegionName: $(".region-table-form").find("input[name='superRegionName']").val().trim(),
-                gradeId: $(".region-table-form").find("select[name='gradeId']").val()
-            };
-        },
-        columns: [{
-            field: 'regionName',
-            title: '区域名称'
-        }, {
-            field: 'regionNo',
-            title: '区域编码'
-        }, {
-            field: 'chinaNameAb',
-            title: '区域简称'
-        }, {
-            field: 'superRegionName',
-            title: '上级区域'
-        }, {
-            field: 'gradeName',
-            title: '区域等级'
-        }, {
-            field: 'address',
-            title: '区域中心地址'
-        }, {
-            field: 'createDate',
-            title: '创建时间'
-        }]
-    };
+    var $form = $(".region-table-form");
+
+    function initTable() {
+        var settings = {
+            url: ctx + "region/list",
+            pageSize: 10,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    regionName: $form.find("input[name='regionName']").val().trim(),
+                    regionNo: $form.find("input[name='regionNo']").val().trim(),
+                    superRegionName: $form.find("input[name='superRegionName']").val().trim(),
+                    gradeId: $form.find("select[name='gradeId']").val()
+                };
+            },
+            columns: $.region.tableColumns
+        };
+
+        $MB.initTable('regionTable', settings);
+    }
 
     function search() {
         $MB.refreshTable('regionTable');
     }
 
     function refresh() {
-        $(".region-table-form")[0].reset();
+        $form[0].reset();
         search();
-    }
-
-    function exportFile(fileType) {
-        var url = ctx + "region/excel";
-        if ("excel" === fileType) {
-            url = ctx + "region/excel";
-        } else if ("csv" === fileType) {
-            url = ctx + "region/csv";
-        }
-        $.post(url, $(".region-table-form").serialize(), function (r) {
-            if (r.code === 0) {
-                window.location.href = "common/download?fileName=" + r.msg + "&delete=" + true;
-            } else {
-                $MB.n_warning(r.msg);
-            }
-        });
     }
 
     function initGrade() {
@@ -74,23 +43,23 @@ $(function () {
         });
     }
 
-    $MB.initTable('regionTable', settings);
+    initTable();
 
-    $(".zmdi-search").click(function () {
+    initGrade();
+
+    $(".region-search").click(function () {
         search();
     });
 
-    $(".zmdi-refresh-alt").click(function () {
+    $(".region-refresh").click(function () {
         refresh();
     });
 
-    $("#exportExcel").click(function () {
-        exportFile("excel")
+    $(".region-export-excel").click(function () {
+        $.utils.exportFile(ctx + "region/excel", $form.serialize());
     });
 
-    $("#exportCsv").click(function () {
-        exportFile("csv")
+    $(".region-export-csv").click(function () {
+        $.utils.exportFile(ctx + "region/csv", $form.serialize());
     });
-
-    initGrade();
 });
