@@ -37,9 +37,6 @@
     </resultMap>
 
     <select id="findAll" resultType="cc.mrbird.system.domain.Region" parameterType="cc.mrbird.system.domain.Region">
-        <bind name="bindRegionName" value="'%' + regionName + '%'"/>
-        <bind name="bindRegionNo" value="'%' + regionNo + '%'"/>
-        <bind name="bindSuperRegionName" value="'%' + superRegionName + '%'"/>
         SELECT A.REGION_ID as regionId,
         A.REGION_NAME as regionName,
         A.REGION_NO as regionNo,
@@ -55,12 +52,15 @@
         AND A.GRADE_ID not in (2000024)
         AND A.SUPER_REGION_ID = B.REGION_ID(+)
         <if test="regionName != null and regionName != ''">
+            <bind name="bindRegionName" value="'%' + regionName + '%'"/>
             AND A.REGION_NAME like #{bindRegionName}
         </if>
         <if test="regionNo != null and regionNo != ''">
+            <bind name="bindRegionNo" value="'%' + regionNo + '%'"/>
             AND A.REGION_NO like #{bindRegionNo}
         </if>
         <if test="superRegionName != null and superRegionName != ''">
+            <bind name="bindSuperRegionName" value="'%' + superRegionName + '%'"/>
             AND B.REGION_NAME like #{bindSuperRegionName}
         </if>
         <if test="gradeId != null and gradeId != ''">

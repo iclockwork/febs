@@ -46,6 +46,11 @@ $(function () {
         closeModal();
     });
 
+    $("#selectStaffSingle").click(function () {
+        console.log("selectStaffSingle");
+
+        $("#staff-select-modal").attr("selectBackFormId", "user-add-form");
+    });
 });
 
 function closeModal() {
@@ -85,6 +90,9 @@ function validateRule() {
                     }
                 }
             },
+            staffName: {
+                required: true
+            },
             email: {
                 email: true
             },
@@ -112,6 +120,7 @@ function validateRule() {
                 remote: icon + "用户名已经存在"
             },
             roles: icon + "请选择用户角色",
+            staffName: icon + "请选择人员",
             email: icon + "邮箱格式不正确",
             ssex: icon + "请选择性别"
         }

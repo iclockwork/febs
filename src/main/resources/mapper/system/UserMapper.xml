@@ -51,7 +51,6 @@
   </select>
 
     <select id="findUserWithDept" resultType="user" parameterType="user">
-        <bind name="bindStaffName" value="'%' + staffName + '%'"/>
         select u.user_id userId,
         u.username,
         u.email,
@@ -70,6 +69,7 @@
         and u.staff_id = s.staff_id(+)
         and s.region_id = r.region_id(+)
         <if test="username != null and username != ''">
+            <bind name="bindStaffName" value="'%' + staffName + '%'"/>
             AND lower(u.username) = #{username}
         </if>
         <if test="deptId != null and deptId != ''">
@@ -84,7 +84,7 @@
         <if test="staffName != null and staffName != ''">
             AND s.name like #{bindStaffName}
         </if>
-        order by u.user_id
+        order by u.user_id desc
     </select>
 
 

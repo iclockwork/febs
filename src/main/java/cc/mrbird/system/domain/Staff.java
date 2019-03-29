@@ -89,6 +89,10 @@ public class Staff implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
+    @Column(name = "REMARK")
+    @ExportConfig(value = "邮箱")
+    private String remark;
+
     @Column(name = "PHONE_NO")
     @ExportConfig(value = "电话")
     private String phoneNo;
@@ -98,9 +102,6 @@ public class Staff implements Serializable {
 
     @Column(name = "DELETE_TIME")
     private Date deleteTime;
-
-    @Column(name = "REMARK")
-    private String remark;
 
     @Column(name = "STAFF_ALIAS")
     private String staffAlias;

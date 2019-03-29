@@ -9,9 +9,25 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon">
-					               	 用户名：
-					            </span>
+                                <div class="input-group-addon">
+                                    姓名：
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="staffId"/>
+                                    <input type="text" class="form-control" name="staffName" readonly>
+                                </div>
+                                <div class="actions__item zmdi zmdi-search" data-toggle="modal"
+                                     data-target="#staff-select-modal" title="搜索"
+                                     id="selectStaffSingle"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    用户名：
+                                </div>
                                 <div class="form-group">
                                     <input type="text" name="username" class="form-control">
                                     <input type="text" hidden name="oldusername" class="form-control">
@@ -23,9 +39,9 @@
                     <div class="row user_password">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon">
-					               	 密码：
-					            </span>
+                                <div class="input-group-addon">
+                                    密码：
+                                </div>
                                 <div class="form-group">
                                     <input type="text" name="password" value="123456" readonly class="form-control">
                                 </div>
@@ -35,9 +51,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon">
-					               	 邮箱：
-					            </span>
+                                <div class="input-group-addon">
+                                    邮箱：
+                                </div>
                                 <div class="form-group">
                                     <input type="text" name="email" class="form-control">
                                 </div>
@@ -47,9 +63,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon">
-					               	 手机：
-					            </span>
+                                <div class="input-group-addon">
+                                    手机：
+                                </div>
                                 <div class="form-group">
                                     <input type="text" name="mobile" class="form-control">
                                 </div>
@@ -59,9 +75,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon">
-					               	 角色：
-					             </span>
+                                <div class="input-group-addon">
+                                    角色：
+                                </div>
                                 <div class="form-group">
                                     <select multiple="multiple" name="rolesSelect"></select>
                                     <input name="roles" hidden/>
@@ -72,40 +88,40 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group" style="margin-top:10px;">
-                                <span class="input-group-addon">
-					               	状态：
-					             </span>
+                                <div class="input-group-addon">
+                                    状态：
+                                </div>
                                 <div class="toggle-switch">
                                     <input type="checkbox" name="status" checked class="toggle-switch__checkbox">
                                     <i class="toggle-switch__helper"></i>
                                 </div>
-                                <span class="input-group-addon" id="status" style="margin-left: 10px;">
-	                                 	可用
-						             </span>
+                                <div class="input-group-addon" id="status" style="margin-left: 10px;">
+                                    可用
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group" style="margin-top:10px;">
-                                <span class="input-group-addon">
-					               	性别：
-					             </span>
+                                <div class="input-group-addon">
+                                    性别：
+                                </div>
                                 <div class="form-group">
                                     <label class="custom-control custom-radio">
                                         <input name="ssex" type="radio" value="0" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">男</span>
+                                        <div class="custom-control-indicator"></div>
+                                        <div class="custom-control-description">男</div>
                                     </label>
                                     <label class="custom-control custom-radio">
                                         <input name="ssex" type="radio" value="1" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">女</span>
+                                        <div class="custom-control-indicator"></div>
+                                        <div class="custom-control-description">女</div>
                                     </label>
                                     <label class="custom-control custom-radio">
-                                        <input name="ssex" type="radio" value="2" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">保密</span>
+                                        <input name="ssex" type="radio" value="2" checked class="custom-control-input">
+                                        <div class="custom-control-indicator"></div>
+                                        <div class="custom-control-description">保密</div>
                                     </label>
                                 </div>
                             </div>
@@ -114,9 +130,9 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="input-group">
-                                <span class="input-group-addon" style="justify-content: flex-start;margin-top: .5rem;">
-					               	部门：
-					             </span>
+                                <div class="input-group-addon" style="justify-content: flex-start;margin-top: .5rem;">
+                                    部门：
+                                </div>
                                 <div class="form-group">
                                     <div id="deptTree"></div>
                                 </div>
@@ -134,4 +150,5 @@
         </div>
     </div>
 </div>
+<div data-th-include="system/staff/select-modal-single"></div>
 <script data-th-src="@{js/app/system/user/userAdd.js}"></script>

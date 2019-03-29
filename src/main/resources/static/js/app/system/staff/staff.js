@@ -19,6 +19,9 @@
         field: 'deptName',
         title: '部门名称'
     }, {
+        field: 'remark',
+        title: '邮箱'
+    },{
         field: 'phoneNo',
         title: '电话'
     }, {

@@ -59,8 +59,11 @@ $(function () {
         }
         var staffId = selected[0].staffId;
         var staffName = selected[0].name;
+        var username = selected[0].loginName;
+        var email = selected[0].remark;
+        var mobile = selected[0].phoneNo;
 
-        console.log("staffId:" + staffId + ", staffName:" + staffName);
+        console.log("staffId:" + staffId + ", staffName:" + staffName + ", username:" + username + ", email:" + email + ", mobile:" + mobile);
 
         var _selectModal = $("#staff-select-modal");
         var selectBackFormId = _selectModal.attr("selectBackFormId");
@@ -68,6 +71,9 @@ $(function () {
             var _selectBackForm = $("#" + selectBackFormId);
             _selectBackForm.find("input[name='staffId']").val(staffId);
             _selectBackForm.find("input[name='staffName']").val(staffName);
+            _selectBackForm.find("input[name='username']").val(username);
+            _selectBackForm.find("input[name='email']").val(email);
+            _selectBackForm.find("input[name='mobile']").val(mobile);
         }
 
         _selectModal.modal('hide');

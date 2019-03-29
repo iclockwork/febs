@@ -51,9 +51,6 @@
     </resultMap>
 
     <select id="findAll" resultType="cc.mrbird.system.domain.Staff" parameterType="cc.mrbird.system.domain.Staff">
-        <bind name="bindLoginName" value="'%' + loginName + '%'"/>
-        <bind name="bindName" value="'%' + name + '%'"/>
-        <bind name="bindPhoneNo" value="'%' + phoneNo + '%'"/>
         SELECT A.STAFF_ID as staffId,
         A.LOGIN_NAME as loginName,
         A.NAME as name,
@@ -61,6 +58,7 @@
         r.region_name as regionName,
         A.SITE_ID as siteId,
         B.DEPT_NAME as deptName,
+        A.REMARK as remark,
         A.PHONE_NO as phoneNo,
         A.EXP_DATE as expDate,
         A.IDENTITY_ID as identityId,
@@ -72,12 +70,15 @@
         AND B.DEPT_ID = A.SITE_ID
         and A.region_id = r.region_id(+)
         <if test="loginName != null and loginName != ''">
+            <bind name="bindLoginName" value="'%' + loginName + '%'"/>
             AND lower(A.LOGIN_NAME) like #{bindLoginName}
         </if>
         <if test="name != null and name != ''">
+            <bind name="bindName" value="'%' + name + '%'"/>
             AND A.NAME like #{bindName}
         </if>
         <if test="phoneNo != null and phoneNo != ''">
+            <bind name="bindPhoneNo" value="'%' + phoneNo + '%'"/>
             AND A.PHONE_NO like #{bindPhoneNo}
         </if>
     </select>
