@@ -32,4 +32,18 @@ public class Constant {
      */
     public static final String PROVINCE_FLAG_YES = "000102000000000000007126";
 
+    /**
+     * 人员类型 0、超级管理员 1、区域管理员 2、普通人员
+     */
+    public static final Integer STAFF_TYPE_SUPER_ADMIN = 0;
+
+    /**
+     * 人员类型 0、超级管理员 1、区域管理员 2、普通人员
+     */
+    public static final Integer STAFF_TYPE_REGION_ADMIN = 1;
+
+    /**
+     * 人员类型 0、超级管理员 1、区域管理员 2、普通人员
+     */
+    public static final Integer STAFF_TYPE_NORMAL = 2;
 }

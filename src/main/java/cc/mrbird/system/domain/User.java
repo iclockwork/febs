@@ -75,6 +75,17 @@ public class User implements Serializable {
     @ExportConfig(value = "手机")
     private String mobile;
 
+    @Column(name = "SSEX")
+    @ExportConfig(value = "性别", convert = "s:0=男,1=女,2=保密")
+    private String ssex;
+
+    @Column(name = "STAFF_TYPE")
+    private Integer staffType;
+
+    @Transient
+    @ExportConfig(value = "人员类型")
+    private String staffTypeName;
+
     @Column(name = "STATUS")
     @ExportConfig(value = "状态", convert = "s:0=锁定,1=有效")
     private String status = STATUS_VALID;
@@ -88,10 +99,6 @@ public class User implements Serializable {
 
     @Column(name = "LAST_LOGIN_TIME")
     private Date lastLoginTime;
-
-    @Column(name = "SSEX")
-    @ExportConfig(value = "性别", convert = "s:0=男,1=女,2=保密")
-    private String ssex;
 
     @Column(name = "THEME")
     private String theme;
@@ -329,6 +336,22 @@ public class User implements Serializable {
 
     public void setRegionName(String regionName) {
         this.regionName = regionName;
+    }
+
+    public Integer getStaffType() {
+        return staffType;
+    }
+
+    public void setStaffType(Integer staffType) {
+        this.staffType = staffType;
+    }
+
+    public String getStaffTypeName() {
+        return staffTypeName;
+    }
+
+    public void setStaffTypeName(String staffTypeName) {
+        this.staffTypeName = staffTypeName;
     }
 
     @Override

@@ -19,7 +19,8 @@
         <result column="THEME" jdbcType="VARCHAR" property="theme"/>
         <result column="AVATAR" jdbcType="VARCHAR" property="avatar"/>
         <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
-        <result column="REGION_ID" jdbcType="VARCHAR" property="regionId"/>
+        <result column="STAFF_ID" jdbcType="DECIMAL" property="staffId"/>
+        <result column="STAFF_TYPE" jdbcType="DECIMAL" property="staffType"/>
     </resultMap>
 
     <select id="findByName" resultType="user">
@@ -41,7 +42,9 @@
         u.staff_id staffId,
         s.name staffName,
         s.region_id regionId,
-        r.region_name regionName
+        r.region_name regionName,
+        u.staff_type staffType,
+        decode(u.staff_type, 0, '超级管理员', 1, '区域管理员', 2, '普通人员') staffTypeName
         from t_user u, t_dept d, staff s, spc_region r
         where 1 = 1
         and u.dept_id = d.dept_id(+)
@@ -62,7 +65,9 @@
         u.staff_id staffId,
         s.name staffName,
         s.region_id regionId,
-        r.region_name regionName
+        r.region_name regionName,
+        u.staff_type staffType,
+        decode(u.staff_type, 0, '超级管理员', 1, '区域管理员', 2, '普通人员') staffTypeName
         from t_user u, t_dept d, staff s, spc_region r
         where 1 = 1
         and u.dept_id = d.dept_id(+)
@@ -100,7 +105,9 @@
                u.staff_id    staffId,
                s.name        staffName,
                s.region_id   regionId,
-               r.region_name regionName
+               r.region_name regionName,
+        u.staff_type staffType,
+        decode(u.staff_type, 0, '超级管理员', 1, '区域管理员', 2, '普通人员') staffTypeName
           from t_user u, t_user_role ur, staff s, spc_region r
          where 1 = 1
            and u.user_id = ur.user_id(+)
@@ -123,7 +130,9 @@
                u.staff_id staffId,
                s.name staffName,
                s.region_id regionId,
-               r.region_name regionName
+               r.region_name regionName,
+        u.staff_type staffType,
+        decode(u.staff_type, 0, '超级管理员', 1, '区域管理员', 2, '普通人员') staffTypeName
           FROM t_user U
           LEFT JOIN t_dept D
             ON U.DEPT_ID = D.DEPT_ID
@@ -149,7 +158,7 @@
                   u.staff_id,
                   s.name,
                   s.region_id,
-                  r.region_name
+                  r.region_name,
+                  u.staff_type
   </select>
-
 </mapper>

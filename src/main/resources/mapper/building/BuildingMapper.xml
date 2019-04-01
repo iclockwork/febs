@@ -206,6 +206,9 @@
         <if test="state != null">
             AND t.state = #{state}
         </if>
+        <if test="buildingManagerId != null and buildingManagerId != ''">
+            AND t.building_manager_id = #{buildingManagerId}
+        </if>
         order by t.building_id desc
     </select>
 

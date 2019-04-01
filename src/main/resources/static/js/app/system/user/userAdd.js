@@ -104,6 +104,9 @@ function validateRule() {
             },
             ssex: {
                 required: true
+            },
+            staffType: {
+                required: true
             }
         },
         errorPlacement: function (error, element) {
@@ -122,7 +125,8 @@ function validateRule() {
             roles: icon + "请选择用户角色",
             staffName: icon + "请选择人员",
             email: icon + "邮箱格式不正确",
-            ssex: icon + "请选择性别"
+            ssex: icon + "请选择性别",
+            staffType: icon + "请选择人员类型"
         }
     });
 }

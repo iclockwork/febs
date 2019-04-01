@@ -6,7 +6,9 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,20 +42,14 @@ public class BuildingController extends BaseController {
     @RequestMapping("building/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Building building) {
-        if (StringUtils.isBlank(building.getDsRegionId())) {
-            building.setDsRegionId(super.getCurrentUser().getRegionId());
-        }
-        return super.selectByPageNumSize(request, () -> this.buildingService.findAll(building));
+        return super.selectByPageNumSize(request, () -> this.buildingService.findAll(workingCondition(building)));
     }
 
     @RequestMapping("building/excel")
     @ResponseBody
     public ResponseBo excel(Building building) {
         try {
-            if (StringUtils.isBlank(building.getDsRegionId())) {
-                building.setDsRegionId(super.getCurrentUser().getRegionId());
-            }
-            List<Building> list = this.buildingService.findAll(building);
+            List<Building> list = this.buildingService.findAll(workingCondition(building));
             return FileUtils.createExcelByPOIKit("楼宇表", list, Building.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,10 +61,7 @@ public class BuildingController extends BaseController {
     @ResponseBody
     public ResponseBo csv(Building building) {
         try {
-            if (StringUtils.isBlank(building.getDsRegionId())) {
-                building.setDsRegionId(super.getCurrentUser().getRegionId());
-            }
-            List<Building> list = this.buildingService.findAll(building);
+            List<Building> list = this.buildingService.findAll(workingCondition(building));
             return FileUtils.createCsv("楼宇表", list, Building.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,5 +136,17 @@ public class BuildingController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("删除楼宇失败，请联系网站管理员！");
         }
+    }
+
+    private Building workingCondition(Building building) {
+        User user = super.getCurrentUser();
+        if (StringUtils.isBlank(building.getDsRegionId())) {
+            building.setDsRegionId(user.getRegionId());
+        }
+        if (Constant.STAFF_TYPE_NORMAL.equals(user.getStaffType())) {
+            building.setBuildingManagerId(user.getStaffId());
+        }
+
+        return building;
     }
 }

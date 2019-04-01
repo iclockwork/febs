@@ -23,6 +23,7 @@
         r.region_name as regionName,
         b.building_no as buildingNo,
         b.building_name as buildingName,
+        b.building_manager_id as buildingManagerId,
         t.segm_id as segmId,
         a.stand_name as standName,
         c.customer_no customerNo,
@@ -76,6 +77,9 @@
         <if test="customerName != null and customerName != ''">
             <bind name="bindCustomerName" value="'%' + customerName + '%'"/>
             AND c.customer_name like #{bindCustomerName}
+        </if>
+        <if test="buildingManagerId != null and buildingManagerId != ''">
+            AND b.building_manager_id = #{buildingManagerId}
         </if>
         order by b.building_id desc
     </select>

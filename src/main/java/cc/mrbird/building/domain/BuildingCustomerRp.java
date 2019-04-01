@@ -44,6 +44,9 @@ public class BuildingCustomerRp implements Serializable {
     @ExportConfig(value = "楼宇名称")
     private String buildingName;
 
+    @Transient
+    private Long buildingManagerId;
+
     @Column(name = "SEGM_ID")
     private String segmId;
 
@@ -319,5 +322,13 @@ public class BuildingCustomerRp implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Long getBuildingManagerId() {
+        return buildingManagerId;
+    }
+
+    public void setBuildingManagerId(Long buildingManagerId) {
+        this.buildingManagerId = buildingManagerId;
     }
 }

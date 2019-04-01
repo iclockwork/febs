@@ -45,6 +45,9 @@ $(function () {
                 else return '保密';
             }
         }, {
+            field: 'staffTypeName',
+            title: '人员类型'
+        }, {
             field: 'crateTime',
             title: '创建时间'
         }, {

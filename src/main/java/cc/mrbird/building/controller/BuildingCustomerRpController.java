@@ -7,6 +7,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.exception.BusinessException;
+import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
@@ -43,18 +44,14 @@ public class BuildingCustomerRpController extends BaseController {
     @RequestMapping("buildingCustomerRp/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, BuildingCustomerRp buildingCustomerRp) {
-        User user = super.getCurrentUser();
-        if (StringUtils.isBlank(buildingCustomerRp.getDsRegionId())) {
-            buildingCustomerRp.setDsRegionId(user.getRegionId());
-        }
-        return super.selectByPageNumSize(request, () -> this.buildingCustomerRpService.findAll(buildingCustomerRp));
+        return super.selectByPageNumSize(request, () -> this.buildingCustomerRpService.findAll(workingCondition(buildingCustomerRp)));
     }
 
     @RequestMapping("buildingCustomerRp/excel")
     @ResponseBody
     public ResponseBo excel(BuildingCustomerRp buildingCustomerRp) {
         try {
-            List<BuildingCustomerRp> list = this.buildingCustomerRpService.findAll(buildingCustomerRp);
+            List<BuildingCustomerRp> list = this.buildingCustomerRpService.findAll(workingCondition(buildingCustomerRp));
             return FileUtils.createExcelByPOIKit("楼宇客户表", list, BuildingCustomerRp.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +63,7 @@ public class BuildingCustomerRpController extends BaseController {
     @ResponseBody
     public ResponseBo csv(BuildingCustomerRp buildingCustomerRp) {
         try {
-            List<BuildingCustomerRp> list = this.buildingCustomerRpService.findAll(buildingCustomerRp);
+            List<BuildingCustomerRp> list = this.buildingCustomerRpService.findAll(workingCondition(buildingCustomerRp));
             return FileUtils.createCsv("楼宇客户表", list, BuildingCustomerRp.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,5 +100,17 @@ public class BuildingCustomerRpController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("删除楼宇客户关系失败，请联系网站管理员！");
         }
+    }
+
+    private BuildingCustomerRp workingCondition(BuildingCustomerRp buildingCustomerRp) {
+        User user = super.getCurrentUser();
+        if (StringUtils.isBlank(buildingCustomerRp.getDsRegionId())) {
+            buildingCustomerRp.setDsRegionId(user.getRegionId());
+        }
+        if (Constant.STAFF_TYPE_NORMAL.equals(user.getStaffType())) {
+            buildingCustomerRp.setBuildingManagerId(user.getStaffId());
+        }
+
+        return buildingCustomerRp;
     }
 }
