@@ -65,6 +65,8 @@
         <result column="inspectionType" property="inspectionType"/>
         <association property="inspectionTotal" column="{inspectionType=inspectionType,inspectionNo=buildingNo}"
                      select="cc.mrbird.building.dao.InspectionMapper.findTotal"/>
+        <association property="customerTotal" column="{buildingNo=buildingNo}"
+                     select="cc.mrbird.building.dao.BuildingCustomerRpMapper.findCustomerTotal"/>
     </resultMap>
 
     <sql id="findCommon">

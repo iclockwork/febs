@@ -22,15 +22,22 @@
         field: 'inspectionTotal',
         title: '巡检记录',
         formatter: function (value, row, index) {
-            if (value && value > 0) {
-                return '<a href="javascript:void(0)" class="operate-inspection">' + value + '</a>';
-            } else {
-                return value
-            }
+            return '<a href="javascript:void(0)" class="operate-inspection">' + value + '</a>';
         },
         events: {
             'click .operate-inspection': function (e, value, row, index) {
                 $.inspection.view(1, row.buildingNo);
+            }
+        }
+    }, {
+        field: 'customerTotal',
+        title: '关联客户',
+        formatter: function (value, row, index) {
+            return '<a href="javascript:void(0)" class="operate-customer">' + value + '</a>';
+        },
+        events: {
+            'click .operate-customer': function (e, value, row, index) {
+                console.log(row.buildingNo);
             }
         }
     }, {

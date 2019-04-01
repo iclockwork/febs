@@ -22,11 +22,7 @@
         field: 'inspectionTotal',
         title: '巡检记录',
         formatter: function (value, row, index) {
-            if (value && value > 0) {
-                return '<a href="javascript:void(0)" class="operate-inspection">' + value + '</a>';
-            } else {
-                return value
-            }
+            return '<a href="javascript:void(0)" class="operate-inspection">' + value + '</a>';
         },
         events: {
             'click .operate-inspection': function (e, value, row, index) {
@@ -37,15 +33,22 @@
         field: 'customerBusinessTotal',
         title: '客户业务',
         formatter: function (value, row, index) {
-            if (value) {
-                return '<a href="javascript:void(0)" class="operate-customerBusiness">' + value + '</a>';
-            } else {
-                return value
-            }
+            return '<a href="javascript:void(0)" class="operate-customerBusiness">' + value + '</a>';
         },
         events: {
             'click .operate-customerBusiness': function (e, value, row, index) {
                 $.customerBusiness.view(row.customerId, row.customerNo);
+            }
+        }
+    }, {
+        field: 'buildingTotal',
+        title: '关联楼宇',
+        formatter: function (value, row, index) {
+            return '<a href="javascript:void(0)" class="operate-building">' + value + '</a>';
+        },
+        events: {
+            'click .operate-building': function (e, value, row, index) {
+                console.log(row.customerNo);
             }
         }
     }, {

@@ -88,4 +88,22 @@
         <include refid="findCommon"/>
         and t.building_customer_rp_id = #{buildingCustomerRpId}
     </select>
+
+    <select id="findCustomerTotal" resultType="Long" parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
+        select count(distinct(t.customer_no))
+        from BD_BUILDING_CUSTOMER_RP t
+        where t.delete_flag = 0
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_no = #{buildingNo}
+        </if>
+    </select>
+
+    <select id="findBuildingTotal" resultType="Long" parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
+        select count(distinct(t.building_no))
+        from BD_BUILDING_CUSTOMER_RP t
+        where t.delete_flag = 0
+        <if test="customerNo != null and customerNo != ''">
+            AND t.customer_no = #{customerNo}
+        </if>
+    </select>
 </mapper>

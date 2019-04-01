@@ -50,6 +50,10 @@ public class Building implements Serializable {
     @ExportConfig(value = "巡检记录")
     private Long inspectionTotal;
 
+    @Transient
+    @ExportConfig(value = "关联客户")
+    private Long customerTotal;
+
     @Column(name = "BUILDING_LEVEL")
     private String buildingLevel;
 
@@ -1041,5 +1045,13 @@ public class Building implements Serializable {
 
     public void setInspectionType(Integer inspectionType) {
         this.inspectionType = inspectionType;
+    }
+
+    public Long getCustomerTotal() {
+        return customerTotal;
+    }
+
+    public void setCustomerTotal(Long customerTotal) {
+        this.customerTotal = customerTotal;
     }
 }

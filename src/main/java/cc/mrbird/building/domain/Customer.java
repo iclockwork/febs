@@ -49,6 +49,10 @@ public class Customer implements Serializable {
     @ExportConfig(value = "客户业务")
     private Long customerBusinessTotal;
 
+    @Transient
+    @ExportConfig(value = "关联楼宇")
+    private Long buildingTotal;
+
     @Column(name = "INDUSTRY_TYPE")
     private Integer industryType;
 
@@ -342,5 +346,13 @@ public class Customer implements Serializable {
 
     public void setCustomerBusinessTotal(Long customerBusinessTotal) {
         this.customerBusinessTotal = customerBusinessTotal;
+    }
+
+    public Long getBuildingTotal() {
+        return buildingTotal;
+    }
+
+    public void setBuildingTotal(Long buildingTotal) {
+        this.buildingTotal = buildingTotal;
     }
 }
