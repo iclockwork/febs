@@ -2,11 +2,31 @@ $(function () {
     var $form = $(".buildingCustomerRp-table-form");
     var $ds = $form.find("select[name='dsRegionId']");
     var $qx = $form.find("select[name='regionId']");
+    var $selectMode = $("#buildingCustomerRpTable").attr("selectMode");
 
     function initTable() {
+        var pageSize = 10;
+        var columns = [];
+
+        if ($.utils.selectModeSingle === $selectMode) {
+            pageSize = 5;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.buildingCustomerRp.tableColumns);
+        } else if ($.utils.selectModeMultiple === $selectMode) {
+            pageSize = 5;
+        } else {
+            pageSize = 10;
+            var checkboxColumns = [{
+                checkbox: true
+            }];
+            columns = checkboxColumns.concat($.buildingCustomerRp.tableColumns);
+        }
+
         var settings = {
             url: ctx + "buildingCustomerRp/list",
-            pageSize: 10,
+            pageSize: pageSize,
             queryParams: function (params) {
                 return {
                     pageSize: params.limit,
@@ -19,7 +39,7 @@ $(function () {
                     customerName: $form.find("input[name='customerName']").val().trim()
                 };
             },
-            columns: $.buildingCustomerRp.tableColumns
+            columns: columns
         };
 
         $MB.initTable('buildingCustomerRpTable', settings);
@@ -31,6 +51,17 @@ $(function () {
 
     function refresh() {
         $(".buildingCustomerRp-table-form")[0].reset();
+
+        var buildingNoInitValue = $form.find("input[name='buildingNo']").attr("initValue");
+        if (buildingNoInitValue) {
+            $form.find("input[name='buildingNo']").val(buildingNoInitValue);
+        }
+
+        var customerNoInitValue = $form.find("input[name='customerNo']").attr("initValue");
+        if (customerNoInitValue) {
+            $form.find("input[name='customerNo']").val(customerNoInitValue);
+        }
+
         search();
     }
 

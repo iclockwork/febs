@@ -91,8 +91,21 @@
 
     <select id="findCustomerTotal" resultType="Long" parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
         select count(distinct(t.customer_no))
-        from BD_BUILDING_CUSTOMER_RP t
+        from BD_BUILDING_CUSTOMER_RP t,
+        BD_BUILDING b,
+        BD_CUSTOMER c,
+        SPC_REGION r,
+        SPC_REGION ds,
+        addr_segm a
         where t.delete_flag = 0
+        and c.delete_flag = 0
+        and c.delete_flag = 0
+        and a.delete_state = '0'
+        and b.region_id = r.region_id
+        and r.super_region_id = ds.region_id
+        and t.building_no = b.building_no
+        and t.customer_no = c.customer_no
+        and t.segm_id = a.segm_id
         <if test="buildingNo != null and buildingNo != ''">
             AND t.building_no = #{buildingNo}
         </if>
@@ -100,8 +113,21 @@
 
     <select id="findBuildingTotal" resultType="Long" parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
         select count(distinct(t.building_no))
-        from BD_BUILDING_CUSTOMER_RP t
+        from BD_BUILDING_CUSTOMER_RP t,
+        BD_BUILDING b,
+        BD_CUSTOMER c,
+        SPC_REGION r,
+        SPC_REGION ds,
+        addr_segm a
         where t.delete_flag = 0
+        and c.delete_flag = 0
+        and c.delete_flag = 0
+        and a.delete_state = '0'
+        and b.region_id = r.region_id
+        and r.super_region_id = ds.region_id
+        and t.building_no = b.building_no
+        and t.customer_no = c.customer_no
+        and t.segm_id = a.segm_id
         <if test="customerNo != null and customerNo != ''">
             AND t.customer_no = #{customerNo}
         </if>

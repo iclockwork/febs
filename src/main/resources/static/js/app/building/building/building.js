@@ -37,7 +37,7 @@
         },
         events: {
             'click .operate-customer': function (e, value, row, index) {
-                console.log(row.buildingNo);
+                $.buildingCustomerRp.view(row.buildingId, row.buildingNo, null, null);
             }
         }
     }, {

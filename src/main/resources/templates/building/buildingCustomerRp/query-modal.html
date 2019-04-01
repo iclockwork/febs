@@ -1,0 +1,84 @@
+<div class="modal fade" id="buildingCustomerRp-query-modal" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-common-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title pull-left" id="buildingCustomerRp-query-modal-title">查询楼宇客户关系</h3>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <div class="dataTables_wrapper">
+                                <div class="dataTables_buttons hidden-sm-down actions">
+                                    <div class="actions__item zmdi zmdi-search buildingCustomerRp-search"
+                                         title="搜索"></div>
+                                    <div class="actions__item zmdi zmdi-refresh-alt buildingCustomerRp-refresh"
+                                         title="刷新"></div>
+                                </div>
+                                <div class="dataTables_filter">
+                                    <form class="buildingCustomerRp-table-form">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        楼宇编码：
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="buildingNo" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        楼宇名称：
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="buildingName" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        客户编码：
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="customerNo" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        客户名称：
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" name="customerName" class="form-control">
+                                                        <i class="form-group__bar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <table id="buildingCustomerRpTable" selectMode="single" data-mobile-responsive="true"
+                                       class="mb-bootstrap-table text-nowrap table-striped"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/building/buildingCustomerRp/buildingCustomerRp.js}"></script>
+<script data-th-src="@{js/app/building/buildingCustomerRp/index.js}"></script>
+<script data-th-src="@{js/app/building/buildingCustomerRp/query-modal.js}"></script>

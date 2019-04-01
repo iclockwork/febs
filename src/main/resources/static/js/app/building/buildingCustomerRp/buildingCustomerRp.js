@@ -7,8 +7,6 @@
      * 表格内容
      */
     $.buildingCustomerRp.tableColumns = [{
-        checkbox: true
-    }, {
         field: 'dsRegionName',
         title: '地市'
     }, {
@@ -48,5 +46,17 @@
      */
     $.buildingCustomerRp.init = function () {
 
+    };
+
+    /**
+     * 初始化
+     */
+    $.buildingCustomerRp.view = function (buildingId, buildingNo, customerId, customerNo) {
+        var _viewModal = $('#buildingCustomerRp-query-modal');
+        _viewModal.attr("buildingId", buildingId);
+        _viewModal.attr("buildingNo", buildingNo);
+        _viewModal.attr("customerId", customerId);
+        _viewModal.attr("customerNo", customerNo);
+        _viewModal.modal('show');
     };
 })(jQuery);
