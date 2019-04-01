@@ -61,6 +61,9 @@ public class UserController extends BaseController {
     @RequestMapping("user/list")
     @ResponseBody
     public Map<String, Object> userList(QueryRequest request, User user) {
+        if (StringUtils.isBlank(user.getDsRegionId())) {
+            user.setDsRegionId(super.getCurrentUser().getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.userService.findUserWithDept(user, request));
     }
 
@@ -68,6 +71,9 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResponseBo userExcel(User user) {
         try {
+            if (StringUtils.isBlank(user.getDsRegionId())) {
+                user.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<User> list = this.userService.findUserWithDept(user, null);
             return FileUtils.createExcelByPOIKit("用户表", list, User.class);
         } catch (Exception e) {
@@ -80,6 +86,9 @@ public class UserController extends BaseController {
     @ResponseBody
     public ResponseBo userCsv(User user) {
         try {
+            if (StringUtils.isBlank(user.getDsRegionId())) {
+                user.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<User> list = this.userService.findUserWithDept(user, null);
             return FileUtils.createCsv("用户表", list, User.class);
         } catch (Exception e) {

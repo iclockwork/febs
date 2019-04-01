@@ -1,5 +1,7 @@
 $(function () {
     var $form = $(".staff-table-form");
+    var $ds = $form.find("select[name='dsRegionId']");
+    var $qx = $form.find("select[name='regionId']");
     var $selectMode = $("#staffTable").attr("selectMode");
 
     function initTable() {
@@ -26,6 +28,7 @@ $(function () {
                 return {
                     pageSize: params.limit,
                     pageNum: params.offset / params.limit + 1,
+                    dsRegionId: $ds.val(),
                     loginName: $form.find("input[name='loginName']").val().trim(),
                     name: $form.find("input[name='name']").val().trim(),
                     phoneNo: $form.find("input[name='phoneNo']").val().trim()
@@ -99,5 +102,9 @@ $(function () {
 
     $(".staff-select-modal-ok").click(function () {
         selectOk();
+    });
+
+    $.region.initDsQx($ds, function () {
+    }, $qx, function () {
     });
 });

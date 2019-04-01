@@ -139,12 +139,12 @@ public class BuildingController extends BaseController {
     }
 
     private Building workingCondition(Building building) {
-        User user = super.getCurrentUser();
+        User currentUser = super.getCurrentUser();
         if (StringUtils.isBlank(building.getDsRegionId())) {
-            building.setDsRegionId(user.getRegionId());
+            building.setDsRegionId(currentUser.getRegionId());
         }
-        if (Constant.STAFF_TYPE_NORMAL.equals(user.getStaffType())) {
-            building.setBuildingManagerId(user.getStaffId());
+        if (Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())) {
+            building.setBuildingManagerId(currentUser.getStaffId());
         }
 
         return building;

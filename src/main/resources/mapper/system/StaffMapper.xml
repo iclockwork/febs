@@ -69,6 +69,13 @@
         WHERE 1 = 1
         AND B.DEPT_ID = A.SITE_ID
         and A.region_id = r.region_id(+)
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND a.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
         <if test="loginName != null and loginName != ''">
             <bind name="bindLoginName" value="'%' + loginName + '%'"/>
             AND lower(A.LOGIN_NAME) like #{bindLoginName}

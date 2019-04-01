@@ -103,12 +103,12 @@ public class BuildingCustomerRpController extends BaseController {
     }
 
     private BuildingCustomerRp workingCondition(BuildingCustomerRp buildingCustomerRp) {
-        User user = super.getCurrentUser();
+        User currentUser = super.getCurrentUser();
         if (StringUtils.isBlank(buildingCustomerRp.getDsRegionId())) {
-            buildingCustomerRp.setDsRegionId(user.getRegionId());
+            buildingCustomerRp.setDsRegionId(currentUser.getRegionId());
         }
-        if (Constant.STAFF_TYPE_NORMAL.equals(user.getStaffType())) {
-            buildingCustomerRp.setBuildingManagerId(user.getStaffId());
+        if (Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())) {
+            buildingCustomerRp.setBuildingManagerId(currentUser.getStaffId());
         }
 
         return buildingCustomerRp;

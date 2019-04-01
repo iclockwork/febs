@@ -1,5 +1,7 @@
 $(function () {
     var $userTableForm = $(".user-table-form");
+    var $ds = $userTableForm.find("select[name='dsRegionId']");
+    var $qx = $userTableForm.find("select[name='regionId']");
     var settings = {
         url: ctx + "user/list",
         pageSize: 10,
@@ -7,8 +9,8 @@ $(function () {
             return {
                 pageSize: params.limit,
                 pageNum: params.offset / params.limit + 1,
+                dsRegionId: $ds.val(),
                 username: $userTableForm.find("input[name='username']").val().trim(),
-                ssex: $userTableForm.find("select[name='ssex']").val(),
                 status: $userTableForm.find("select[name='status']").val(),
                 staffName: $userTableForm.find("input[name='staffName']").val().trim()
             };
@@ -63,6 +65,10 @@ $(function () {
     };
 
     $MB.initTable('userTable', settings);
+
+    $.region.initDsQx($ds, function () {
+    }, $qx, function () {
+    });
 });
 
 function search() {

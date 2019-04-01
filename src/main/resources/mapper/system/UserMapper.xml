@@ -73,6 +73,13 @@
         and u.dept_id = d.dept_id(+)
         and u.staff_id = s.staff_id(+)
         and s.region_id = r.region_id(+)
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND s.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
         <if test="username != null and username != ''">
             <bind name="bindStaffName" value="'%' + staffName + '%'"/>
             AND lower(u.username) = #{username}

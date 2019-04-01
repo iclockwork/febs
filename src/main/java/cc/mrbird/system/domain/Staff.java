@@ -4,6 +4,7 @@ import cc.mrbird.common.annotation.ExportConfig;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,6 +20,9 @@ public class Staff implements Serializable {
     @Column(name = "NAME")
     @ExportConfig(value = "姓名")
     private String name;
+
+    @Transient
+    private String dsRegionId;
 
     @Column(name = "REGION_ID")
     private String regionId;
@@ -766,5 +770,13 @@ public class Staff implements Serializable {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
     }
 }

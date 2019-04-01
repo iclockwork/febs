@@ -57,6 +57,9 @@ public class User implements Serializable {
     private String staffName;
 
     @Transient
+    private String dsRegionId;
+
+    @Transient
     private String regionId;
 
     @Transient
@@ -352,6 +355,14 @@ public class User implements Serializable {
 
     public void setStaffTypeName(String staffTypeName) {
         this.staffTypeName = staffTypeName;
+    }
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
     }
 
     @Override

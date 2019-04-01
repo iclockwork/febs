@@ -7,6 +7,7 @@ import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.FileUtils;
 import cc.mrbird.system.domain.Staff;
 import cc.mrbird.system.service.StaffService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,9 @@ public class StaffController extends BaseController {
     @RequestMapping("staff/list")
     @ResponseBody
     public Map<String, Object> list(QueryRequest request, Staff staff) {
+        if (StringUtils.isBlank(staff.getDsRegionId())) {
+            staff.setDsRegionId(super.getCurrentUser().getRegionId());
+        }
         return super.selectByPageNumSize(request, () -> this.staffService.findAll(staff));
     }
 
@@ -46,6 +50,9 @@ public class StaffController extends BaseController {
     @ResponseBody
     public ResponseBo excel(Staff staff) {
         try {
+            if (StringUtils.isBlank(staff.getDsRegionId())) {
+                staff.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Staff> list = this.staffService.findAll(staff);
             return FileUtils.createExcelByPOIKit("人员表", list, Staff.class);
         } catch (Exception e) {
@@ -58,6 +65,9 @@ public class StaffController extends BaseController {
     @ResponseBody
     public ResponseBo csv(Staff staff) {
         try {
+            if (StringUtils.isBlank(staff.getDsRegionId())) {
+                staff.setDsRegionId(super.getCurrentUser().getRegionId());
+            }
             List<Staff> list = this.staffService.findAll(staff);
             return FileUtils.createCsv("人员表", list, Staff.class);
         } catch (Exception e) {
