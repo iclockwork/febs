@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created with IntelliJ IDEA.
@@ -90,7 +91,9 @@ public class BuildingCountController extends BaseController {
             if (countCustomerFee == null){
                return ResponseBo.ok("0");
             }
-            BigDecimal customerFee = countCustomerFee.divide(new BigDecimal("10000"));
+            // 换算为万元
+            BigDecimal fee = countCustomerFee.divide(new BigDecimal("10000"));
+            BigDecimal customerFee = fee.setScale(2, RoundingMode.HALF_UP);
             return ResponseBo.ok(customerFee);
         } catch (Exception e) {
             e.printStackTrace();
