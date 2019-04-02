@@ -1,7 +1,6 @@
 package cc.mrbird.building.controller;
 
 
-import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.domain.CustomerOpportunity;
 import cc.mrbird.building.service.CustomerOpportunityService;
 import cc.mrbird.common.annotation.Log;
@@ -45,20 +44,14 @@ public class CustomerOpportunityController extends BaseController {
     @RequestMapping("customerOpportunity/list")
     @ResponseBody
     public Map<String, Object> queryCustomerOpportunity(QueryRequest request, CustomerOpportunity customerOpportunity) {
-        if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-            customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
-        }
-        return  super.selectByPageNumSize(request, () -> this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity));
+        return  super.selectByPageNumSize(request, () -> this.customerOpportunityService.queryCustomerOpportunity(workingCondition(customerOpportunity)));
     }
 
     @RequestMapping("customerOpportunity/excel")
     @ResponseBody
     public ResponseBo exportExcel(CustomerOpportunity customerOpportunity,QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-                customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity);
+            List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(workingCondition(customerOpportunity));
             return FileUtils.createExcelByPOIKit("商机客户表", list, CustomerOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,10 +63,7 @@ public class CustomerOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(CustomerOpportunity customerOpportunity,QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-                customerOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(customerOpportunity);
+            List<CustomerOpportunity> list = this.customerOpportunityService.queryCustomerOpportunity(workingCondition(customerOpportunity));
             return FileUtils.createCsv("商机客户表", list, CustomerOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -135,5 +125,16 @@ public class CustomerOpportunityController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("删除商机客户失败，请联系网站管理员！");
         }
+    }
+
+    private CustomerOpportunity workingCondition(CustomerOpportunity customerOpportunity) {
+        User currentUser = super.getCurrentUser();
+        if (StringUtils.isBlank(customerOpportunity.getDsRegionId())) {
+            customerOpportunity.setDsRegionId(currentUser.getRegionId());
+        }
+        if (Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())) {
+            customerOpportunity.setCreateStaffId(currentUser.getStaffId());
+        }
+        return customerOpportunity;
     }
 }

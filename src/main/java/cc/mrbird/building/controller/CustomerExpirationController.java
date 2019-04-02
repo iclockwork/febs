@@ -9,6 +9,7 @@ import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
 import cc.mrbird.common.util.FileUtils;
+import cc.mrbird.system.domain.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import java.util.Map;
  * Created with IntelliJ IDEA.
  * User: fang.yefei.
  * Date: 2019/2 /18
- * Features:
+ * Features:客户到期提醒
  */
 
 @Controller
@@ -43,20 +44,14 @@ public class CustomerExpirationController extends BaseController {
     @RequestMapping("customerExpiration/list")
     @ResponseBody
     public Map<String, Object> queryCustomerExpiration(QueryRequest request, CustomerExpiration customerExpiration) {
-        if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-            customerExpiration.setCreateStaffId(super.getCurrentUser().getStaffId());
-        }
-        return  super.selectByPageNumSize(request, () -> this.customerExpirationService.queryCustomerExpiration(customerExpiration));
+        return  super.selectByPageNumSize(request, () -> this.customerExpirationService.queryCustomerExpiration(workingCondition(customerExpiration)));
     }
 
     @RequestMapping("customerExpiration/excel")
     @ResponseBody
     public ResponseBo exportExcel(CustomerExpiration customerExpiration,QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-                customerExpiration.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(customerExpiration);
+            List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(workingCondition(customerExpiration));
             return FileUtils.createExcelByPOIKit("客户到期提醒表", list, CustomerExpiration.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,10 +63,7 @@ public class CustomerExpirationController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(CustomerExpiration customerExpiration,QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-                customerExpiration.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(customerExpiration);
+            List<CustomerExpiration> list = this.customerExpirationService.queryCustomerExpiration(workingCondition(customerExpiration));
             return FileUtils.createCsv("客户到期提醒表", list, CustomerExpiration.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,5 +125,16 @@ public class CustomerExpirationController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("删除客户到期提醒失败，请联系网站管理员！");
         }
+    }
+
+    private CustomerExpiration workingCondition(CustomerExpiration customerExpiration) {
+        User currentUser = super.getCurrentUser();
+        if (StringUtils.isBlank(customerExpiration.getDsRegionId())) {
+            customerExpiration.setDsRegionId(currentUser.getRegionId());
+        }
+        if (Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())) {
+            customerExpiration.setCreateStaffId(currentUser.getStaffId());
+        }
+        return customerExpiration;
     }
 }

@@ -36,7 +36,7 @@ import java.util.Map;
  * Created with IntelliJ IDEA.
  * User: fang.yefei.
  * Date: 2019/2 /18
- * Features:
+ * Features:竞争产品
  */
 
 @Controller
@@ -57,20 +57,14 @@ public class CompProductController extends BaseController {
     @RequestMapping("compProduct/list")
     @ResponseBody
     public Map<String, Object> queryCompProduct(QueryRequest request, CompProduct compProduct) {
-        if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-            compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
-        }
-        return super.selectByPageNumSize(request, () -> this.compProductService.queryCompProduct(compProduct));
+        return super.selectByPageNumSize(request, () -> this.compProductService.queryCompProduct(workingCondition(compProduct)));
     }
 
     @RequestMapping("compProduct/excel")
     @ResponseBody
     public ResponseBo exportExcel(CompProduct compProduct, QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-                compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<CompProduct> list = this.compProductService.queryCompProduct(compProduct);
+            List<CompProduct> list = this.compProductService.queryCompProduct(workingCondition(compProduct));
             return FileUtils.createExcelByPOIKit("竞争产品表", list, CompProduct.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,10 +76,7 @@ public class CompProductController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(CompProduct compProduct, QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(super.getCurrentUser().getRegionId(), Constant.PROVINCE_FLAG_YES)){
-                compProduct.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<CompProduct> list = this.compProductService.queryCompProduct(compProduct);
+            List<CompProduct> list = this.compProductService.queryCompProduct(workingCondition(compProduct));
             return FileUtils.createCsv("竞争产品表", list, CompProduct.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -238,5 +229,16 @@ public class CompProductController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("获取附件内容失败，请联系网站管理员！");
         }
+    }
+
+    private CompProduct workingCondition(CompProduct compProduct) {
+        User currentUser = super.getCurrentUser();
+        if (StringUtils.isBlank(compProduct.getDsRegionId())) {
+            compProduct.setDsRegionId(currentUser.getRegionId());
+        }
+        if (Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())) {
+            compProduct.setCreateStaffId(currentUser.getStaffId());
+        }
+        return compProduct;
     }
 }

@@ -85,6 +85,25 @@ public class CustomerOpportunity {
     @Column(name = "MODIFY_OP")
     private String modifyOp;
 
+    private String dsRegionId;
+
+    private String regionId;
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
 
     public String getBuildingNo() {
         return buildingNo;

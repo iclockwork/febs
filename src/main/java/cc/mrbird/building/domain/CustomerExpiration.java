@@ -44,6 +44,26 @@ public class CustomerExpiration {
 
     private Long createStaffId;
 
+    private String dsRegionId;
+
+    private String regionId;
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
+
     public Long getCreateStaffId() {
         return createStaffId;
     }

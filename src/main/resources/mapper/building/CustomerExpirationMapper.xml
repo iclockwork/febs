@@ -26,9 +26,21 @@
         <include refid="selectColumn"/>
         from bd_customer_expiration t
         join bd_building a on t.building_id = a.building_id
+        join SPC_REGION r  on a.region_id = r.region_id
+        join SPC_REGION ds on r.super_region_id = ds.region_id
         where t.delete_flag = 0 and a.delete_flag = 0
         <if test="createStaffId != null">
             and a.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+        <if test="dsRegionId != null and dsRegionId != ''">
+            AND a.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{dsRegionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND a.region_id = #{regionId}
         </if>
         <if test="buildingNo != null and buildingNo != ''">
             AND t.building_id = (select A.building_id from bd_building A where A.building_no like
