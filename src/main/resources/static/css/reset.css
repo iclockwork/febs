@@ -4,25 +4,33 @@
 
 .login-page {
     background: #DE3A3B;
+    overflow: hidden;
+}
+
+.login-header {
+    height: 70px;
+    line-height: 70px;
+    background-color: #ffffff;
 }
 
 .login-logo-nav {
-    margin: 45px 0 0 60px;
-    color: #ffffff;
-    font-size: 24px;
+    font-size: 20px;
     text-align: left;
     font-weight: bold;
-    line-height: 30px;
+}
+
+.login-section {
+    background: #DE3A3B;
+    margin-top: 5%;
 }
 
 .login-logo {
-    width: 40px;
-    height: 30px;
-    float: left;
-    vertical-align: middle;
-    margin-right: 10px;
+    width: 88px;
+    height: 48px;
+    margin: -10px 20px 0 70px;
     padding-right: 10px;
-    background: url(../img/unicom-logo.png) no-repeat;
+    vertical-align: middle;
+    background: url(../img/unicom-logo-text.png) no-repeat;
     display: inline-block;
 }
 
@@ -38,7 +46,7 @@
 
 .login-box-body {
     width: 400px;
-    margin: 50px 60px 0 60px;
+    margin: 40px 60px 0 100px;
     background: #fff;
     padding: 20px;
     border-top: 0;

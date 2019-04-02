@@ -411,14 +411,16 @@ body {
 }
 
 .common-footer {
-    margin-top: 5%;
-    color: #ffffff;
+    width: 100%;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    background-color: #ffffff;
+    position: absolute;
+    bottom: 0;
 }
 
-.common-footer p{
-    color: #ffffff;
-}
-
-.common-footer a {
-    color: #ffffff;
+.row {
+    margin-top: 0;
+    margin-bottom: 0;
 }

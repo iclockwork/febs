@@ -28,10 +28,12 @@
 
 </style>
 <body class="hold-transition login-page">
-<section>
+<header class="login-header">
     <div class="login-logo-nav">
         <a href="index" class="login-logo"></a>江苏联通商务楼宇管理系统
     </div>
+</header>
+<section class="login-section">
     <div class="row">
         <div class="col-sm-6 login-bg"></div>
         <div class="col-sm-6 login-box">
@@ -75,7 +77,8 @@
 <div data-th-include="common/footer"></div>
 </body>
 <script th:inline="javascript">
-    var ctx = [[@{/}]];
+    var ctx = [[@{
+        /}]];
 </script>
 <script data-th-src="@{js/app/login.js}"></script>
 </html>
