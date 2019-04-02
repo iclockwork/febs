@@ -8,18 +8,12 @@ $(function () {
 
         if ($.utils.selectModeSingle === $selectMode) {
             pageSize = 5;
-            var checkboxColumns = [{
-                checkbox: true
-            }];
-            columns = checkboxColumns.concat($.customerBusiness.tableColumns);
+            columns = $.customerBusiness.tableColumns;
         } else if ($.utils.selectModeMultiple === $selectMode) {
             pageSize = 5;
         } else {
             pageSize = 10;
-            var checkboxColumns = [{
-                checkbox: true
-            }];
-            columns = checkboxColumns.concat($.customerBusiness.tableColumns);
+            columns = $.customerBusiness.tableColumns;
         }
 
         var settings = {
