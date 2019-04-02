@@ -44,25 +44,14 @@ public class BuildingOpportunityController extends BaseController {
     @RequestMapping("buildingOpportunity/list")
     @ResponseBody
     public Map<String, Object> queryBuildingOpportunity(QueryRequest request, BuildingOpportunity buildingOpportunity) {
-        User user = super.getCurrentUser();
-        if (StringUtils.isBlank(buildingOpportunity.getDsRegionId())) {
-            buildingOpportunity.setDsRegionId(user.getRegionId());
-        }
-        if (!StringUtils.equalsIgnoreCase(buildingOpportunity.getDsRegionId(), Constant.PROVINCE_FLAG_YES)){
-            buildingOpportunity.setCreateStaffId(user.getStaffId());
-        }
-
-        return  super.selectByPageNumSize(request, () -> this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity));
+        return  super.selectByPageNumSize(request, () -> this.buildingOpportunityService.queryBuildingOpportunity(workingCondition(buildingOpportunity)));
     }
 
     @RequestMapping("buildingOpportunity/excel")
     @ResponseBody
     public ResponseBo exportExcel(BuildingOpportunity buildingOpportunity,QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(buildingOpportunity.getDsRegionId(), Constant.PROVINCE_FLAG_YES)){
-                buildingOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity);
+            List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(workingCondition(buildingOpportunity));
             return FileUtils.createExcelByPOIKit("商机楼宇表", list, BuildingOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,10 +63,7 @@ public class BuildingOpportunityController extends BaseController {
     @ResponseBody
     public ResponseBo exportCsv(BuildingOpportunity buildingOpportunity,QueryRequest request) {
         try {
-            if (!StringUtils.equalsIgnoreCase(buildingOpportunity.getDsRegionId(), Constant.PROVINCE_FLAG_YES)){
-                buildingOpportunity.setCreateStaffId(super.getCurrentUser().getStaffId());
-            }
-            List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(buildingOpportunity);
+            List<BuildingOpportunity> list = this.buildingOpportunityService.queryBuildingOpportunity(workingCondition(buildingOpportunity));
             return FileUtils.createCsv("商机楼宇表", list, BuildingOpportunity.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,5 +125,18 @@ public class BuildingOpportunityController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("删除商机楼宇失败，请联系网站管理员！");
         }
+    }
+
+
+    private BuildingOpportunity workingCondition(BuildingOpportunity buildingOpportunity) {
+        User currentUser = super.getCurrentUser();
+        if (StringUtils.isBlank(buildingOpportunity.getDsRegionId())) {
+            buildingOpportunity.setDsRegionId(currentUser.getRegionId());
+        }
+        if (Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())) {
+            buildingOpportunity.setCreateStaffId(currentUser.getStaffId());
+        }
+
+        return buildingOpportunity;
     }
 }

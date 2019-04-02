@@ -68,6 +68,10 @@ public class CompProduct implements Serializable {
     @Column(name = "MODIFY_OP")
     private String modifyOp;
 
+    private String dsRegionId;
+
+    private String regionId;
+
     private Long compProductDocId;
 
     private Long docId;
@@ -81,6 +85,22 @@ public class CompProduct implements Serializable {
     //是否上传文件标识
     private String uploadFlag;
 
+
+    public String getDsRegionId() {
+        return dsRegionId;
+    }
+
+    public void setDsRegionId(String dsRegionId) {
+        this.dsRegionId = dsRegionId;
+    }
+
+    public String getRegionId() {
+        return regionId;
+    }
+
+    public void setRegionId(String regionId) {
+        this.regionId = regionId;
+    }
 
     public String getOperatorName() {
         return operatorName;

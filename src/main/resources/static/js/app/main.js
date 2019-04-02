@@ -112,6 +112,9 @@ $(function () {
         $.post(ctx + "buildingBusiness/count", "", function (r) {
             if (r.code === 0) {
                 var jsonDatas = r.msg;
+                if (jsonDatas && jsonDatas.length === 0){
+                    return;
+                }
                 for (var i = 0; i < jsonDatas.length; i++) {
                     labels.push(jsonDatas[i].buildingName);
                     var businessData = jsonDatas[i].business;
@@ -211,13 +214,12 @@ $(function () {
                 }
             };
 
-            var canvas = $("#barChart").get(0).getContext("2d");
-            var chart = new Chart(canvas, {
-                type: 'bar',
-                data: tempData,
-                options: options
-            });
-
+                var canvas = $("#barChart").get(0).getContext("2d");
+                var chart = new Chart(canvas, {
+                    type: 'bar',
+                    data: tempData,
+                    options: options
+                });
         });
 
     }
