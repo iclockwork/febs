@@ -34,7 +34,7 @@
 }
 
 .change-box .change-inner {
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .change-col {
@@ -49,10 +49,9 @@
 .common-box-margin {
     margin-top: 0px;
     padding-top: 0px;
-    height: 97px;
-    line-height: 97px;
+    height: 120px;
     padding-bottom: 15px;
-    min-width: 280px;
+    /*min-width: 280px;*/
 }
 
 .change-col .change-box {
@@ -94,9 +93,10 @@
 }
 
 .change-col .change-box .change-inner {
-    float: right;
-    position: relative;
-    top: 25px;
+    /*float: right;*/
+    /*position: relative;*/
+    /*top: 25px;*/
+    text-align: center;
 }
 
 .change-col .change-box .change-inner-clue {
