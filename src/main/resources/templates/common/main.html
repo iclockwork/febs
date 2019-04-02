@@ -5,70 +5,70 @@
         </ol>
     </header>
     <div class="main-content">
-        <div class="card">
-            <div class="card-block">
-                <div class="col-lg-12">
-                    <div>
-                        <h3>
-                          商务楼宇业务数据量统计
-                        </h3>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">商务楼宇业务数据量统计</h3>
+            </div>
+            <div class="box-body no-padding change-col">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="small-box common-box-margin change-box">
+                            <img data-th-src="@{img/change/1.png}" height="50" width="50"/>
+                            <span class="change-clue-red">楼宇总量（栋）</span>
+                            <div class="inner change-inner change-inner-clue">
+                                <h4 id="buildingId">
+                                </h4>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="small-box bg-aqua common-box-margin">
-                                <div class="inner">
-                                    <h4 id="buildingId">
-                                    </h4>
-                                    <p>楼宇总量（栋）</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-city"></i>
-                                </div>
+                    <div class="col-lg-6">
+                        <div class="small-box common-box-margin change-box">
+                            <img data-th-src="@{img/change/6.png}" height="50" width="50"/>
+                            <span class="change-clue-red">客户总量（个）</span>
+                            <div class="inner change-inner change-inner-clue">
+                                <h4 id="customerId">
+                                </h4>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="small-box bg-aqua common-box-margin">
-                                <div class="inner">
-                                    <h4 id="customerId">
-                                    </h4>
-                                    <p>客户总量（个）</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-accounts"></i>
-                                </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="small-box common-box-margin change-box">
+                            <img data-th-src="@{img/change/3.png}" height="50" width="50"/>
+                            <span class="change-clue-green">客户业务量(条)</span>
+                            <div class="inner change-inner change-inner-clue">
+                                <h4 id="customerBusinessId">
+                                </h4>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="small-box bg-red common-box-margin">
-                                <div class="inner">
-                                    <h4 id="customerBusinessId">
-                                    </h4>
-                                    <p>客户业务量（条）</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-flower-alt"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="small-box bg-red common-box-margin">
-                                <div class="inner">
-                                    <h4 id="feeId">
-                                    </h4>
-                                    <p>业务月费总计（万元）</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-balance-wallet"></i>
-                                </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="small-box common-box-margin change-box">
+                            <img data-th-src="@{img/change/4.png}" height="50" width="50"/>
+                            <span class="change-clue-green">业务月费总计（万元）</span>
+                            <div class="inner change-inner change-inner-clue">
+                                <h4 id="feeId">
+                                </h4>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card-block">
+        </div>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">客户业务量统计</h3>
+            </div>
+            <div class="box-body no-padding">
                 <canvas id="barCustomerChart" height="110"></canvas>
             </div>
-            <div class="card-block">
+        </div>
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">楼宇客户业务量统计</h3>
+            </div>
+            <div class="box-body no-padding">
                 <canvas id="barChart" height="110"></canvas>
             </div>
         </div>

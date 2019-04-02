@@ -61,21 +61,12 @@ $(function () {
                 scaleOverlay: true,
                 //是否显示label值
                 scaleShowLabels: true,
-                //设置标题
-                title: {
-                    display: true,
-                    fontColor: 'red',
-                    fontSize: 18,
-                    text: '楼长客户各业务量统计图'
-                },
                 scales: {
                     xAxes: [{
                         display: true,
                         barPercentage: 0.5,
                         scaleLabel: {
                             display: true,
-                            fontColor: 'red',
-                            fontSize: 18,
                             labelString: '客户业务名称'
                         }
                     }],
@@ -83,8 +74,6 @@ $(function () {
                         display: true,
                         scaleLabel: {
                             display: true,
-                            fontColor: 'red',
-                            fontSize: 18,
                             labelString: '客户业务量（条）'
                         }
                     }]
@@ -181,13 +170,6 @@ $(function () {
                 scaleOverlay: true,
                 //是否显示label值
                 scaleShowLabels: true,
-                //设置标题
-                title: {
-                    display: true,
-                    fontColor: 'red',
-                    fontSize: 18,
-                    text: '各楼宇客户业务量统计图'
-                },
                 scales: {
                     xAxes: [{
                         display: true,
@@ -197,8 +179,6 @@ $(function () {
                         },
                         scaleLabel: {
                             display: true,
-                            fontColor: 'red',
-                            fontSize: 18,
                             labelString: '楼宇名称'
                         }
                     }],
@@ -206,8 +186,6 @@ $(function () {
                         display: true,
                         scaleLabel: {
                             display: true,
-                            fontColor: 'red',
-                            fontSize: 18,
                             labelString: '客户业务量（条）'
                         }
                     }]

@@ -1,7 +1,7 @@
 .common-box-margin {
-    margin-top: 30px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    /*margin-top: 30px;*/
+    /*padding-top: 15px;*/
+    /*padding-bottom: 15px;*/
 }
 
 .common-footer {
@@ -26,4 +26,79 @@
     .modal-common-large {
         max-width: 900px;
     }
+}
+
+.box {
+    border-top: 0;
+    margin-bottom: 10px;
+}
+
+.change-box .change-inner {
+    display: inline-block;
+}
+
+.change-col {
+    /*background-color: #F6F6F6;*/
+}
+
+.change-col .col-lg-4 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.common-box-margin {
+    margin-top: 0px;
+    padding-top: 0px;
+    height: 97px;
+    line-height: 97px;
+    padding-bottom: 15px;
+    min-width: 280px;
+}
+
+.change-col .change-box {
+    box-shadow: none;
+    background-color: #ffffff !important;
+    margin-bottom: 0;
+}
+
+.change-col .change-box img {
+    margin-left: 5%;
+}
+
+.change-col .change-box span {
+    margin-left: 1.4%;
+    color: #333333;
+    font-size: 14px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    display: inline;
+}
+
+.change-col .change-box .change-clue-red {
+    border-bottom: 3px solid #FF7676;
+}
+
+.change-col .change-box .change-clue-blue {
+    border-bottom: 3px solid #2CABE3;
+}
+
+.change-col .change-box .change-clue-green {
+    border-bottom: 3px solid #54E69D;
+}
+
+.change-col .change-box h4 {
+    color: #333333;
+    font-size: 28px;
+    position: relative;
+    /*right: 23%;*/
+}
+
+.change-col .change-box .change-inner {
+    float: right;
+    position: relative;
+    top: 25px;
+}
+
+.change-col .change-box .change-inner-clue {
+    /*border-right: 1px solid #dddddd;*/
 }
