@@ -29,9 +29,10 @@
 
     <select id="countCustomer" resultType="String">
         select count(distinct t.customer_no)
-        from BD_BUILDING_CUSTOMER_RP t
-        join BD_BUILDING b on t.building_no=b.building_no
-        where t.delete_flag = '0' and b.delete_flag = '0'
+        from bd_customer t
+        join BD_BUILDING_CUSTOMER_RP a on t.customer_no = a.customer_no
+        join BD_BUILDING b on a.building_no=b.building_no
+        where t.delete_flag = '0' and a.delete_flag = '0' and b.delete_flag = '0'
         <!--<if test="createStaffId != null">-->
             <!--and b.CREATE_STAFF_ID = #{createStaffId}-->
         <!--</if>-->
@@ -50,6 +51,7 @@
     <!--</if>-->
      ) e
     on b.customer_no = e.customer_no
+    where a.delete_flag =  '0'
 </select>
 
     <select id="queryBusiness" resultType="Integer">
@@ -64,6 +66,7 @@
         <!--</if> -->
          ) e
         on b.customer_no = e.customer_no
+        where a.delete_flag =  '0'
     </select>
 
     <select id="queryCustomerBusiness" resultType="Integer">
@@ -75,6 +78,7 @@
         where d.delete_flag = '0' and c.delete_flag = '0'
         and d.building_no = #{buildingNo}) e
         on b.customer_no = e.customer_no
+        where a.delete_flag =  '0'
     </select>
 
 
@@ -90,6 +94,7 @@
         <!--</if> -->
          ) e
         on b.customer_no = e.customer_no
+        where a.delete_flag =  '0'
     </select>
 
 </mapper>
