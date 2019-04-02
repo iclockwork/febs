@@ -13,7 +13,6 @@
         <result column="industryTypeName" property="industryTypeName"/>
         <result column="keyPerson" property="keyPerson"/>
         <result column="keyPersonContact" property="keyPersonContact"/>
-        <result column="monthFee" property="monthFee"/>
         <result column="remark" property="remark"/>
         <result column="createDate" property="createDate"/>
 
@@ -22,6 +21,8 @@
                      select="cc.mrbird.building.dao.InspectionMapper.findTotal"/>
         <association property="customerBusinessTotal" column="{customerId=customerId}"
                      select="cc.mrbird.building.dao.CustomerBusinessMapper.findTotal"/>
+        <association property="monthFee" column="{customerId=customerId}"
+                     select="cc.mrbird.building.dao.CustomerBusinessMapper.monthFeeTotal"/>
         <association property="buildingTotal" column="{customerNo=customerNo}"
                      select="cc.mrbird.building.dao.BuildingCustomerRpMapper.findBuildingTotal"/>
     </resultMap>
