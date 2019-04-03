@@ -35,7 +35,7 @@
         left join t_user u on (u.user_id = ur.user_id)
         where u.username = #{userName})
     start with m.PARENT_ID = 0 connect by m.PARENT_ID = prior m.MENU_ID 
-    order siblings by m.order_num
+    order siblings by m.menu_id
   </select>
   
    <update id="changeToTop" parameterType="java.util.List">
