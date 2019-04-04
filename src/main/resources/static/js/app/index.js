@@ -54,9 +54,9 @@ $(window).on("load", function () {
             var urlstr = "";
             try {
                 if (!o[i]["url"]) {
-                    urlstr = "<div><span><i class='" + o[i]["icon"] + "'></i>&nbsp;&nbsp;" + o[i]["text"] + "</span><ul>";
+                    urlstr = "<div><span class='navigation-menu'><i class='" + o[i]["icon"] + "'></i>&nbsp;&nbsp;" + o[i]["text"] + "</span><ul>";
                 } else {
-                    urlstr = "<div><span name=" + o[i]["url"] + " onclick='loadMain(this);'><i class='" + o[i]["icon"] + "'></i>&nbsp;&nbsp;" + o[i]["text"] + "</span><ul>";
+                    urlstr = "<div><span class='navigation-menu navigation-menu-href' name=" + o[i]["url"] + "><i class='" + o[i]["icon"] + "'></i>&nbsp;&nbsp;" + o[i]["text"] + "</span><ul>";
                 }
                 str += urlstr;
                 if (o[i]["children"].length !== 0) {
@@ -97,9 +97,13 @@ $(window).on("load", function () {
         if (r.code === 0) {
             var data = r.msg;
             var $crollbarInner = $(".scrollbar-inner");
-            document.getElementById("navigation").innerHTML = forTree(data.children);
+            $("#navigation").append(forTree(data.children));
             menuTree();
-            $crollbarInner[0] && $crollbarInner.scrollbar().scrollLock()
+            $crollbarInner[0] && $crollbarInner.scrollbar().scrollLock();
+
+            $(".navigation-menu-href").unbind("click").click(function () {
+                loadMain(this);
+            });
         } else {
             $MB.n_danger(r.msg);
         }
@@ -149,15 +153,21 @@ function loadMain(obj) {
 
     // 加载内容
     var $name = $this.attr("name");
-    $.post(ctx + $name, {}, function (r) {
-        if (r.indexOf('账户登录') !== -1) {
-            location = location;
-            return;
+    if ($name) {
+        if ("index" === $name) {
+            window.location.href = ctx;
+        } else {
+            $.post(ctx + $name, {}, function (r) {
+                if (r.indexOf('账户登录') !== -1) {
+                    location = location;
+                    return;
+                }
+                clearInterval(rediskeysSizeInterval);
+                clearInterval(redisMemoryInfoInterval);
+                $main_content.html("").append(r);
+            });
         }
-        clearInterval(rediskeysSizeInterval);
-        clearInterval(redisMemoryInfoInterval);
-        $main_content.html("").append(r);
-    });
+    }
 }
 
 /**
