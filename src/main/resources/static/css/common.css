@@ -33,6 +33,11 @@
     margin-bottom: 10px;
 }
 
+.common-box-title {
+    margin: 0;
+    font-size: 14px;
+}
+
 .change-box .change-inner {
     /*display: inline-block;*/
 }
