@@ -9,9 +9,11 @@
                     <div class="card-block">
                         <div class="table-responsive">
                             <div class="dataTables_wrapper">
-                                <div class="dataTables_buttons hidden-sm-down actions">
-                                    <div class="actions__item zmdi zmdi-search building-search" title="搜索"></div>
-                                    <div class="actions__item zmdi zmdi-refresh-alt building-refresh" title="刷新"></div>
+                                <div class="change-title-row">
+                                    <div class="change-title-border">
+                                        <div></div>
+                                        <span>查询条件</span>
+                                    </div>
                                 </div>
                                 <div class="dataTables_filter">
                                     <form class="building-table-form">
@@ -123,6 +125,17 @@
                                             </div>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="change-title-row">
+                                    <div class="change-title-border float-left">
+                                        <div></div>
+                                        <span>查询结果</span>
+                                    </div>
+                                    <div class="dataTables_buttons hidden-sm-down actions">
+                                        <div class="actions__item zmdi zmdi-search building-search" title="搜索"></div>
+                                        <div class="actions__item zmdi zmdi-refresh-alt building-refresh"
+                                             title="刷新"></div>
+                                    </div>
                                 </div>
                                 <table id="buildingTable" selectMode="single" data-mobile-responsive="true"
                                        class="mb-bootstrap-table text-nowrap table-striped"></table>

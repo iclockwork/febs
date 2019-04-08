@@ -1,3 +1,8 @@
+.dataTables_filter {
+    overflow: hidden;
+    width: 100%;
+}
+
 .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
     border-bottom-width: 0;
 }
@@ -139,4 +144,11 @@
     /*color: #ffffff;*/
 }
 
+.input-group-addon {
+    /*border-bottom: 0;*/
+}
+
+.form-control {
+    /*border: 1px solid #f1f1f1;*/
+}
 

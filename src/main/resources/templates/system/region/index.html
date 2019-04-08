@@ -2,22 +2,10 @@
     <div class="card-block">
         <div class="table-responsive">
             <div class="dataTables_wrapper">
-                <div class="dataTables_buttons hidden-sm-down actions">
-                    <div class="actions__item zmdi zmdi-search region-search" title="搜索"></div>
-                    <div class="actions__item zmdi zmdi-refresh-alt region-refresh" title="刷新"></div>
-                    <div class="dropdown actions__item">
-                        <i data-toggle="dropdown" class="zmdi zmdi-download">
-                        </i>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <a href="javascript:void(0)" class="dropdown-item region-export-excel"
-                               data-table-action="excel">
-                                Excel (.xlsx)
-                            </a>
-                            <a href="javascript:void(0)" class="dropdown-item region-export-csv"
-                               data-table-action="csv">
-                                CSV (.csv)
-                            </a>
-                        </ul>
+                <div class="change-title-row">
+                    <div class="change-title-border">
+                        <div></div>
+                        <span>查询条件</span>
                     </div>
                 </div>
                 <div class="dataTables_filter">
@@ -71,6 +59,30 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="change-title-row">
+                    <div class="change-title-border float-left">
+                        <div></div>
+                        <span>查询结果</span>
+                    </div>
+                    <div class="dataTables_buttons hidden-sm-down actions">
+                        <div class="actions__item zmdi zmdi-search region-search" title="搜索"></div>
+                        <div class="actions__item zmdi zmdi-refresh-alt region-refresh" title="刷新"></div>
+                        <div class="dropdown actions__item">
+                            <i data-toggle="dropdown" class="zmdi zmdi-download">
+                            </i>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <a href="javascript:void(0)" class="dropdown-item region-export-excel"
+                                   data-table-action="excel">
+                                    Excel (.xlsx)
+                                </a>
+                                <a href="javascript:void(0)" class="dropdown-item region-export-csv"
+                                   data-table-action="csv">
+                                    CSV (.csv)
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <table id="regionTable" data-mobile-responsive="true"
                        class="mb-bootstrap-table text-nowrap table-striped"></table>

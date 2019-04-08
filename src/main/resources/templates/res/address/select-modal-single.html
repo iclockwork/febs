@@ -9,12 +9,25 @@
                     <div class="card-block">
                         <div class="table-responsive">
                             <div class="dataTables_wrapper">
-                                <div class="dataTables_buttons hidden-sm-down actions">
-                                    <div class="actions__item zmdi zmdi-search address-search" title="搜索"></div>
-                                    <div class="actions__item zmdi zmdi-refresh-alt address-refresh" title="刷新"></div>
+                                <div class="change-title-row">
+                                    <div class="change-title-border">
+                                        <div></div>
+                                        <span>查询条件</span>
+                                    </div>
                                 </div>
                                 <div class="dataTables_filter"
                                      data-th-include="res/address/select-modal-common-part.html"></div>
+                                <div class="change-title-row">
+                                    <div class="change-title-border float-left">
+                                        <div></div>
+                                        <span>查询结果</span>
+                                    </div>
+                                    <div class="dataTables_buttons hidden-sm-down actions">
+                                        <div class="actions__item zmdi zmdi-search address-search" title="搜索"></div>
+                                        <div class="actions__item zmdi zmdi-refresh-alt address-refresh"
+                                             title="刷新"></div>
+                                    </div>
+                                </div>
                                 <table id="addressTable" selectMode="single" data-mobile-responsive="true"
                                        class="mb-bootstrap-table text-nowrap table-striped"></table>
                             </div>
