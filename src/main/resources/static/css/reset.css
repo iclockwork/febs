@@ -1,5 +1,8 @@
-.dataTables_filter {
+.table-responsive {
     overflow: hidden;
+}
+
+.dataTables_filter {
     width: 100%;
 }
 
