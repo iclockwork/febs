@@ -5,60 +5,56 @@
                 <h3 class="modal-title pull-left" id="queryBuilding-modal-title">查询楼宇</h3>
             </div>
             <div class="modal-body">
-                <div class="card">
-                    <div class="card-block">
-                        <div class="table-responsive">
-                            <div id="data-table_wrapper" class="dataTables_wrapper">
-                                <div class="change-title-row">
-                                    <div class="change-title-border">
-                                        <div></div>
-                                        <span>查询条件</span>
-                                    </div>
-                                </div>
-                                <div id="data-table_filter" class="dataTables_filter">
-                                    <form class="building-table-form">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="input-group">
+                <div class="table-responsive">
+                    <div id="data-table_wrapper" class="dataTables_wrapper">
+                        <div class="change-title-row">
+                            <div class="change-title-border">
+                                <div></div>
+                                <span>查询条件</span>
+                            </div>
+                        </div>
+                        <div id="data-table_filter" class="dataTables_filter">
+                            <form class="building-table-form">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="input-group">
                                                            <span class="input-group-addon">
 					                                         	楼宇编码：
 					                                       </span>
-                                                    <div class="form-group">
-                                                        <input type="text" hidden id="modalId" class="form-control">
-                                                        <input type="text" hidden id="formId" class="form-control">
-                                                        <input type="text" name="buildingNo" class="form-control">
-                                                        <i class="form-group__bar"></i>
-                                                    </div>
-                                                </div>
+                                            <div class="form-group">
+                                                <input type="text" hidden id="modalId" class="form-control">
+                                                <input type="text" hidden id="formId" class="form-control">
+                                                <input type="text" name="buildingNo" class="form-control">
+                                                <i class="form-group__bar"></i>
                                             </div>
-                                            <div class="col-sm-6">
-                                                <div class="input-group">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="input-group">
                                                           <span class="input-group-addon">
 					                                              	楼宇名称：
 					                                      </span>
-                                                    <div class="form-group">
-                                                        <input type="text" name="buildingName" class="form-control">
-                                                        <i class="form-group__bar"></i>
-                                                    </div>
-                                                </div>
+                                            <div class="form-group">
+                                                <input type="text" name="buildingName" class="form-control">
+                                                <i class="form-group__bar"></i>
                                             </div>
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="change-title-row">
-                                    <div class="change-title-border float-left">
-                                        <div></div>
-                                        <span>查询结果</span>
-                                    </div>
-                                    <div class="dataTables_buttons hidden-sm-down actions">
-                                        <span class="actions__item zmdi zmdi-search" title="搜索"/>
-                                        <span class="actions__item zmdi zmdi-refresh-alt" title="刷新"/>
                                     </div>
                                 </div>
-                                <table id="queryBuildingTable" data-mobile-responsive="true"
-                                       class="mb-bootstrap-table text-nowrap table-striped"></table>
+                            </form>
+                        </div>
+                        <div class="change-title-row">
+                            <div class="change-title-border float-left">
+                                <div></div>
+                                <span>查询结果</span>
+                            </div>
+                            <div class="dataTables_buttons hidden-sm-down actions">
+                                <span class="actions__item zmdi zmdi-search" title="搜索"/>
+                                <span class="actions__item zmdi zmdi-refresh-alt" title="刷新"/>
                             </div>
                         </div>
+                        <table id="queryBuildingTable" data-mobile-responsive="true"
+                               class="mb-bootstrap-table text-nowrap table-striped"></table>
                     </div>
                 </div>
             </div>
