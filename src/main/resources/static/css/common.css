@@ -102,3 +102,30 @@
 .change-col .change-box .change-inner-clue {
     /*border-right: 1px solid #dddddd;*/
 }
+
+.change-title-row {
+    display: block;
+    margin-left: -15px;
+}
+
+.change-title-border {
+    display: flex;
+    align-items: center;
+}
+
+.change-title-border div {
+    display: inline-block;
+    width: 1px;
+    height: 14px;
+    border: 2.5px solid #ED1B23;
+    border-radius: 2.5px;
+    margin-left: 20px;
+}
+
+.change-title-border span {
+    font-size: 14px;
+    color: #333333;
+    line-height: 30px;
+    font-weight: bold;
+    margin-left: 5px;
+}
