@@ -20,7 +20,7 @@ public class User implements Serializable {
 
     public static final String STATUS_LOCK = "0";
 
-    public static final String DEFAULT_THEME = "green";
+    public static final String DEFAULT_THEME = "red";
 
     public static final String DEFAULT_AVATAR = "default.jpg";
 
