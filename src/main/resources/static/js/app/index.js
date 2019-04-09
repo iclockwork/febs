@@ -18,6 +18,10 @@ $(window).on("load", function () {
     $("body").attr("data-ma-theme", theme);
     $(".bg-" + theme).addClass("active").siblings().removeClass("active");
     $head.append("<style>.toggle-switch__checkbox:checked ~ .toggle-switch__helper:after{background-color: " + theme_color + "}</style>")
+        .append("<style>.change-title-border div{border-color: " + theme_color + ";}</style>")
+        .append("<style>.dataTables_buttons .actions__item{color: " + theme_color + "!important;}</style>")
+        .append("<style>.dataTables_buttons .actions__item:hover{color: " + theme_color + "!important;}</style>")
+        .append("<style>.modal-header{background: " + theme_color + "; color: #fff }</style>")
         .append("<style>.btn-save{background: " + theme_color + "; color: #fff }</style>")
         .append("<style>.custom-control-input:checked ~ .custom-control-indicator{ border-color: " + theme_color + " }</style>")
         .append("<style>.custom-radio .custom-control-indicator:before{background-color: " + theme_color + "}</style>")

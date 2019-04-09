@@ -130,7 +130,7 @@ var $MB = (function () {
                 color = '#2196F3';
                 break;
             case 'red':
-                color = '#ff5652';
+                color = '#ED1B23';
                 break;
             case 'orange':
                 color = '#FF9800';
@@ -170,7 +170,7 @@ var $MB = (function () {
                 color = 'rgba(33,150,243,' + opacity + ')';
                 break;
             case 'red':
-                color = 'rgba(255,86,82,' + opacity + ')';
+                color = 'rgba(237,27,35,' + opacity + ')';
                 break;
             case 'orange':
                 color = 'rgba(255,152,0,' + opacity + ')';
