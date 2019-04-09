@@ -101,10 +101,15 @@
     }
 }
 
-@media (min-width: 1200px) {
-    .header__logo {
-        min-width: calc(230px - 2rem);
-    }
+.header {
+    padding: 0;
+}
+
+.header__logo {
+    width: 230px;
+    min-width: 230px;
+    text-align: center;
+    background-color: #ED1B23;
 }
 
 .header__logo .logo {
@@ -112,6 +117,7 @@
 }
 
 .header-name {
+    margin-left: 10px;
     font-size: 16px;
 }
 
