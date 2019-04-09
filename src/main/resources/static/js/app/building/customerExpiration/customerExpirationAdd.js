@@ -33,6 +33,9 @@ $(function () {
         closeModal();
     });
 
+    $("#customerExpiration-add .close").click(function () {
+        closeModal();
+    });
 
     $("#queryButton").click(function () {
         $("#modalId").val("#customerExpiration-add");

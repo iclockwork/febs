@@ -32,6 +32,10 @@ $(function () {
         closeModal();
     });
 
+    $("#customerOpportunity-add .close").click(function () {
+        closeModal();
+    });
+
     $("#queryButton").click(function () {
         $("#modalId").val("#customerOpportunity-add");
         $("#formId").val("#customerOpportunity-add-form");

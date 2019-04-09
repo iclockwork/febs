@@ -34,6 +34,10 @@ $(function () {
         closeModal();
     });
 
+    $("#dict-add .close").click(function () {
+        closeModal();
+    });
+
 });
 
 function closeModal() {

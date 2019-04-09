@@ -32,6 +32,10 @@ $(function () {
         closeModal();
     });
 
+    $("#buildingOpportunity-add .close").click(function () {
+        closeModal();
+    });
+
     function closeModal() {
         $("#save-button").attr("name", "save");
         $("#buildingOpportunity-add-modal-title").html('新增商机楼宇');

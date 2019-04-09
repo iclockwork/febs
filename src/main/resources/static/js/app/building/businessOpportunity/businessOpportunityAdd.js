@@ -34,6 +34,10 @@ $(function () {
         closeModal();
     });
 
+    $("#businessOpportunity-add .close").click(function () {
+        closeModal();
+    });
+
 });
 
 function closeModal() {

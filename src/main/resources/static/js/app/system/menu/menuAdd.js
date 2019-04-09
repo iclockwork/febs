@@ -81,6 +81,11 @@ $(function () {
         closeModal();
     });
 
+    $("#menu-add .close").click(function () {
+        $("input:radio[value='0']").trigger("click");
+        closeModal();
+    });
+
 });
 
 function closeModal() {

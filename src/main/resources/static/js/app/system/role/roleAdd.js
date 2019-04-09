@@ -36,6 +36,10 @@ $(function () {
         closeModal();
     });
 
+    $("#role-add .close").click(function () {
+        closeModal();
+    });
+
 });
 
 function closeModal() {

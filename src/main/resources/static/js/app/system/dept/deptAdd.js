@@ -36,6 +36,10 @@ $(function () {
         closeModal();
     });
 
+    $("#dept-add .close").click(function () {
+        closeModal();
+    });
+
 });
 
 function closeModal() {

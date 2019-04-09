@@ -46,6 +46,10 @@ $(function () {
         closeModal();
     });
 
+    $("#user-add .close").click(function () {
+        closeModal();
+    });
+
     $("#selectStaffSingle").click(function () {
         console.log("selectStaffSingle");
 

@@ -31,6 +31,10 @@ $(function () {
         closeModal();
     });
 
+    $("#compProduct-add .close").click(function () {
+        closeModal();
+    });
+
     $("#queryButton").click(function () {
         $("#modalId").val("#compProduct-add");
         $("#formId").val("#compProduct-add-form");
