@@ -23,6 +23,11 @@ $(function () {
         $MB.closeAndRestModal("update-password");
     });
 
+    $("#update-password .close").click(function () {
+        validateUpdatePassword.resetForm();
+        $MB.closeAndRestModal("update-password");
+    });
+
 });
 
 function validateUpdatePasswordRule() {

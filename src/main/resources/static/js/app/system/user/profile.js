@@ -13,6 +13,11 @@ $(function () {
         validator.resetForm();
         $MB.resetJsTree("deptTree");
     });
+    $("#update-profile .close").click(function () {
+        $MB.closeAndRestModal("update-profile");
+        validator.resetForm();
+        $MB.resetJsTree("deptTree");
+    });
     $(".default_avatars_list").find("img").each(function () {
         var $this = $(this);
         $this.on("click", function () {
