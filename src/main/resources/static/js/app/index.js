@@ -14,13 +14,14 @@ $(window).on("load", function () {
     // 设置主题色
     var theme_color = $MB.getThemeColor(theme);
     var opacity_color = $MB.getThemeRGBA(theme, 0.1);
+    var hover_color = $MB.getThemeRGBA(theme, 0.7);
     var $head = $("head");
     $("body").attr("data-ma-theme", theme);
     $(".bg-" + theme).addClass("active").siblings().removeClass("active");
     $head.append("<style>.toggle-switch__checkbox:checked ~ .toggle-switch__helper:after{background-color: " + theme_color + "}</style>")
         .append("<style>.change-title-border div{border-color: " + theme_color + ";}</style>")
         .append("<style>.dataTables_buttons .actions__item{color: " + theme_color + "!important;}</style>")
-        .append("<style>.dataTables_buttons .actions__item:hover{color: " + theme_color + "!important;}</style>")
+        .append("<style>.dataTables_buttons .actions__item:hover{color: " + hover_color + "!important;}</style>")
         .append("<style>.modal-header{background: " + theme_color + "; color: #fff }</style>")
         .append("<style>.btn-save{background: " + theme_color + "; color: #fff }</style>")
         .append("<style>.custom-control-input:checked ~ .custom-control-indicator{ border-color: " + theme_color + " }</style>")
