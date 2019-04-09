@@ -147,6 +147,11 @@
     /*color: #ffffff;*/
 }
 
+.modal-footer {
+    text-align: center;
+    display: inline-block;
+}
+
 .input-group-addon {
     /*border-bottom: 0;*/
 }
