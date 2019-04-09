@@ -81,6 +81,5 @@
             AND t.customer_name like #{bindCustomerName}
             <bind name="bindCustomerName" value="'%' + customerName + '%'"/>
         </if>
-        order by t.customer_id desc
     </select>
 </mapper>
