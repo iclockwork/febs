@@ -8593,13 +8593,13 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 }
 
 .caret:before {
-  font-family: "Material-Design-Iconic-Font";
-  content: '\f2f2';
-  font-size: 1.5rem;
-  font-style: normal;
-  line-height: 5px;
-  position: relative;
-  top: 3px;
+  /*font-family: "Material-Design-Iconic-Font";*/
+  /*content: '\f2f2';*/
+  /*font-size: 1.5rem;*/
+  /*font-style: normal;*/
+  /*line-height: 5px;*/
+  /*position: relative;*/
+  /*top: 3px;*/
 }
 
 .dropdown-toggle-split {
