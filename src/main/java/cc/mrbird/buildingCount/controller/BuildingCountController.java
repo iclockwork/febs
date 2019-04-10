@@ -3,11 +3,14 @@ package cc.mrbird.buildingCount.controller;
 import cc.mrbird.buildingCount.service.BuildingCountService;
 import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
+import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -122,16 +126,28 @@ public class BuildingCountController extends BaseController {
     @ResponseBody
     public ResponseBo countBuildingBusiness() {
         try {
-            GetUserInfo getUserInfo = new GetUserInfo().invoke();
-            String regionId = getUserInfo.getRegionId();
-            Long createStaffId = getUserInfo.getCreateStaffId();
-            JSONArray countBuildingBusiness = this.buildingCountService.countBuildingBusiness(regionId, createStaffId);
+            JSONArray countBuildingBusiness = getCountBuildingBusiness();
             logger.info("objects is;" + countBuildingBusiness);
             return ResponseBo.ok(countBuildingBusiness);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseBo.error("各楼宇客户业务统计查询失败，请联系网站管理员！");
         }
+    }
+
+    private JSONArray getCountBuildingBusiness() throws JSONException {
+        GetUserInfo getUserInfo = new GetUserInfo().invoke();
+        String regionId = getUserInfo.getRegionId();
+        Long createStaffId = getUserInfo.getCreateStaffId();
+        return this.buildingCountService.countBuildingBusiness(regionId, createStaffId);
+    }
+
+    @Log("查询楼宇名称列表")
+    @RequestMapping("buildingBusiness/list")
+    @ResponseBody
+    public Map<String, Object> queryBuildingList(QueryRequest request) throws JSONException {
+        JSONArray countBuildingBusiness = getCountBuildingBusiness();
+        return  super.selectByPageNumSize(request, () -> this.buildingCountService.queryBuildingList(countBuildingBusiness));
     }
 
     private class GetUserInfo {

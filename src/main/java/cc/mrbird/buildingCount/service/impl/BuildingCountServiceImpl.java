@@ -3,8 +3,10 @@ package cc.mrbird.buildingCount.service.impl;
 import cc.mrbird.building.domain.Building;
 import cc.mrbird.buildingCount.dao.BuildingCountMapper;
 import cc.mrbird.buildingCount.service.BuildingCountService;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -79,6 +81,19 @@ public class BuildingCountServiceImpl implements BuildingCountService {
         }
         setData(data, businessTypes);
         return data;
+    }
+
+    @Override
+    public List<Building> queryBuildingList(JSONArray countBuildingBusiness) {
+        List<Building> buildings = new ArrayList<>();
+        for(int i=0;i<countBuildingBusiness.size();i++){
+            Building building = new Building();
+            JSONObject job = countBuildingBusiness.getJSONObject(i);
+            String buildingName = job.getString("buildingName");
+            building.setBuildingName(buildingName);
+            buildings.add(building);
+        }
+        return buildings;
     }
 
     private void setData(JSONObject data, List<Integer> businessTypes) {
