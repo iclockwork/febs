@@ -79,7 +79,7 @@ function validateRule() {
             username: {
                 required: true,
                 minlength: 3,
-                maxlength: 10,
+                maxlength: 50,
                 remote: {
                     url: "user/checkUserName",
                     type: "get",
@@ -123,7 +123,7 @@ function validateRule() {
         messages: {
             username: {
                 required: icon + "请输入用户名",
-                minlength: icon + "用户名长度3到10个字符",
+                minlength: icon + "用户名长度3到50个字符",
                 remote: icon + "用户名已经存在"
             },
             roles: icon + "请选择用户角色",

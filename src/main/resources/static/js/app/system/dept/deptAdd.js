@@ -56,8 +56,8 @@ function validateRule() {
         rules: {
             deptName: {
                 required: true,
-                minlength: 3,
-                maxlength: 10,
+                minlength: 1,
+                maxlength: 50,
                 remote: {
                     url: "dept/checkDeptName",
                     type: "get",
@@ -76,7 +76,7 @@ function validateRule() {
         messages: {
             deptName: {
                 required: icon + "请输入部门名称",
-                minlength: icon + "部门名称长度3到10个字符",
+                minlength: icon + "部门名称长度1到50个字符",
                 remote: icon + "该部门名称已经存在"
             }
         }

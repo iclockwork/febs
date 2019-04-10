@@ -56,8 +56,8 @@ function validateRule() {
         rules: {
             roleName: {
                 required: true,
-                minlength: 3,
-                maxlength: 10,
+                minlength: 1,
+                maxlength: 50,
                 remote: {
                     url: "role/checkRoleName",
                     type: "get",
@@ -82,7 +82,7 @@ function validateRule() {
         messages: {
             roleName: {
                 required: icon + "请输入角色名称",
-                minlength: icon + "角色名称长度3到10个字符",
+                minlength: icon + "角色名称长度1到10个字符",
                 remote: icon + "该角色名已经存在"
             },
             remark: icon + "角色描述不能超过50个字符",
