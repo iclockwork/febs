@@ -1,10 +1,13 @@
 package cc.mrbird.buildingCount.service;
 
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+import cc.mrbird.building.domain.Building;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.json.JSONException;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,4 +27,6 @@ public interface BuildingCountService {
     JSONArray countBuildingBusiness(String regionId, Long createStaffId) throws JSONException;
 
     JSONObject queryBusiness(String regionId, Long createStaffId);
+
+    List<Building> queryBuildingList(JSONArray countBuildingBusiness);
 }
