@@ -212,9 +212,10 @@ function buildBarChart(buildingName) {
 function removeData(chart) {
     if (chart){
         chart.data.labels.pop();
-        chart.data.datasets.forEach((dataset) => {
-            dataset.data.pop();
-    });
+        var datasets = chart.data.datasets;
+        for (var i = 0; i < datasets.length; i++) {
+            datasets[i].data.pop();
+        }
         chart.update();
     }
 }
