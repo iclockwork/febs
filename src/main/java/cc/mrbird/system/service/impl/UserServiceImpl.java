@@ -2,6 +2,7 @@ package cc.mrbird.system.service.impl;
 
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.service.impl.BaseService;
+import cc.mrbird.common.util.DealPWD;
 import cc.mrbird.common.util.MD5Utils;
 import cc.mrbird.system.dao.UserMapper;
 import cc.mrbird.system.dao.UserRoleMapper;
@@ -92,7 +93,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         user.setCrateTime(new Date());
         user.setTheme(User.DEFAULT_THEME);
         user.setAvatar(User.DEFAULT_AVATAR);
-        user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
+        user.setPassword(DealPWD.encrypt(user.getPassword()));
         this.save(user);
         setUserRoles(user, roles);
     }
@@ -144,7 +145,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         Example example = new Example(User.class);
         example.createCriteria().andCondition("username=", user.getUsername());
-        String newPassword = MD5Utils.encrypt(user.getUsername().toLowerCase(), password);
+        String newPassword = DealPWD.encrypt(password);
         user.setPassword(newPassword);
         this.userMapper.updateByExampleSelective(user, example);
     }

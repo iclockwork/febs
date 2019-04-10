@@ -4,7 +4,7 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.config.FebsProperties;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.ResponseBo;
-import cc.mrbird.common.util.MD5Utils;
+import cc.mrbird.common.util.DealPWD;
 import cc.mrbird.common.util.vcode.Captcha;
 import cc.mrbird.common.util.vcode.GifCaptcha;
 import cc.mrbird.system.domain.User;
@@ -41,7 +41,7 @@ public class LoginController extends BaseController {
     @ResponseBody
     public ResponseBo login(String username, String password, Boolean rememberMe) {
         // 密码 MD5 加密
-        password = MD5Utils.encrypt(username.toLowerCase(), password);
+        password = DealPWD.encrypt(password);
         UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
         try {
             Subject subject = getSubject();

@@ -4,8 +4,8 @@ import cc.mrbird.common.annotation.Log;
 import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
+import cc.mrbird.common.util.DealPWD;
 import cc.mrbird.common.util.FileUtils;
-import cc.mrbird.common.util.MD5Utils;
 import cc.mrbird.system.domain.User;
 import cc.mrbird.system.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -180,7 +180,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public boolean checkPassword(String password) {
         User user = getCurrentUser();
-        String encrypt = MD5Utils.encrypt(user.getUsername().toLowerCase(), password);
+        String encrypt = DealPWD.encrypt(password);
         return user.getPassword().equals(encrypt);
     }
 
