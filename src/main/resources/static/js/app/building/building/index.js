@@ -109,6 +109,22 @@ $(function () {
         });
     }
 
+    function viewBuilding() {
+        var selected = $("#buildingTable").bootstrapTable('getSelections');
+        var selected_length = selected.length;
+        if (!selected_length) {
+            $MB.n_warning('请勾选需要查看的楼宇！');
+            return;
+        }
+        if (selected_length > 1) {
+            $MB.n_warning('一次只能查看一个楼宇！');
+            return;
+        }
+        var buildingId = selected[0].buildingId;
+        var buildingNo = selected[0].buildingNo;
+        $.building.view(buildingId, buildingNo);
+    }
+
     function viewInspection() {
         var selected = $("#buildingTable").bootstrapTable('getSelections');
         var selected_length = selected.length;
@@ -198,6 +214,10 @@ $(function () {
 
     $(".building-delete").click(function () {
         del();
+    });
+
+    $(".building-view").click(function () {
+        viewBuilding();
     });
 
     $(".building-inspection").click(function () {

@@ -17,7 +17,15 @@
         title: '楼宇编码'
     }, {
         field: 'buildingName',
-        title: '楼宇名称'
+        title: '楼宇名称',
+        formatter: function (value, row, index) {
+            return '<a href="javascript:void(0)" class="operate-view">' + value + '</a>';
+        },
+        events: {
+            'click .operate-view': function (e, value, row, index) {
+                $.building.view(row.buildingId, row.buildingNo);
+            }
+        }
     }, {
         field: 'inspectionTotal',
         title: '巡检记录',
@@ -84,7 +92,11 @@
         title: '楼长电话'
     }, {
         field: 'stateName',
-        title: '楼宇状态'
+        title: '楼宇状态',
+        formatter: function (value, row, index) {
+            if (value === '已覆盖') return '<span class="badge badge-success">' + value + '</span>';
+            if (value === '待覆盖') return '<span class="badge badge-warning">' + value + '</span>';
+        }
     }, {
         field: 'remark',
         title: '备注'
@@ -155,5 +167,15 @@
      */
     $.building.init = function () {
 
+    };
+
+    /**
+     * 初始化
+     */
+    $.building.view = function (buildingId, buildingNo) {
+        var _viewModal = $('#modal-building-view');
+        _viewModal.attr("buildingId", buildingId);
+        _viewModal.attr("buildingNo", buildingNo);
+        _viewModal.modal('show');
     };
 })(jQuery);

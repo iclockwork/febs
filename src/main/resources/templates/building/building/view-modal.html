@@ -1,0 +1,474 @@
+<div class="modal fade" id="modal-building-view" data-keyboard="false" data-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title pull-left" id="modal-building-view-title">查看楼宇</h3>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tab-home" data-toggle="tab" href="#pane-home" role="tab"
+                           aria-controls="home" aria-selected="true">概况</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-building" data-toggle="tab" href="#pane-building" role="tab"
+                           aria-controls="profile" aria-selected="false">楼宇信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-res" data-toggle="tab" href="#pane-res" role="tab"
+                           aria-controls="contact" aria-selected="false">资源信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-customer" data-toggle="tab" href="#pane-customer" role="tab"
+                           aria-controls="contact" aria-selected="false">客户信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-business" data-toggle="tab" href="#pane-business" role="tab"
+                           aria-controls="contact" aria-selected="false">业务信息</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="pane-home" role="tabpanel" aria-labelledby="tab-home">
+                        <canvas id="customerBusinessBarChart" height="110"></canvas>
+                    </div>
+                    <div class="tab-pane fade" id="pane-building" role="tabpanel" aria-labelledby="tab-building">
+                        <form id="modal-building-view-pane-building-form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            地市：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="dsRegionName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            区县：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="regionName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇等级：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingLevelName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇所属区域类型：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingTypeDesc" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇所属区域名称：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingTypeName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇地址：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingAddress" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇编码：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingNo" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇名称：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            经度：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="longitude" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            纬度：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="latitude" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼层数：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="floorNumber" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            建筑面积（万m2）：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="area" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            商户数（户）：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="householderNumber" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            物业单位：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="propertyCompany" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            物业联系人：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="propertyManager" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            物业联系人电话：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="propertyManagerContact"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼长姓名：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingManager" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼长电话：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="buildingManagerContact"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇状态：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="stateName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            备注：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="remark" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="pane-res" role="tabpanel" aria-labelledby="tab-res">
+                        <form id="modal-building-view-pane-res-form">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            标准地址：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="standName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            综合业务接入区：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="accessAreaName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            综合业务接入机房：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="roomName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            光交名称：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="lightName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            光交地址：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="lightAddress" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            光交经度：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="lightLongitude" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            光交纬度：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="lightLatitude" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            是否有机房/机柜：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="roomCabinetFlagName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            光缆资源是否接入：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="cableAccessFlagName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            进楼光缆条数：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="cableNumber" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            空余芯数：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="cableRemainNumber" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            是否具备垂直覆盖：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="verticalCoverageFlagName"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            是否具备水平覆盖：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="horizontalCoverageFlagName"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            楼宇覆盖方式：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="coverageMethodName"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            合作方式：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="cooperationMethodName"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            是否具备室分：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="indoorDistributionFlagName"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            已覆盖网络制式：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="coverageNetworkStandardName"
+                                                   readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            WLAN是否已覆盖：
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="wlanFlagName" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="pane-customer" role="tabpanel" aria-labelledby="tab-customer">
+                        <table id="modal-building-view-pane-res-table" data-mobile-responsive="true"
+                               class="mb-bootstrap-table text-nowrap table-striped"></table>
+                    </div>
+                    <div class="tab-pane fade" id="pane-business" role="tabpanel" aria-labelledby="tab-business">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">关闭</button>
+                <button class="btn-hide"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-src="@{js/app/building/building/view.js}"></script>

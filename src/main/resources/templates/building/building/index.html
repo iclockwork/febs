@@ -153,6 +153,7 @@
                         <div class="dropdown actions__item">
                             <i data-toggle="dropdown" class="zmdi zmdi-more-vert"></i>
                             <div class="dropdown-menu dropdown-menu-right">
+                                <a href="javascript:void(0)" class="dropdown-item building-view">查看楼宇</a>
                                 <a href="javascript:void(0)" class="dropdown-item building-add"
                                    shiro:hasPermission="building:add">新增楼宇</a>
                                 <a href="javascript:void(0)" class="dropdown-item building-update"
@@ -173,5 +174,6 @@
 <div data-th-include="building/inspection/query-modal.html"></div>
 <div data-th-include="building/buildingCustomerRp/query-modal.html"></div>
 <div data-th-include="building/building/edit-modal"></div>
+<div data-th-include="building/building/view-modal"></div>
 <script data-th-src="@{js/app/building/building/building.js}"></script>
 <script data-th-src="@{js/app/building/building/index.js}"></script>
