@@ -6,7 +6,6 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
@@ -145,9 +144,11 @@ public class BuildingCountController extends BaseController {
     @Log("查询楼宇名称列表")
     @RequestMapping("buildingBusiness/list")
     @ResponseBody
-    public Map<String, Object> queryBuildingList(QueryRequest request) throws JSONException {
-        JSONArray countBuildingBusiness = getCountBuildingBusiness();
-        return  super.selectByPageNumSize(request, () -> this.buildingCountService.queryBuildingList(countBuildingBusiness));
+    public Map<String, Object> queryBuildingList(QueryRequest request){
+        GetUserInfo getUserInfo = new GetUserInfo().invoke();
+        String regionId = getUserInfo.getRegionId();
+        Long createStaffId = getUserInfo.getCreateStaffId();
+        return  super.selectByPageNumSize(request, () -> this.buildingCountService.queryBuildingList(regionId, createStaffId));
     }
 
     private class GetUserInfo {
