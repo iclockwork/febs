@@ -28,5 +28,5 @@ public interface BuildingCountService {
 
     JSONObject queryBusiness(String regionId, Long createStaffId);
 
-    List<Building> queryBuildingList(JSONArray countBuildingBusiness);
+    List<Building> queryBuildingList(String regionId, Long createStaffId);
 }

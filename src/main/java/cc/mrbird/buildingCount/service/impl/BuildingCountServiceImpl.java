@@ -84,16 +84,8 @@ public class BuildingCountServiceImpl implements BuildingCountService {
     }
 
     @Override
-    public List<Building> queryBuildingList(JSONArray countBuildingBusiness) {
-        List<Building> buildings = new ArrayList<>();
-        for(int i=0;i<countBuildingBusiness.size();i++){
-            Building building = new Building();
-            JSONObject job = countBuildingBusiness.getJSONObject(i);
-            String buildingName = job.getString("buildingName");
-            building.setBuildingName(buildingName);
-            buildings.add(building);
-        }
-        return buildings;
+    public List<Building> queryBuildingList(String regionId, Long createStaffId) {
+        return buildingCountMapper.queryBuildingList(regionId,createStaffId);
     }
 
     private void setData(JSONObject data, List<Integer> businessTypes) {

@@ -97,4 +97,21 @@
         where a.delete_flag =  '0'
     </select>
 
+
+    <select id="queryBuildingList" resultType="cc.mrbird.building.domain.Building">
+        select
+        t.building_no as buildingNo,
+        t.building_name as buildingName
+        from BD_BUILDING t
+        join (select distinct a.building_no from  BD_BUILDING_CUSTOMER_RP a
+        join BD_CUSTOMER b on b.customer_no = a.customer_no
+        join BD_CUSTOMER_BUSINESS c  on c.customer_id = b.customer_id) d
+        on t.building_no = d.building_no
+        where t.delete_flag = 0
+        <if test="createStaffId != null">
+            and t.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+
+    </select>
+
 </mapper>
