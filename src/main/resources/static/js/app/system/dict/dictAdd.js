@@ -51,41 +51,41 @@ function validateRule() {
     var icon = "<i class='zmdi zmdi-close-circle zmdi-hc-fw'></i> ";
     validator = $dictAddForm.validate({
         rules: {
-            keyy: {
+            key: {
                 required: true,
                 digits: true,
                 maxlength: 10
             },
-            valuee: {
+            value: {
                 required: true,
-                maxlength: 10
+                maxlength: 100
             },
             tableName: {
                 required: true,
-                maxlength: 10
+                maxlength: 100
             },
             fieldName: {
                 required: true,
-                maxlength: 10
+                maxlength: 100
             }
         },
         messages: {
-            keyy: {
+            key: {
                 required: icon + "请输入键名",
                 digits: icon + "请输入整数",
                 maxlength: icon + "长度不能超过10个字符"
             },
-            valuee: {
+            value: {
                 required: icon + "请输入键值",
-                maxlength: icon + "长度不能超过10个字符"
+                maxlength: icon + "长度不能超过100个字符"
             },
             tableName: {
                 required: icon + "请输入关联表名",
-                maxlength: icon + "长度不能超过10个字符"
+                maxlength: icon + "长度不能超过100个字符"
             },
             fieldName: {
                 required: icon + "请输入字段名",
-                maxlength: icon + "长度不能超过10个字符"
+                maxlength: icon + "长度不能超过100个字符"
             }
         }
     });

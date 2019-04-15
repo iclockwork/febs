@@ -18,13 +18,12 @@ $(function() {
             },
             {
                 field: 'dictId',
-                title: '字典ID',
-                width: 150
+                title: '字典ID'
             }, {
-                field: 'keyy',
+                field: 'key',
                 title: '键'
             }, {
-                field: 'valuee',
+                field: 'value',
                 title: '值'
             }, {
                 field: 'tableName',
