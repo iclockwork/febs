@@ -59,8 +59,8 @@ public class FileUtils {
             return ResponseBo.warn("导出数据为空！");
         } else {
             boolean operateSign = false;
-            String fileName = filename + ".xlsx";
-            fileName = makeFileName(fileName);
+            String fileName = UUID.randomUUID().toString() + ".xlsx";
+//            fileName = makeFileName(fileName);
             try {
                 File fileDir = new File("file");
                 if (!fileDir.exists())
@@ -97,9 +97,8 @@ public class FileUtils {
             return ResponseBo.warn("导出数据为空！");
         } else {
             boolean operateSign;
-            String fileName = filename + ".csv";
-            fileName = makeFileName(fileName);
-
+            String fileName = UUID.randomUUID().toString() + ".csv";
+//            fileName = makeFileName(fileName);
             File fileDir = new File("file");
             if (!fileDir.exists())
                 fileDir.mkdir();
