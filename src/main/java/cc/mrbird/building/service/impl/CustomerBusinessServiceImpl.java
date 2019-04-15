@@ -40,6 +40,16 @@ public class CustomerBusinessServiceImpl extends BaseService<CustomerBusiness> i
     }
 
     @Override
+    public List<CustomerBusiness> findAllByBuilding(String buildingNo) {
+        try {
+            return this.customerBusinessMapper.findAllByBuilding(buildingNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public CustomerBusiness findById(Long customerBusinessId) {
         return customerBusinessMapper.findById(customerBusinessId);
     }

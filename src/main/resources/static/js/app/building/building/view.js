@@ -4,12 +4,14 @@ $(function () {
     var $paneResForm = $('#modal-building-view-pane-res-form');
 
     function init() {
+        buildCustomerBusinessTotalChart();
         loadPaneBuildingAndRes();
         loadPaneCustomer();
+        loadPaneBusiness();
     }
 
-    function buildCustomerBusinessBarChart() {
-        
+    function buildCustomerBusinessTotalChart() {
+
     }
 
     function loadPaneBuildingAndRes() {
@@ -103,7 +105,41 @@ $(function () {
             }]
         };
 
-        $MB.initTable('modal-building-view-pane-res-table', settings);
+        $MB.initTable('modal-building-view-pane-customer-table', settings);
+    }
+
+    function loadPaneBusiness() {
+        var buildingId = $modal.attr("buildingId");
+        var buildingNo = $modal.attr("buildingNo");
+        var settings = {
+            url: ctx + "customerBusiness/listByBuilding",
+            pageSize: 5,
+            queryParams: function (params) {
+                return {
+                    pageSize: params.limit,
+                    pageNum: params.offset / params.limit + 1,
+                    buildingNo: buildingNo
+                };
+            },
+            columns: [{
+                field: 'customerNo',
+                title: '客户编码'
+            }, {
+                field: 'customerName',
+                title: '客户名称'
+            }, {
+                field: 'businessTypeName',
+                title: '业务类型'
+            }, {
+                field: 'businessPhone',
+                title: '业务号码'
+            }, {
+                field: 'monthFee',
+                title: '月费'
+            }]
+        };
+
+        $MB.initTable('modal-building-view-pane-business-table', settings);
     }
 
     //打开事件
@@ -118,6 +154,7 @@ $(function () {
     $modal.on('hidden.bs.modal', function (event) {
         $.utils.toggleBodyModal();
 
-        $('#modal-building-view-pane-res-table').bootstrapTable('destroy');
+        $('#modal-building-view-pane-customer-table').bootstrapTable('destroy');
+        $('#modal-building-view-pane-business-table').bootstrapTable('destroy');
     });
 });

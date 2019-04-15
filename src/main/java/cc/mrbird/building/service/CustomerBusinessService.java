@@ -16,6 +16,8 @@ import java.util.List;
 public interface CustomerBusinessService extends IService<CustomerBusiness> {
     List<CustomerBusiness> findAll(CustomerBusiness customerBusiness);
 
+    List<CustomerBusiness> findAllByBuilding(String buildingNo);
+
     CustomerBusiness findById(Long customerBusinessId);
 
     void add(CustomerBusiness customerBusiness);

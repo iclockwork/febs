@@ -40,6 +40,12 @@ public class CustomerBusinessController extends BaseController {
         return super.selectByPageNumSize(request, () -> this.customerBusinessService.findAll(customerBusiness));
     }
 
+    @RequestMapping("customerBusiness/listByBuilding")
+    @ResponseBody
+    public Map<String, Object> listByBuilding(QueryRequest request, String buildingNo) {
+        return super.selectByPageNumSize(request, () -> this.customerBusinessService.findAllByBuilding(buildingNo));
+    }
+
     @RequestMapping("customerBusiness/excel")
     @ResponseBody
     public ResponseBo excel(CustomerBusiness customerBusiness) {
