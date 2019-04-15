@@ -66,6 +66,9 @@ public class CustomerBusiness {
     @Column(name = "MODIFY_DATE")
     private Date modifyDate;
 
+    @Transient
+    private Long count;
+
     /**
      * @return CUSTOMER_BUSINESS_ID
      */
@@ -236,5 +239,13 @@ public class CustomerBusiness {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
     }
 }

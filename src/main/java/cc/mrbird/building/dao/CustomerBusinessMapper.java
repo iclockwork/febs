@@ -12,6 +12,10 @@ public interface CustomerBusinessMapper extends MyMapper<CustomerBusiness> {
 
     List<CustomerBusiness> findAllByBuilding(@Param("buildingNo") String buildingNo);
 
+    List<CustomerBusiness> countByBuilding(@Param("buildingNo") String buildingNo);
+
+    List<CustomerBusiness> sumMonthFeeByBuilding(@Param("buildingNo") String buildingNo);
+
     CustomerBusiness findById(Long customerBusinessId);
 
     Long findTotal(CustomerBusiness customerBusiness);

@@ -46,6 +46,30 @@ public class CustomerBusinessController extends BaseController {
         return super.selectByPageNumSize(request, () -> this.customerBusinessService.findAllByBuilding(buildingNo));
     }
 
+    @RequestMapping("customerBusiness/countByBuilding")
+    @ResponseBody
+    public Map<String, Object> countByBuilding(QueryRequest request, String buildingNo) {
+        try {
+            List<CustomerBusiness> list = this.customerBusinessService.countByBuilding(buildingNo);
+            return ResponseBo.ok(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取客户业务量失败，请联系网站管理员！");
+        }
+    }
+
+    @RequestMapping("customerBusiness/sumMonthFeeByBuilding")
+    @ResponseBody
+    public Map<String, Object> sumMonthFeeByBuilding(QueryRequest request, String buildingNo) {
+        try {
+            List<CustomerBusiness> list = this.customerBusinessService.sumMonthFeeByBuilding(buildingNo);
+            return ResponseBo.ok(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("获取客户业务收入失败，请联系网站管理员！");
+        }
+    }
+
     @RequestMapping("customerBusiness/excel")
     @ResponseBody
     public ResponseBo excel(CustomerBusiness customerBusiness) {

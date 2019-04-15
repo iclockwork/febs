@@ -19,31 +19,22 @@
 
     <sql id="findCommon">
         select t.customer_business_id as customerBusinessId,
-        t.customer_id as customerId,
-        c.customer_no as customerNo,
-        c.customer_name as customerName,
-        t.business_type as businessType,
-        decode(t.business_type,
-        1,
-        '专线',
-        2,
-        '宽带',
-        3,
-        '固话',
-        4,
-        '云',
-        5,
-        '移网',
-        6,
-        '电路') as businessTypeName,
-        t.business_phone as businessPhone,
-        t.month_fee as monthFee,
-        s.name as createStaffName,
-        t.create_date as createDate
-        from bd_customer_business t, staff s, bd_customer c
-        where t.delete_flag = 0
-        and t.create_staff_id = s.staff_id
-        and t.customer_id = c.customer_id
+               t.customer_id          as customerId,
+               c.customer_no          as customerNo,
+               c.customer_name        as customerName,
+               t.business_type        as businessType,
+               d.value                as businessTypeName,
+               t.business_phone       as businessPhone,
+               t.month_fee            as monthFee,
+               s.name                 as createStaffName,
+               t.create_date          as createDate
+          from bd_customer_business t, staff s, bd_customer c, t_dict d
+         where t.delete_flag = 0
+           and t.create_staff_id = s.staff_id
+           and t.customer_id = c.customer_id
+           and d.table_name = 'bd_customer_business'
+           and d.field_name = 'business_type'
+           and t.business_type = d.key
     </sql>
 
     <select id="findAllByBuilding" resultType="cc.mrbird.building.domain.CustomerBusiness"
@@ -53,25 +44,14 @@
         c.customer_name as customerName,
         cb.customer_business_id as customerBusinessId,
         cb.business_type as businessType,
-        decode(cb.business_type,
-        1,
-        '专线',
-        2,
-        '宽带',
-        3,
-        '固话',
-        4,
-        '云',
-        5,
-        '移网',
-        6,
-        '电路') as businessTypeName,
+        d.value as businessTypeName,
         cb.business_phone as businessPhone,
         cb.month_fee as monthFee
         from BD_BUILDING_CUSTOMER_RP t,
         BD_BUILDING b,
         BD_CUSTOMER c,
         bd_customer_business cb,
+        t_dict d,
         addr_segm a
         where t.delete_flag = 0
         and c.delete_flag = 0
@@ -81,11 +61,74 @@
         and t.building_no = b.building_no
         and t.customer_no = c.customer_no
         and cb.customer_id = c.customer_id
+        and d.table_name = 'bd_customer_business'
+        and d.field_name = 'business_type'
+        and cb.business_type = d.key
         and t.segm_id = a.segm_id
         <if test="buildingNo != null and buildingNo != ''">
             AND t.building_no = #{buildingNo}
         </if>
         order by c.customer_id desc
+    </select>
+
+    <select id="countByBuilding" resultType="cc.mrbird.building.domain.CustomerBusiness"
+            parameterType="String">
+        select cb.business_type as businessType,
+        d.value as businessTypeName,
+        count(distinct cb.customer_business_id) as count
+        from BD_BUILDING_CUSTOMER_RP t,
+        BD_BUILDING b,
+        BD_CUSTOMER c,
+        bd_customer_business cb,
+        t_dict d,
+        addr_segm a
+        where t.delete_flag = 0
+        and c.delete_flag = 0
+        and c.delete_flag = 0
+        and a.delete_state = '0'
+        and cb.delete_flag = 0
+        and t.building_no = b.building_no
+        and t.customer_no = c.customer_no
+        and cb.customer_id = c.customer_id
+        and d.table_name = 'bd_customer_business'
+        and d.field_name = 'business_type'
+        and cb.business_type = d.key
+        and t.segm_id = a.segm_id
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_no = #{buildingNo}
+        </if>
+        group by cb.business_type, d.value
+        order by cb.business_type, d.value
+    </select>
+
+    <select id="sumMonthFeeByBuilding" resultType="cc.mrbird.building.domain.CustomerBusiness"
+            parameterType="String">
+        select cb.business_type as businessType,
+        d.value as businessTypeName,
+        sum(distinct cb.month_fee) as monthFee
+        from BD_BUILDING_CUSTOMER_RP t,
+        BD_BUILDING b,
+        BD_CUSTOMER c,
+        bd_customer_business cb,
+        t_dict d,
+        addr_segm a
+        where t.delete_flag = 0
+        and c.delete_flag = 0
+        and c.delete_flag = 0
+        and a.delete_state = '0'
+        and cb.delete_flag = 0
+        and t.building_no = b.building_no
+        and t.customer_no = c.customer_no
+        and cb.customer_id = c.customer_id
+        and d.table_name = 'bd_customer_business'
+        and d.field_name = 'business_type'
+        and cb.business_type = d.key
+        and t.segm_id = a.segm_id
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_no = #{buildingNo}
+        </if>
+        group by cb.business_type, d.value
+        order by cb.business_type, d.value
     </select>
 
     <select id="findAll" resultType="cc.mrbird.building.domain.CustomerBusiness"

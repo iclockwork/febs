@@ -18,6 +18,10 @@ public interface CustomerBusinessService extends IService<CustomerBusiness> {
 
     List<CustomerBusiness> findAllByBuilding(String buildingNo);
 
+    List<CustomerBusiness> countByBuilding(String buildingNo);
+
+    List<CustomerBusiness> sumMonthFeeByBuilding(String buildingNo);
+
     CustomerBusiness findById(Long customerBusinessId);
 
     void add(CustomerBusiness customerBusiness);

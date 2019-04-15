@@ -50,6 +50,26 @@ public class CustomerBusinessServiceImpl extends BaseService<CustomerBusiness> i
     }
 
     @Override
+    public List<CustomerBusiness> countByBuilding(String buildingNo) {
+        try {
+            return this.customerBusinessMapper.countByBuilding(buildingNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<CustomerBusiness> sumMonthFeeByBuilding(String buildingNo) {
+        try {
+            return this.customerBusinessMapper.sumMonthFeeByBuilding(buildingNo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
     public CustomerBusiness findById(Long customerBusinessId) {
         return customerBusinessMapper.findById(customerBusinessId);
     }
