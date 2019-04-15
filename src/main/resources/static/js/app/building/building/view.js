@@ -311,6 +311,7 @@ $(function () {
         $.utils.toggleBodyModal();
 
         removeChartData(customerBusinessTotalChart);
+        removeChartData(customerBusinessMonthFeeChart);
         $('#modal-building-view-pane-customer-table').bootstrapTable('destroy');
         $('#modal-building-view-pane-business-table').bootstrapTable('destroy');
     });
