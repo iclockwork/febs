@@ -49,6 +49,12 @@
             }
         }
     }, {
+        field: 'customerBusinessTotal',
+        title: '客户业务量(条)'
+    }, {
+        field: 'customerBusinessMonthFeeTotal',
+        title: '业务月费总计（万元）'
+    }, {
         field: 'buildingLevelName',
         title: '楼宇等级'
     }, {

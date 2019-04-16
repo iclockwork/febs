@@ -54,6 +54,14 @@ public class Building implements Serializable {
     @ExportConfig(value = "关联客户")
     private Long customerTotal;
 
+    @Transient
+    @ExportConfig(value = "客户业务量(条)")
+    private Long customerBusinessTotal;
+
+    @Transient
+    @ExportConfig(value = "业务月费总计（万元）")
+    private BigDecimal customerBusinessMonthFeeTotal;
+
     @Column(name = "BUILDING_LEVEL")
     private String buildingLevel;
 
@@ -1053,5 +1061,21 @@ public class Building implements Serializable {
 
     public void setCustomerTotal(Long customerTotal) {
         this.customerTotal = customerTotal;
+    }
+
+    public Long getCustomerBusinessTotal() {
+        return customerBusinessTotal;
+    }
+
+    public void setCustomerBusinessTotal(Long customerBusinessTotal) {
+        this.customerBusinessTotal = customerBusinessTotal;
+    }
+
+    public BigDecimal getCustomerBusinessMonthFeeTotal() {
+        return customerBusinessMonthFeeTotal;
+    }
+
+    public void setCustomerBusinessMonthFeeTotal(BigDecimal customerBusinessMonthFeeTotal) {
+        this.customerBusinessMonthFeeTotal = customerBusinessMonthFeeTotal;
     }
 }

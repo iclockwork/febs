@@ -217,6 +217,12 @@ $(function () {
         $.post(ctx + "building/getBuilding", {buildingId: buildingId}, function (r) {
             if (r.code === 0) {
                 var building = r.msg;
+
+                $(".pane-home-title").html(building.buildingName);
+                $(".pane-home-customerTotal").html(building.customerTotal);
+                $(".pane-home-customerBusinessTotal").html(building.customerBusinessTotal);
+                $(".pane-home-customerBusinessMonthFeeTotal").html(building.customerBusinessMonthFeeTotal);
+
                 $paneBuildingForm.find("input[name='dsRegionName']").val(building.dsRegionName);
                 $paneBuildingForm.find("input[name='regionName']").val(building.regionName);
                 $paneBuildingForm.find("input[name='buildingLevelName']").val(building.buildingLevelName);

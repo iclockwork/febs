@@ -67,6 +67,10 @@
                      select="cc.mrbird.building.dao.InspectionMapper.findTotal"/>
         <association property="customerTotal" column="{buildingNo=buildingNo}"
                      select="cc.mrbird.building.dao.BuildingCustomerRpMapper.findCustomerTotal"/>
+        <association property="customerBusinessTotal" column="{buildingNo=buildingNo}"
+                     select="cc.mrbird.building.dao.BuildingCustomerRpMapper.findCustomerBusinessTotal"/>
+        <association property="customerBusinessMonthFeeTotal" column="{buildingNo=buildingNo}"
+                     select="cc.mrbird.building.dao.BuildingCustomerRpMapper.findCustomerBusinessMonthFeeTotal"/>
     </resultMap>
 
     <sql id="findCommon">
@@ -214,7 +218,7 @@
         order by t.building_id desc
     </select>
 
-    <select id="findById" resultType="cc.mrbird.building.domain.Building">
+    <select id="findById" resultMap="building">
         <include refid="findCommon"/>
         and t.building_id = #{buildingId}
     </select>

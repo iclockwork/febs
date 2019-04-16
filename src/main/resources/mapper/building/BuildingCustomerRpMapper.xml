@@ -137,4 +137,48 @@
             AND t.customer_no = #{customerNo}
         </if>
     </select>
+
+    <select id="findCustomerBusinessTotal" resultType="Long"
+            parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
+        select count(distinct(cb.customer_business_id)) as count
+        from BD_BUILDING_CUSTOMER_RP t,
+        BD_BUILDING b,
+        BD_CUSTOMER c,
+        bd_customer_business cb,
+        addr_segm a
+        where t.delete_flag = 0
+        and c.delete_flag = 0
+        and c.delete_flag = 0
+        and a.delete_state = '0'
+        and cb.delete_flag = 0
+        and t.building_no = b.building_no
+        and t.customer_no = c.customer_no
+        and cb.customer_id = c.customer_id
+        and t.segm_id = a.segm_id
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_no = #{buildingNo}
+        </if>
+    </select>
+
+    <select id="findCustomerBusinessMonthFeeTotal" resultType="java.math.BigDecimal"
+            parameterType="cc.mrbird.building.domain.BuildingCustomerRp">
+        select nvl(round(sum(distinct cb.month_fee) / 10000, 2), 0) as sum
+        from BD_BUILDING_CUSTOMER_RP t,
+        BD_BUILDING b,
+        BD_CUSTOMER c,
+        bd_customer_business cb,
+        addr_segm a
+        where t.delete_flag = 0
+        and c.delete_flag = 0
+        and c.delete_flag = 0
+        and a.delete_state = '0'
+        and cb.delete_flag = 0
+        and t.building_no = b.building_no
+        and t.customer_no = c.customer_no
+        and cb.customer_id = c.customer_id
+        and t.segm_id = a.segm_id
+        <if test="buildingNo != null and buildingNo != ''">
+            AND t.building_no = #{buildingNo}
+        </if>
+    </select>
 </mapper>

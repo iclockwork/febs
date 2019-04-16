@@ -3,6 +3,7 @@ package cc.mrbird.building.dao;
 import cc.mrbird.building.domain.BuildingCustomerRp;
 import cc.mrbird.common.config.MyMapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface BuildingCustomerRpMapper extends MyMapper<BuildingCustomerRp> {
@@ -13,4 +14,8 @@ public interface BuildingCustomerRpMapper extends MyMapper<BuildingCustomerRp> {
     Long findCustomerTotal(BuildingCustomerRp buildingCustomerRp);
 
     Long findBuildingTotal(BuildingCustomerRp buildingCustomerRp);
+
+    Long findCustomerBusinessTotal(BuildingCustomerRp buildingCustomerRp);
+
+    BigDecimal findCustomerBusinessMonthFeeTotal(BuildingCustomerRp buildingCustomerRp);
 }
