@@ -33,6 +33,11 @@
     margin-bottom: 10px;
 }
 
+.modal-dialog .box {
+    border: 1px solid #f4f4f4;
+    box-shadow: none;
+}
+
 .common-box-title {
     margin: 0;
     font-size: 14px;
