@@ -52,7 +52,56 @@ $(function () {
                     }
                 }
 
-                newCustomerBusinessChart('customerBusinessTotalChart', customerBusinessTotalChart, '客户业务量（条）', labels, zxData, kdData, ghData, yData, ywData, dlData)
+                var canvas = $("#customerBusinessTotalChart").get(0).getContext("2d");
+                customerBusinessTotalChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "专线业务",
+                            data: zxData,
+                            backgroundColor: "#00c0ef"
+                        }, {
+                            label: "宽带业务",
+                            data: kdData,
+                            backgroundColor: "#338aff"
+                        }, {
+                            label: "固话业务",
+                            data: ghData,
+                            backgroundColor: "#80c14a"
+                        }, {
+                            label: "云业务",
+                            data: yData,
+                            backgroundColor: "#cf706c"
+                        }, {
+                            label: "移网业务",
+                            data: ywData,
+                            backgroundColor: "#bb7cc1"
+                        }, {
+                            label: "电路业务",
+                            data: dlData,
+                            backgroundColor: "#f400ae"
+                        }]
+                    },
+                    options: {
+                        //是否显示柱状图上面的数据
+                        scaleOverlay: true,
+                        //是否显示label值
+                        scaleShowLabels: true,
+                        scales: {
+                            xAxes: [{
+                                display: true
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: '客户业务量（条）'
+                                }
+                            }]
+                        }
+                    }
+                });
             } else {
                 $MB.n_warning(r.msg);
             }
@@ -96,7 +145,56 @@ $(function () {
                     }
                 }
 
-                newCustomerBusinessChart('customerBusinessMonthFeeChart', customerBusinessMonthFeeChart, '客户业务收入（元）', labels, zxData, kdData, ghData, yData, ywData, dlData)
+                var canvas = $("#customerBusinessMonthFeeChart").get(0).getContext("2d");
+                customerBusinessMonthFeeChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "专线业务",
+                            data: zxData,
+                            backgroundColor: "#00c0ef"
+                        }, {
+                            label: "宽带业务",
+                            data: kdData,
+                            backgroundColor: "#338aff"
+                        }, {
+                            label: "固话业务",
+                            data: ghData,
+                            backgroundColor: "#80c14a"
+                        }, {
+                            label: "云业务",
+                            data: yData,
+                            backgroundColor: "#cf706c"
+                        }, {
+                            label: "移网业务",
+                            data: ywData,
+                            backgroundColor: "#bb7cc1"
+                        }, {
+                            label: "电路业务",
+                            data: dlData,
+                            backgroundColor: "#f400ae"
+                        }]
+                    },
+                    options: {
+                        //是否显示柱状图上面的数据
+                        scaleOverlay: true,
+                        //是否显示label值
+                        scaleShowLabels: true,
+                        scales: {
+                            xAxes: [{
+                                display: true
+                            }],
+                            yAxes: [{
+                                display: true,
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: '客户业务收入（元）'
+                                }
+                            }]
+                        }
+                    }
+                });
             } else {
                 $MB.n_warning(r.msg);
             }
@@ -112,62 +210,6 @@ $(function () {
             }
             chart.update();
         }
-    }
-
-    function newCustomerBusinessChart(chartId, chart, yLabelString, labels, zxData, kdData, ghData, yData, ywData, dlData) {
-        var tempData = {
-            labels: labels,
-            datasets: [{
-                label: "专线业务",
-                data: zxData,
-                backgroundColor: "#00c0ef"
-            }, {
-                label: "宽带业务",
-                data: kdData,
-                backgroundColor: "#338aff"
-            }, {
-                label: "固话业务",
-                data: ghData,
-                backgroundColor: "#80c14a"
-            }, {
-                label: "云业务",
-                data: yData,
-                backgroundColor: "#cf706c"
-            }, {
-                label: "移网业务",
-                data: ywData,
-                backgroundColor: "#bb7cc1"
-            }, {
-                label: "电路业务",
-                data: dlData,
-                backgroundColor: "#f400ae"
-            }]
-        };
-
-        var options = {
-            //是否显示柱状图上面的数据
-            scaleOverlay: true,
-            //是否显示label值
-            scaleShowLabels: true,
-            scales: {
-                xAxes: [{
-                    display: true
-                }],
-                yAxes: [{
-                    display: true,
-                    scaleLabel: {
-                        display: true,
-                        labelString: yLabelString
-                    }
-                }]
-            }
-        };
-        var canvas = $("#" + chartId).get(0).getContext("2d");
-        chart = new Chart(canvas, {
-            type: 'bar',
-            data: tempData,
-            options: options
-        });
     }
 
     function loadPaneBuildingAndRes() {
