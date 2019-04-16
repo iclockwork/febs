@@ -304,6 +304,8 @@ $(function () {
         if (buildingId) {
             init();
         }
+
+        $("#tab-home").trigger("click");
     });
 
     //隐藏事件
