@@ -28,6 +28,7 @@ $(window).on("load", function () {
         .append("<style>.custom-radio .custom-control-indicator:before{background-color: " + theme_color + "}</style>")
         .append("<style>.navigation__active > a:hover{color: " + theme_color + " !important;}</style>")
         .append("<style>.navigation__active{color: " + theme_color + ";}</style>")
+        .append("<style>.nav-tabs .nav-link:before{background-color: " + theme_color + ";}</style>")
         .append("<style>.fixed-table-pagination .pagination li.active a{ background:" + theme_color + ";border: 1px solid " + theme_color + "}</style>")
         .append("<style>.form-group__bar:before, .form-group__bar:after {background-color: " + theme_color + "}</style>")
         .append("<style>.daterangepicker td.active, .daterangepicker td.active:hover,.end-date {background-color: " + theme_color + " !important}</style>")
