@@ -1,6 +1,7 @@
 package cc.mrbird.building.service.impl;
 
 import cc.mrbird.building.dao.CustomerExpirationMapper;
+import cc.mrbird.building.domain.Customer;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.CustomerExpirationService;
 import cc.mrbird.common.util.Constant;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -51,5 +53,15 @@ public class CustomerExpirationServiceImpl implements CustomerExpirationService 
     public void deleteCustomerExpiration(String ids) {
         int[] ints = Arrays.stream(ids.split(",")).mapToInt(s -> Integer.parseInt(s)).toArray();
         customerExpirationMapper.deleteCustomerExpiration(ints);
+    }
+
+    @Override
+    public List<Customer> findAll(Customer customer) {
+        try {
+            return this.customerExpirationMapper.findAll(customer);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 }

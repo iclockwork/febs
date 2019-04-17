@@ -43,7 +43,7 @@
             AND a.region_id = #{regionId}
         </if>
         <if test="buildingNo != null and buildingNo != ''">
-            AND t.building_id = (select A.building_id from bd_building A where A.building_no like
+            AND t.building_id in (select A.building_id from bd_building A where A.building_no like
             '%'||#{buildingNo}||'%')
         </if>
         <if test="buildingName != null and buildingName != ''">
@@ -89,15 +89,55 @@
                 where t.CUSTOMER_EXPIRATION_ID = #{customerExpirationId} and t.delete_flag = 0
     </update>
 
-    <!--删除竞争产品-->
+    <!--删除客户到期提醒-->
     <update id="deleteCustomerExpiration" parameterType="int[]">
          update bd_customer_expiration t set delete_flag = 1
                 where t.CUSTOMER_EXPIRATION_ID in
         <foreach item="item" collection="array" open="(" separator="," close=")">
             #{item}
         </foreach>
-
-
     </update>
+
+    <select id="findAll" resultType="cc.mrbird.building.domain.Customer">
+        select t.customer_id as customerId,
+        t.customer_no as customerNo,
+        t.customer_name as customerName,
+        2 as inspectionType,
+        t.industry_type as industryType,
+        decode(t.industry_type,
+        201,
+        '生产制造',
+        202,
+        '批发零售',
+        203,
+        '信息技术',
+        204,
+        '金融保险',
+        205,
+        '政企机构及社会团体',
+        206,
+        '教育培训',
+        207,
+        '酒店住宿',
+        208,
+        '其他') as industryTypeName,
+        t.key_person as keyPerson,
+        t.key_person_contact as keyPersonContact,
+        t.month_fee as monthFee,
+        t.remark as remark,
+        t.create_date as createDate
+        from BD_CUSTOMER t,
+        (select distinct customer_no from bd_building_customer_rp rp where rp.building_no = #{buildingNo} and rp.delete_flag = 0 ) a
+        where t.delete_flag = 0
+        and t.customer_no = a.customer_no
+        <if test="customerNo != null and customerNo != ''">
+            <bind name="bindCustomerNo" value="'%' + customerNo + '%'"/>
+            AND t.customer_no like #{bindCustomerNo}
+        </if>
+        <if test="customerName != null and customerName != ''">
+            AND t.customer_name like #{bindCustomerName}
+            <bind name="bindCustomerName" value="'%' + customerName + '%'"/>
+        </if>
+    </select>
 
 </mapper>

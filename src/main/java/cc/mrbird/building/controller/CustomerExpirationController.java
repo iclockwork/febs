@@ -1,6 +1,7 @@
 package cc.mrbird.building.controller;
 
 
+import cc.mrbird.building.domain.Customer;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.building.service.CustomerExpirationService;
 import cc.mrbird.common.annotation.Log;
@@ -125,6 +126,18 @@ public class CustomerExpirationController extends BaseController {
             e.printStackTrace();
             return ResponseBo.error("删除客户到期提醒失败，请联系网站管理员！");
         }
+    }
+
+    /**
+     * 楼宇下关联的客户
+     * @param request
+     * @param customer
+     * @return
+     */
+    @RequestMapping("buildingCustomer/list")
+    @ResponseBody
+    public Map<String, Object> buildingCustomerRpList(QueryRequest request, Customer customer) {
+        return super.selectByPageNumSize(request, () -> this.customerExpirationService.findAll(customer));
     }
 
     private CustomerExpiration workingCondition(CustomerExpiration customerExpiration) {

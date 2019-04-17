@@ -1,5 +1,6 @@
 package cc.mrbird.building.service;
 
+import cc.mrbird.building.domain.Customer;
 import cc.mrbird.building.domain.CustomerExpiration;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface CustomerExpirationService {
     void updateCustomerExpiration(CustomerExpiration customerExpiration);
 
     void deleteCustomerExpiration(String ids);
+
+    List<Customer> findAll(Customer customer);
 }

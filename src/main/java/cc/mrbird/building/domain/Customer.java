@@ -20,6 +20,9 @@ public class Customer implements Serializable {
     private String dsRegionId;
 
     @Transient
+    private String buildingNo;
+
+    @Transient
     @ExportConfig(value = "地市")
     private String dsRegionName;
 
@@ -354,5 +357,13 @@ public class Customer implements Serializable {
 
     public void setBuildingTotal(Long buildingTotal) {
         this.buildingTotal = buildingTotal;
+    }
+
+    public String getBuildingNo() {
+        return buildingNo;
+    }
+
+    public void setBuildingNo(String buildingNo) {
+        this.buildingNo = buildingNo;
     }
 }

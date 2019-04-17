@@ -110,6 +110,18 @@ $(function () {
 
     }, "需要提醒时，提醒时间不能为空!");
 
+    $("#selectCustomerSingle").click(function () {
+        var segmId = $customerExpirationAddForm.find("input[name='buildingNo']").val();
+        if (segmId) {
+            console.log("selectCustomerSingle");
+            var _customerSelectModal = $('#query_customer_modal');
+            _customerSelectModal.attr("selectBackFormId", "customerExpiration-add");
+
+            _customerSelectModal.modal('show');
+        } else {
+            $MB.n_warning('请先选择楼宇！');
+        }
+    });
 
 });
 

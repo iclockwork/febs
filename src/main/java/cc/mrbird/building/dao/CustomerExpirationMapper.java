@@ -1,5 +1,6 @@
 package cc.mrbird.building.dao;
 
+import cc.mrbird.building.domain.Customer;
 import cc.mrbird.building.domain.CustomerExpiration;
 import cc.mrbird.common.config.MyMapper;
 
@@ -15,5 +16,7 @@ public interface CustomerExpirationMapper extends MyMapper<CustomerExpiration> {
     void updateCustomerExpiration(CustomerExpiration customerExpiration);
 
     void deleteCustomerExpiration(int[] ids);
+
+    List<Customer> findAll(Customer customer);
 }
 

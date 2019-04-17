@@ -58,7 +58,7 @@
             AND a.region_id = #{regionId}
         </if>
         <if test="buildingNo != null and buildingNo != ''">
-            AND t.building_id = (select A.building_id from bd_building A where A.building_no like
+            AND t.building_id in (select A.building_id from bd_building A where A.building_no like
             '%'||#{buildingNo}||'%')
         </if>
         <if test="buildingName != null and buildingName != ''">
