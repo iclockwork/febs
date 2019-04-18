@@ -46,11 +46,14 @@
         cb.business_type as businessType,
         d.value as businessTypeName,
         cb.business_phone as businessPhone,
-        cb.month_fee as monthFee
+        cb.month_fee as monthFee,
+        s.name as createStaffName,
+        cb.create_date as createDate
         from BD_BUILDING_CUSTOMER_RP t,
         BD_BUILDING b,
         BD_CUSTOMER c,
         bd_customer_business cb,
+        staff s,
         t_dict d,
         addr_segm a
         where t.delete_flag = 0
@@ -60,6 +63,7 @@
         and cb.delete_flag = 0
         and t.building_no = b.building_no
         and t.customer_no = c.customer_no
+        and cb.create_staff_id = s.staff_id
         and cb.customer_id = c.customer_id
         and d.table_name = 'bd_customer_business'
         and d.field_name = 'business_type'

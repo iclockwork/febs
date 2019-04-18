@@ -60,7 +60,7 @@ public class Customer implements Serializable {
     private Integer industryType;
 
     @Transient
-    @ExportConfig(value = "光缆资源是否接入")
+    @ExportConfig(value = "所属行业")
     private String industryTypeName;
 
     @Column(name = "KEY_PERSON")

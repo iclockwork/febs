@@ -310,6 +310,18 @@ $(function () {
         };
 
         $MB.initTable('modal-building-view-pane-customer-table', settings);
+
+        $(".modal-building-view-pane-customer-export-excel").unbind("click").click(function () {
+            $.utils.exportFile(ctx + "buildingCustomerRp/excel", {
+                buildingNo: buildingNo
+            });
+        });
+
+        $(".modal-building-view-pane-customer-export-csv").unbind("click").click(function () {
+            $.utils.exportFile(ctx + "buildingCustomerRp/csv", {
+                buildingNo: buildingNo
+            });
+        });
     }
 
     function loadPaneBusiness() {
@@ -340,10 +352,28 @@ $(function () {
             }, {
                 field: 'monthFee',
                 title: '月费'
+            }, {
+                field: 'createStaffName',
+                title: '创建人'
+            }, {
+                field: 'createDate',
+                title: '创建时间'
             }]
         };
 
         $MB.initTable('modal-building-view-pane-business-table', settings);
+
+        $(".modal-building-view-pane-business-export-excel").unbind("click").click(function () {
+            $.utils.exportFile(ctx + "customerBusiness/listByBuildingExcel", {
+                buildingNo: buildingNo
+            });
+        });
+
+        $(".modal-building-view-pane-business-export-csv").unbind("click").click(function () {
+            $.utils.exportFile(ctx + "customerBusiness/listByBuildingCsv", {
+                buildingNo: buildingNo
+            });
+        });
     }
 
     //打开事件

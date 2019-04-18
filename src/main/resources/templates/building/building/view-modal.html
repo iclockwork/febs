@@ -520,10 +520,58 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="pane-customer" role="tabpanel" aria-labelledby="tab-customer">
+                        <div class="change-title-row">
+                            <div class="change-title-border float-left">
+                                <div></div>
+                                <span>查询结果</span>
+                            </div>
+                            <div class="dataTables_buttons hidden-sm-down actions">
+                                <div class="dropdown actions__item">
+                                    <i data-toggle="dropdown" class="zmdi zmdi-download">
+                                    </i>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <a href="javascript:void(0)"
+                                           class="dropdown-item modal-building-view-pane-customer-export-excel"
+                                           data-table-action="excel">
+                                            Excel (.xlsx)
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="dropdown-item modal-building-view-pane-customer-export-csv"
+                                           data-table-action="csv">
+                                            CSV (.csv)
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <table id="modal-building-view-pane-customer-table" data-mobile-responsive="true"
                                class="mb-bootstrap-table text-nowrap table-striped"></table>
                     </div>
                     <div class="tab-pane fade" id="pane-business" role="tabpanel" aria-labelledby="tab-business">
+                        <div class="change-title-row">
+                            <div class="change-title-border float-left">
+                                <div></div>
+                                <span>查询结果</span>
+                            </div>
+                            <div class="dataTables_buttons hidden-sm-down actions">
+                                <div class="dropdown actions__item">
+                                    <i data-toggle="dropdown" class="zmdi zmdi-download">
+                                    </i>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <a href="javascript:void(0)"
+                                           class="dropdown-item modal-building-view-pane-business-export-excel"
+                                           data-table-action="excel">
+                                            Excel (.xlsx)
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="dropdown-item modal-building-view-pane-business-export-csv"
+                                           data-table-action="csv">
+                                            CSV (.csv)
+                                        </a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                         <table id="modal-building-view-pane-business-table" data-mobile-responsive="true"
                                class="mb-bootstrap-table text-nowrap table-striped"></table>
                     </div>

@@ -46,6 +46,30 @@ public class CustomerBusinessController extends BaseController {
         return super.selectByPageNumSize(request, () -> this.customerBusinessService.findAllByBuilding(buildingNo));
     }
 
+    @RequestMapping("customerBusiness/listByBuildingExcel")
+    @ResponseBody
+    public ResponseBo listByBuildingExcel(String buildingNo) {
+        try {
+            List<CustomerBusiness> list = this.customerBusinessService.findAllByBuilding(buildingNo);
+            return FileUtils.createExcelByPOIKit("客户业务表", list, CustomerBusiness.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("导出Excel失败，请联系网站管理员！");
+        }
+    }
+
+    @RequestMapping("customerBusiness/listByBuildingCsv")
+    @ResponseBody
+    public ResponseBo listByBuildingCsv(String buildingNo) {
+        try {
+            List<CustomerBusiness> list = this.customerBusinessService.findAllByBuilding(buildingNo);
+            return FileUtils.createCsv("客户业务表", list, CustomerBusiness.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseBo.error("导出Csv失败，请联系网站管理员！");
+        }
+    }
+
     @RequestMapping("customerBusiness/countByBuilding")
     @ResponseBody
     public Map<String, Object> countByBuilding(QueryRequest request, String buildingNo) {
