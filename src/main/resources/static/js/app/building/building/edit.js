@@ -110,12 +110,12 @@ $(function () {
             cableNumber: {
                 required: false,
                 digits: true,
-                range: [1, 9999]
+                range: [0, 9999]
             },
             cableRemainNumber: {
                 required: false,
                 digits: true,
-                range: [1, 9999]
+                range: [0, 9999]
             },
             verticalCoverageFlag: {
                 required: false
@@ -278,6 +278,15 @@ $(function () {
         console.log("selectRoomSingle");
 
         $("#room-select-modal").attr("selectBackFormId", "modal-building-edit-form");
+    });
+
+    $editForm.find("select[name='state']").unbind("change").change(function () {
+        var state = $editForm.find("select[name='state']").val();
+        if ("0" == state) {
+            $("#modal-building-edit-res-info").hide();
+        } else {
+            $("#modal-building-edit-res-info").show();
+        }
     });
 
     $(".building-save").click(function () {
