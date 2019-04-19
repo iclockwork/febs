@@ -37,4 +37,9 @@
             }
         });
     };
+
+    $.validator.addMethod("checkPwd", function (value, element) {
+        var regex = new RegExp('(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{8,30}');
+        return this.optional(element) || (regex.test(value));
+    }, "密码必须8-30位，包含数字、字母大小写和特殊字符");
 })(jQuery);

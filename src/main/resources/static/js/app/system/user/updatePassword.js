@@ -49,7 +49,8 @@ function validateUpdatePasswordRule() {
             },
             newPassword: {
                 required: true,
-                minlength: 6
+                minlength: 8,
+                checkPwd: true
             },
             confirm: {
                 required: true,
@@ -63,7 +64,7 @@ function validateUpdatePasswordRule() {
             },
             newPassword: {
                 required: icon + "请输入新密码",
-                minlength: icon + "密码不能小于6个字符"
+                minlength: icon + "密码不能小于8个字符"
             },
             confirm: {
                 required: icon + "请再次输入新密码",
