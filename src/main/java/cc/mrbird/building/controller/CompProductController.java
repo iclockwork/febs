@@ -168,7 +168,7 @@ public class CompProductController extends BaseController {
             }
             /** 获取文件的后缀* */
             String filename = multipartFile.getOriginalFilename();
-            String tempPath = System.getProperty("java.io.tmpdir");
+            String tempPath = request.getSession().getServletContext().getRealPath("/upload/") + "/";
             File file = new File(tempPath);
             if (!file.exists()) {
                 if (!file.mkdirs()) {
