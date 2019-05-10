@@ -7,9 +7,17 @@
         count(*)
         from BD_BUILDING t
         where t.delete_flag = 0
-        <!--<if test="createStaffId != null">-->
-            <!--and t.CREATE_STAFF_ID = #{createStaffId}-->
-        <!--</if>-->
+        <if test="createStaffId != null">
+            and t.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND t.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{regionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+
 
     </select>
 
@@ -33,9 +41,16 @@
         join BD_BUILDING_CUSTOMER_RP a on t.customer_no = a.customer_no
         join BD_BUILDING b on a.building_no=b.building_no
         where t.delete_flag = '0' and a.delete_flag = '0' and b.delete_flag = '0'
-        <!--<if test="createStaffId != null">-->
-            <!--and b.CREATE_STAFF_ID = #{createStaffId}-->
-        <!--</if>-->
+        <if test="createStaffId != null">
+            and b.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND t.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{regionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
 
     </select>
 
@@ -46,14 +61,45 @@
     from BD_BUILDING_CUSTOMER_RP c
     join BD_BUILDING d on c.building_no = d.building_no
     where d.delete_flag = '0' and c.delete_flag = '0'
-    <!--<if test="createStaffId != null">-->
-        <!--and d.CREATE_STAFF_ID = #{createStaffId}-->
-    <!--</if>-->
+    <if test="createStaffId != null">
+        and d.CREATE_STAFF_ID = #{createStaffId}
+    </if>
+        <if test="regionId != null and regionId != ''">
+            AND d.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{regionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
      ) e
     on b.customer_no = e.customer_no
     where a.delete_flag =  '0'
 </select>
 
+    <select id="countCustomerFee" resultType="BigDecimal">
+        select sum(a.month_fee) from BD_CUSTOMER_BUSINESS a
+        join BD_CUSTOMER b on a.customer_id = b.customer_id
+        join (select distinct c.customer_no
+        from BD_BUILDING_CUSTOMER_RP c
+        join BD_BUILDING d on c.building_no = d.building_no
+        where d.delete_flag = '0' and c.delete_flag = '0'
+        <if test="createStaffId != null">
+        and d.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND d.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{regionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
+        ) e
+        on b.customer_no = e.customer_no
+        where a.delete_flag =  '0'
+    </select>
+
+
+    <!--客户业务量统计-->
     <select id="queryBusiness" resultType="Integer">
         select a.BUSINESS_TYPE from BD_CUSTOMER_BUSINESS a
         join BD_CUSTOMER b on a.customer_id = b.customer_id
@@ -61,14 +107,22 @@
         from BD_BUILDING_CUSTOMER_RP c
         join BD_BUILDING d on c.building_no = d.building_no
         where d.delete_flag = '0' and c.delete_flag = '0'
-        <!--<if test="createStaffId != null">-->
-            <!--and d.CREATE_STAFF_ID = #{createStaffId}-->
-        <!--</if> -->
+        <if test="createStaffId != null">
+            and d.CREATE_STAFF_ID = #{createStaffId}
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND d.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{regionId}
+            connect by prior r.region_id = r.super_region_id)
+        </if>
          ) e
         on b.customer_no = e.customer_no
         where a.delete_flag =  '0'
     </select>
 
+    <!--楼长下楼宇中客户业务-->
     <select id="queryCustomerBusiness" resultType="Integer">
         select a.BUSINESS_TYPE from BD_CUSTOMER_BUSINESS a
         join BD_CUSTOMER b on a.customer_id = b.customer_id
@@ -81,23 +135,7 @@
         where a.delete_flag =  '0'
     </select>
 
-
-    <select id="countCustomerFee" resultType="BigDecimal">
-        select sum(a.month_fee) from BD_CUSTOMER_BUSINESS a
-        join BD_CUSTOMER b on a.customer_id = b.customer_id
-        join (select distinct c.customer_no
-        from BD_BUILDING_CUSTOMER_RP c
-        join BD_BUILDING d on c.building_no = d.building_no
-        where d.delete_flag = '0' and c.delete_flag = '0'
-        <!--<if test="createStaffId != null">-->
-            <!--and d.CREATE_STAFF_ID = #{createStaffId}-->
-        <!--</if> -->
-         ) e
-        on b.customer_no = e.customer_no
-        where a.delete_flag =  '0'
-    </select>
-
-
+    <!--查询楼长下楼宇列表 -->
     <select id="queryBuildingList" resultType="cc.mrbird.building.domain.Building">
         select
         t.building_no as buildingNo,
@@ -111,7 +149,7 @@
         <if test="createStaffId != null">
             and t.CREATE_STAFF_ID = #{createStaffId}
         </if>
-
+        order by t.building_id desc
     </select>
 
 </mapper>

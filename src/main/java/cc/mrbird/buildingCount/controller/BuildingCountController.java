@@ -6,6 +6,7 @@ import cc.mrbird.common.controller.BaseController;
 import cc.mrbird.common.domain.QueryRequest;
 import cc.mrbird.common.domain.ResponseBo;
 import cc.mrbird.common.util.Constant;
+import cc.mrbird.system.domain.User;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
@@ -164,10 +165,12 @@ public class BuildingCountController extends BaseController {
         }
 
         public GetUserInfo invoke() {
-            regionId = BuildingCountController.super.getCurrentUser().getRegionId();
+            User currentUser = BuildingCountController.super.getCurrentUser();
+            regionId = currentUser.getRegionId();
             createStaffId = null;
-            if (!StringUtils.equalsIgnoreCase(regionId, Constant.PROVINCE_FLAG_YES)){
-                createStaffId = BuildingCountController.super.getCurrentUser().getStaffId();
+            if (!StringUtils.equalsIgnoreCase(regionId, Constant.PROVINCE_FLAG_YES)
+                    && Constant.STAFF_TYPE_NORMAL.equals(currentUser.getStaffType())){
+                createStaffId = currentUser.getStaffId();
             }
             return this;
         }

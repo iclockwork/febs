@@ -138,6 +138,7 @@ function buildBarChart(buildingName) {
             var jsonDatas = r.msg;
             if (jsonDatas && jsonDatas.length === 0) {
                 $('#buildingBusiness').hide();
+                $('#buildingTable').hide();
                 return;
             }
             if (!buildingName && buildingName === "") {
@@ -167,7 +168,7 @@ function buildBarChart(buildingName) {
                             break;
                     }
                 }
-                newChar(labels,zxData,kdData,ghData,yData,ywData,dlData);
+                newChar(labels, zxData, kdData, ghData, yData, ywData, dlData);
             } else {
                 for (var i = 0; i < jsonDatas.length; i++) {
                     if (jsonDatas[i].buildingName !== buildingName) {
@@ -200,7 +201,7 @@ function buildBarChart(buildingName) {
                         }
                     }
                 }
-                newChar(labels,zxData,kdData,ghData,yData,ywData,dlData);
+                newChar(labels, zxData, kdData, ghData, yData, ywData, dlData);
             }
         } else {
             $MB.n_warning(r.msg);
@@ -210,7 +211,7 @@ function buildBarChart(buildingName) {
 }
 
 function removeData(chart) {
-    if (chart){
+    if (chart) {
         chart.data.labels.pop();
         var datasets = chart.data.datasets;
         for (var i = 0; i < datasets.length; i++) {
@@ -220,7 +221,7 @@ function removeData(chart) {
     }
 }
 
-function newChar(labels,zxData,kdData,ghData,yData,ywData,dlData) {
+function newChar(labels, zxData, kdData, ghData, yData, ywData, dlData) {
     var tempData = {
         labels: labels,
         datasets: [{

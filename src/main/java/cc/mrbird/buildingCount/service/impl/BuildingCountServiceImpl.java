@@ -53,7 +53,7 @@ public class BuildingCountServiceImpl implements BuildingCountService {
     @Override
     public JSONArray countBuildingBusiness(String regionId, Long createStaffId){
         JSONArray countBusiness = new JSONArray();
-        List<Building> buildings = buildingCountMapper.queryBuilding(regionId, createStaffId);
+        List<Building> buildings = buildingCountMapper.queryBuildingList(regionId,createStaffId);
         if (buildings.isEmpty()) {
             return countBusiness;
         }
