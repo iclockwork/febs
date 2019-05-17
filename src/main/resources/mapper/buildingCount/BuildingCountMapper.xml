@@ -147,7 +147,14 @@
         on t.building_no = d.building_no
         where t.delete_flag = 0
         <if test="createStaffId != null">
-            and t.CREATE_STAFF_ID = #{createStaffId}
+            and t.building_manager_id = #{createStaffId}
+        </if>
+        <if test="regionId != null and regionId != ''">
+            AND t.region_id in
+            (select r.region_id
+            from spc_region r
+            start with r.region_id = #{regionId}
+            connect by prior r.region_id = r.super_region_id)
         </if>
         order by t.building_id desc
     </select>
