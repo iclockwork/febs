@@ -8,7 +8,7 @@
         from BD_BUILDING t
         where t.delete_flag = 0
         <if test="createStaffId != null">
-            and t.CREATE_STAFF_ID = #{createStaffId}
+            and t.building_manager_id = #{createStaffId}
         </if>
         <if test="regionId != null and regionId != ''">
             AND t.region_id in
@@ -28,7 +28,7 @@
         from BD_BUILDING t
         where t.delete_flag = 0
         <if test="createStaffId != null">
-            and t.CREATE_STAFF_ID = #{createStaffId}
+            and t.building_manager_id = #{createStaffId}
         </if>
 
     </select>
@@ -42,7 +42,7 @@
         join BD_BUILDING b on a.building_no=b.building_no
         where t.delete_flag = '0' and a.delete_flag = '0' and b.delete_flag = '0'
         <if test="createStaffId != null">
-            and b.CREATE_STAFF_ID = #{createStaffId}
+            and b.building_manager_id = #{createStaffId}
         </if>
         <if test="regionId != null and regionId != ''">
             AND t.region_id in
@@ -62,7 +62,7 @@
     join BD_BUILDING d on c.building_no = d.building_no
     where d.delete_flag = '0' and c.delete_flag = '0'
     <if test="createStaffId != null">
-        and d.CREATE_STAFF_ID = #{createStaffId}
+        and d.building_manager_id = #{createStaffId}
     </if>
         <if test="regionId != null and regionId != ''">
             AND d.region_id in
@@ -84,7 +84,7 @@
         join BD_BUILDING d on c.building_no = d.building_no
         where d.delete_flag = '0' and c.delete_flag = '0'
         <if test="createStaffId != null">
-        and d.CREATE_STAFF_ID = #{createStaffId}
+        and d.building_manager_id = #{createStaffId}
         </if>
         <if test="regionId != null and regionId != ''">
             AND d.region_id in
@@ -108,7 +108,7 @@
         join BD_BUILDING d on c.building_no = d.building_no
         where d.delete_flag = '0' and c.delete_flag = '0'
         <if test="createStaffId != null">
-            and d.CREATE_STAFF_ID = #{createStaffId}
+            and d.building_manager_id = #{createStaffId}
         </if>
         <if test="regionId != null and regionId != ''">
             AND d.region_id in
