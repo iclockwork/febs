@@ -30,7 +30,7 @@
         join SPC_REGION ds on r.super_region_id = ds.region_id
         where t.delete_flag = 0 and a.delete_flag = 0
         <if test="createStaffId != null">
-            and a.CREATE_STAFF_ID = #{createStaffId}
+            and a.BUILDING_MANAGER_ID = #{createStaffId}
         </if>
         <if test="dsRegionId != null and dsRegionId != ''">
             AND a.region_id in
